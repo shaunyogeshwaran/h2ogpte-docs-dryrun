@@ -1,0 +1,2639 @@
+# PermissionsApi
+
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**add_user_document_permission**](PermissionsApi.md#add-user-document-permission) | **PUT** /documents/{document-id}/users/{user-id} | Associates a user with a document they have permission on.| **PUT** /documents/{document_id}/users/{user_id} | Associates a user with a document they have permission on.
+[**assign_permission_to_role**](PermissionsApi.md#assign-permission-to-role) | **PUT** /roles/{role-id}/permissions/{permission-name} | Assigns permission to a given role.| **PUT** /roles/{role_id}/permissions/{permission_name} | Assigns permission to a given role.
+[**assign_roles_to_group**](PermissionsApi.md#assign-roles-to-group) | **PUT** /groups/{group-id}/roles/{role-names} | Assigns roles to a given group.| **PUT** /groups/{group_id}/roles/{role_names} | Assigns roles to a given group.
+[**assign_roles_to_user**](PermissionsApi.md#assign-roles-to-user) | **PUT** /users/{user-id}/roles/{role-names} | Assigns roles to a given user.| **PUT** /users/{user_id}/roles/{role_names} | Assigns roles to a given user.
+[**confirm_current_user_deletion**](PermissionsApi.md#confirm-current-user-deletion) | **POST** /users/current/confirm-delete | Confirm deletion of the current user.| **POST** /users/current/confirm-delete | Confirm deletion of the current user.
+[**create_group**](PermissionsApi.md#create-group) | **POST** /groups | Creates a user group.| **POST** /groups | Creates a user group.
+[**create_role**](PermissionsApi.md#create-role) | **POST** /roles | Creates a role.| **POST** /roles | Creates a role.
+[**delete_groups**](PermissionsApi.md#delete-groups) | **DELETE** /groups/{group-ids} | Deletes groups for given unique identifiers.| **DELETE** /groups/{group_ids} | Deletes groups for given unique identifiers.
+[**delete_groups_by_names**](PermissionsApi.md#delete-groups-by-names) | **DELETE** /groups | Deletes groups for given group names.| **DELETE** /groups | Deletes groups for given group names.
+[**delete_roles**](PermissionsApi.md#delete-roles) | **DELETE** /roles/{role-ids} | Deletes roles for given unique identifiers.| **DELETE** /roles/{role_ids} | Deletes roles for given unique identifiers.
+[**delete_roles_by_names**](PermissionsApi.md#delete-roles-by-names) | **DELETE** /roles | Deletes roles for given role names.| **DELETE** /roles | Deletes roles for given role names.
+[**get_current_user_permissions**](PermissionsApi.md#get-current-user-permissions) | **GET** /users/current/permissions | Lists permissions of the user calling the endpoint.| **GET** /users/current/permissions | Lists permissions of the user calling the endpoint.
+[**get_current_user_roles**](PermissionsApi.md#get-current-user-roles) | **GET** /users/current/roles | Finds roles associated with the user calling the endpoint.| **GET** /users/current/roles | Finds roles associated with the user calling the endpoint.
+[**get_group_permissions**](PermissionsApi.md#get-group-permissions) | **GET** /group/{group-id}/permissions | Lists permissions of a given group.| **GET** /group/{group_id}/permissions | Lists permissions of a given group.
+[**get_group_roles**](PermissionsApi.md#get-group-roles) | **GET** /groups/{group-id}/roles | Finds roles associated with a given group.| **GET** /groups/{group_id}/roles | Finds roles associated with a given group.
+[**get_role**](PermissionsApi.md#get-role) | **GET** /roles/{role-id} | Finds role for a given unique identifier.| **GET** /roles/{role_id} | Finds role for a given unique identifier.
+[**get_role_permissions**](PermissionsApi.md#get-role-permissions) | **GET** /roles/{role-id}/permissions | Lists permissions of a given role.| **GET** /roles/{role_id}/permissions | Lists permissions of a given role.
+[**get_user**](PermissionsApi.md#get-user) | **GET** /users/{user-id} | Finds user for a given unique identifier.| **GET** /users/{user_id} | Finds user for a given unique identifier.
+[**get_user_permissions**](PermissionsApi.md#get-user-permissions) | **GET** /users/{user-id}/permissions | Lists permissions of a given user.| **GET** /users/{user_id}/permissions | Lists permissions of a given user.
+[**get_user_roles**](PermissionsApi.md#get-user-roles) | **GET** /users/{user-id}/roles | Finds roles associated with a given user.| **GET** /users/{user_id}/roles | Finds roles associated with a given user.
+[**is_collection_permission_granted**](PermissionsApi.md#is-collection-permission-granted) | **POST** /collections/{collection-id}/permissions/is-granted | Checks if collection permission is granted for a given user.| **POST** /collections/{collection_id}/permissions/is_granted | Checks if collection permission is granted for a given user.
+[**is_permission_granted**](PermissionsApi.md#is-permission-granted) | **POST** /permissions/is-granted | Checks if permission is granted for a given user.| **POST** /permissions/is_granted | Checks if permission is granted for a given user.
+[**list_groups**](PermissionsApi.md#list-groups) | **GET** /groups | Returns a list of all groups existing on the H2OGPTe instance.| **GET** /groups | Returns a list of all groups existing on the H2OGPTe instance.
+[**list_permissions**](PermissionsApi.md#list-permissions) | **GET** /permissions | Returns system permissions.| **GET** /permissions | Returns system permissions.
+[**list_roles**](PermissionsApi.md#list-roles) | **GET** /roles | Returns all roles for in the H2OGPTe instance.| **GET** /roles | Returns all roles for in the H2OGPTe instance.
+[**list_users**](PermissionsApi.md#list-users) | **GET** /users | Returns a list of all registered users for the system.| **GET** /users | Returns a list of all registered users for the system.
+[**remove_permission_from_role**](PermissionsApi.md#remove-permission-from-role) | **DELETE** /roles/{role-id}/permissions/{permission-name} | Removes permission from a given role.| **DELETE** /roles/{role_id}/permissions/{permission_name} | Removes permission from a given role.
+[**remove_roles_from_group**](PermissionsApi.md#remove-roles-from-group) | **DELETE** /groups/{group-id}/roles/{role-names} | Removes roles from a given group.| **DELETE** /groups/{group_id}/roles/{role_names} | Removes roles from a given group.
+[**remove_roles_from_user**](PermissionsApi.md#remove-roles-from-user) | **DELETE** /users/{user-id}/roles/{role-names} | Removes roles from a given user.| **DELETE** /users/{user_id}/roles/{role_names} | Removes roles from a given user.
+[**request_current_user_deletion**](PermissionsApi.md#request-current-user-deletion) | **DELETE** /users/current | Request deletion of the current user.| **DELETE** /users/current | Request deletion of the current user.
+[**reset_group_roles**](PermissionsApi.md#reset-group-roles) | **DELETE** /groups/{group-id}/roles | Resets group roles.| **DELETE** /groups/{group_id}/roles | Resets group roles.
+[**reset_user_roles**](PermissionsApi.md#reset-user-roles) | **DELETE** /users/{user-id}/roles | Resets user roles.| **DELETE** /users/{user_id}/roles | Resets user roles.
+[**set_role_permissions**](PermissionsApi.md#set-role-permissions) | **POST** /roles/{role-id}/permissions | Sets a new set of permissions for a given role.| **POST** /roles/{role_id}/permissions | Sets a new set of permissions for a given role.
+[**set_role_priority**](PermissionsApi.md#set-role-priority) | **PUT** /roles/{role-id}/priority | Sets priority for a given role.| **PUT** /roles/{role_id}/priority | Sets priority for a given role.
+
+
+# **add_user_document_permission**
+> add_user_document_permission(document_id, user_id)
+
+Associates a user with a document they have permission on.
+
+Associates a user with a document they have permission on.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PermissionsApi(api_client)
+    document_id = 'document_id_example' # str | Id of the document
+    user_id = 'user_id_example' # str | The id of the user that has the permission.
+
+    try:
+        # Associates a user with a document they have permission on.
+        await api_instance.add_user_document_permission(document_id, user_id)
+    except Exception as e:
+        print("Exception when calling PermissionsApi->add_user_document_permission: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **document_id** | **str**| Id of the document | 
+ **user_id** | **str**| The id of the user that has the permission. | 
+
+### Return type
+
+void (empty response body)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **assign_permission_to_role**
+> assign_permission_to_role(role_id, permission_name)
+
+Assigns permission to a given role.
+
+Assigns permission to a given role.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PermissionsApi(api_client)
+    role_id = 'role_id_example' # str | The unique identifier of an user.
+    permission_name = 'permission_name_example' # str | The permission name.
+
+    try:
+        # Assigns permission to a given role.
+        await api_instance.assign_permission_to_role(role_id, permission_name)
+    except Exception as e:
+        print("Exception when calling PermissionsApi->assign_permission_to_role: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **role_id** | **str**| The unique identifier of an user. | 
+ **permission_name** | **str**| The permission name. | 
+
+### Return type
+
+void (empty response body)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+**409** | Conflict |  -  |
+
+
+
+# **assign_roles_to_group**
+> assign_roles_to_group(group_id, role_names)
+
+Assigns roles to a given group.
+
+Assigns roles to a given user.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PermissionsApi(api_client)
+    group_id = 'group_id_example' # str | The unique identifier of a group.
+    role_names = ['role_names_example'] # List[str] | The role names.
+
+    try:
+        # Assigns roles to a given group.
+        await api_instance.assign_roles_to_group(group_id, role_names)
+    except Exception as e:
+        print("Exception when calling PermissionsApi->assign_roles_to_group: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **group_id** | **str**| The unique identifier of a group. | 
+ **role_names** | [**List[str]**](str.md)| The role names. | 
+
+### Return type
+
+void (empty response body)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **assign_roles_to_user**
+> assign_roles_to_user(user_id, role_names)
+
+Assigns roles to a given user.
+
+Assigns roles to a given user.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PermissionsApi(api_client)
+    user_id = 'user_id_example' # str | The unique identifier of an user.
+    role_names = ['role_names_example'] # List[str] | The role names.
+
+    try:
+        # Assigns roles to a given user.
+        await api_instance.assign_roles_to_user(user_id, role_names)
+    except Exception as e:
+        print("Exception when calling PermissionsApi->assign_roles_to_user: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **user_id** | **str**| The unique identifier of an user. | 
+ **role_names** | [**List[str]**](str.md)| The role names. | 
+
+### Return type
+
+void (empty response body)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **confirm_current_user_deletion**
+> confirm_current_user_deletion(confirm_user_deletion_request, timeout=timeout)
+
+Confirm deletion of the current user.
+
+Confirms and executes the deletion of the currently authenticated user and all associated data using the delete ID from the initial request.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.confirm_user_deletion_request import ConfirmUserDeletionRequest
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PermissionsApi(api_client)
+    confirm_user_deletion_request = h2ogpte.rest_async.ConfirmUserDeletionRequest() # ConfirmUserDeletionRequest | 
+    timeout = 300 # float | Timeout in seconds (optional) (default to 300)
+
+    try:
+        # Confirm deletion of the current user.
+        await api_instance.confirm_current_user_deletion(confirm_user_deletion_request, timeout=timeout)
+    except Exception as e:
+        print("Exception when calling PermissionsApi->confirm_current_user_deletion: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **confirm_user_deletion_request** | [**ConfirmUserDeletionRequest**](ConfirmUserDeletionRequest.md)|  | 
+ **timeout** | **float**| Timeout in seconds | [optional] [default to 300]
+
+### Return type
+
+void (empty response body)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | User deletion completed successfully |  -  |
+**400** | Invalid or expired delete ID |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **create_group**
+> GroupInfo create_group(group_create_request)
+
+Creates a user group.
+
+Creates a user group.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.group_create_request import GroupCreateRequest
+from h2ogpte.rest_async.models.group_info import GroupInfo
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PermissionsApi(api_client)
+    group_create_request = h2ogpte.rest_async.GroupCreateRequest() # GroupCreateRequest | 
+
+    try:
+        # Creates a user group.
+        api_response = await api_instance.create_group(group_create_request)
+        print("The response of PermissionsApi->create_group:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PermissionsApi->create_group: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **group_create_request** | [**GroupCreateRequest**](GroupCreateRequest.md)|  | 
+
+### Return type
+
+[**GroupInfo**](GroupInfo.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **create_role**
+> RoleInfo create_role(role_create_request)
+
+Creates a role.
+
+Creates a role.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.role_create_request import RoleCreateRequest
+from h2ogpte.rest_async.models.role_info import RoleInfo
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PermissionsApi(api_client)
+    role_create_request = h2ogpte.rest_async.RoleCreateRequest() # RoleCreateRequest | 
+
+    try:
+        # Creates a role.
+        api_response = await api_instance.create_role(role_create_request)
+        print("The response of PermissionsApi->create_role:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PermissionsApi->create_role: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **role_create_request** | [**RoleCreateRequest**](RoleCreateRequest.md)|  | 
+
+### Return type
+
+[**RoleInfo**](RoleInfo.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **delete_groups**
+> delete_groups(group_ids)
+
+Deletes groups for given unique identifiers.
+
+Deletes a groups for given unique identifiers.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PermissionsApi(api_client)
+    group_ids = ['group_ids_example'] # List[str] | The unique identifiers of groups to be deleted.
+
+    try:
+        # Deletes groups for given unique identifiers.
+        await api_instance.delete_groups(group_ids)
+    except Exception as e:
+        print("Exception when calling PermissionsApi->delete_groups: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **group_ids** | [**List[str]**](str.md)| The unique identifiers of groups to be deleted. | 
+
+### Return type
+
+void (empty response body)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+**409** | Conflict |  -  |
+
+
+
+# **delete_groups_by_names**
+> delete_groups_by_names(names)
+
+Deletes groups for given group names.
+
+Deletes groups for given group names.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PermissionsApi(api_client)
+    names = ['names_example'] # List[str] | Names of groups to be deleted.
+
+    try:
+        # Deletes groups for given group names.
+        await api_instance.delete_groups_by_names(names)
+    except Exception as e:
+        print("Exception when calling PermissionsApi->delete_groups_by_names: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **names** | [**List[str]**](str.md)| Names of groups to be deleted. | 
+
+### Return type
+
+void (empty response body)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+**409** | Conflict |  -  |
+
+
+
+# **delete_roles**
+> delete_roles(role_ids)
+
+Deletes roles for given unique identifiers.
+
+Deletes roles for given unique identifiers.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PermissionsApi(api_client)
+    role_ids = ['role_ids_example'] # List[str] | The unique identifiers of roles to be deleted.
+
+    try:
+        # Deletes roles for given unique identifiers.
+        await api_instance.delete_roles(role_ids)
+    except Exception as e:
+        print("Exception when calling PermissionsApi->delete_roles: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **role_ids** | [**List[str]**](str.md)| The unique identifiers of roles to be deleted. | 
+
+### Return type
+
+void (empty response body)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+**409** | Conflict |  -  |
+
+
+
+# **delete_roles_by_names**
+> delete_roles_by_names(names)
+
+Deletes roles for given role names.
+
+Deletes roles for given role names.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PermissionsApi(api_client)
+    names = ['names_example'] # List[str] | Names of roles to be deleted.
+
+    try:
+        # Deletes roles for given role names.
+        await api_instance.delete_roles_by_names(names)
+    except Exception as e:
+        print("Exception when calling PermissionsApi->delete_roles_by_names: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **names** | [**List[str]**](str.md)| Names of roles to be deleted. | 
+
+### Return type
+
+void (empty response body)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+**409** | Conflict |  -  |
+
+
+
+# **get_current_user_permissions**
+> List[UserPermission] get_current_user_permissions()
+
+Lists permissions of the user calling the endpoint.
+
+Lists permissions of the user calling the endpoint.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.user_permission import UserPermission
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PermissionsApi(api_client)
+
+    try:
+        # Lists permissions of the user calling the endpoint.
+        api_response = await api_instance.get_current_user_permissions()
+        print("The response of PermissionsApi->get_current_user_permissions:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PermissionsApi->get_current_user_permissions: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**List[UserPermission]**](UserPermission.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **get_current_user_roles**
+> List[RoleInfo] get_current_user_roles()
+
+Finds roles associated with the user calling the endpoint.
+
+Finds roles associated with the user calling the endpoint.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.role_info import RoleInfo
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PermissionsApi(api_client)
+
+    try:
+        # Finds roles associated with the user calling the endpoint.
+        api_response = await api_instance.get_current_user_roles()
+        print("The response of PermissionsApi->get_current_user_roles:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PermissionsApi->get_current_user_roles: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**List[RoleInfo]**](RoleInfo.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **get_group_permissions**
+> List[UserPermission] get_group_permissions(group_id)
+
+Lists permissions of a given group.
+
+Lists permissions of a given group.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.user_permission import UserPermission
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PermissionsApi(api_client)
+    group_id = 'group_id_example' # str | The unique identifier of a group.
+
+    try:
+        # Lists permissions of a given group.
+        api_response = await api_instance.get_group_permissions(group_id)
+        print("The response of PermissionsApi->get_group_permissions:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PermissionsApi->get_group_permissions: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **group_id** | **str**| The unique identifier of a group. | 
+
+### Return type
+
+[**List[UserPermission]**](UserPermission.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **get_group_roles**
+> List[RoleInfo] get_group_roles(group_id)
+
+Finds roles associated with a given group.
+
+Finds roles associated with a given group.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.role_info import RoleInfo
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PermissionsApi(api_client)
+    group_id = 'group_id_example' # str | The unique identifier of a group.
+
+    try:
+        # Finds roles associated with a given group.
+        api_response = await api_instance.get_group_roles(group_id)
+        print("The response of PermissionsApi->get_group_roles:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PermissionsApi->get_group_roles: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **group_id** | **str**| The unique identifier of a group. | 
+
+### Return type
+
+[**List[RoleInfo]**](RoleInfo.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **get_role**
+> RoleInfo get_role(role_id)
+
+Finds role for a given unique identifier.
+
+Finds role for a given unique identifier.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.role_info import RoleInfo
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PermissionsApi(api_client)
+    role_id = 'role_id_example' # str | The unique identifier of an role.
+
+    try:
+        # Finds role for a given unique identifier.
+        api_response = await api_instance.get_role(role_id)
+        print("The response of PermissionsApi->get_role:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PermissionsApi->get_role: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **role_id** | **str**| The unique identifier of an role. | 
+
+### Return type
+
+[**RoleInfo**](RoleInfo.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **get_role_permissions**
+> List[UserPermission] get_role_permissions(role_id)
+
+Lists permissions of a given role.
+
+Lists permissions of a given role.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.user_permission import UserPermission
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PermissionsApi(api_client)
+    role_id = 'role_id_example' # str | The unique identifier of an role.
+
+    try:
+        # Lists permissions of a given role.
+        api_response = await api_instance.get_role_permissions(role_id)
+        print("The response of PermissionsApi->get_role_permissions:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PermissionsApi->get_role_permissions: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **role_id** | **str**| The unique identifier of an role. | 
+
+### Return type
+
+[**List[UserPermission]**](UserPermission.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **get_user**
+> UserInfo get_user(user_id)
+
+Finds user for a given unique identifier.
+
+Finds user for a given unique identifier.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.user_info import UserInfo
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PermissionsApi(api_client)
+    user_id = 'user_id_example' # str | The unique identifier of an user.
+
+    try:
+        # Finds user for a given unique identifier.
+        api_response = await api_instance.get_user(user_id)
+        print("The response of PermissionsApi->get_user:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PermissionsApi->get_user: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **user_id** | **str**| The unique identifier of an user. | 
+
+### Return type
+
+[**UserInfo**](UserInfo.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **get_user_permissions**
+> List[UserPermission] get_user_permissions(user_id)
+
+Lists permissions of a given user.
+
+Lists permissions of a given user.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.user_permission import UserPermission
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PermissionsApi(api_client)
+    user_id = 'user_id_example' # str | The unique identifier of an user.
+
+    try:
+        # Lists permissions of a given user.
+        api_response = await api_instance.get_user_permissions(user_id)
+        print("The response of PermissionsApi->get_user_permissions:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PermissionsApi->get_user_permissions: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **user_id** | **str**| The unique identifier of an user. | 
+
+### Return type
+
+[**List[UserPermission]**](UserPermission.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **get_user_roles**
+> List[RoleInfo] get_user_roles(user_id)
+
+Finds roles associated with a given user.
+
+Finds roles associated with a given user.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.role_info import RoleInfo
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PermissionsApi(api_client)
+    user_id = 'user_id_example' # str | The unique identifier of an user.
+
+    try:
+        # Finds roles associated with a given user.
+        api_response = await api_instance.get_user_roles(user_id)
+        print("The response of PermissionsApi->get_user_roles:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PermissionsApi->get_user_roles: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **user_id** | **str**| The unique identifier of an user. | 
+
+### Return type
+
+[**List[RoleInfo]**](RoleInfo.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **is_collection_permission_granted**
+> bool is_collection_permission_granted(collection_id, permission_check_request)
+
+Checks if collection permission is granted for a given user.
+
+Checks if collection permission is granted for a given user.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.permission_check_request import PermissionCheckRequest
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PermissionsApi(api_client)
+    collection_id = 'collection_id_example' # str | Id of the collection.
+    permission_check_request = h2ogpte.rest_async.PermissionCheckRequest() # PermissionCheckRequest | 
+
+    try:
+        # Checks if collection permission is granted for a given user.
+        api_response = await api_instance.is_collection_permission_granted(collection_id, permission_check_request)
+        print("The response of PermissionsApi->is_collection_permission_granted:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PermissionsApi->is_collection_permission_granted: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **collection_id** | **str**| Id of the collection. | 
+ **permission_check_request** | [**PermissionCheckRequest**](PermissionCheckRequest.md)|  | 
+
+### Return type
+
+**bool**
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **is_permission_granted**
+> bool is_permission_granted(permission_check_request)
+
+Checks if permission is granted for a given user.
+
+Checks if permission is granted for a given user.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.permission_check_request import PermissionCheckRequest
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PermissionsApi(api_client)
+    permission_check_request = h2ogpte.rest_async.PermissionCheckRequest() # PermissionCheckRequest | 
+
+    try:
+        # Checks if permission is granted for a given user.
+        api_response = await api_instance.is_permission_granted(permission_check_request)
+        print("The response of PermissionsApi->is_permission_granted:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PermissionsApi->is_permission_granted: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **permission_check_request** | [**PermissionCheckRequest**](PermissionCheckRequest.md)|  | 
+
+### Return type
+
+**bool**
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **list_groups**
+> List[GroupInfo] list_groups()
+
+Returns a list of all groups existing on the H2OGPTe instance.
+
+Returns a list of all groups existing on the H2OGPTe instance.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.group_info import GroupInfo
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PermissionsApi(api_client)
+
+    try:
+        # Returns a list of all groups existing on the H2OGPTe instance.
+        api_response = await api_instance.list_groups()
+        print("The response of PermissionsApi->list_groups:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PermissionsApi->list_groups: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**List[GroupInfo]**](GroupInfo.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **list_permissions**
+> List[UserPermission] list_permissions(group_names=group_names, role_names=role_names)
+
+Returns system permissions.
+
+Returns all system permissions or permissions for given groups
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.user_permission import UserPermission
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PermissionsApi(api_client)
+    group_names = ['group_names_example'] # List[str] | If set, the output permissions will be related only to given groups. (optional)
+    role_names = ['role_names_example'] # List[str] | If set, the output permissions will be related only to given roles. (optional)
+
+    try:
+        # Returns system permissions.
+        api_response = await api_instance.list_permissions(group_names=group_names, role_names=role_names)
+        print("The response of PermissionsApi->list_permissions:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PermissionsApi->list_permissions: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **group_names** | [**List[str]**](str.md)| If set, the output permissions will be related only to given groups. | [optional] 
+ **role_names** | [**List[str]**](str.md)| If set, the output permissions will be related only to given roles. | [optional] 
+
+### Return type
+
+[**List[UserPermission]**](UserPermission.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **list_roles**
+> List[RoleInfo] list_roles()
+
+Returns all roles for in the H2OGPTe instance.
+
+Returns all roles for in the H2OGPTe instance.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.role_info import RoleInfo
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PermissionsApi(api_client)
+
+    try:
+        # Returns all roles for in the H2OGPTe instance.
+        api_response = await api_instance.list_roles()
+        print("The response of PermissionsApi->list_roles:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PermissionsApi->list_roles: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**List[RoleInfo]**](RoleInfo.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **list_users**
+> List[UserInfo] list_users(offset=offset, limit=limit)
+
+Returns a list of all registered users for the system.
+
+Returns a list of all registered users for the system.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.user_info import UserInfo
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PermissionsApi(api_client)
+    offset = 0 # int | How many users to skip before returning. (optional) (default to 0)
+    limit = 100 # int | How many users to return. (optional) (default to 100)
+
+    try:
+        # Returns a list of all registered users for the system.
+        api_response = await api_instance.list_users(offset=offset, limit=limit)
+        print("The response of PermissionsApi->list_users:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PermissionsApi->list_users: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **offset** | **int**| How many users to skip before returning. | [optional] [default to 0]
+ **limit** | **int**| How many users to return. | [optional] [default to 100]
+
+### Return type
+
+[**List[UserInfo]**](UserInfo.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **remove_permission_from_role**
+> remove_permission_from_role(role_id, permission_name)
+
+Removes permission from a given role.
+
+Removes permission from a given role.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PermissionsApi(api_client)
+    role_id = 'role_id_example' # str | The unique identifier of the role.
+    permission_name = 'permission_name_example' # str | The permission name.
+
+    try:
+        # Removes permission from a given role.
+        await api_instance.remove_permission_from_role(role_id, permission_name)
+    except Exception as e:
+        print("Exception when calling PermissionsApi->remove_permission_from_role: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **role_id** | **str**| The unique identifier of the role. | 
+ **permission_name** | **str**| The permission name. | 
+
+### Return type
+
+void (empty response body)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+**409** | Conflict |  -  |
+
+
+
+# **remove_roles_from_group**
+> remove_roles_from_group(group_id, role_names)
+
+Removes roles from a given group.
+
+Removes roles from a given group.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PermissionsApi(api_client)
+    group_id = 'group_id_example' # str | The unique identifier of a group.
+    role_names = ['role_names_example'] # List[str] | The role names.
+
+    try:
+        # Removes roles from a given group.
+        await api_instance.remove_roles_from_group(group_id, role_names)
+    except Exception as e:
+        print("Exception when calling PermissionsApi->remove_roles_from_group: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **group_id** | **str**| The unique identifier of a group. | 
+ **role_names** | [**List[str]**](str.md)| The role names. | 
+
+### Return type
+
+void (empty response body)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **remove_roles_from_user**
+> remove_roles_from_user(user_id, role_names)
+
+Removes roles from a given user.
+
+Removes roles from a given user.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PermissionsApi(api_client)
+    user_id = 'user_id_example' # str | The unique identifier of an user.
+    role_names = ['role_names_example'] # List[str] | The role names.
+
+    try:
+        # Removes roles from a given user.
+        await api_instance.remove_roles_from_user(user_id, role_names)
+    except Exception as e:
+        print("Exception when calling PermissionsApi->remove_roles_from_user: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **user_id** | **str**| The unique identifier of an user. | 
+ **role_names** | [**List[str]**](str.md)| The role names. | 
+
+### Return type
+
+void (empty response body)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **request_current_user_deletion**
+> UserDeletionRequest request_current_user_deletion()
+
+Request deletion of the current user.
+
+Creates a deletion request for the currently authenticated user. Returns a delete ID that must be used to confirm the deletion within 5 minutes.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.user_deletion_request import UserDeletionRequest
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PermissionsApi(api_client)
+
+    try:
+        # Request deletion of the current user.
+        api_response = await api_instance.request_current_user_deletion()
+        print("The response of PermissionsApi->request_current_user_deletion:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PermissionsApi->request_current_user_deletion: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**UserDeletionRequest**](UserDeletionRequest.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Deletion request created successfully |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **reset_group_roles**
+> reset_group_roles(group_id, roles_reset_request)
+
+Resets group roles.
+
+Replaces all roles of the given group with a new set of roles
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.roles_reset_request import RolesResetRequest
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PermissionsApi(api_client)
+    group_id = 'group_id_example' # str | The unique identifier of a group.
+    roles_reset_request = h2ogpte.rest_async.RolesResetRequest() # RolesResetRequest | 
+
+    try:
+        # Resets group roles.
+        await api_instance.reset_group_roles(group_id, roles_reset_request)
+    except Exception as e:
+        print("Exception when calling PermissionsApi->reset_group_roles: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **group_id** | **str**| The unique identifier of a group. | 
+ **roles_reset_request** | [**RolesResetRequest**](RolesResetRequest.md)|  | 
+
+### Return type
+
+void (empty response body)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **reset_user_roles**
+> reset_user_roles(user_id, roles_reset_request)
+
+Resets user roles.
+
+Replaces all roles of the given user with a new set of roles
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.roles_reset_request import RolesResetRequest
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PermissionsApi(api_client)
+    user_id = 'user_id_example' # str | The unique identifier of an user.
+    roles_reset_request = h2ogpte.rest_async.RolesResetRequest() # RolesResetRequest | 
+
+    try:
+        # Resets user roles.
+        await api_instance.reset_user_roles(user_id, roles_reset_request)
+    except Exception as e:
+        print("Exception when calling PermissionsApi->reset_user_roles: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **user_id** | **str**| The unique identifier of an user. | 
+ **roles_reset_request** | [**RolesResetRequest**](RolesResetRequest.md)|  | 
+
+### Return type
+
+void (empty response body)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **set_role_permissions**
+> set_role_permissions(role_id, permission_reset_request)
+
+Sets a new set of permissions for a given role.
+
+Sets a new set of permissions for a given role.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.permission_reset_request import PermissionResetRequest
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PermissionsApi(api_client)
+    role_id = 'role_id_example' # str | The unique identifier of an role.
+    permission_reset_request = h2ogpte.rest_async.PermissionResetRequest() # PermissionResetRequest | 
+
+    try:
+        # Sets a new set of permissions for a given role.
+        await api_instance.set_role_permissions(role_id, permission_reset_request)
+    except Exception as e:
+        print("Exception when calling PermissionsApi->set_role_permissions: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **role_id** | **str**| The unique identifier of an role. | 
+ **permission_reset_request** | [**PermissionResetRequest**](PermissionResetRequest.md)|  | 
+
+### Return type
+
+void (empty response body)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **set_role_priority**
+> RoleInfo set_role_priority(role_id, set_role_priority_request=set_role_priority_request)
+
+Sets priority for a given role.
+
+Sets priority for a given role.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.role_info import RoleInfo
+from h2ogpte.rest_async.models.set_role_priority_request import SetRolePriorityRequest
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PermissionsApi(api_client)
+    role_id = 'role_id_example' # str | The unique identifier of an role.
+    set_role_priority_request = h2ogpte.rest_async.SetRolePriorityRequest() # SetRolePriorityRequest |  (optional)
+
+    try:
+        # Sets priority for a given role.
+        api_response = await api_instance.set_role_priority(role_id, set_role_priority_request=set_role_priority_request)
+        print("The response of PermissionsApi->set_role_priority:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PermissionsApi->set_role_priority: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **role_id** | **str**| The unique identifier of an role. | 
+ **set_role_priority_request** | [**SetRolePriorityRequest**](SetRolePriorityRequest.md)|  | [optional] 
+
+### Return type
+
+[**RoleInfo**](RoleInfo.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+**500** | Internal server error |  -  |
+
+
+

@@ -1,0 +1,29 @@
+# CreateInsertDocumentToCollectionJobRequest
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**document_id** | **str** | Id of the document to be inserted. | 
+
+## Example
+
+```python
+from h2ogpte.rest_async.models.create_insert_document_to_collection_job_request import CreateInsertDocumentToCollectionJobRequest
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of CreateInsertDocumentToCollectionJobRequest from a JSON string
+create_insert_document_to_collection_job_request_instance = CreateInsertDocumentToCollectionJobRequest.from_json(json)
+# print the JSON string representation of the object
+print(CreateInsertDocumentToCollectionJobRequest.to_json())
+
+# convert the object into a dict
+create_insert_document_to_collection_job_request_dict = create_insert_document_to_collection_job_request_instance.to_dict()
+# create an instance of CreateInsertDocumentToCollectionJobRequest from a dict
+create_insert_document_to_collection_job_request_from_dict = CreateInsertDocumentToCollectionJobRequest.from_dict(create_insert_document_to_collection_job_request_dict)
+```
+
+
+

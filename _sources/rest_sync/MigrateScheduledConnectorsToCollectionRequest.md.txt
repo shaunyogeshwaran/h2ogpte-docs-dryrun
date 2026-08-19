@@ -1,0 +1,29 @@
+# MigrateScheduledConnectorsToCollectionRequest
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**src_collection_id** | **str** | Source collection ID to copy scheduled connectors from | 
+
+## Example
+
+```python
+from h2ogpte.rest_sync.models.migrate_scheduled_connectors_to_collection_request import MigrateScheduledConnectorsToCollectionRequest
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of MigrateScheduledConnectorsToCollectionRequest from a JSON string
+migrate_scheduled_connectors_to_collection_request_instance = MigrateScheduledConnectorsToCollectionRequest.from_json(json)
+# print the JSON string representation of the object
+print(MigrateScheduledConnectorsToCollectionRequest.to_json())
+
+# convert the object into a dict
+migrate_scheduled_connectors_to_collection_request_dict = migrate_scheduled_connectors_to_collection_request_instance.to_dict()
+# create an instance of MigrateScheduledConnectorsToCollectionRequest from a dict
+migrate_scheduled_connectors_to_collection_request_from_dict = MigrateScheduledConnectorsToCollectionRequest.from_dict(migrate_scheduled_connectors_to_collection_request_dict)
+```
+
+
+

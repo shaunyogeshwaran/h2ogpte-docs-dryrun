@@ -1,0 +1,1806 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChatApi &mdash; h2oGPTe</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/code.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="canonical" href="https://h2ogpte.github.io/rest/ChatApi.html"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=d729bd2f"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            h2oGPTe
+          </a>
+              <div class="version">
+                1.6.28
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Installation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">h2oGPTe Python Client Installation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started with h2oGPTe</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/tutorial1/tutorial1.html">Tutorial 1: Chat with a website</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/tutorial2/tutorial2.html">Tutorial 2: Create a Collection with h2oGPTe’s or your custom guardrails and PII parameter values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/tutorial3/tutorial3.html">Tutorial 3: Agents</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../examples/chats/index.html">Chats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/collections/index.html">Collections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/documents/index.html">Documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/llms/index.html">LLMs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/users/index.html">Users</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/jobs/index.html">Jobs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/prompts/index.html">Prompts</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Python API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../python_api.html">h2oGPTe Python API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Python for REST API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../rest.html">h2oGPTe Python API for REST Interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Third-Party Notices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../docs-licenses/licenses.html">Third-Party Licenses</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Release Notes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">h2oGPTe</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">ChatApi</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/rest/ChatApi.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="chatapi">
+<h1>ChatApi<a class="headerlink" href="#chatapi" title="Link to this heading"></a></h1>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>HTTP request</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="#create-chat-session"><span class="std std-ref"><strong>create_chat_session</strong></span></a></p></td>
+<td><p><strong>POST</strong> /chats</p></td>
+<td><p>Creates chat session.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#delete-chat-session"><span class="std std-ref"><strong>delete_chat_session</strong></span></a></p></td>
+<td><p><strong>DELETE</strong> /chats/{session-id}</p></td>
+<td><p>Deletes collection.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#delete-chat-session-collection"><span class="std std-ref"><strong>delete_chat_session_collection</strong></span></a></p></td>
+<td><p><strong>DELETE</strong> /chats/{session-id}/collection</p></td>
+<td><p>Removes a collection reference from the chat session.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#delete-chat-session-prompt-template"><span class="std std-ref"><strong>delete_chat_session_prompt_template</strong></span></a></p></td>
+<td><p><strong>DELETE</strong> /chats/{session-id}/prompt-template</p></td>
+<td><p>Removes a prompt template reference from the chat session.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#get-chat-session"><span class="std std-ref"><strong>get_chat_session</strong></span></a></p></td>
+<td><p><strong>GET</strong> /chats/{session-id}</p></td>
+<td><p>Finds a chat session by id.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#get-chat-session-count"><span class="std std-ref"><strong>get_chat_session_count</strong></span></a></p></td>
+<td><p><strong>GET</strong> /chats/count</p></td>
+<td><p>Counts a number of chat sessions.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#get-chat-session-messages"><span class="std std-ref"><strong>get_chat_session_messages</strong></span></a></p></td>
+<td><p><strong>GET</strong> /chats/{session-id}/messages</p></td>
+<td><p>Fetches chat message and metadata for messages in a chat session.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#get-completion"><span class="std std-ref"><strong>get_completion</strong></span></a></p></td>
+<td><p><strong>POST</strong> /chats/{session-id}/completions</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#get-message-meta"><span class="std std-ref"><strong>get_message_meta</strong></span></a></p></td>
+<td><p><strong>GET</strong> /messages/{message-id}/meta</p></td>
+<td><p>Fetches chat message meta information.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#get-message-references"><span class="std std-ref"><strong>get_message_references</strong></span></a></p></td>
+<td><p><strong>GET</strong> /messages/{message-id}/references</p></td>
+<td><p>Fetches metadata for references of a chat message.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#list-chat-sessions"><span class="std std-ref"><strong>list_chat_sessions</strong></span></a></p></td>
+<td><p><strong>GET</strong> /chats</p></td>
+<td><p>List chat sessions.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#list-questions-for-chat-session"><span class="std std-ref"><strong>list_questions_for_chat_session</strong></span></a></p></td>
+<td><p><strong>GET</strong> /chats/{session-id}/questions</p></td>
+<td><p>List suggested questions for a given chat session.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#update-chat-session"><span class="std std-ref"><strong>update_chat_session</strong></span></a></p></td>
+<td><p><strong>PATCH</strong> /chats/{session-id}</p></td>
+<td><p>Updates the name of a chat session.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#update-chat-session-collection"><span class="std std-ref"><strong>update_chat_session_collection</strong></span></a></p></td>
+<td><p><strong>PUT</strong> /chats/{session-id}/collection</p></td>
+<td><p>Updates a collection reference of a chat session.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#update-chat-session-prompt-template"><span class="std std-ref"><strong>update_chat_session_prompt_template</strong></span></a></p></td>
+<td><p><strong>PUT</strong> /chats/{session-id}/prompt-template</p></td>
+<td><p>Updates a prompt template reference of a chat session.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="create-chat-session">
+<h1><strong>create_chat_session</strong><a class="headerlink" href="#create-chat-session" title="Link to this heading"></a></h1>
+<blockquote>
+<div><p>ChatSession create_chat_session(collection_id=collection_id)</p>
+</div></blockquote>
+<p>Creates chat session.</p>
+<p>Creates chat session with a collection if provided. Otherwise, the session will be with a generic LLM.</p>
+<section id="example">
+<h2>Example<a class="headerlink" href="#example" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Bearer Authentication (bearerAuth):</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">h2ogpte.rest</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">h2ogpte.rest.models.chat_session</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatSession</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">h2ogpte.rest.rest</span><span class="w"> </span><span class="kn">import</span> <span class="n">ApiException</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pprint</span><span class="w"> </span><span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="c1"># Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1</span>
+<span class="c1"># See configuration.py for a list of all supported configuration parameters.</span>
+<span class="n">configuration</span> <span class="o">=</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span>
+    <span class="n">host</span> <span class="o">=</span> <span class="s2">&quot;https://h2ogpte.genai.h2o.ai/api/v1&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># The client must configure the authentication and authorization parameters</span>
+<span class="c1"># in accordance with the API server security policy.</span>
+<span class="c1"># Examples for each auth method are provided below, use the example that</span>
+<span class="c1"># satisfies your auth use case.</span>
+
+<span class="c1"># Configure Bearer authorization: bearerAuth</span>
+<span class="n">configuration</span> <span class="o">=</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span>
+    <span class="n">access_token</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;BEARER_TOKEN&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="c1"># Enter a context with an instance of the API client</span>
+<span class="k">async</span> <span class="k">with</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="k">as</span> <span class="n">api_client</span><span class="p">:</span>
+    <span class="c1"># Create an instance of the API class</span>
+    <span class="n">api_instance</span> <span class="o">=</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">ChatApi</span><span class="p">(</span><span class="n">api_client</span><span class="p">)</span>
+    <span class="n">collection_id</span> <span class="o">=</span> <span class="s1">&#39;collection_id_example&#39;</span> <span class="c1"># str | Id of collection (optional)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Creates chat session.</span>
+        <span class="n">api_response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">api_instance</span><span class="o">.</span><span class="n">create_chat_session</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">collection_id</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The response of ChatApi-&gt;create_chat_session:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">api_response</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exception when calling ChatApi-&gt;create_chat_session: </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>collection_id</strong></p></td>
+<td><p><strong>str</strong></p></td>
+<td><p>Id of collection</p></td>
+<td><p>[optional]</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="return-type">
+<h2>Return type<a class="headerlink" href="#return-type" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="ChatSession.html"><span class="std std-doc"><strong>ChatSession</strong></span></a></p>
+</section>
+<section id="http-request-headers">
+<h2>HTTP request headers<a class="headerlink" href="#http-request-headers" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Content-Type</strong>: Not defined</p></li>
+<li><p><strong>Accept</strong>: application/json</p></li>
+</ul>
+</section>
+<section id="http-response-details">
+<h2>HTTP response details<a class="headerlink" href="#http-response-details" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Status code</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Response headers</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>201</strong></p></td>
+<td><p>Successful operation</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>401</strong></p></td>
+<td><p>Unauthorized - Invalid or missing API key</p></td>
+<td><p>-</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="delete-chat-session">
+<h1><strong>delete_chat_session</strong><a class="headerlink" href="#delete-chat-session" title="Link to this heading"></a></h1>
+<blockquote>
+<div><p>ChatSession delete_chat_session(session_id, timeout=timeout)</p>
+</div></blockquote>
+<p>Deletes collection.</p>
+<p>Deletes collection with a given unique identifier.</p>
+<section id="id1">
+<h2>Example<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Bearer Authentication (bearerAuth):</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">h2ogpte.rest</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">h2ogpte.rest.models.chat_session</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatSession</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">h2ogpte.rest.rest</span><span class="w"> </span><span class="kn">import</span> <span class="n">ApiException</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pprint</span><span class="w"> </span><span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="c1"># Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1</span>
+<span class="c1"># See configuration.py for a list of all supported configuration parameters.</span>
+<span class="n">configuration</span> <span class="o">=</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span>
+    <span class="n">host</span> <span class="o">=</span> <span class="s2">&quot;https://h2ogpte.genai.h2o.ai/api/v1&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># The client must configure the authentication and authorization parameters</span>
+<span class="c1"># in accordance with the API server security policy.</span>
+<span class="c1"># Examples for each auth method are provided below, use the example that</span>
+<span class="c1"># satisfies your auth use case.</span>
+
+<span class="c1"># Configure Bearer authorization: bearerAuth</span>
+<span class="n">configuration</span> <span class="o">=</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span>
+    <span class="n">access_token</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;BEARER_TOKEN&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="c1"># Enter a context with an instance of the API client</span>
+<span class="k">async</span> <span class="k">with</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="k">as</span> <span class="n">api_client</span><span class="p">:</span>
+    <span class="c1"># Create an instance of the API class</span>
+    <span class="n">api_instance</span> <span class="o">=</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">ChatApi</span><span class="p">(</span><span class="n">api_client</span><span class="p">)</span>
+    <span class="n">session_id</span> <span class="o">=</span> <span class="s1">&#39;session_id_example&#39;</span> <span class="c1"># str | Id of the chat session</span>
+    <span class="n">timeout</span> <span class="o">=</span> <span class="mi">300</span> <span class="c1"># int | Timeout in seconds (optional) (default to 300)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Deletes collection.</span>
+        <span class="n">api_response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">api_instance</span><span class="o">.</span><span class="n">delete_chat_session</span><span class="p">(</span><span class="n">session_id</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The response of ChatApi-&gt;delete_chat_session:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">api_response</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exception when calling ChatApi-&gt;delete_chat_session: </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id2">
+<h2>Parameters<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>session_id</strong></p></td>
+<td><p><strong>str</strong></p></td>
+<td><p>Id of the chat session</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>timeout</strong></p></td>
+<td><p><strong>int</strong></p></td>
+<td><p>Timeout in seconds</p></td>
+<td><p>[optional] [default to 300]</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id3">
+<h2>Return type<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="ChatSession.html"><span class="std std-doc"><strong>ChatSession</strong></span></a></p>
+</section>
+<section id="id4">
+<h2>HTTP request headers<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Content-Type</strong>: Not defined</p></li>
+<li><p><strong>Accept</strong>: application/json</p></li>
+</ul>
+</section>
+<section id="id5">
+<h2>HTTP response details<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Status code</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Response headers</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>204</strong></p></td>
+<td><p>Successful operation</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>401</strong></p></td>
+<td><p>Unauthorized - Invalid or missing API key</p></td>
+<td><p>-</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="delete-chat-session-collection">
+<h1><strong>delete_chat_session_collection</strong><a class="headerlink" href="#delete-chat-session-collection" title="Link to this heading"></a></h1>
+<blockquote>
+<div><p>ChatSession delete_chat_session_collection(session_id)</p>
+</div></blockquote>
+<p>Removes a collection reference from the chat session.</p>
+<p>Removes a collection reference from the chat session.</p>
+<section id="id6">
+<h2>Example<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Bearer Authentication (bearerAuth):</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">h2ogpte.rest</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">h2ogpte.rest.models.chat_session</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatSession</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">h2ogpte.rest.rest</span><span class="w"> </span><span class="kn">import</span> <span class="n">ApiException</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pprint</span><span class="w"> </span><span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="c1"># Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1</span>
+<span class="c1"># See configuration.py for a list of all supported configuration parameters.</span>
+<span class="n">configuration</span> <span class="o">=</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span>
+    <span class="n">host</span> <span class="o">=</span> <span class="s2">&quot;https://h2ogpte.genai.h2o.ai/api/v1&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># The client must configure the authentication and authorization parameters</span>
+<span class="c1"># in accordance with the API server security policy.</span>
+<span class="c1"># Examples for each auth method are provided below, use the example that</span>
+<span class="c1"># satisfies your auth use case.</span>
+
+<span class="c1"># Configure Bearer authorization: bearerAuth</span>
+<span class="n">configuration</span> <span class="o">=</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span>
+    <span class="n">access_token</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;BEARER_TOKEN&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="c1"># Enter a context with an instance of the API client</span>
+<span class="k">async</span> <span class="k">with</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="k">as</span> <span class="n">api_client</span><span class="p">:</span>
+    <span class="c1"># Create an instance of the API class</span>
+    <span class="n">api_instance</span> <span class="o">=</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">ChatApi</span><span class="p">(</span><span class="n">api_client</span><span class="p">)</span>
+    <span class="n">session_id</span> <span class="o">=</span> <span class="s1">&#39;session_id_example&#39;</span> <span class="c1"># str | Id of the chat session</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Removes a collection reference from the chat session.</span>
+        <span class="n">api_response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">api_instance</span><span class="o">.</span><span class="n">delete_chat_session_collection</span><span class="p">(</span><span class="n">session_id</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The response of ChatApi-&gt;delete_chat_session_collection:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">api_response</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exception when calling ChatApi-&gt;delete_chat_session_collection: </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id7">
+<h2>Parameters<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>session_id</strong></p></td>
+<td><p><strong>str</strong></p></td>
+<td><p>Id of the chat session</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id8">
+<h2>Return type<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="ChatSession.html"><span class="std std-doc"><strong>ChatSession</strong></span></a></p>
+</section>
+<section id="id9">
+<h2>HTTP request headers<a class="headerlink" href="#id9" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Content-Type</strong>: Not defined</p></li>
+<li><p><strong>Accept</strong>: application/json</p></li>
+</ul>
+</section>
+<section id="id10">
+<h2>HTTP response details<a class="headerlink" href="#id10" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Status code</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Response headers</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>200</strong></p></td>
+<td><p>Successful operation</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>401</strong></p></td>
+<td><p>Unauthorized - Invalid or missing API key</p></td>
+<td><p>-</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="delete-chat-session-prompt-template">
+<h1><strong>delete_chat_session_prompt_template</strong><a class="headerlink" href="#delete-chat-session-prompt-template" title="Link to this heading"></a></h1>
+<blockquote>
+<div><p>ChatSession delete_chat_session_prompt_template(session_id)</p>
+</div></blockquote>
+<p>Removes a prompt template reference from the chat session.</p>
+<p>Removes a prompt template reference from the chat session.</p>
+<section id="id11">
+<h2>Example<a class="headerlink" href="#id11" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Bearer Authentication (bearerAuth):</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">h2ogpte.rest</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">h2ogpte.rest.models.chat_session</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatSession</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">h2ogpte.rest.rest</span><span class="w"> </span><span class="kn">import</span> <span class="n">ApiException</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pprint</span><span class="w"> </span><span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="c1"># Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1</span>
+<span class="c1"># See configuration.py for a list of all supported configuration parameters.</span>
+<span class="n">configuration</span> <span class="o">=</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span>
+    <span class="n">host</span> <span class="o">=</span> <span class="s2">&quot;https://h2ogpte.genai.h2o.ai/api/v1&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># The client must configure the authentication and authorization parameters</span>
+<span class="c1"># in accordance with the API server security policy.</span>
+<span class="c1"># Examples for each auth method are provided below, use the example that</span>
+<span class="c1"># satisfies your auth use case.</span>
+
+<span class="c1"># Configure Bearer authorization: bearerAuth</span>
+<span class="n">configuration</span> <span class="o">=</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span>
+    <span class="n">access_token</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;BEARER_TOKEN&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="c1"># Enter a context with an instance of the API client</span>
+<span class="k">async</span> <span class="k">with</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="k">as</span> <span class="n">api_client</span><span class="p">:</span>
+    <span class="c1"># Create an instance of the API class</span>
+    <span class="n">api_instance</span> <span class="o">=</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">ChatApi</span><span class="p">(</span><span class="n">api_client</span><span class="p">)</span>
+    <span class="n">session_id</span> <span class="o">=</span> <span class="s1">&#39;session_id_example&#39;</span> <span class="c1"># str | Id of the chat session</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Removes a prompt template reference from the chat session.</span>
+        <span class="n">api_response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">api_instance</span><span class="o">.</span><span class="n">delete_chat_session_prompt_template</span><span class="p">(</span><span class="n">session_id</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The response of ChatApi-&gt;delete_chat_session_prompt_template:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">api_response</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exception when calling ChatApi-&gt;delete_chat_session_prompt_template: </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id12">
+<h2>Parameters<a class="headerlink" href="#id12" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>session_id</strong></p></td>
+<td><p><strong>str</strong></p></td>
+<td><p>Id of the chat session</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id13">
+<h2>Return type<a class="headerlink" href="#id13" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="ChatSession.html"><span class="std std-doc"><strong>ChatSession</strong></span></a></p>
+</section>
+<section id="id14">
+<h2>HTTP request headers<a class="headerlink" href="#id14" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Content-Type</strong>: Not defined</p></li>
+<li><p><strong>Accept</strong>: application/json</p></li>
+</ul>
+</section>
+<section id="id15">
+<h2>HTTP response details<a class="headerlink" href="#id15" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Status code</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Response headers</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>200</strong></p></td>
+<td><p>Successful operation</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>401</strong></p></td>
+<td><p>Unauthorized - Invalid or missing API key</p></td>
+<td><p>-</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="get-chat-session">
+<h1><strong>get_chat_session</strong><a class="headerlink" href="#get-chat-session" title="Link to this heading"></a></h1>
+<blockquote>
+<div><p>ChatSession get_chat_session(session_id)</p>
+</div></blockquote>
+<p>Finds a chat session by id.</p>
+<p>Returns a single chat session by its unique identifier.</p>
+<section id="id16">
+<h2>Example<a class="headerlink" href="#id16" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Bearer Authentication (bearerAuth):</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">h2ogpte.rest</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">h2ogpte.rest.models.chat_session</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatSession</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">h2ogpte.rest.rest</span><span class="w"> </span><span class="kn">import</span> <span class="n">ApiException</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pprint</span><span class="w"> </span><span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="c1"># Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1</span>
+<span class="c1"># See configuration.py for a list of all supported configuration parameters.</span>
+<span class="n">configuration</span> <span class="o">=</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span>
+    <span class="n">host</span> <span class="o">=</span> <span class="s2">&quot;https://h2ogpte.genai.h2o.ai/api/v1&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># The client must configure the authentication and authorization parameters</span>
+<span class="c1"># in accordance with the API server security policy.</span>
+<span class="c1"># Examples for each auth method are provided below, use the example that</span>
+<span class="c1"># satisfies your auth use case.</span>
+
+<span class="c1"># Configure Bearer authorization: bearerAuth</span>
+<span class="n">configuration</span> <span class="o">=</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span>
+    <span class="n">access_token</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;BEARER_TOKEN&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="c1"># Enter a context with an instance of the API client</span>
+<span class="k">async</span> <span class="k">with</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="k">as</span> <span class="n">api_client</span><span class="p">:</span>
+    <span class="c1"># Create an instance of the API class</span>
+    <span class="n">api_instance</span> <span class="o">=</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">ChatApi</span><span class="p">(</span><span class="n">api_client</span><span class="p">)</span>
+    <span class="n">session_id</span> <span class="o">=</span> <span class="s1">&#39;session_id_example&#39;</span> <span class="c1"># str | Id of the chat session</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Finds a chat session by id.</span>
+        <span class="n">api_response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">api_instance</span><span class="o">.</span><span class="n">get_chat_session</span><span class="p">(</span><span class="n">session_id</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The response of ChatApi-&gt;get_chat_session:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">api_response</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exception when calling ChatApi-&gt;get_chat_session: </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id17">
+<h2>Parameters<a class="headerlink" href="#id17" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>session_id</strong></p></td>
+<td><p><strong>str</strong></p></td>
+<td><p>Id of the chat session</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id18">
+<h2>Return type<a class="headerlink" href="#id18" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="ChatSession.html"><span class="std std-doc"><strong>ChatSession</strong></span></a></p>
+</section>
+<section id="id19">
+<h2>HTTP request headers<a class="headerlink" href="#id19" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Content-Type</strong>: Not defined</p></li>
+<li><p><strong>Accept</strong>: application/json</p></li>
+</ul>
+</section>
+<section id="id20">
+<h2>HTTP response details<a class="headerlink" href="#id20" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Status code</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Response headers</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>200</strong></p></td>
+<td><p>Successful operation</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>401</strong></p></td>
+<td><p>Unauthorized - Invalid or missing API key</p></td>
+<td><p>-</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="get-chat-session-count">
+<h1><strong>get_chat_session_count</strong><a class="headerlink" href="#get-chat-session-count" title="Link to this heading"></a></h1>
+<blockquote>
+<div><p>Count get_chat_session_count()</p>
+</div></blockquote>
+<p>Counts a number of chat sessions.</p>
+<p>Counts a number of chat sessions.</p>
+<section id="id21">
+<h2>Example<a class="headerlink" href="#id21" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Bearer Authentication (bearerAuth):</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">h2ogpte.rest</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">h2ogpte.rest.models.count</span><span class="w"> </span><span class="kn">import</span> <span class="n">Count</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">h2ogpte.rest.rest</span><span class="w"> </span><span class="kn">import</span> <span class="n">ApiException</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pprint</span><span class="w"> </span><span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="c1"># Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1</span>
+<span class="c1"># See configuration.py for a list of all supported configuration parameters.</span>
+<span class="n">configuration</span> <span class="o">=</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span>
+    <span class="n">host</span> <span class="o">=</span> <span class="s2">&quot;https://h2ogpte.genai.h2o.ai/api/v1&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># The client must configure the authentication and authorization parameters</span>
+<span class="c1"># in accordance with the API server security policy.</span>
+<span class="c1"># Examples for each auth method are provided below, use the example that</span>
+<span class="c1"># satisfies your auth use case.</span>
+
+<span class="c1"># Configure Bearer authorization: bearerAuth</span>
+<span class="n">configuration</span> <span class="o">=</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span>
+    <span class="n">access_token</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;BEARER_TOKEN&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="c1"># Enter a context with an instance of the API client</span>
+<span class="k">async</span> <span class="k">with</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="k">as</span> <span class="n">api_client</span><span class="p">:</span>
+    <span class="c1"># Create an instance of the API class</span>
+    <span class="n">api_instance</span> <span class="o">=</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">ChatApi</span><span class="p">(</span><span class="n">api_client</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Counts a number of chat sessions.</span>
+        <span class="n">api_response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">api_instance</span><span class="o">.</span><span class="n">get_chat_session_count</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The response of ChatApi-&gt;get_chat_session_count:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">api_response</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exception when calling ChatApi-&gt;get_chat_session_count: </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id22">
+<h2>Parameters<a class="headerlink" href="#id22" title="Link to this heading"></a></h2>
+<p>This endpoint does not need any parameter.</p>
+</section>
+<section id="id23">
+<h2>Return type<a class="headerlink" href="#id23" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="Count.html"><span class="std std-doc"><strong>Count</strong></span></a></p>
+</section>
+<section id="id24">
+<h2>HTTP request headers<a class="headerlink" href="#id24" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Content-Type</strong>: Not defined</p></li>
+<li><p><strong>Accept</strong>: application/json</p></li>
+</ul>
+</section>
+<section id="id25">
+<h2>HTTP response details<a class="headerlink" href="#id25" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Status code</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Response headers</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>200</strong></p></td>
+<td><p>Successful operation</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>401</strong></p></td>
+<td><p>Unauthorized - Invalid or missing API key</p></td>
+<td><p>-</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="get-chat-session-messages">
+<h1><strong>get_chat_session_messages</strong><a class="headerlink" href="#get-chat-session-messages" title="Link to this heading"></a></h1>
+<blockquote>
+<div><p>List[ChatMessage] get_chat_session_messages(session_id, offset=offset, limit=limit)</p>
+</div></blockquote>
+<p>Fetches chat message and metadata for messages in a chat session.</p>
+<p>Fetches chat message and metadata for messages in a chat session. Messages without a <code class="docutils literal notranslate"><span class="pre">reply_to</span></code> are from the end user, messages with a <code class="docutils literal notranslate"><span class="pre">reply_to</span></code> are from an LLM and a response to a specific user message.</p>
+<section id="id26">
+<h2>Example<a class="headerlink" href="#id26" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Bearer Authentication (bearerAuth):</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">h2ogpte.rest</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">h2ogpte.rest.models.chat_message</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatMessage</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">h2ogpte.rest.rest</span><span class="w"> </span><span class="kn">import</span> <span class="n">ApiException</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pprint</span><span class="w"> </span><span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="c1"># Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1</span>
+<span class="c1"># See configuration.py for a list of all supported configuration parameters.</span>
+<span class="n">configuration</span> <span class="o">=</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span>
+    <span class="n">host</span> <span class="o">=</span> <span class="s2">&quot;https://h2ogpte.genai.h2o.ai/api/v1&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># The client must configure the authentication and authorization parameters</span>
+<span class="c1"># in accordance with the API server security policy.</span>
+<span class="c1"># Examples for each auth method are provided below, use the example that</span>
+<span class="c1"># satisfies your auth use case.</span>
+
+<span class="c1"># Configure Bearer authorization: bearerAuth</span>
+<span class="n">configuration</span> <span class="o">=</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span>
+    <span class="n">access_token</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;BEARER_TOKEN&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="c1"># Enter a context with an instance of the API client</span>
+<span class="k">async</span> <span class="k">with</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="k">as</span> <span class="n">api_client</span><span class="p">:</span>
+    <span class="c1"># Create an instance of the API class</span>
+    <span class="n">api_instance</span> <span class="o">=</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">ChatApi</span><span class="p">(</span><span class="n">api_client</span><span class="p">)</span>
+    <span class="n">session_id</span> <span class="o">=</span> <span class="s1">&#39;session_id_example&#39;</span> <span class="c1"># str | Id of the chat session</span>
+    <span class="n">offset</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># int | How many chat sessions to skip before returning. (optional) (default to 0)</span>
+    <span class="n">limit</span> <span class="o">=</span> <span class="mi">100</span> <span class="c1"># int | How many chat sessions to return. (optional) (default to 100)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Fetches chat message and metadata for messages in a chat session.</span>
+        <span class="n">api_response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">api_instance</span><span class="o">.</span><span class="n">get_chat_session_messages</span><span class="p">(</span><span class="n">session_id</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="n">offset</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="n">limit</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The response of ChatApi-&gt;get_chat_session_messages:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">api_response</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exception when calling ChatApi-&gt;get_chat_session_messages: </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id27">
+<h2>Parameters<a class="headerlink" href="#id27" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>session_id</strong></p></td>
+<td><p><strong>str</strong></p></td>
+<td><p>Id of the chat session</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>offset</strong></p></td>
+<td><p><strong>int</strong></p></td>
+<td><p>How many chat sessions to skip before returning.</p></td>
+<td><p>[optional] [default to 0]</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>limit</strong></p></td>
+<td><p><strong>int</strong></p></td>
+<td><p>How many chat sessions to return.</p></td>
+<td><p>[optional] [default to 100]</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id28">
+<h2>Return type<a class="headerlink" href="#id28" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="ChatMessage.html"><span class="std std-doc"><strong>List[ChatMessage]</strong></span></a></p>
+</section>
+<section id="id29">
+<h2>HTTP request headers<a class="headerlink" href="#id29" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Content-Type</strong>: Not defined</p></li>
+<li><p><strong>Accept</strong>: application/json</p></li>
+</ul>
+</section>
+<section id="id30">
+<h2>HTTP response details<a class="headerlink" href="#id30" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Status code</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Response headers</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>200</strong></p></td>
+<td><p>Successful operation</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>401</strong></p></td>
+<td><p>Unauthorized - Invalid or missing API key</p></td>
+<td><p>-</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="get-completion">
+<h1><strong>get_completion</strong><a class="headerlink" href="#get-completion" title="Link to this heading"></a></h1>
+<blockquote>
+<div><p>ChatCompletion get_completion(session_id, chat_completion_request)</p>
+</div></blockquote>
+<p>Asks question in a given chat session.</p>
+<section id="id31">
+<h2>Example<a class="headerlink" href="#id31" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Bearer Authentication (bearerAuth):</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">h2ogpte.rest</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">h2ogpte.rest.models.chat_completion</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatCompletion</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">h2ogpte.rest.models.chat_completion_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatCompletionRequest</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">h2ogpte.rest.rest</span><span class="w"> </span><span class="kn">import</span> <span class="n">ApiException</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pprint</span><span class="w"> </span><span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="c1"># Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1</span>
+<span class="c1"># See configuration.py for a list of all supported configuration parameters.</span>
+<span class="n">configuration</span> <span class="o">=</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span>
+    <span class="n">host</span> <span class="o">=</span> <span class="s2">&quot;https://h2ogpte.genai.h2o.ai/api/v1&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># The client must configure the authentication and authorization parameters</span>
+<span class="c1"># in accordance with the API server security policy.</span>
+<span class="c1"># Examples for each auth method are provided below, use the example that</span>
+<span class="c1"># satisfies your auth use case.</span>
+
+<span class="c1"># Configure Bearer authorization: bearerAuth</span>
+<span class="n">configuration</span> <span class="o">=</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span>
+    <span class="n">access_token</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;BEARER_TOKEN&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="c1"># Enter a context with an instance of the API client</span>
+<span class="k">async</span> <span class="k">with</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="k">as</span> <span class="n">api_client</span><span class="p">:</span>
+    <span class="c1"># Create an instance of the API class</span>
+    <span class="n">api_instance</span> <span class="o">=</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">ChatApi</span><span class="p">(</span><span class="n">api_client</span><span class="p">)</span>
+    <span class="n">session_id</span> <span class="o">=</span> <span class="s1">&#39;session_id_example&#39;</span> <span class="c1"># str | Id of a chat session</span>
+    <span class="n">chat_completion_request</span> <span class="o">=</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">ChatCompletionRequest</span><span class="p">()</span> <span class="c1"># ChatCompletionRequest | </span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">api_response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">api_instance</span><span class="o">.</span><span class="n">get_completion</span><span class="p">(</span><span class="n">session_id</span><span class="p">,</span> <span class="n">chat_completion_request</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The response of ChatApi-&gt;get_completion:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">api_response</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exception when calling ChatApi-&gt;get_completion: </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id32">
+<h2>Parameters<a class="headerlink" href="#id32" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>session_id</strong></p></td>
+<td><p><strong>str</strong></p></td>
+<td><p>Id of a chat session</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>chat_completion_request</strong></p></td>
+<td><p><a class="reference internal" href="ChatCompletionRequest.html"><span class="std std-doc"><strong>ChatCompletionRequest</strong></span></a></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id33">
+<h2>Return type<a class="headerlink" href="#id33" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="ChatCompletion.html"><span class="std std-doc"><strong>ChatCompletion</strong></span></a></p>
+</section>
+<section id="id34">
+<h2>HTTP request headers<a class="headerlink" href="#id34" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Content-Type</strong>: application/json</p></li>
+<li><p><strong>Accept</strong>: application/json, application/jsonl</p></li>
+</ul>
+</section>
+<section id="id35">
+<h2>HTTP response details<a class="headerlink" href="#id35" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Status code</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Response headers</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>200</strong></p></td>
+<td><p>Successful operation</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>401</strong></p></td>
+<td><p>Unauthorized - Invalid or missing API key</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>500</strong></p></td>
+<td><p>Internal server error</p></td>
+<td><p>-</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="get-message-meta">
+<h1><strong>get_message_meta</strong><a class="headerlink" href="#get-message-meta" title="Link to this heading"></a></h1>
+<blockquote>
+<div><p>List[ChatMessageMeta] get_message_meta(message_id, info_type=info_type)</p>
+</div></blockquote>
+<p>Fetches chat message meta information.</p>
+<p>Fetches chat message meta information.</p>
+<section id="id36">
+<h2>Example<a class="headerlink" href="#id36" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Bearer Authentication (bearerAuth):</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">h2ogpte.rest</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">h2ogpte.rest.models.chat_message_meta</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatMessageMeta</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">h2ogpte.rest.rest</span><span class="w"> </span><span class="kn">import</span> <span class="n">ApiException</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pprint</span><span class="w"> </span><span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="c1"># Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1</span>
+<span class="c1"># See configuration.py for a list of all supported configuration parameters.</span>
+<span class="n">configuration</span> <span class="o">=</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span>
+    <span class="n">host</span> <span class="o">=</span> <span class="s2">&quot;https://h2ogpte.genai.h2o.ai/api/v1&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># The client must configure the authentication and authorization parameters</span>
+<span class="c1"># in accordance with the API server security policy.</span>
+<span class="c1"># Examples for each auth method are provided below, use the example that</span>
+<span class="c1"># satisfies your auth use case.</span>
+
+<span class="c1"># Configure Bearer authorization: bearerAuth</span>
+<span class="n">configuration</span> <span class="o">=</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span>
+    <span class="n">access_token</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;BEARER_TOKEN&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="c1"># Enter a context with an instance of the API client</span>
+<span class="k">async</span> <span class="k">with</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="k">as</span> <span class="n">api_client</span><span class="p">:</span>
+    <span class="c1"># Create an instance of the API class</span>
+    <span class="n">api_instance</span> <span class="o">=</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">ChatApi</span><span class="p">(</span><span class="n">api_client</span><span class="p">)</span>
+    <span class="n">message_id</span> <span class="o">=</span> <span class="s1">&#39;message_id_example&#39;</span> <span class="c1"># str | Id of the chat message.</span>
+    <span class="n">info_type</span> <span class="o">=</span> <span class="s1">&#39;info_type_example&#39;</span> <span class="c1"># str | Metadata type to fetch. (optional)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Fetches chat message meta information.</span>
+        <span class="n">api_response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">api_instance</span><span class="o">.</span><span class="n">get_message_meta</span><span class="p">(</span><span class="n">message_id</span><span class="p">,</span> <span class="n">info_type</span><span class="o">=</span><span class="n">info_type</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The response of ChatApi-&gt;get_message_meta:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">api_response</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exception when calling ChatApi-&gt;get_message_meta: </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id37">
+<h2>Parameters<a class="headerlink" href="#id37" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>message_id</strong></p></td>
+<td><p><strong>str</strong></p></td>
+<td><p>Id of the chat message.</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>info_type</strong></p></td>
+<td><p><strong>str</strong></p></td>
+<td><p>Metadata type to fetch.</p></td>
+<td><p>[optional]</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id38">
+<h2>Return type<a class="headerlink" href="#id38" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="ChatMessageMeta.html"><span class="std std-doc"><strong>List[ChatMessageMeta]</strong></span></a></p>
+</section>
+<section id="id39">
+<h2>HTTP request headers<a class="headerlink" href="#id39" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Content-Type</strong>: Not defined</p></li>
+<li><p><strong>Accept</strong>: application/json</p></li>
+</ul>
+</section>
+<section id="id40">
+<h2>HTTP response details<a class="headerlink" href="#id40" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Status code</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Response headers</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>200</strong></p></td>
+<td><p>Successful operation</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>401</strong></p></td>
+<td><p>Unauthorized - Invalid or missing API key</p></td>
+<td><p>-</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="get-message-references">
+<h1><strong>get_message_references</strong><a class="headerlink" href="#get-message-references" title="Link to this heading"></a></h1>
+<blockquote>
+<div><p>List[ChatMessageReference] get_message_references(message_id)</p>
+</div></blockquote>
+<p>Fetches metadata for references of a chat message.</p>
+<p>Fetches metadata for references of a chat message. References are only available for messages sent from an LLM, an empty list will be returned for messages sent by the user.</p>
+<section id="id41">
+<h2>Example<a class="headerlink" href="#id41" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Bearer Authentication (bearerAuth):</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">h2ogpte.rest</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">h2ogpte.rest.models.chat_message_reference</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatMessageReference</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">h2ogpte.rest.rest</span><span class="w"> </span><span class="kn">import</span> <span class="n">ApiException</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pprint</span><span class="w"> </span><span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="c1"># Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1</span>
+<span class="c1"># See configuration.py for a list of all supported configuration parameters.</span>
+<span class="n">configuration</span> <span class="o">=</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span>
+    <span class="n">host</span> <span class="o">=</span> <span class="s2">&quot;https://h2ogpte.genai.h2o.ai/api/v1&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># The client must configure the authentication and authorization parameters</span>
+<span class="c1"># in accordance with the API server security policy.</span>
+<span class="c1"># Examples for each auth method are provided below, use the example that</span>
+<span class="c1"># satisfies your auth use case.</span>
+
+<span class="c1"># Configure Bearer authorization: bearerAuth</span>
+<span class="n">configuration</span> <span class="o">=</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span>
+    <span class="n">access_token</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;BEARER_TOKEN&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="c1"># Enter a context with an instance of the API client</span>
+<span class="k">async</span> <span class="k">with</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="k">as</span> <span class="n">api_client</span><span class="p">:</span>
+    <span class="c1"># Create an instance of the API class</span>
+    <span class="n">api_instance</span> <span class="o">=</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">ChatApi</span><span class="p">(</span><span class="n">api_client</span><span class="p">)</span>
+    <span class="n">message_id</span> <span class="o">=</span> <span class="s1">&#39;message_id_example&#39;</span> <span class="c1"># str | Id of the chat message</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Fetches metadata for references of a chat message.</span>
+        <span class="n">api_response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">api_instance</span><span class="o">.</span><span class="n">get_message_references</span><span class="p">(</span><span class="n">message_id</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The response of ChatApi-&gt;get_message_references:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">api_response</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exception when calling ChatApi-&gt;get_message_references: </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id42">
+<h2>Parameters<a class="headerlink" href="#id42" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>message_id</strong></p></td>
+<td><p><strong>str</strong></p></td>
+<td><p>Id of the chat message</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id43">
+<h2>Return type<a class="headerlink" href="#id43" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="ChatMessageReference.html"><span class="std std-doc"><strong>List[ChatMessageReference]</strong></span></a></p>
+</section>
+<section id="id44">
+<h2>HTTP request headers<a class="headerlink" href="#id44" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Content-Type</strong>: Not defined</p></li>
+<li><p><strong>Accept</strong>: application/json</p></li>
+</ul>
+</section>
+<section id="id45">
+<h2>HTTP response details<a class="headerlink" href="#id45" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Status code</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Response headers</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>200</strong></p></td>
+<td><p>Successful operation</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>401</strong></p></td>
+<td><p>Unauthorized - Invalid or missing API key</p></td>
+<td><p>-</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="list-chat-sessions">
+<h1><strong>list_chat_sessions</strong><a class="headerlink" href="#list-chat-sessions" title="Link to this heading"></a></h1>
+<blockquote>
+<div><p>List[ChatSession] list_chat_sessions(offset=offset, limit=limit)</p>
+</div></blockquote>
+<p>List chat sessions.</p>
+<p>List chat sessions.</p>
+<section id="id46">
+<h2>Example<a class="headerlink" href="#id46" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Bearer Authentication (bearerAuth):</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">h2ogpte.rest</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">h2ogpte.rest.models.chat_session</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatSession</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">h2ogpte.rest.rest</span><span class="w"> </span><span class="kn">import</span> <span class="n">ApiException</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pprint</span><span class="w"> </span><span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="c1"># Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1</span>
+<span class="c1"># See configuration.py for a list of all supported configuration parameters.</span>
+<span class="n">configuration</span> <span class="o">=</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span>
+    <span class="n">host</span> <span class="o">=</span> <span class="s2">&quot;https://h2ogpte.genai.h2o.ai/api/v1&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># The client must configure the authentication and authorization parameters</span>
+<span class="c1"># in accordance with the API server security policy.</span>
+<span class="c1"># Examples for each auth method are provided below, use the example that</span>
+<span class="c1"># satisfies your auth use case.</span>
+
+<span class="c1"># Configure Bearer authorization: bearerAuth</span>
+<span class="n">configuration</span> <span class="o">=</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span>
+    <span class="n">access_token</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;BEARER_TOKEN&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="c1"># Enter a context with an instance of the API client</span>
+<span class="k">async</span> <span class="k">with</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="k">as</span> <span class="n">api_client</span><span class="p">:</span>
+    <span class="c1"># Create an instance of the API class</span>
+    <span class="n">api_instance</span> <span class="o">=</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">ChatApi</span><span class="p">(</span><span class="n">api_client</span><span class="p">)</span>
+    <span class="n">offset</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># int | How many chat sessions to skip before returning. (optional) (default to 0)</span>
+    <span class="n">limit</span> <span class="o">=</span> <span class="mi">100</span> <span class="c1"># int | How many chat sessions to return. (optional) (default to 100)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># List chat sessions.</span>
+        <span class="n">api_response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">api_instance</span><span class="o">.</span><span class="n">list_chat_sessions</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="n">offset</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="n">limit</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The response of ChatApi-&gt;list_chat_sessions:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">api_response</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exception when calling ChatApi-&gt;list_chat_sessions: </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id47">
+<h2>Parameters<a class="headerlink" href="#id47" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>offset</strong></p></td>
+<td><p><strong>int</strong></p></td>
+<td><p>How many chat sessions to skip before returning.</p></td>
+<td><p>[optional] [default to 0]</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>limit</strong></p></td>
+<td><p><strong>int</strong></p></td>
+<td><p>How many chat sessions to return.</p></td>
+<td><p>[optional] [default to 100]</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id48">
+<h2>Return type<a class="headerlink" href="#id48" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="ChatSession.html"><span class="std std-doc"><strong>List[ChatSession]</strong></span></a></p>
+</section>
+<section id="id49">
+<h2>HTTP request headers<a class="headerlink" href="#id49" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Content-Type</strong>: Not defined</p></li>
+<li><p><strong>Accept</strong>: application/json</p></li>
+</ul>
+</section>
+<section id="id50">
+<h2>HTTP response details<a class="headerlink" href="#id50" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Status code</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Response headers</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>200</strong></p></td>
+<td><p>Successful operation</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>401</strong></p></td>
+<td><p>Unauthorized - Invalid or missing API key</p></td>
+<td><p>-</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="list-questions-for-chat-session">
+<h1><strong>list_questions_for_chat_session</strong><a class="headerlink" href="#list-questions-for-chat-session" title="Link to this heading"></a></h1>
+<blockquote>
+<div><p>List[SuggestedQuestion] list_questions_for_chat_session(session_id, limit=limit)</p>
+</div></blockquote>
+<p>List suggested questions for a given chat session.</p>
+<p>List suggested questions for a given chat session.</p>
+<section id="id51">
+<h2>Example<a class="headerlink" href="#id51" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Bearer Authentication (bearerAuth):</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">h2ogpte.rest</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">h2ogpte.rest.models.suggested_question</span><span class="w"> </span><span class="kn">import</span> <span class="n">SuggestedQuestion</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">h2ogpte.rest.rest</span><span class="w"> </span><span class="kn">import</span> <span class="n">ApiException</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pprint</span><span class="w"> </span><span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="c1"># Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1</span>
+<span class="c1"># See configuration.py for a list of all supported configuration parameters.</span>
+<span class="n">configuration</span> <span class="o">=</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span>
+    <span class="n">host</span> <span class="o">=</span> <span class="s2">&quot;https://h2ogpte.genai.h2o.ai/api/v1&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># The client must configure the authentication and authorization parameters</span>
+<span class="c1"># in accordance with the API server security policy.</span>
+<span class="c1"># Examples for each auth method are provided below, use the example that</span>
+<span class="c1"># satisfies your auth use case.</span>
+
+<span class="c1"># Configure Bearer authorization: bearerAuth</span>
+<span class="n">configuration</span> <span class="o">=</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span>
+    <span class="n">access_token</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;BEARER_TOKEN&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="c1"># Enter a context with an instance of the API client</span>
+<span class="k">async</span> <span class="k">with</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="k">as</span> <span class="n">api_client</span><span class="p">:</span>
+    <span class="c1"># Create an instance of the API class</span>
+    <span class="n">api_instance</span> <span class="o">=</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">ChatApi</span><span class="p">(</span><span class="n">api_client</span><span class="p">)</span>
+    <span class="n">session_id</span> <span class="o">=</span> <span class="s1">&#39;session_id_example&#39;</span> <span class="c1"># str | Id of a chat session</span>
+    <span class="n">limit</span> <span class="o">=</span> <span class="mi">100</span> <span class="c1"># int | How many questions to return. (optional) (default to 100)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># List suggested questions for a given chat session.</span>
+        <span class="n">api_response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">api_instance</span><span class="o">.</span><span class="n">list_questions_for_chat_session</span><span class="p">(</span><span class="n">session_id</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="n">limit</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The response of ChatApi-&gt;list_questions_for_chat_session:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">api_response</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exception when calling ChatApi-&gt;list_questions_for_chat_session: </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id52">
+<h2>Parameters<a class="headerlink" href="#id52" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>session_id</strong></p></td>
+<td><p><strong>str</strong></p></td>
+<td><p>Id of a chat session</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>limit</strong></p></td>
+<td><p><strong>int</strong></p></td>
+<td><p>How many questions to return.</p></td>
+<td><p>[optional] [default to 100]</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id53">
+<h2>Return type<a class="headerlink" href="#id53" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="SuggestedQuestion.html"><span class="std std-doc"><strong>List[SuggestedQuestion]</strong></span></a></p>
+</section>
+<section id="id54">
+<h2>HTTP request headers<a class="headerlink" href="#id54" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Content-Type</strong>: Not defined</p></li>
+<li><p><strong>Accept</strong>: application/json</p></li>
+</ul>
+</section>
+<section id="id55">
+<h2>HTTP response details<a class="headerlink" href="#id55" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Status code</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Response headers</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>200</strong></p></td>
+<td><p>Successful operation</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>401</strong></p></td>
+<td><p>Unauthorized - Invalid or missing API key</p></td>
+<td><p>-</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="update-chat-session">
+<h1><strong>update_chat_session</strong><a class="headerlink" href="#update-chat-session" title="Link to this heading"></a></h1>
+<blockquote>
+<div><p>ChatSession update_chat_session(session_id, chat_session_update_request=chat_session_update_request)</p>
+</div></blockquote>
+<p>Updates the name of a chat session.</p>
+<p>Updates the name of a chat session.</p>
+<section id="id56">
+<h2>Example<a class="headerlink" href="#id56" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Bearer Authentication (bearerAuth):</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">h2ogpte.rest</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">h2ogpte.rest.models.chat_session</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatSession</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">h2ogpte.rest.models.chat_session_update_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatSessionUpdateRequest</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">h2ogpte.rest.rest</span><span class="w"> </span><span class="kn">import</span> <span class="n">ApiException</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pprint</span><span class="w"> </span><span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="c1"># Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1</span>
+<span class="c1"># See configuration.py for a list of all supported configuration parameters.</span>
+<span class="n">configuration</span> <span class="o">=</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span>
+    <span class="n">host</span> <span class="o">=</span> <span class="s2">&quot;https://h2ogpte.genai.h2o.ai/api/v1&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># The client must configure the authentication and authorization parameters</span>
+<span class="c1"># in accordance with the API server security policy.</span>
+<span class="c1"># Examples for each auth method are provided below, use the example that</span>
+<span class="c1"># satisfies your auth use case.</span>
+
+<span class="c1"># Configure Bearer authorization: bearerAuth</span>
+<span class="n">configuration</span> <span class="o">=</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span>
+    <span class="n">access_token</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;BEARER_TOKEN&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="c1"># Enter a context with an instance of the API client</span>
+<span class="k">async</span> <span class="k">with</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="k">as</span> <span class="n">api_client</span><span class="p">:</span>
+    <span class="c1"># Create an instance of the API class</span>
+    <span class="n">api_instance</span> <span class="o">=</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">ChatApi</span><span class="p">(</span><span class="n">api_client</span><span class="p">)</span>
+    <span class="n">session_id</span> <span class="o">=</span> <span class="s1">&#39;session_id_example&#39;</span> <span class="c1"># str | Id of the chat session</span>
+    <span class="n">chat_session_update_request</span> <span class="o">=</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">ChatSessionUpdateRequest</span><span class="p">()</span> <span class="c1"># ChatSessionUpdateRequest |  (optional)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Updates the name of a chat session.</span>
+        <span class="n">api_response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">api_instance</span><span class="o">.</span><span class="n">update_chat_session</span><span class="p">(</span><span class="n">session_id</span><span class="p">,</span> <span class="n">chat_session_update_request</span><span class="o">=</span><span class="n">chat_session_update_request</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The response of ChatApi-&gt;update_chat_session:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">api_response</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exception when calling ChatApi-&gt;update_chat_session: </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id57">
+<h2>Parameters<a class="headerlink" href="#id57" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>session_id</strong></p></td>
+<td><p><strong>str</strong></p></td>
+<td><p>Id of the chat session</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>chat_session_update_request</strong></p></td>
+<td><p><a class="reference internal" href="ChatSessionUpdateRequest.html"><span class="std std-doc"><strong>ChatSessionUpdateRequest</strong></span></a></p></td>
+<td><p></p></td>
+<td><p>[optional]</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id58">
+<h2>Return type<a class="headerlink" href="#id58" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="ChatSession.html"><span class="std std-doc"><strong>ChatSession</strong></span></a></p>
+</section>
+<section id="id59">
+<h2>HTTP request headers<a class="headerlink" href="#id59" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Content-Type</strong>: application/json</p></li>
+<li><p><strong>Accept</strong>: application/json</p></li>
+</ul>
+</section>
+<section id="id60">
+<h2>HTTP response details<a class="headerlink" href="#id60" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Status code</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Response headers</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>200</strong></p></td>
+<td><p>Successful operation</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>401</strong></p></td>
+<td><p>Unauthorized - Invalid or missing API key</p></td>
+<td><p>-</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="update-chat-session-collection">
+<h1><strong>update_chat_session_collection</strong><a class="headerlink" href="#update-chat-session-collection" title="Link to this heading"></a></h1>
+<blockquote>
+<div><p>ChatSession update_chat_session_collection(session_id, collection_change_request)</p>
+</div></blockquote>
+<p>Updates a collection reference of a chat session.</p>
+<p>Updates a collection reference of a chat session.</p>
+<section id="id61">
+<h2>Example<a class="headerlink" href="#id61" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Bearer Authentication (bearerAuth):</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">h2ogpte.rest</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">h2ogpte.rest.models.chat_session</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatSession</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">h2ogpte.rest.models.collection_change_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">CollectionChangeRequest</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">h2ogpte.rest.rest</span><span class="w"> </span><span class="kn">import</span> <span class="n">ApiException</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pprint</span><span class="w"> </span><span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="c1"># Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1</span>
+<span class="c1"># See configuration.py for a list of all supported configuration parameters.</span>
+<span class="n">configuration</span> <span class="o">=</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span>
+    <span class="n">host</span> <span class="o">=</span> <span class="s2">&quot;https://h2ogpte.genai.h2o.ai/api/v1&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># The client must configure the authentication and authorization parameters</span>
+<span class="c1"># in accordance with the API server security policy.</span>
+<span class="c1"># Examples for each auth method are provided below, use the example that</span>
+<span class="c1"># satisfies your auth use case.</span>
+
+<span class="c1"># Configure Bearer authorization: bearerAuth</span>
+<span class="n">configuration</span> <span class="o">=</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span>
+    <span class="n">access_token</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;BEARER_TOKEN&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="c1"># Enter a context with an instance of the API client</span>
+<span class="k">async</span> <span class="k">with</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="k">as</span> <span class="n">api_client</span><span class="p">:</span>
+    <span class="c1"># Create an instance of the API class</span>
+    <span class="n">api_instance</span> <span class="o">=</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">ChatApi</span><span class="p">(</span><span class="n">api_client</span><span class="p">)</span>
+    <span class="n">session_id</span> <span class="o">=</span> <span class="s1">&#39;session_id_example&#39;</span> <span class="c1"># str | Id of the chat session</span>
+    <span class="n">collection_change_request</span> <span class="o">=</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">CollectionChangeRequest</span><span class="p">()</span> <span class="c1"># CollectionChangeRequest | </span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Updates a collection reference of a chat session.</span>
+        <span class="n">api_response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">api_instance</span><span class="o">.</span><span class="n">update_chat_session_collection</span><span class="p">(</span><span class="n">session_id</span><span class="p">,</span> <span class="n">collection_change_request</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The response of ChatApi-&gt;update_chat_session_collection:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">api_response</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exception when calling ChatApi-&gt;update_chat_session_collection: </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id62">
+<h2>Parameters<a class="headerlink" href="#id62" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>session_id</strong></p></td>
+<td><p><strong>str</strong></p></td>
+<td><p>Id of the chat session</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>collection_change_request</strong></p></td>
+<td><p><a class="reference internal" href="CollectionChangeRequest.html"><span class="std std-doc"><strong>CollectionChangeRequest</strong></span></a></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id63">
+<h2>Return type<a class="headerlink" href="#id63" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="ChatSession.html"><span class="std std-doc"><strong>ChatSession</strong></span></a></p>
+</section>
+<section id="id64">
+<h2>HTTP request headers<a class="headerlink" href="#id64" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Content-Type</strong>: application/json</p></li>
+<li><p><strong>Accept</strong>: application/json</p></li>
+</ul>
+</section>
+<section id="id65">
+<h2>HTTP response details<a class="headerlink" href="#id65" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Status code</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Response headers</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>200</strong></p></td>
+<td><p>Successful operation</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>401</strong></p></td>
+<td><p>Unauthorized - Invalid or missing API key</p></td>
+<td><p>-</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="update-chat-session-prompt-template">
+<h1><strong>update_chat_session_prompt_template</strong><a class="headerlink" href="#update-chat-session-prompt-template" title="Link to this heading"></a></h1>
+<blockquote>
+<div><p>ChatSession update_chat_session_prompt_template(session_id, prompt_template_change_request)</p>
+</div></blockquote>
+<p>Updates a prompt template reference of a chat session.</p>
+<p>Updates a prompt template reference of a chat session.</p>
+<section id="id66">
+<h2>Example<a class="headerlink" href="#id66" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Bearer Authentication (bearerAuth):</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">h2ogpte.rest</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">h2ogpte.rest.models.chat_session</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatSession</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">h2ogpte.rest.models.prompt_template_change_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">PromptTemplateChangeRequest</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">h2ogpte.rest.rest</span><span class="w"> </span><span class="kn">import</span> <span class="n">ApiException</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pprint</span><span class="w"> </span><span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="c1"># Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1</span>
+<span class="c1"># See configuration.py for a list of all supported configuration parameters.</span>
+<span class="n">configuration</span> <span class="o">=</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span>
+    <span class="n">host</span> <span class="o">=</span> <span class="s2">&quot;https://h2ogpte.genai.h2o.ai/api/v1&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># The client must configure the authentication and authorization parameters</span>
+<span class="c1"># in accordance with the API server security policy.</span>
+<span class="c1"># Examples for each auth method are provided below, use the example that</span>
+<span class="c1"># satisfies your auth use case.</span>
+
+<span class="c1"># Configure Bearer authorization: bearerAuth</span>
+<span class="n">configuration</span> <span class="o">=</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">Configuration</span><span class="p">(</span>
+    <span class="n">access_token</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;BEARER_TOKEN&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="c1"># Enter a context with an instance of the API client</span>
+<span class="k">async</span> <span class="k">with</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">ApiClient</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span> <span class="k">as</span> <span class="n">api_client</span><span class="p">:</span>
+    <span class="c1"># Create an instance of the API class</span>
+    <span class="n">api_instance</span> <span class="o">=</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">ChatApi</span><span class="p">(</span><span class="n">api_client</span><span class="p">)</span>
+    <span class="n">session_id</span> <span class="o">=</span> <span class="s1">&#39;session_id_example&#39;</span> <span class="c1"># str | Id of the chat session</span>
+    <span class="n">prompt_template_change_request</span> <span class="o">=</span> <span class="n">h2ogpte</span><span class="o">.</span><span class="n">rest</span><span class="o">.</span><span class="n">PromptTemplateChangeRequest</span><span class="p">()</span> <span class="c1"># PromptTemplateChangeRequest | </span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Updates a prompt template reference of a chat session.</span>
+        <span class="n">api_response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">api_instance</span><span class="o">.</span><span class="n">update_chat_session_prompt_template</span><span class="p">(</span><span class="n">session_id</span><span class="p">,</span> <span class="n">prompt_template_change_request</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The response of ChatApi-&gt;update_chat_session_prompt_template:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">api_response</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exception when calling ChatApi-&gt;update_chat_session_prompt_template: </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id67">
+<h2>Parameters<a class="headerlink" href="#id67" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>session_id</strong></p></td>
+<td><p><strong>str</strong></p></td>
+<td><p>Id of the chat session</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>prompt_template_change_request</strong></p></td>
+<td><p><a class="reference internal" href="PromptTemplateChangeRequest.html"><span class="std std-doc"><strong>PromptTemplateChangeRequest</strong></span></a></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id68">
+<h2>Return type<a class="headerlink" href="#id68" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="ChatSession.html"><span class="std std-doc"><strong>ChatSession</strong></span></a></p>
+</section>
+<section id="id69">
+<h2>HTTP request headers<a class="headerlink" href="#id69" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Content-Type</strong>: application/json</p></li>
+<li><p><strong>Accept</strong>: application/json</p></li>
+</ul>
+</section>
+<section id="id70">
+<h2>HTTP response details<a class="headerlink" href="#id70" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Status code</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Response headers</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>200</strong></p></td>
+<td><p>Successful operation</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>401</strong></p></td>
+<td><p>Unauthorized - Invalid or missing API key</p></td>
+<td><p>-</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024 H2O.ai, Inc. All rights reserved..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

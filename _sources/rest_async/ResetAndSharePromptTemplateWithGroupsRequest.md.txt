@@ -1,0 +1,29 @@
+# ResetAndSharePromptTemplateWithGroupsRequest
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**groups** | **List[str]** |  | [optional] 
+
+## Example
+
+```python
+from h2ogpte.rest_async.models.reset_and_share_prompt_template_with_groups_request import ResetAndSharePromptTemplateWithGroupsRequest
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of ResetAndSharePromptTemplateWithGroupsRequest from a JSON string
+reset_and_share_prompt_template_with_groups_request_instance = ResetAndSharePromptTemplateWithGroupsRequest.from_json(json)
+# print the JSON string representation of the object
+print(ResetAndSharePromptTemplateWithGroupsRequest.to_json())
+
+# convert the object into a dict
+reset_and_share_prompt_template_with_groups_request_dict = reset_and_share_prompt_template_with_groups_request_instance.to_dict()
+# create an instance of ResetAndSharePromptTemplateWithGroupsRequest from a dict
+reset_and_share_prompt_template_with_groups_request_from_dict = ResetAndSharePromptTemplateWithGroupsRequest.from_dict(reset_and_share_prompt_template_with_groups_request_dict)
+```
+
+
+

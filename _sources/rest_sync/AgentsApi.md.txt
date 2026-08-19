@@ -1,0 +1,1259 @@
+# AgentsApi
+
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**add_custom_agent_tool**](AgentsApi.md#add-custom-agent-tool) | **POST** /agents/custom-tools | Add Custom Agent Tools| **POST** /agents/custom_tools | Add Custom Agent Tools
+[**create_agent_key**](AgentsApi.md#create-agent-key) | **POST** /agents/keys | Creates agent key.| **POST** /agents/keys | Creates agent key.
+[**create_agent_key_tool_associations**](AgentsApi.md#create-agent-key-tool-associations) | **POST** /agents/tool-association | Creates associations between a tool and user&| **POST** /agents/tool_association | Creates associations between a tool and user&#39;s keys.
+[**delete_agent_keys**](AgentsApi.md#delete-agent-keys) | **DELETE** /agents/keys/{key-ids} | Deletes agent keys.| **DELETE** /agents/keys/{key_ids} | Deletes agent keys.
+[**delete_agent_tool_association**](AgentsApi.md#delete-agent-tool-association) | **DELETE** /agents/tool-association/{associate-ids} | Deletes agent tool key associations.| **DELETE** /agents/tool_association/{associate_ids} | Deletes agent tool key associations.
+[**delete_agent_tool_preference**](AgentsApi.md#delete-agent-tool-preference) | **DELETE** /agents/tool-preference | Deletes the agent tool preferences for the user.| **DELETE** /agents/tool_preference | Deletes the agent tool preferences for the user.
+[**delete_custom_agent_tool**](AgentsApi.md#delete-custom-agent-tool) | **DELETE** /agents/custom-tools/{tool-ids} | Deletes custom agent tools| **DELETE** /agents/custom_tools/{tool_ids} | Deletes custom agent tools
+[**list_agent_directory_stats**](AgentsApi.md#list-agent-directory-stats) | **GET** /agents/directory-stats | Lists agent directory stats across all agent chat sessions.| **GET** /agents/directory_stats | Lists agent directory stats across all agent chat sessions.
+[**list_agent_key_tool_associations**](AgentsApi.md#list-agent-key-tool-associations) | **GET** /agents/tool-association | Returns a list of tools and the user&| **GET** /agents/tool_association | Returns a list of tools and the user&#39;s associated keys.
+[**list_agent_keys**](AgentsApi.md#list-agent-keys) | **GET** /agents/keys | Lists agent keys.| **GET** /agents/keys | Lists agent keys.
+[**list_agent_tool_preference**](AgentsApi.md#list-agent-tool-preference) | **GET** /agents/tool-preference | Lists the agent tool preference for the user.| **GET** /agents/tool_preference | Lists the agent tool preference for the user.
+[**list_agent_tools**](AgentsApi.md#list-agent-tools) | **GET** /agents/tools | Lists agent tools present on the system.| **GET** /agents/tools | Lists agent tools present on the system.
+[**list_custom_agent_tools**](AgentsApi.md#list-custom-agent-tools) | **GET** /agents/custom-tools | List Custom Agent Tools| **GET** /agents/custom_tools | List Custom Agent Tools
+[**update_agent_key**](AgentsApi.md#update-agent-key) | **POST** /agents/keys/{key-id} | Updates agent key.| **POST** /agents/keys/{key_id} | Updates agent key.
+[**update_agent_tool_preference**](AgentsApi.md#update-agent-tool-preference) | **POST** /agents/tool-preference | Creates or updates the agent tool preference for the user.| **POST** /agents/tool_preference | Creates or updates the agent tool preference for the user.
+[**update_custom_agent_tool**](AgentsApi.md#update-custom-agent-tool) | **PUT** /agents/custom-tools/{tool-id} | Updates a custom agent tool| **PUT** /agents/custom_tools/{tool_id} | Updates a custom agent tool
+
+
+# **add_custom_agent_tool**
+> List[AddCustomAgentTool201ResponseInner] add_custom_agent_tool(tool_type, tool_args, file=file, custom_tool_path=custom_tool_path, filename=filename)
+
+Add Custom Agent Tools
+
+Add Custom Agent Tools
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.models.add_custom_agent_tool201_response_inner import AddCustomAgentTool201ResponseInner
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.AgentsApi(api_client)
+    tool_type = 'tool_type_example' # str | 
+    tool_args = 'tool_args_example' # str | 
+    file = None # bytearray |  (optional)
+    custom_tool_path = 'custom_tool_path_example' # str |  (optional)
+    filename = 'filename_example' # str |  (optional)
+
+    try:
+        # Add Custom Agent Tools
+        api_response = api_instance.add_custom_agent_tool(tool_type, tool_args, file=file, custom_tool_path=custom_tool_path, filename=filename)
+        print("The response of AgentsApi->add_custom_agent_tool:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AgentsApi->add_custom_agent_tool: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **tool_type** | **str**|  | 
+ **tool_args** | **str**|  | 
+ **file** | **bytearray**|  | [optional] 
+ **custom_tool_path** | **str**|  | [optional] 
+ **filename** | **str**|  | [optional] 
+
+### Return type
+
+[**List[AddCustomAgentTool201ResponseInner]**](AddCustomAgentTool201ResponseInner.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Custom agent tool created successfully |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **create_agent_key**
+> AgentKey create_agent_key(create_agent_key_request)
+
+Creates agent key.
+
+Creates agent key.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.models.agent_key import AgentKey
+from h2ogpte.rest_sync.models.create_agent_key_request import CreateAgentKeyRequest
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.AgentsApi(api_client)
+    create_agent_key_request = h2ogpte.rest_sync.CreateAgentKeyRequest() # CreateAgentKeyRequest | 
+
+    try:
+        # Creates agent key.
+        api_response = api_instance.create_agent_key(create_agent_key_request)
+        print("The response of AgentsApi->create_agent_key:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AgentsApi->create_agent_key: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **create_agent_key_request** | [**CreateAgentKeyRequest**](CreateAgentKeyRequest.md)|  | 
+
+### Return type
+
+[**AgentKey**](AgentKey.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+**409** | Conflict |  -  |
+**500** | Internal server error |  -  |
+
+
+
+# **create_agent_key_tool_associations**
+> AgentToolKeyAssociations create_agent_key_tool_associations(create_agent_tool_key_associations_request)
+
+Creates associations between a tool and user's keys.
+
+Creates associations between a tool and user's keys.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.models.agent_tool_key_associations import AgentToolKeyAssociations
+from h2ogpte.rest_sync.models.create_agent_tool_key_associations_request import CreateAgentToolKeyAssociationsRequest
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.AgentsApi(api_client)
+    create_agent_tool_key_associations_request = h2ogpte.rest_sync.CreateAgentToolKeyAssociationsRequest() # CreateAgentToolKeyAssociationsRequest | 
+
+    try:
+        # Creates associations between a tool and user's keys.
+        api_response = api_instance.create_agent_key_tool_associations(create_agent_tool_key_associations_request)
+        print("The response of AgentsApi->create_agent_key_tool_associations:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AgentsApi->create_agent_key_tool_associations: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **create_agent_tool_key_associations_request** | [**CreateAgentToolKeyAssociationsRequest**](CreateAgentToolKeyAssociationsRequest.md)|  | 
+
+### Return type
+
+[**AgentToolKeyAssociations**](AgentToolKeyAssociations.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+**500** | Internal server error |  -  |
+
+
+
+# **delete_agent_keys**
+> delete_agent_keys(key_ids)
+
+Deletes agent keys.
+
+Deletes agent keys.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.AgentsApi(api_client)
+    key_ids = ['key_ids_example'] # List[str] | Ids of keys to be deleted.
+
+    try:
+        # Deletes agent keys.
+        api_instance.delete_agent_keys(key_ids)
+    except Exception as e:
+        print("Exception when calling AgentsApi->delete_agent_keys: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **key_ids** | [**List[str]**](str.md)| Ids of keys to be deleted. | 
+
+### Return type
+
+void (empty response body)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+**500** | Internal server error |  -  |
+
+
+
+# **delete_agent_tool_association**
+> Count delete_agent_tool_association(associate_ids)
+
+Deletes agent tool key associations.
+
+Deletes agent tool key associations given a list of associate ids belonging to the user.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.models.count import Count
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.AgentsApi(api_client)
+    associate_ids = ['associate_ids_example'] # List[str] | The unique identifiers of tool associations to be deleted.
+
+    try:
+        # Deletes agent tool key associations.
+        api_response = api_instance.delete_agent_tool_association(associate_ids)
+        print("The response of AgentsApi->delete_agent_tool_association:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AgentsApi->delete_agent_tool_association: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **associate_ids** | [**List[str]**](str.md)| The unique identifiers of tool associations to be deleted. | 
+
+### Return type
+
+[**Count**](Count.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+**500** | Internal server error |  -  |
+
+
+
+# **delete_agent_tool_preference**
+> delete_agent_tool_preference()
+
+Deletes the agent tool preferences for the user.
+
+Deletes the agent tool preferences for the user.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.AgentsApi(api_client)
+
+    try:
+        # Deletes the agent tool preferences for the user.
+        api_instance.delete_agent_tool_preference()
+    except Exception as e:
+        print("Exception when calling AgentsApi->delete_agent_tool_preference: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+void (empty response body)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+**500** | Internal server error |  -  |
+
+
+
+# **delete_custom_agent_tool**
+> Count delete_custom_agent_tool(tool_ids)
+
+Deletes custom agent tools
+
+Deletes custom agent tool given a list of tool ids belonging to the user.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.models.count import Count
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.AgentsApi(api_client)
+    tool_ids = ['tool_ids_example'] # List[str] | The unique identifiers of tools to be deleted.
+
+    try:
+        # Deletes custom agent tools
+        api_response = api_instance.delete_custom_agent_tool(tool_ids)
+        print("The response of AgentsApi->delete_custom_agent_tool:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AgentsApi->delete_custom_agent_tool: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **tool_ids** | [**List[str]**](str.md)| The unique identifiers of tools to be deleted. | 
+
+### Return type
+
+[**Count**](Count.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+**500** | Internal server error |  -  |
+
+
+
+# **list_agent_directory_stats**
+> List[AgentServerDirectoryStatsPerAgentChatSession] list_agent_directory_stats(offset=offset, limit=limit, filter_text=filter_text)
+
+Lists agent directory stats across all agent chat sessions.
+
+Lists agent directory stats across all agent chat sessions.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.models.agent_server_directory_stats_per_agent_chat_session import AgentServerDirectoryStatsPerAgentChatSession
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.AgentsApi(api_client)
+    offset = 0 # int | How many agent chat sessions to skip before returning. (optional) (default to 0)
+    limit = 100 # int | How many agent chat sessions to return. (optional) (default to 100)
+    filter_text = 'filter_text_example' # str | Applied text filter. (optional)
+
+    try:
+        # Lists agent directory stats across all agent chat sessions.
+        api_response = api_instance.list_agent_directory_stats(offset=offset, limit=limit, filter_text=filter_text)
+        print("The response of AgentsApi->list_agent_directory_stats:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AgentsApi->list_agent_directory_stats: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **offset** | **int**| How many agent chat sessions to skip before returning. | [optional] [default to 0]
+ **limit** | **int**| How many agent chat sessions to return. | [optional] [default to 100]
+ **filter_text** | **str**| Applied text filter. | [optional] 
+
+### Return type
+
+[**List[AgentServerDirectoryStatsPerAgentChatSession]**](AgentServerDirectoryStatsPerAgentChatSession.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **list_agent_key_tool_associations**
+> List[AgentToolKeyAssociations] list_agent_key_tool_associations()
+
+Returns a list of tools and the user's associated keys.
+
+Returns a list of tools and the user's associated keys.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.models.agent_tool_key_associations import AgentToolKeyAssociations
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.AgentsApi(api_client)
+
+    try:
+        # Returns a list of tools and the user's associated keys.
+        api_response = api_instance.list_agent_key_tool_associations()
+        print("The response of AgentsApi->list_agent_key_tool_associations:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AgentsApi->list_agent_key_tool_associations: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**List[AgentToolKeyAssociations]**](AgentToolKeyAssociations.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+**500** | Internal server error |  -  |
+
+
+
+# **list_agent_keys**
+> List[AgentKey] list_agent_keys()
+
+Lists agent keys.
+
+Lists agent keys.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.models.agent_key import AgentKey
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.AgentsApi(api_client)
+
+    try:
+        # Lists agent keys.
+        api_response = api_instance.list_agent_keys()
+        print("The response of AgentsApi->list_agent_keys:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AgentsApi->list_agent_keys: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**List[AgentKey]**](AgentKey.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+**500** | Internal server error |  -  |
+
+
+
+# **list_agent_tool_preference**
+> List[str] list_agent_tool_preference()
+
+Lists the agent tool preference for the user.
+
+Lists the agent tool preference for the user.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.AgentsApi(api_client)
+
+    try:
+        # Lists the agent tool preference for the user.
+        api_response = api_instance.list_agent_tool_preference()
+        print("The response of AgentsApi->list_agent_tool_preference:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AgentsApi->list_agent_tool_preference: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+**List[str]**
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+**500** | Internal server error |  -  |
+
+
+
+# **list_agent_tools**
+> List[AgentToolSpec] list_agent_tools()
+
+Lists agent tools present on the system.
+
+Lists agent tools present on the system.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.models.agent_tool_spec import AgentToolSpec
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.AgentsApi(api_client)
+
+    try:
+        # Lists agent tools present on the system.
+        api_response = api_instance.list_agent_tools()
+        print("The response of AgentsApi->list_agent_tools:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AgentsApi->list_agent_tools: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**List[AgentToolSpec]**](AgentToolSpec.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+**500** | Internal server error |  -  |
+
+
+
+# **list_custom_agent_tools**
+> List[ListCustomAgentTools200ResponseInner] list_custom_agent_tools()
+
+List Custom Agent Tools
+
+List all custom agent tools for the current user
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.models.list_custom_agent_tools200_response_inner import ListCustomAgentTools200ResponseInner
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.AgentsApi(api_client)
+
+    try:
+        # List Custom Agent Tools
+        api_response = api_instance.list_custom_agent_tools()
+        print("The response of AgentsApi->list_custom_agent_tools:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AgentsApi->list_custom_agent_tools: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**List[ListCustomAgentTools200ResponseInner]**](ListCustomAgentTools200ResponseInner.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+**500** | Internal server error |  -  |
+
+
+
+# **update_agent_key**
+> AgentKey update_agent_key(key_id, update_agent_key_request)
+
+Updates agent key.
+
+Updates agent key.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.models.agent_key import AgentKey
+from h2ogpte.rest_sync.models.update_agent_key_request import UpdateAgentKeyRequest
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.AgentsApi(api_client)
+    key_id = 'key_id_example' # str | Id of the key to be updated.
+    update_agent_key_request = h2ogpte.rest_sync.UpdateAgentKeyRequest() # UpdateAgentKeyRequest | 
+
+    try:
+        # Updates agent key.
+        api_response = api_instance.update_agent_key(key_id, update_agent_key_request)
+        print("The response of AgentsApi->update_agent_key:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AgentsApi->update_agent_key: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **key_id** | **str**| Id of the key to be updated. | 
+ **update_agent_key_request** | [**UpdateAgentKeyRequest**](UpdateAgentKeyRequest.md)|  | 
+
+### Return type
+
+[**AgentKey**](AgentKey.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+**409** | Conflict |  -  |
+**500** | Internal server error |  -  |
+
+
+
+# **update_agent_tool_preference**
+> update_agent_tool_preference(update_agent_tool_preference_request)
+
+Creates or updates the agent tool preference for the user.
+
+Creates or updates the agent tool preference for the user.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.models.update_agent_tool_preference_request import UpdateAgentToolPreferenceRequest
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.AgentsApi(api_client)
+    update_agent_tool_preference_request = h2ogpte.rest_sync.UpdateAgentToolPreferenceRequest() # UpdateAgentToolPreferenceRequest | 
+
+    try:
+        # Creates or updates the agent tool preference for the user.
+        api_instance.update_agent_tool_preference(update_agent_tool_preference_request)
+    except Exception as e:
+        print("Exception when calling AgentsApi->update_agent_tool_preference: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **update_agent_tool_preference_request** | [**UpdateAgentToolPreferenceRequest**](UpdateAgentToolPreferenceRequest.md)|  | 
+
+### Return type
+
+void (empty response body)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+**500** | Internal server error |  -  |
+
+
+
+# **update_custom_agent_tool**
+> UpdateCustomAgentTool200Response update_custom_agent_tool(tool_id, update_custom_agent_tool_request)
+
+Updates a custom agent tool
+
+Updates a custom agent tool given a tool id belonging to the user.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.models.update_custom_agent_tool200_response import UpdateCustomAgentTool200Response
+from h2ogpte.rest_sync.models.update_custom_agent_tool_request import UpdateCustomAgentToolRequest
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.AgentsApi(api_client)
+    tool_id = 'tool_id_example' # str | The unique identifier of the tool to be updated.
+    update_custom_agent_tool_request = h2ogpte.rest_sync.UpdateCustomAgentToolRequest() # UpdateCustomAgentToolRequest | 
+
+    try:
+        # Updates a custom agent tool
+        api_response = api_instance.update_custom_agent_tool(tool_id, update_custom_agent_tool_request)
+        print("The response of AgentsApi->update_custom_agent_tool:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AgentsApi->update_custom_agent_tool: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **tool_id** | **str**| The unique identifier of the tool to be updated. | 
+ **update_custom_agent_tool_request** | [**UpdateCustomAgentToolRequest**](UpdateCustomAgentToolRequest.md)|  | 
+
+### Return type
+
+[**UpdateCustomAgentTool200Response**](UpdateCustomAgentTool200Response.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+**404** | Not found |  -  |
+**500** | Internal server error |  -  |
+
+
+

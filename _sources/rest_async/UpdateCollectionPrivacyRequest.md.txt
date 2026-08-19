@@ -1,0 +1,30 @@
+# UpdateCollectionPrivacyRequest
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**is_public** | **bool** | A flag specifying whether a collection is private or public. | 
+**permissions** | **List[str]** | Collection specific permissions, only used if is_public is true. | [optional] 
+
+## Example
+
+```python
+from h2ogpte.rest_async.models.update_collection_privacy_request import UpdateCollectionPrivacyRequest
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of UpdateCollectionPrivacyRequest from a JSON string
+update_collection_privacy_request_instance = UpdateCollectionPrivacyRequest.from_json(json)
+# print the JSON string representation of the object
+print(UpdateCollectionPrivacyRequest.to_json())
+
+# convert the object into a dict
+update_collection_privacy_request_dict = update_collection_privacy_request_instance.to_dict()
+# create an instance of UpdateCollectionPrivacyRequest from a dict
+update_collection_privacy_request_from_dict = UpdateCollectionPrivacyRequest.from_dict(update_collection_privacy_request_dict)
+```
+
+
+

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ProcessDocumentJobRequest &mdash; h2oGPTe</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/code.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="canonical" href="https://h2ogpte.github.io/rest_async/ProcessDocumentJobRequest.html"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=4085d3d6"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            h2oGPTe
+          </a>
+              <div class="version">
+                1.6.64
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Installation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">h2oGPTe Python Client Installation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started with h2oGPTe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../async_api.html">h2oGPTe Async API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/tutorial1/tutorial1.html">Tutorial 1: Chat with a website</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/tutorial2/tutorial2.html">Tutorial 2: Create a Collection with h2oGPTe’s or your custom guardrails and PII parameter values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/tutorial3/tutorial3.html">Tutorial 3: Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/tutorial4/tutorial4.html">Tutorial 4: Downloading agent-generated files</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../examples/chats/index.html">Chats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/collections/index.html">Collections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/documents/index.html">Documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/llms/index.html">LLMs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/users/index.html">Users</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/jobs/index.html">Jobs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/prompts/index.html">Prompts</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Python API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../python_api.html">h2oGPTe Python API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Python for REST API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../rest.html">h2oGPTe Python API for REST Interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Third-Party Notices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../docs-licenses/licenses.html">Third-Party Licenses</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Release Notes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">h2oGPTe</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">ProcessDocumentJobRequest</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/rest_async/ProcessDocumentJobRequest.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="processdocumentjobrequest">
+<h1>ProcessDocumentJobRequest<a class="headerlink" href="#processdocumentjobrequest" title="Link to this heading"></a></h1>
+<section id="properties">
+<h2>Properties<a class="headerlink" href="#properties" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>document_id</strong></p></td>
+<td><p><strong>str</strong></p></td>
+<td><p>String id of the document to create a summary from.</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>summary_id</strong></p></td>
+<td><p><strong>str</strong></p></td>
+<td><p>The requested identifier of the output document summary.</p></td>
+<td><p>[optional]</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>system_prompt</strong></p></td>
+<td><p><strong>str</strong></p></td>
+<td><p>System prompt.</p></td>
+<td><p>[optional]</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>pre_prompt_summary</strong></p></td>
+<td><p><strong>str</strong></p></td>
+<td><p>Prompt that goes before each large piece of text to summarize.</p></td>
+<td><p>[optional]</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>prompt_summary</strong></p></td>
+<td><p><strong>str</strong></p></td>
+<td><p>Prompt that goes after each large piece of text to summarize.</p></td>
+<td><p>[optional]</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>image_batch_image_prompt</strong></p></td>
+<td><p><strong>str</strong></p></td>
+<td><p>Prompt for each image batch for vision models.</p></td>
+<td><p>[optional]</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>image_batch_final_prompt</strong></p></td>
+<td><p><strong>str</strong></p></td>
+<td><p>Prompt to reduce all answers each image batch for vision models.</p></td>
+<td><p>[optional]</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>llm</strong></p></td>
+<td><p><strong>str</strong></p></td>
+<td><p>LLM to use.</p></td>
+<td><p>[optional]</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>llm_args</strong></p></td>
+<td><p><strong>Dict[str, object]</strong></p></td>
+<td><p>A map of arguments sent to LLM with query.   * `temperature` <strong>(type=double, default=0.0)</strong> - A value used to modulate the next token probabilities.     0 is the most deterministic and 1 is most creative.   * `top_k` <strong>(type=integer, default=1)</strong> - A number of highest probability vocabulary tokens to keep for top-k-filtering.   * `top_p` <strong>(type=double, default=0.0)</strong> - If set to a value &lt; 1, only the smallest set of most probable     tokens with probabilities that add up to top_p or higher are kept for generation.   * `seed` <strong>(type=integer, default=0)</strong> - A seed for the random number generator when sampling during      generation (if temp&gt;0 or top_k&gt;1 or top_p&lt;1), seed=0 picks a random seed.   * `repetition_penalty` <strong>(type=double, default=1.07)</strong> - A parameter for repetition penalty. 1.0 means no penalty.   * `max_new_tokens` <strong>(type=double, default=1024)</strong> - A maximum number of new tokens to generate.     This limit applies to each (map+reduce) step during summarization and each (map) step during extraction.   * `min_max_new_tokens` <strong>(type=integer, default=512)</strong> - A minimum value for max_new_tokens when auto-adjusting for content of prompt, docs, etc.   * `response_format` <strong>(type=enum[text, json_object, json_code], default=text)</strong> - An output type of LLM   * `guided_json` <strong>(type=map)</strong> - If specified, the output will follow the JSON schema.   * `guided_regex` <strong>(type=string)</strong> - If specified, the output will follow the regex pattern.     Only for models that support guided generation.   * `guided_choice` <strong>(type=array[string])</strong> - If specified, the output will be exactly one of the choices.     Only for models that support guided generation.   * `guided_grammar` <strong>(type=string)</strong> - If specified, the output will follow the context free grammar.     Only for models that support guided generation.   * `guided_whitespace_pattern` <strong>(type=string)</strong> - If specified, will override the default whitespace pattern for guided json decoding.     Only for models that support guided generation.   * `enable_vision` <strong>(type=enum[on, off, auto], default=auto)</strong> - Controls vision mode,     send images to the LLM in addition to text chunks.   * `visible_vision_models` <strong>(type=array[string], default=[auto])</strong> - Controls which vision model to use when processing images.     Must provide exactly one model. [auto] for automatic.   * `images_num_max` <strong>(type=integer, default=None)</strong> - Maximum number of images to process.   * `json_preserve_system_prompt` <strong>(type=boolean, default=None)</strong> - Whether to preserve system prompt in JSON response.   * `client_metadata` <strong>(type=string, default=None)</strong> - Additional metadata to send with the request.   * `min_chars_per_yield` <strong>(type=integer, default=1)</strong> - Minimum characters to yield in streaming response.   * `reasoning_effort` <strong>(type=integer, default=0)</strong> - Level of reasoning effort for the model (higher values = deeper reasoning, e.g., 10000-65000).     Use for models that support chain-of-thought reasoning. 0 means no additional reasoning effort.   * `cost_controls` <strong>(type=map)</strong> A map with cost controls settings:     * `max_cost` <strong>(type=double)</strong> - Sets the maximum allowed cost in USD per LLM call when doing Automatic model routing.       If the estimated cost based on input and output token counts is higher than this limit,       the request will fail as early as possible.     * `max_cost_per_million_tokens` <strong>(type=double)</strong> - Only consider models that cost less than this value in USD per million tokens       when doing automatic routing. Using the max of input and output cost.     * `model` <strong>(type=array[string])</strong> - Optional subset of models to consider when doing automatic routing.       If not specified, all models are considered.     * `willingness_to_pay` <strong>(type=double)</strong> - Controls the willingness to pay extra for a more accurate model for every LLM call       when doing automatic routing, in units of USD per +10% increase in accuracy.       We start with the least accurate model. For each more accurate model,       we accept it if the increase in estimated cost divided by the increase in estimated accuracy       is no more than this value divided by 10%, up to the upper limit specified above.       Lower values will try to keep the cost as low as possible,       higher values will approach the cost limit to increase accuracy. 0 means unlimited.     * `willingness_to_wait` <strong>(type=double)</strong> - Controls the willingness to wait longer for a more accurate model for every LLM call       when doing automatic routing, in units of seconds per +10% increase in accuracy.       We start with the least accurate model. For each more accurate model,       we accept it if the increase in estimated time divided by the increase in estimated accuracy       is no more than this value divided by 10%. Lower values will try to keep the time       as low as possible, higher values will take longer to increase accuracy. 0 means unlimited.   * `use_agent` <strong>(type=boolean, default=False)</strong> - If True, use the AI agent (with access to tools) to generate the response.   * `agent_accuracy` <strong>(type=string, default=&amp;quot;standard&amp;quot;)</strong> - Effort level by the agent. Only if use_agent=True. One of [&amp;quot;quick&amp;quot;, &amp;quot;basic&amp;quot;, &amp;quot;standard&amp;quot;, &amp;quot;maximum&amp;quot;].   * `agent_max_turns` <strong>(type=union[string, integer], default=&amp;quot;auto&amp;quot;)</strong> - Optional max. number of back-and-forth turns with the agent. Only if use_agent=True. Either &amp;quot;auto&amp;quot; or an integer.   * `agent_tools` <strong>(type=union[string, array[string]], default=&amp;quot;auto&amp;quot;)</strong> - Either &amp;quot;auto&amp;quot;, &amp;quot;all&amp;quot;, &amp;quot;any&amp;quot; to enable all available tools, or a specific list of tools to use. Only if use_agent=True.   * `agent_type` <strong>(type=string, default=&amp;quot;auto&amp;quot;)</strong> - Type of agent to use for task processing.   * `agent_original_files` <strong>(type=array[string], default=None)</strong> - List of file paths for agent to process.   * `agent_timeout` <strong>(type=integer, default=None)</strong> - Timeout in seconds for each agent turn.   * `agent_total_timeout` <strong>(type=integer, default=3600)</strong> - Total timeout in seconds for all agent processing.   * `agent_code_writer_system_message` <strong>(type=string, default=None)</strong> - System message for agent code writer.   * `agent_num_executable_code_blocks_limit` <strong>(type=integer, default=1)</strong> - Maximum number of executable code blocks.   * `agent_system_site_packages` <strong>(type=boolean, default=True)</strong> - Whether agent has access to system site packages.   * `agent_main_model` <strong>(type=string, default=None)</strong> - Main model to use for agent.   * `agent_max_stream_length` <strong>(type=integer, default=None)</strong> - Maximum stream length for agent response.   * `agent_max_memory_usage` <strong>(type=integer, default=16*1024</strong>3)** - Maximum memory usage for agent in bytes (16GB default).   * `agent_main_reasoning_effort` <strong>(type=integer, default=None)</strong> - Effort level for main reasoning.   * `agent_advanced_reasoning_effort` <strong>(type=integer, default=None)</strong> - Effort level for advanced reasoning.   * `agent_max_confidence_level` <strong>(type=integer, default=None)</strong> - Maximum confidence level for agent responses.   * `agent_planning_forced_mode` <strong>(type=boolean, default=None)</strong> - Whether to force planning mode for agent.   * `agent_too_soon_forced_mode` <strong>(type=boolean, default=None)</strong> - Whether to force &amp;quot;too soon&amp;quot; mode for agent.   * `agent_critique_forced_mode` <strong>(type=integer, default=None)</strong> - Whether to force critique mode for agent.   * `agent_query_understanding_parallel_calls` <strong>(type=integer, default=None)</strong> - Number of parallel calls for query understanding.   * `tool_building_mode` <strong>(type=string, default=None)</strong> - Mode for tool building configuration.   * `agent_stream_files` <strong>(type=boolean, default=True)</strong> - Whether to stream files from agent.</p></td>
+<td><p>[optional]</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>max_num_chunks</strong></p></td>
+<td><p><strong>int</strong></p></td>
+<td><p>Max limit of chunks to send to the summarizer.</p></td>
+<td><p>[optional]</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>sampling_strategy</strong></p></td>
+<td><p><strong>str</strong></p></td>
+<td><p>How to sample if the document has more chunks than max_num_chunks. Options are &amp;quot;auto&amp;quot;, &amp;quot;uniform&amp;quot;, &amp;quot;first&amp;quot;, &amp;quot;first+last&amp;quot;, default is &amp;quot;auto&amp;quot; (a hybrid of them all).</p></td>
+<td><p>[optional] [default to ‘auto’]</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>pages</strong></p></td>
+<td><p><strong>List[int]</strong></p></td>
+<td><p>List of specific pages (of the ingested document in PDF form) to use from the document. 1-based indexing.</p></td>
+<td><p>[optional]</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>var_schema</strong></p></td>
+<td><p><strong>object</strong></p></td>
+<td><p>Optional JSON schema to use for guided json generation.</p></td>
+<td><p>[optional]</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>keep_intermediate_results</strong></p></td>
+<td><p><strong>bool</strong></p></td>
+<td><p>Whether to keep intermediate results. If false, further LLM calls are applied to the intermediate results until one global summary is obtained - map+reduce (i.e., summary). If true, the results’ content will be a list of strings (the results of applying the LLM to different pieces of document context) - map (i.e., extract).</p></td>
+<td><p>[optional] [default to False]</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>guardrails_settings</strong></p></td>
+<td><p><a class="reference internal" href="GuardrailsSettings.html"><span class="std std-doc"><strong>GuardrailsSettings</strong></span></a></p></td>
+<td><p></p></td>
+<td><p>[optional]</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>timeout</strong></p></td>
+<td><p><strong>int</strong></p></td>
+<td><p>Amount of time in seconds to allow the request to run. The default is 86400 seconds.</p></td>
+<td><p>[optional] [default to 86400]</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>meta_data_to_include</strong></p></td>
+<td><p><strong>Dict[str, bool]</strong></p></td>
+<td><p>A map with flags that indicate whether each piece of document metadata is to be included as part of  the context for a chat with a collection.   * `name` <strong>(type: boolean, default=True)</strong>   * `text` <strong>(type: boolean, default=True)</strong>   * `page` <strong>(type: boolean, default=True)</strong>   * `captions` <strong>(type: boolean, default=True)</strong>   * `uri` <strong>(type: boolean, default=False)</strong>   * `connector` <strong>(type: boolean, default=False)</strong>   * `original_mtime` <strong>(type: boolean, default=False)</strong>   * `age` <strong>(type: boolean, default=False)</strong>   * `score` <strong>(type: boolean, default=False)</strong></p></td>
+<td><p>[optional]</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="example">
+<h2>Example<a class="headerlink" href="#example" title="Link to this heading"></a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">h2ogpte.rest_async.models.process_document_job_request</span><span class="w"> </span><span class="kn">import</span> <span class="n">ProcessDocumentJobRequest</span>
+
+<span class="c1"># TODO update the JSON string below</span>
+<span class="n">json</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span>
+<span class="c1"># create an instance of ProcessDocumentJobRequest from a JSON string</span>
+<span class="n">process_document_job_request_instance</span> <span class="o">=</span> <span class="n">ProcessDocumentJobRequest</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="n">json</span><span class="p">)</span>
+<span class="c1"># print the JSON string representation of the object</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ProcessDocumentJobRequest</span><span class="o">.</span><span class="n">to_json</span><span class="p">())</span>
+
+<span class="c1"># convert the object into a dict</span>
+<span class="n">process_document_job_request_dict</span> <span class="o">=</span> <span class="n">process_document_job_request_instance</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+<span class="c1"># create an instance of ProcessDocumentJobRequest from a dict</span>
+<span class="n">process_document_job_request_from_dict</span> <span class="o">=</span> <span class="n">ProcessDocumentJobRequest</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">process_document_job_request_dict</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025 H2O.ai, Inc. All rights reserved..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+Upload a file from your local machine
+=====================================
+
+
+Overview 
+--------
+
+Users can upload a supported file type to a Collection from their local machine. 
+
+
+
+
+Example 
+-------
+
+
+.. code-block:: python
+
+    from h2ogpte import H2OGPTE
+
+    client = H2OGPTE(
+        address="https://h2ogpte.genai.h2o.ai",
+        api_key='sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+    )
+
+    collection_id = client.create_collection(
+        name="The name of my Collection",
+        description="The description of my Collection",
+    )
+
+    with open("annual-report.pdf", "rb") as f:
+        report = client.upload("annual-report.pdf", f)
+
+    client.ingest_uploads(
+        collection_id=collection_id, 
+        upload_ids=[report]
+    )

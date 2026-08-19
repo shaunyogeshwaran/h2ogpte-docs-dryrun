@@ -1,0 +1,1830 @@
+# DocumentsApi
+
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**create_delete_document_job**](DocumentsApi.md#create-delete-document-job) | **POST** /documents/delete-job | Creates job to delete documents.| **POST** /documents/delete_job | Creates job to delete documents.
+[**create_process_document_job**](DocumentsApi.md#create-process-document-job) | **POST** /documents/process-job | Creates job to process document.| **POST** /documents/process_job | Creates job to process document.
+[**create_tag_on_document**](DocumentsApi.md#create-tag-on-document) | **POST** /documents/{document-id}/tags | Assigns a tag to the document.| **POST** /documents/{document_id}/tags | Assigns a tag to the document.
+[**delete_document**](DocumentsApi.md#delete-document) | **DELETE** /documents/{document-id} | Deletes a document.| **DELETE** /documents/{document_id} | Deletes a document.
+[**delete_document_summaries**](DocumentsApi.md#delete-document-summaries) | **DELETE** /documents/summaries/{summary-ids} | Deletes document summaries.| **DELETE** /documents/summaries/{summary_ids} | Deletes document summaries.
+[**delete_tag_from_document**](DocumentsApi.md#delete-tag-from-document) | **DELETE** /documents/{document-id}/tags/{tag-name} | Removes a tag from a document.| **DELETE** /documents/{document_id}/tags/{tag_name} | Removes a tag from a document.
+[**get_chat_session_count_for_document**](DocumentsApi.md#get-chat-session-count-for-document) | **GET** /documents/{document-id}/chats/count | Counts a number of chat sessions with the document.| **GET** /documents/{document_id}/chats/count | Counts a number of chat sessions with the document.
+[**get_document**](DocumentsApi.md#get-document) | **GET** /documents/{document-id} | Finds a document by id.| **GET** /documents/{document_id} | Finds a document by id.
+[**get_document_count**](DocumentsApi.md#get-document-count) | **GET** /documents/count | Counts a number of documents.| **GET** /documents/count | Counts a number of documents.
+[**get_document_guardrails_settings**](DocumentsApi.md#get-document-guardrails-settings) | **GET** /documents/{document-id}/guardrails-settings | Fetches document guardrails settings.| **GET** /documents/{document_id}/guardrails_settings | Fetches document guardrails settings.
+[**get_document_internal_metadata**](DocumentsApi.md#get-document-internal-metadata) | **GET** /documents/{document-id}/internal-metadata | Fetches document internal metadata.| **GET** /documents/{document_id}/internal_metadata | Fetches document internal metadata.
+[**get_document_metadata**](DocumentsApi.md#get-document-metadata) | **GET** /documents/{document-id}/metadata | Fetches document metadata.| **GET** /documents/{document_id}/metadata | Fetches document metadata.
+[**get_document_page_layout**](DocumentsApi.md#get-document-page-layout) | **GET** /documents/{document-id}/page-layout | Fetches document page layout.| **GET** /documents/{document_id}/page_layout | Fetches document page layout.
+[**get_document_page_ocr_model**](DocumentsApi.md#get-document-page-ocr-model) | **GET** /documents/{document-id}/page-ocr-model | Fetches document page ocr model.| **GET** /documents/{document_id}/page_ocr_model | Fetches document page ocr model.
+[**get_document_summary**](DocumentsApi.md#get-document-summary) | **GET** /document-summaries/{summary-id} | Fetches document summary.| **GET** /document_summaries/{summary_id} | Fetches document summary.
+[**get_document_user_source_file**](DocumentsApi.md#get-document-user-source-file) | **GET** /documents/{document-id}/user-source-file | Fetches document user source file.| **GET** /documents/{document_id}/user_source_file | Fetches document user source file.
+[**list_chat_sessions_for_document**](DocumentsApi.md#list-chat-sessions-for-document) | **GET** /documents/{document-id}/chats | List chat sessions for a given document.| **GET** /documents/{document_id}/chats | List chat sessions for a given document.
+[**list_collections_for_document**](DocumentsApi.md#list-collections-for-document) | **GET** /documents/{document-id}/collections | Lists collections for containing a given document.| **GET** /documents/{document_id}/collections | Lists collections for containing a given document.
+[**list_document_chunks**](DocumentsApi.md#list-document-chunks) | **GET** /documents/{document-id}/chunks | Returns all chunks for a specific document.| **GET** /documents/{document_id}/chunks | Returns all chunks for a specific document.
+[**list_document_summaries**](DocumentsApi.md#list-document-summaries) | **GET** /documents/{document-id}/summaries | Fetches recent document summaries/extractions/transformations| **GET** /documents/{document_id}/summaries | Fetches recent document summaries/extractions/transformations
+[**list_documents**](DocumentsApi.md#list-documents) | **GET** /documents | List documents.| **GET** /documents | List documents.
+[**update_document**](DocumentsApi.md#update-document) | **PATCH** /documents/{document-id} | Updates attributes of an existing document.| **PATCH** /documents/{document_id} | Updates attributes of an existing document.
+[**update_document_metadata**](DocumentsApi.md#update-document-metadata) | **PUT** /documents/{document-id}/metadata | Updates document metadata.| **PUT** /documents/{document_id}/metadata | Updates document metadata.
+
+
+# **create_delete_document_job**
+> JobDetails create_delete_document_job(delete_documents_job_request)
+
+Creates job to delete documents.
+
+Creates job to delete documents with a given unique identifier.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.delete_documents_job_request import DeleteDocumentsJobRequest
+from h2ogpte.rest_async.models.job_details import JobDetails
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.DocumentsApi(api_client)
+    delete_documents_job_request = h2ogpte.rest_async.DeleteDocumentsJobRequest() # DeleteDocumentsJobRequest | 
+
+    try:
+        # Creates job to delete documents.
+        api_response = await api_instance.create_delete_document_job(delete_documents_job_request)
+        print("The response of DocumentsApi->create_delete_document_job:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DocumentsApi->create_delete_document_job: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **delete_documents_job_request** | [**DeleteDocumentsJobRequest**](DeleteDocumentsJobRequest.md)|  | 
+
+### Return type
+
+[**JobDetails**](JobDetails.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **create_process_document_job**
+> JobDetails create_process_document_job(process_document_job_request)
+
+Creates job to process document.
+
+Processes a document to either create a global or piecewise summary/extraction/transformation of a document. 
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.job_details import JobDetails
+from h2ogpte.rest_async.models.process_document_job_request import ProcessDocumentJobRequest
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.DocumentsApi(api_client)
+    process_document_job_request = h2ogpte.rest_async.ProcessDocumentJobRequest() # ProcessDocumentJobRequest | 
+
+    try:
+        # Creates job to process document.
+        api_response = await api_instance.create_process_document_job(process_document_job_request)
+        print("The response of DocumentsApi->create_process_document_job:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DocumentsApi->create_process_document_job: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **process_document_job_request** | [**ProcessDocumentJobRequest**](ProcessDocumentJobRequest.md)|  | 
+
+### Return type
+
+[**JobDetails**](JobDetails.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **create_tag_on_document**
+> Tag create_tag_on_document(document_id, tag_create_request)
+
+Assigns a tag to the document.
+
+Assigns a tag to the document.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.tag import Tag
+from h2ogpte.rest_async.models.tag_create_request import TagCreateRequest
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.DocumentsApi(api_client)
+    document_id = 'document_id_example' # str | Id of the document to to be associated with a tag
+    tag_create_request = h2ogpte.rest_async.TagCreateRequest() # TagCreateRequest | 
+
+    try:
+        # Assigns a tag to the document.
+        api_response = await api_instance.create_tag_on_document(document_id, tag_create_request)
+        print("The response of DocumentsApi->create_tag_on_document:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DocumentsApi->create_tag_on_document: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **document_id** | **str**| Id of the document to to be associated with a tag | 
+ **tag_create_request** | [**TagCreateRequest**](TagCreateRequest.md)|  | 
+
+### Return type
+
+[**Tag**](Tag.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **delete_document**
+> delete_document(document_id, timeout=timeout)
+
+Deletes a document.
+
+Deletes a document with a given unique identifier.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.DocumentsApi(api_client)
+    document_id = 'document_id_example' # str | Id of document to delete
+    timeout = 300 # float | Timeout in seconds (optional) (default to 300)
+
+    try:
+        # Deletes a document.
+        await api_instance.delete_document(document_id, timeout=timeout)
+    except Exception as e:
+        print("Exception when calling DocumentsApi->delete_document: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **document_id** | **str**| Id of document to delete | 
+ **timeout** | **float**| Timeout in seconds | [optional] [default to 300]
+
+### Return type
+
+void (empty response body)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **delete_document_summaries**
+> delete_document_summaries(summary_ids)
+
+Deletes document summaries.
+
+Deletes document summaries.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.DocumentsApi(api_client)
+    summary_ids = ['summary_ids_example'] # List[str] | List of string ids of a document summary to delete from the system.
+
+    try:
+        # Deletes document summaries.
+        await api_instance.delete_document_summaries(summary_ids)
+    except Exception as e:
+        print("Exception when calling DocumentsApi->delete_document_summaries: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **summary_ids** | [**List[str]**](str.md)| List of string ids of a document summary to delete from the system. | 
+
+### Return type
+
+void (empty response body)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **delete_tag_from_document**
+> DeleteTagFromDocument200Response delete_tag_from_document(document_id, tag_name)
+
+Removes a tag from a document.
+
+Removes a tag from a document.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.delete_tag_from_document200_response import DeleteTagFromDocument200Response
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.DocumentsApi(api_client)
+    document_id = 'document_id_example' # str | Id of the document to remove the tag from
+    tag_name = 'tag_name_example' # str | Name of the tag to be removed.
+
+    try:
+        # Removes a tag from a document.
+        api_response = await api_instance.delete_tag_from_document(document_id, tag_name)
+        print("The response of DocumentsApi->delete_tag_from_document:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DocumentsApi->delete_tag_from_document: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **document_id** | **str**| Id of the document to remove the tag from | 
+ **tag_name** | **str**| Name of the tag to be removed. | 
+
+### Return type
+
+[**DeleteTagFromDocument200Response**](DeleteTagFromDocument200Response.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **get_chat_session_count_for_document**
+> Count get_chat_session_count_for_document(document_id)
+
+Counts a number of chat sessions with the document.
+
+Counts a number of chat sessions with the document.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.count import Count
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.DocumentsApi(api_client)
+    document_id = 'document_id_example' # str | Id of the document to filter by.
+
+    try:
+        # Counts a number of chat sessions with the document.
+        api_response = await api_instance.get_chat_session_count_for_document(document_id)
+        print("The response of DocumentsApi->get_chat_session_count_for_document:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DocumentsApi->get_chat_session_count_for_document: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **document_id** | **str**| Id of the document to filter by. | 
+
+### Return type
+
+[**Count**](Count.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **get_document**
+> Document get_document(document_id)
+
+Finds a document by id.
+
+Returns a single document by its unique identifier.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.document import Document
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.DocumentsApi(api_client)
+    document_id = 'document_id_example' # str | Id of document to return
+
+    try:
+        # Finds a document by id.
+        api_response = await api_instance.get_document(document_id)
+        print("The response of DocumentsApi->get_document:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DocumentsApi->get_document: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **document_id** | **str**| Id of document to return | 
+
+### Return type
+
+[**Document**](Document.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **get_document_count**
+> Count get_document_count(owned=owned)
+
+Counts a number of documents.
+
+Counts a number of documents the user has access to. If owned parameter is enabled, it counts only the documents owned by the user.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.count import Count
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.DocumentsApi(api_client)
+    owned = False # bool | If true, it counts only the documents owned by the user. (optional) (default to False)
+
+    try:
+        # Counts a number of documents.
+        api_response = await api_instance.get_document_count(owned=owned)
+        print("The response of DocumentsApi->get_document_count:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DocumentsApi->get_document_count: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **owned** | **bool**| If true, it counts only the documents owned by the user. | [optional] [default to False]
+
+### Return type
+
+[**Count**](Count.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **get_document_guardrails_settings**
+> GuardrailsSettings get_document_guardrails_settings(document_id)
+
+Fetches document guardrails settings.
+
+Returns document guardrails settings.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.guardrails_settings import GuardrailsSettings
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.DocumentsApi(api_client)
+    document_id = 'document_id_example' # str | Id of the document
+
+    try:
+        # Fetches document guardrails settings.
+        api_response = await api_instance.get_document_guardrails_settings(document_id)
+        print("The response of DocumentsApi->get_document_guardrails_settings:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DocumentsApi->get_document_guardrails_settings: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **document_id** | **str**| Id of the document | 
+
+### Return type
+
+[**GuardrailsSettings**](GuardrailsSettings.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation with data |  -  |
+**204** | Successful operation with no result |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **get_document_internal_metadata**
+> Dict[str, object] get_document_internal_metadata(document_id)
+
+Fetches document internal metadata.
+
+Returns document internal metadata.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.DocumentsApi(api_client)
+    document_id = 'document_id_example' # str | Id of the document
+
+    try:
+        # Fetches document internal metadata.
+        api_response = await api_instance.get_document_internal_metadata(document_id)
+        print("The response of DocumentsApi->get_document_internal_metadata:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DocumentsApi->get_document_internal_metadata: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **document_id** | **str**| Id of the document | 
+
+### Return type
+
+**Dict[str, object]**
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation with data |  -  |
+**204** | Successful operation with no result |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **get_document_metadata**
+> Dict[str, object] get_document_metadata(document_id)
+
+Fetches document metadata.
+
+Returns details of document metadata
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.DocumentsApi(api_client)
+    document_id = 'document_id_example' # str | Id of the document associated with the metadata
+
+    try:
+        # Fetches document metadata.
+        api_response = await api_instance.get_document_metadata(document_id)
+        print("The response of DocumentsApi->get_document_metadata:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DocumentsApi->get_document_metadata: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **document_id** | **str**| Id of the document associated with the metadata | 
+
+### Return type
+
+**Dict[str, object]**
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **get_document_page_layout**
+> Dict[str, object] get_document_page_layout(document_id)
+
+Fetches document page layout.
+
+Returns document page layout.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.DocumentsApi(api_client)
+    document_id = 'document_id_example' # str | Id of the document
+
+    try:
+        # Fetches document page layout.
+        api_response = await api_instance.get_document_page_layout(document_id)
+        print("The response of DocumentsApi->get_document_page_layout:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DocumentsApi->get_document_page_layout: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **document_id** | **str**| Id of the document | 
+
+### Return type
+
+**Dict[str, object]**
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation with data |  -  |
+**204** | Successful operation with no result |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **get_document_page_ocr_model**
+> Dict[str, object] get_document_page_ocr_model(document_id)
+
+Fetches document page ocr model.
+
+Returns document page ocr model.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.DocumentsApi(api_client)
+    document_id = 'document_id_example' # str | Id of the document
+
+    try:
+        # Fetches document page ocr model.
+        api_response = await api_instance.get_document_page_ocr_model(document_id)
+        print("The response of DocumentsApi->get_document_page_ocr_model:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DocumentsApi->get_document_page_ocr_model: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **document_id** | **str**| Id of the document | 
+
+### Return type
+
+**Dict[str, object]**
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation with data |  -  |
+**204** | Successful operation with no result |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **get_document_summary**
+> DocumentSummary get_document_summary(summary_id)
+
+Fetches document summary.
+
+Fetches document summary.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.document_summary import DocumentSummary
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.DocumentsApi(api_client)
+    summary_id = 'summary_id_example' # str | Id of the document summary
+
+    try:
+        # Fetches document summary.
+        api_response = await api_instance.get_document_summary(summary_id)
+        print("The response of DocumentsApi->get_document_summary:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DocumentsApi->get_document_summary: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **summary_id** | **str**| Id of the document summary | 
+
+### Return type
+
+[**DocumentSummary**](DocumentSummary.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **get_document_user_source_file**
+> Dict[str, object] get_document_user_source_file(document_id)
+
+Fetches document user source file.
+
+Returns document user source file.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.DocumentsApi(api_client)
+    document_id = 'document_id_example' # str | Id of the document
+
+    try:
+        # Fetches document user source file.
+        api_response = await api_instance.get_document_user_source_file(document_id)
+        print("The response of DocumentsApi->get_document_user_source_file:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DocumentsApi->get_document_user_source_file: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **document_id** | **str**| Id of the document | 
+
+### Return type
+
+**Dict[str, object]**
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation with data |  -  |
+**204** | Successful operation with no result |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **list_chat_sessions_for_document**
+> List[ChatSession] list_chat_sessions_for_document(document_id, offset=offset, limit=limit)
+
+List chat sessions for a given document.
+
+List chat sessions for a given document.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.chat_session import ChatSession
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.DocumentsApi(api_client)
+    document_id = 'document_id_example' # str | Id of the document to filter by.
+    offset = 0 # int | How many chat sessions to skip before returning. (optional) (default to 0)
+    limit = 100 # int | How many chat sessions to return. (optional) (default to 100)
+
+    try:
+        # List chat sessions for a given document.
+        api_response = await api_instance.list_chat_sessions_for_document(document_id, offset=offset, limit=limit)
+        print("The response of DocumentsApi->list_chat_sessions_for_document:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DocumentsApi->list_chat_sessions_for_document: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **document_id** | **str**| Id of the document to filter by. | 
+ **offset** | **int**| How many chat sessions to skip before returning. | [optional] [default to 0]
+ **limit** | **int**| How many chat sessions to return. | [optional] [default to 100]
+
+### Return type
+
+[**List[ChatSession]**](ChatSession.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **list_collections_for_document**
+> List[Collection] list_collections_for_document(document_id, offset=offset, limit=limit)
+
+Lists collections for containing a given document.
+
+Lists collections for containing a given document.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.collection import Collection
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.DocumentsApi(api_client)
+    document_id = 'document_id_example' # str | Id of the document.
+    offset = 0 # int | How many collections to skip before returning. (optional) (default to 0)
+    limit = 100 # int | How many collections to return. (optional) (default to 100)
+
+    try:
+        # Lists collections for containing a given document.
+        api_response = await api_instance.list_collections_for_document(document_id, offset=offset, limit=limit)
+        print("The response of DocumentsApi->list_collections_for_document:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DocumentsApi->list_collections_for_document: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **document_id** | **str**| Id of the document. | 
+ **offset** | **int**| How many collections to skip before returning. | [optional] [default to 0]
+ **limit** | **int**| How many collections to return. | [optional] [default to 100]
+
+### Return type
+
+[**List[Collection]**](Collection.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **list_document_chunks**
+> List[ChunkSearchResult] list_document_chunks(document_id, collection_id)
+
+Returns all chunks for a specific document.
+
+Returns all chunks for a specific document.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.chunk_search_result import ChunkSearchResult
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.DocumentsApi(api_client)
+    document_id = 'document_id_example' # str | Id of the document.
+    collection_id = 'collection_id_example' # str | Id of the collection the document belongs to.
+
+    try:
+        # Returns all chunks for a specific document.
+        api_response = await api_instance.list_document_chunks(document_id, collection_id)
+        print("The response of DocumentsApi->list_document_chunks:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DocumentsApi->list_document_chunks: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **document_id** | **str**| Id of the document. | 
+ **collection_id** | **str**| Id of the collection the document belongs to. | 
+
+### Return type
+
+[**List[ChunkSearchResult]**](ChunkSearchResult.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **list_document_summaries**
+> List[DocumentSummary] list_document_summaries(document_id, offset=offset, limit=limit)
+
+Fetches recent document summaries/extractions/transformations
+
+Fetches recent document summaries/extractions/transformations
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.document_summary import DocumentSummary
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.DocumentsApi(api_client)
+    document_id = 'document_id_example' # str | Id of the document to filter by.
+    offset = 0 # int | How many summaries to skip before returning. (optional) (default to 0)
+    limit = 100 # int | How many summaries to return. (optional) (default to 100)
+
+    try:
+        # Fetches recent document summaries/extractions/transformations
+        api_response = await api_instance.list_document_summaries(document_id, offset=offset, limit=limit)
+        print("The response of DocumentsApi->list_document_summaries:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DocumentsApi->list_document_summaries: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **document_id** | **str**| Id of the document to filter by. | 
+ **offset** | **int**| How many summaries to skip before returning. | [optional] [default to 0]
+ **limit** | **int**| How many summaries to return. | [optional] [default to 100]
+
+### Return type
+
+[**List[DocumentSummary]**](DocumentSummary.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **list_documents**
+> List[Document] list_documents(offset=offset, limit=limit, sort_column=sort_column, ascending=ascending, with_summaries=with_summaries, metadata_filter=metadata_filter)
+
+List documents.
+
+List documents for a given user. If sort_column is not specified, the output is sorted by by last update time in descending order.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.document import Document
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.DocumentsApi(api_client)
+    offset = 0 # int | How many documents to skip before returning. (optional) (default to 0)
+    limit = 100 # int | How many documents to return. (optional) (default to 100)
+    sort_column = updated_at # str | Sort column. (optional) (default to updated_at)
+    ascending = False # bool | When true, returns sorted by sort_column in ascending order. (optional) (default to False)
+    with_summaries = False # bool | When true, returns also summary and summary_parameter with other common attributes of the document. (optional) (default to False)
+    metadata_filter = 'metadata_filter_example' # str | String containing metadata json dict to filter collections by metadata. (optional)
+
+    try:
+        # List documents.
+        api_response = await api_instance.list_documents(offset=offset, limit=limit, sort_column=sort_column, ascending=ascending, with_summaries=with_summaries, metadata_filter=metadata_filter)
+        print("The response of DocumentsApi->list_documents:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DocumentsApi->list_documents: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **offset** | **int**| How many documents to skip before returning. | [optional] [default to 0]
+ **limit** | **int**| How many documents to return. | [optional] [default to 100]
+ **sort_column** | **str**| Sort column. | [optional] [default to updated_at]
+ **ascending** | **bool**| When true, returns sorted by sort_column in ascending order. | [optional] [default to False]
+ **with_summaries** | **bool**| When true, returns also summary and summary_parameter with other common attributes of the document. | [optional] [default to False]
+ **metadata_filter** | **str**| String containing metadata json dict to filter collections by metadata. | [optional] 
+
+### Return type
+
+[**List[Document]**](Document.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **update_document**
+> Document update_document(document_id, document_update_request)
+
+Updates attributes of an existing document.
+
+Updates attributes of an existing document, particularly name and uri.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.document import Document
+from h2ogpte.rest_async.models.document_update_request import DocumentUpdateRequest
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.DocumentsApi(api_client)
+    document_id = 'document_id_example' # str | Id of document to to be updated
+    document_update_request = h2ogpte.rest_async.DocumentUpdateRequest() # DocumentUpdateRequest | 
+
+    try:
+        # Updates attributes of an existing document.
+        api_response = await api_instance.update_document(document_id, document_update_request)
+        print("The response of DocumentsApi->update_document:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DocumentsApi->update_document: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **document_id** | **str**| Id of document to to be updated | 
+ **document_update_request** | [**DocumentUpdateRequest**](DocumentUpdateRequest.md)|  | 
+
+### Return type
+
+[**Document**](Document.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **update_document_metadata**
+> update_document_metadata(document_id, request_body=request_body)
+
+Updates document metadata.
+
+Recreates entire metadata of the document.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.DocumentsApi(api_client)
+    document_id = 'document_id_example' # str | Id of the document
+    request_body = None # Dict[str, object] |  (optional)
+
+    try:
+        # Updates document metadata.
+        await api_instance.update_document_metadata(document_id, request_body=request_body)
+    except Exception as e:
+        print("Exception when calling DocumentsApi->update_document_metadata: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **document_id** | **str**| Id of the document | 
+ **request_body** | [**Dict[str, object]**](object.md)|  | [optional] 
+
+### Return type
+
+void (empty response body)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+

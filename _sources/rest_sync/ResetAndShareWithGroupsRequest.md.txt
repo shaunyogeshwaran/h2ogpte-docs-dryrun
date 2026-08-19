@@ -1,0 +1,29 @@
+# ResetAndShareWithGroupsRequest
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**groups** | **List[str]** |  | 
+
+## Example
+
+```python
+from h2ogpte.rest_sync.models.reset_and_share_with_groups_request import ResetAndShareWithGroupsRequest
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of ResetAndShareWithGroupsRequest from a JSON string
+reset_and_share_with_groups_request_instance = ResetAndShareWithGroupsRequest.from_json(json)
+# print the JSON string representation of the object
+print(ResetAndShareWithGroupsRequest.to_json())
+
+# convert the object into a dict
+reset_and_share_with_groups_request_dict = reset_and_share_with_groups_request_instance.to_dict()
+# create an instance of ResetAndShareWithGroupsRequest from a dict
+reset_and_share_with_groups_request_from_dict = ResetAndShareWithGroupsRequest.from_dict(reset_and_share_with_groups_request_dict)
+```
+
+
+

@@ -1,0 +1,29 @@
+# CreateTopicModelJobRequest
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**collection_id** | **str** |  | 
+
+## Example
+
+```python
+from h2ogpte.rest_sync.models.create_topic_model_job_request import CreateTopicModelJobRequest
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of CreateTopicModelJobRequest from a JSON string
+create_topic_model_job_request_instance = CreateTopicModelJobRequest.from_json(json)
+# print the JSON string representation of the object
+print(CreateTopicModelJobRequest.to_json())
+
+# convert the object into a dict
+create_topic_model_job_request_dict = create_topic_model_job_request_instance.to_dict()
+# create an instance of CreateTopicModelJobRequest from a dict
+create_topic_model_job_request_from_dict = CreateTopicModelJobRequest.from_dict(create_topic_model_job_request_dict)
+```
+
+
+

@@ -1,0 +1,40 @@
+h2oGPTe Python API for REST Interface
+=====================================
+
+sync
+----
+
+ - `APIKeysApi <rest_sync/APIKeysApi.md>`__
+ - `AgentsApi <rest_sync/AgentsApi.md>`__
+ - `ChatApi <rest_sync/ChatApi.md>`__
+ - `CollectionsApi <rest_sync/CollectionsApi.md>`__
+ - `ConfigurationsApi <rest_sync/ConfigurationsApi.md>`__
+ - `DocumentIngestionApi <rest_sync/DocumentIngestionApi.md>`__
+ - `DocumentsApi <rest_sync/DocumentsApi.md>`__
+ - `ExtractorsApi <rest_sync/ExtractorsApi.md>`__
+ - `JobsApi <rest_sync/JobsApi.md>`__
+ - `ModelsApi <rest_sync/ModelsApi.md>`__
+ - `PermissionsApi <rest_sync/PermissionsApi.md>`__
+ - `PromptTemplatesApi <rest_sync/PromptTemplatesApi.md>`__
+ - `SecretsApi <rest_sync/SecretsApi.md>`__
+ - `SystemApi <rest_sync/SystemApi.md>`__
+ - `TagsApi <rest_sync/TagsApi.md>`__
+
+async
+-----
+
+ - `APIKeysApi <rest_async/APIKeysApi.md>`__
+ - `AgentsApi <rest_async/AgentsApi.md>`__
+ - `ChatApi <rest_async/ChatApi.md>`__
+ - `CollectionsApi <rest_async/CollectionsApi.md>`__
+ - `ConfigurationsApi <rest_async/ConfigurationsApi.md>`__
+ - `DocumentIngestionApi <rest_async/DocumentIngestionApi.md>`__
+ - `DocumentsApi <rest_async/DocumentsApi.md>`__
+ - `ExtractorsApi <rest_async/ExtractorsApi.md>`__
+ - `JobsApi <rest_async/JobsApi.md>`__
+ - `ModelsApi <rest_async/ModelsApi.md>`__
+ - `PermissionsApi <rest_async/PermissionsApi.md>`__
+ - `PromptTemplatesApi <rest_async/PromptTemplatesApi.md>`__
+ - `SecretsApi <rest_async/SecretsApi.md>`__
+ - `SystemApi <rest_async/SystemApi.md>`__
+ - `TagsApi <rest_async/TagsApi.md>`__

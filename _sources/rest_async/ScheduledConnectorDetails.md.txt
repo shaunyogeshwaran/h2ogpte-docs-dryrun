@@ -1,0 +1,42 @@
+# ScheduledConnectorDetails
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**id** | **str** | Unique identifier of the connector | 
+**user_id** | **str** | ID of the user who owns the connector | 
+**user_name** | **str** | Name of the user who owns the connector | [optional] 
+**user_email** | **str** | Email of the user who owns the connector | [optional] 
+**collection_id** | **str** | ID of the collection this connector is associated with | 
+**collection_name** | **str** | Name of the collection this connector is associated with | [optional] 
+**type** | **str** | Type of connector (e.g., s3, confluence) | 
+**config** | **object** | Configuration details for the connector | [optional] 
+**schedule** | **int** | Schedule interval in seconds (0 means no schedule) | 
+**last_sync_status** | **str** | Status of the last sync | [optional] 
+**last_sync_job_id** | **str** | ID of the last sync job | [optional] 
+**last_sync_at** | **datetime** | Timestamp of the last sync | [optional] 
+**last_sync_error** | **str** | Error message from the last sync (if any) | [optional] 
+**created_at** | **datetime** | Timestamp when the connector was created | 
+
+## Example
+
+```python
+from h2ogpte.rest_async.models.scheduled_connector_details import ScheduledConnectorDetails
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of ScheduledConnectorDetails from a JSON string
+scheduled_connector_details_instance = ScheduledConnectorDetails.from_json(json)
+# print the JSON string representation of the object
+print(ScheduledConnectorDetails.to_json())
+
+# convert the object into a dict
+scheduled_connector_details_dict = scheduled_connector_details_instance.to_dict()
+# create an instance of ScheduledConnectorDetails from a dict
+scheduled_connector_details_from_dict = ScheduledConnectorDetails.from_dict(scheduled_connector_details_dict)
+```
+
+
+

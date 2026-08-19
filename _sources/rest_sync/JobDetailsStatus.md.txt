@@ -1,0 +1,30 @@
+# JobDetailsStatus
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**id** | **str** |  | 
+**status** | **str** |  | 
+
+## Example
+
+```python
+from h2ogpte.rest_sync.models.job_details_status import JobDetailsStatus
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of JobDetailsStatus from a JSON string
+job_details_status_instance = JobDetailsStatus.from_json(json)
+# print the JSON string representation of the object
+print(JobDetailsStatus.to_json())
+
+# convert the object into a dict
+job_details_status_dict = job_details_status_instance.to_dict()
+# create an instance of JobDetailsStatus from a dict
+job_details_status_from_dict = JobDetailsStatus.from_dict(job_details_status_dict)
+```
+
+
+

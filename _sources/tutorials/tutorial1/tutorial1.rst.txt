@@ -1,0 +1,86 @@
+Tutorial 1: Chat with a website 
+===============================
+
+Overview 
+--------
+
+This tutorial demonstrates how to use the **h2oGPTe** Python Client Library to interact with a website. We will use H2O Label Genie's documentation website for this tutorial. 
+
+
+Prerequisites
+-------------
+
+Before you begin, make sure you have:
+
+    - **a global API key**: Sign up/in at **Enterprise h2oGPTe** and create a global API key.
+    - **h2oGPTe v1.6.13**
+
+
+Steps
+-----
+
+.. code-block:: python
+    
+    from h2ogpte import H2OGPTE
+
+    # Step 1: Set up client
+    # Instantiate an h2oGPTe client by providing:
+    # - address (address): Specifies the URL where Enterprise h2oGPTe is hosted. The address should be where the API key was created. 
+    # - global API key (api_key): Provides full system-wide access to all collections, documents, chats, and settings within the h2oGPTe service, allowing for secure communication and interaction with all aspects of your work. 
+    client = H2OGPTE(
+        address="https://h2ogpte.genai.h2o.ai",
+        api_key='sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+    )
+
+    # Step 2: Create a Collection
+    collection_id = client.create_collection(
+        name="Chat with website",
+        description="Chat with the H2O Label Genie documentation website",
+    )
+
+    # Step 3: Crawl website
+    website = client.ingest_website(
+        collection_id=collection_id, 
+        url="https://docs.h2o.ai/wave-apps/h2o-label-genie/"
+    )
+
+    # Step 4: Initiate a chat session 
+    chat_session_id = client.create_chat_session(collection_id=collection_id)
+
+    with client.connect(chat_session_id) as session:
+
+        # Step 5: Chat with the website
+        reply = session.query("What is H2O Label Genie?")
+
+        print(
+            f"Content: {reply.content}\n" # Response to the sent query
+            f"Created at: {reply.created_at}\n"
+            f"Error: {reply.error}\n"
+            f"ID: {reply.id}\n"
+            f"Model computed fields: {reply.model_computed_fields}\n"
+            f"Model config: {reply.model_config}\n"
+            f"Model fields: {reply.model_fields}\n"
+            f"Reply to: {reply.reply_to}\n"
+            f"Type list: {reply.type_list}\n"
+            f"Votes: {reply.votes}"
+        )
+
+
+
+.. code-block:: text
+
+    Content: According to the documentation, H2O Label Genie is an application that utilizes AI to perform data labeling tasks for AI governance. It is designed to automate the process of labeling data, which is often a time-consuming and tedious task for data scientists and machine learning engineers. The application provides features for importing and exploring datasets, creating annotation tasks, and accessing demo datasets. It also supports various annotation and clustering tasks, and offers zero-shot learning models to improve the accuracy of labeling. Additionally, H2O Label Genie allows users to customize app settings, including appearance settings, smart annotation settings, image settings, audio settings, and OpenAI API settings.
+    Created at: 2025-01-29 14:52:33.302126
+    Error: None
+    ID: 1322aa30-a999.....
+    Model computed fields: {}
+    Model config: {}
+    Model fields: {'id': FieldInfo(annotation=str, required=True), 'content': FieldInfo(annotation=str, required=True), 'reply_to': FieldInfo(annotation=Union[str, NoneType], required=False, default=None), 'votes': FieldInfo(annotation=int, required=True), 'created_at': FieldInfo(annotation=datetime, required=True), 'type_list': FieldInfo(annotation=Union[List[str], NoneType], required=False, default=None), 'error': FieldInfo(annotation=Union[str, NoneType], required=False, default=None)}
+    Reply to: 70525c65-d079-.....
+    Type list: []
+    Votes: 0
+
+
+
+
+

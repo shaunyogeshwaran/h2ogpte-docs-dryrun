@@ -1,0 +1,33 @@
+# Chunk
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**text** | **str** | The text represented by the chunk | 
+**id** | **int** | The identifier of the chunk | 
+**name** | **str** |  | 
+**size** | **int** | The size in bytes. | 
+**pages** | **str** |  | 
+
+## Example
+
+```python
+from h2ogpte.rest_sync.models.chunk import Chunk
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of Chunk from a JSON string
+chunk_instance = Chunk.from_json(json)
+# print the JSON string representation of the object
+print(Chunk.to_json())
+
+# convert the object into a dict
+chunk_dict = chunk_instance.to_dict()
+# create an instance of Chunk from a dict
+chunk_from_dict = Chunk.from_dict(chunk_dict)
+```
+
+
+

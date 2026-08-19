@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>h2oGPTe — Enterprise Improvements</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg-base:       #0d0e14;
+      --bg-surface:    #13141d;
+      --bg-elevated:   #1a1b27;
+      --bg-overlay:    rgba(19,20,29,0.96);
+      --border:        rgba(255,255,255,0.07);
+      --border-bright: rgba(255,255,255,0.12);
+
+      --text-primary:  #e8eaf0;
+      --text-secondary:#8b90a8;
+      --text-muted:    #565a70;
+
+      --accent-blue:   #5b8dee;
+      --accent-cyan:   #3ecfcf;
+      --accent-violet: #9b7fe8;
+      --accent-amber:  #f0a843;
+      --accent-green:  #3ecb8a;
+      --accent-rose:   #e8637a;
+
+      --tag-achraf:    #5b8dee;
+      --tag-bruce:     #3ecb8a;
+      --tag-shu:       #9b7fe8;
+      --tag-martin:    #f0a843;
+      --tag-marek:     #3ecfcf;
+      --tag-luxshan:   #e8637a;
+      --tag-jon:       #80c8a0;
+      --tag-branden:   #c97ce8;
+      --tag-prathushan:#56c8e8;
+      --tag-others:    #8b90a8;
+
+      --open-pr:       #f0a843;
+      --merged-pr:     #3ecb8a;
+
+      --header-h:      56px;
+      --topbar-h:      40px;
+      --total-top:     calc(var(--header-h) + var(--topbar-h));
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg-base);
+      color: var(--text-primary);
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+    }
+
+    /* ─── Background pattern ─────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 900px 600px at 15% 20%, rgba(91,141,238,0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 700px 500px at 85% 75%, rgba(155,127,232,0.06) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ─── Header ─────────────────────────────────────────── */
+    #header {
+      position: fixed; top: 0; left: 0; right: 0;
+      height: var(--header-h);
+      z-index: 200;
+      background: var(--bg-overlay);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 0 20px;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .logo-badge {
+      width: 30px; height: 30px;
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-violet));
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 13px; color: #fff;
+      letter-spacing: -0.5px;
+    }
+
+    .logo-text {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-primary);
+      letter-spacing: -0.3px;
+    }
+
+    .logo-text span {
+      color: #FEC925;
+    }
+
+    .header-divider {
+      width: 1px; height: 20px;
+      background: var(--border-bright);
+      flex-shrink: 0;
+    }
+
+    .period-badge {
+      font-size: 11.5px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      padding: 3px 9px;
+      border-radius: 99px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* Search */
+    .search-wrap {
+      position: relative;
+      flex: 1;
+      max-width: 340px;
+      min-width: 180px;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 10px; top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+      display: flex;
+    }
+
+    #search-box {
+      width: 100%;
+      padding: 7px 60px 7px 32px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-primary);
+      font-size: 13px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    #search-box::placeholder { color: var(--text-muted); }
+    #search-box:focus {
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 0 3px rgba(91,141,238,0.15);
+    }
+
+    #match-count {
+      position: absolute;
+      right: 10px; top: 50%;
+      transform: translateY(-50%);
+      font-size: 11px;
+      color: var(--accent-cyan);
+      font-weight: 500;
+      min-width: 40px;
+      text-align: right;
+      pointer-events: none;
+    }
+
+    /* Contributor chips */
+    .chips-wrap {
+      display: flex;
+      gap: 5px;
+      flex-shrink: 0;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      border-radius: 99px;
+      font-size: 11.5px;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1.5px solid transparent;
+      transition: all 0.15s;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .chip .chip-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+    }
+
+    .chip .chip-count {
+      font-size: 10px;
+      font-weight: 600;
+      opacity: 0.75;
+    }
+
+    .chip-achraf { color: var(--tag-achraf); background: rgba(91,141,238,0.1); border-color: rgba(91,141,238,0.25); }
+    .chip-bruce  { color: var(--tag-bruce);  background: rgba(62,203,138,0.1); border-color: rgba(62,203,138,0.25); }
+    .chip-shu    { color: var(--tag-shu);    background: rgba(155,127,232,0.1);border-color: rgba(155,127,232,0.25);}
+    .chip-martin { color: var(--tag-martin); background: rgba(240,168,67,0.1); border-color: rgba(240,168,67,0.25); }
+    .chip-marek  { color: var(--tag-marek);  background: rgba(62,207,207,0.1); border-color: rgba(62,207,207,0.25); }
+    .chip-luxshan    { color: var(--tag-luxshan);   background: rgba(232,99,122,0.1); border-color: rgba(232,99,122,0.25); }
+    .chip-jon        { color: var(--tag-jon);       background: rgba(128,200,160,0.1);border-color: rgba(128,200,160,0.25);}
+    .chip-branden    { color: var(--tag-branden);   background: rgba(201,124,232,0.1);border-color: rgba(201,124,232,0.25);}
+    .chip-prathushan { color: var(--tag-prathushan); background: rgba(86,200,232,0.1); border-color: rgba(86,200,232,0.25); }
+    .chip-others     { color: var(--tag-others);    background: rgba(139,144,168,0.1);border-color: rgba(139,144,168,0.25);}
+
+    .chip-achraf.chip-active { background: rgba(91,141,238,0.22);  border-color: var(--tag-achraf); }
+    .chip-bruce.chip-active  { background: rgba(62,203,138,0.22);  border-color: var(--tag-bruce); }
+    .chip-shu.chip-active    { background: rgba(155,127,232,0.22); border-color: var(--tag-shu); }
+    .chip-martin.chip-active { background: rgba(240,168,67,0.22);  border-color: var(--tag-martin); }
+    .chip-marek.chip-active  { background: rgba(62,207,207,0.22);  border-color: var(--tag-marek); }
+    .chip-luxshan.chip-active    { background: rgba(232,99,122,0.22); border-color: var(--tag-luxshan); }
+    .chip-jon.chip-active        { background: rgba(128,200,160,0.22);border-color: var(--tag-jon); }
+    .chip-branden.chip-active    { background: rgba(201,124,232,0.22);border-color: var(--tag-branden); }
+    .chip-prathushan.chip-active { background: rgba(86,200,232,0.22); border-color: var(--tag-prathushan); }
+    .chip-others.chip-active     { background: rgba(139,144,168,0.22);border-color: var(--tag-others); }
+
+    .chip:hover { opacity: 0.85; transform: translateY(-1px); }
+
+    .header-stats {
+      margin-left: auto;
+      font-size: 11.5px;
+      color: var(--text-muted);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .header-stats strong { color: var(--accent-cyan); font-weight: 600; }
+
+    /* ─── Topic stats bar ────────────────────────────────── */
+    #topbar {
+      position: fixed;
+      top: var(--header-h); left: 0; right: 0;
+      height: var(--topbar-h);
+      z-index: 190;
+      background: var(--bg-overlay);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 0 20px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    #topbar::-webkit-scrollbar { display: none; }
+
+    .topic-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 9px;
+      border-radius: 99px;
+      font-size: 10.5px;
+      font-weight: 500;
+      white-space: nowrap;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.15s;
+      flex-shrink: 0;
+    }
+
+    .topic-pill .pill-count {
+      font-size: 9.5px;
+      font-weight: 700;
+      opacity: 0.75;
+    }
+
+    .topic-pill:hover { opacity: 0.85; }
+    .topic-pill.tp-active { border-color: currentColor; box-shadow: 0 0 0 1px currentColor; }
+
+    /* Per-topic colors */
+    .tp-security   { color: #e8637a; background: rgba(232,99,122,0.1);  border-color: rgba(232,99,122,0.2); }
+    .tp-cve        { color: #f0a843; background: rgba(240,168,67,0.1);  border-color: rgba(240,168,67,0.2); }
+    .tp-acl        { color: #9b7fe8; background: rgba(155,127,232,0.1); border-color: rgba(155,127,232,0.2);}
+    .tp-ratelimit  { color: #3ecfcf; background: rgba(62,207,207,0.1);  border-color: rgba(62,207,207,0.2); }
+    .tp-scale      { color: #3ecb8a; background: rgba(62,203,138,0.1);  border-color: rgba(62,203,138,0.2); }
+    .tp-mcp        { color: #5b8dee; background: rgba(91,141,238,0.1);  border-color: rgba(91,141,238,0.2); }
+    .tp-migration  { color: #c97ce8; background: rgba(201,124,232,0.1); border-color: rgba(201,124,232,0.2);}
+    .tp-telemetry  { color: #56c8e8; background: rgba(86,200,232,0.1);  border-color: rgba(86,200,232,0.2); }
+    .tp-infra      { color: #80c8a0; background: rgba(128,200,160,0.1); border-color: rgba(128,200,160,0.2);}
+    .tp-ui         { color: #f0c843; background: rgba(240,200,67,0.1);  border-color: rgba(240,200,67,0.2); }
+    .tp-sdk        { color: #a8c8f0; background: rgba(168,200,240,0.1); border-color: rgba(168,200,240,0.2);}
+    .tp-data       { color: #e89b56; background: rgba(232,155,86,0.1);  border-color: rgba(232,155,86,0.2); }
+    .tp-model      { color: #b8e856; background: rgba(184,232,86,0.1);  border-color: rgba(184,232,86,0.2); }
+    .tp-i18n       { color: #e856c8; background: rgba(232,86,200,0.1);  border-color: rgba(232,86,200,0.2); }
+
+    /* ─── Map container ──────────────────────────────────── */
+    #map-container {
+      position: fixed;
+      top: var(--total-top);
+      left: 0; right: 0; bottom: 0;
+      z-index: 1;
+    }
+
+    svg.markmap {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* ─── Legend ─────────────────────────────────────────── */
+    #legend {
+      position: fixed;
+      bottom: 16px; left: 16px;
+      z-index: 200;
+      background: var(--bg-overlay);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 15px;
+      font-size: 11px;
+      line-height: 1.7;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+      min-width: 190px;
+    }
+
+    .legend-title {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .legend-row {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--text-secondary);
+      font-size: 11px;
+    }
+
+    .legend-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .legend-sep {
+      height: 1px;
+      background: var(--border);
+      margin: 6px 0;
+    }
+
+    .legend-tip {
+      font-size: 10.5px;
+      color: var(--text-muted);
+    }
+
+    /* ─── Filter active state notification ───────────────── */
+    #filter-notice {
+      position: fixed;
+      bottom: 16px; right: 16px;
+      z-index: 200;
+      background: rgba(91,141,238,0.15);
+      border: 1px solid rgba(91,141,238,0.35);
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-size: 12px;
+      color: var(--accent-blue);
+      display: none;
+      align-items: center;
+      gap: 8px;
+      backdrop-filter: blur(8px);
+    }
+
+    #filter-notice.visible { display: flex; }
+
+    #filter-notice button {
+      background: none; border: none;
+      color: var(--accent-blue);
+      cursor: pointer;
+      font-size: 11px;
+      font-family: inherit;
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid rgba(91,141,238,0.4);
+      transition: background 0.1s;
+    }
+    #filter-notice button:hover { background: rgba(91,141,238,0.2); }
+
+    /* ─── Tooltip for PR links ───────────────────────────── */
+    .mm-foreign a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .mm-foreign a:hover {
+      text-decoration: underline;
+      text-decoration-color: rgba(255,255,255,0.3);
+    }
+
+    /* ─── Methodology panel ─────────────────────────── */
+    #methodology-panel {
+      display: none;
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 500;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-bright);
+      border-radius: 12px;
+      width: min(680px, 90vw);
+      max-height: 80vh;
+      overflow-y: auto;
+      box-shadow: 0 16px 64px rgba(0,0,0,0.6);
+      scrollbar-width: thin;
+    }
+    #methodology-panel.visible { display: block; }
+
+    .method-header {
+      position: sticky; top: 0;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 20px;
+      background: var(--bg-elevated);
+      border-bottom: 1px solid var(--border);
+      border-radius: 12px 12px 0 0;
+    }
+    .method-title {
+      font-size: 13px; font-weight: 600;
+      letter-spacing: 0.04em; text-transform: uppercase;
+      color: var(--text-secondary);
+    }
+    #method-close {
+      background: none; border: none; color: var(--text-muted);
+      font-size: 20px; cursor: pointer; padding: 0 4px; line-height: 1;
+    }
+    #method-close:hover { color: var(--text-primary); }
+
+    .method-body {
+      padding: 20px;
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+    .method-body h4 {
+      color: var(--text-primary);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin: 18px 0 8px;
+    }
+    .method-body h4:first-child { margin-top: 0; }
+    .method-body p { margin: 6px 0; }
+    .method-body ul { margin: 6px 0 6px 18px; }
+    .method-body li { margin: 3px 0; }
+    .method-body pre {
+      background: var(--bg-base);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 10px 14px;
+      overflow-x: auto;
+      font-size: 11.5px;
+      line-height: 1.5;
+      margin: 8px 0;
+    }
+    .method-body code { color: var(--accent-cyan); font-family: 'SF Mono', Consolas, monospace; }
+    .method-body a { color: var(--accent-cyan); text-decoration: none; }
+    .method-body a:hover { text-decoration: underline; }
+    .method-criteria {
+      background: rgba(91,141,238,0.06);
+      border: 1px solid rgba(91,141,238,0.15);
+      border-radius: 6px;
+      padding: 12px 14px;
+      margin: 8px 0;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+    .method-body strong { color: var(--text-primary); }
+
+    /* Backdrop */
+    #method-backdrop {
+      display: none;
+      position: fixed; inset: 0; z-index: 400;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(4px);
+    }
+    #method-backdrop.visible { display: block; }
+
+    /* ─── Markmap overrides for dark theme ──────────── */
+    svg.markmap {
+      --markmap-a-color: var(--accent-cyan);
+      --markmap-a-hover-color: #5be0e0;
+      --markmap-code-bg: var(--bg-elevated);
+      --markmap-code-color: var(--text-secondary);
+    }
+
+    /* Ensure link paths (curves) inherit stroke from parent g */
+    .markmap-link {
+      fill: none;
+    }
+
+    /* Text color for dark background */
+    svg.markmap text,
+    svg.markmap foreignObject {
+      color: var(--text-primary) !important;
+    }
+
+    svg.markmap foreignObject div {
+      color: var(--text-primary);
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border-bright); border-radius: 99px; }
+
+    /* No-match overlay */
+    #no-match {
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 300;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 14px;
+      display: none;
+      pointer-events: none;
+    }
+    #no-match.visible { display: block; }
+    #no-match strong { display: block; font-size: 28px; margin-bottom: 6px; color: var(--text-secondary); }
+  </style>
+</head>
+<body>
+
+<!-- ─── Header ──────────────────────────────────────────────── -->
+<div id="header">
+  <div class="logo-area">
+    <span class="logo-text">h2o<span>GPTe</span></span>
+  </div>
+  <div class="header-divider"></div>
+  <span class="period-badge">Jan 10 – Mar 10, 2026</span>
+
+  <div class="search-wrap">
+    <span class="search-icon">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8">
+        <circle cx="6.5" cy="6.5" r="5"/><line x1="10.5" y1="10.5" x2="14.5" y2="14.5"/>
+      </svg>
+    </span>
+    <input type="text" id="search-box" placeholder="Search PRs, topics, authors…" autocomplete="off" />
+    <span id="match-count"></span>
+  </div>
+
+  <div class="chips-wrap" id="contributor-chips">
+    <span class="chip chip-achraf" data-contributor="Achraf" title="Filter by Achraf">
+      <span class="chip-dot" style="background:var(--tag-achraf)"></span>
+      Achraf <span class="chip-count" id="cnt-achraf"></span>
+    </span>
+    <span class="chip chip-bruce" data-contributor="Bruce" title="Filter by Bruce">
+      <span class="chip-dot" style="background:var(--tag-bruce)"></span>
+      Bruce <span class="chip-count" id="cnt-bruce"></span>
+    </span>
+    <span class="chip chip-shu" data-contributor="Shu" title="Filter by Shu">
+      <span class="chip-dot" style="background:var(--tag-shu)"></span>
+      Shu <span class="chip-count" id="cnt-shu"></span>
+    </span>
+    <span class="chip chip-martin" data-contributor="Martin" title="Filter by Martin">
+      <span class="chip-dot" style="background:var(--tag-martin)"></span>
+      Martin <span class="chip-count" id="cnt-martin"></span>
+    </span>
+    <span class="chip chip-marek" data-contributor="Marek" title="Filter by Marek">
+      <span class="chip-dot" style="background:var(--tag-marek)"></span>
+      Marek <span class="chip-count" id="cnt-marek"></span>
+    </span>
+    <span class="chip chip-luxshan" data-contributor="Luxshan" title="Filter by Luxshan">
+      <span class="chip-dot" style="background:var(--tag-luxshan)"></span>
+      Luxshan <span class="chip-count" id="cnt-luxshan"></span>
+    </span>
+    <span class="chip chip-jon" data-contributor="Jon" title="Filter by Jon">
+      <span class="chip-dot" style="background:var(--tag-jon)"></span>
+      Jon <span class="chip-count" id="cnt-jon"></span>
+    </span>
+    <span class="chip chip-branden" data-contributor="Branden" title="Filter by Branden">
+      <span class="chip-dot" style="background:var(--tag-branden)"></span>
+      Branden <span class="chip-count" id="cnt-branden"></span>
+    </span>
+    <span class="chip chip-prathushan" data-contributor="Prathushan" title="Filter by Prathushan">
+      <span class="chip-dot" style="background:var(--tag-prathushan)"></span>
+      Prathushan <span class="chip-count" id="cnt-prathushan"></span>
+    </span>
+    <span class="chip chip-others" data-contributor="Others" title="Filter by other contributors">
+      <span class="chip-dot" style="background:var(--tag-others)"></span>
+      Others <span class="chip-count" id="cnt-others"></span>
+    </span>
+  </div>
+
+  <div class="header-stats">
+    <strong id="total-count">—</strong> PRs · <span id="contributor-count">—</span> contributors
+  </div>
+</div>
+
+<!-- ─── Topic stats bar ─────────────────────────────────────── -->
+<div id="topbar">
+  <span class="topic-pill tp-security"  data-topic="Security Hardening">Security <span class="pill-count" id="tp-security"></span></span>
+  <span class="topic-pill tp-cve"       data-topic="CVE Remediation">CVEs <span class="pill-count" id="tp-cve"></span></span>
+  <span class="topic-pill tp-acl"       data-topic="Access Control">Access Control <span class="pill-count" id="tp-acl"></span></span>
+  <span class="topic-pill tp-ratelimit" data-topic="Rate Limiting">Rate Limiting <span class="pill-count" id="tp-ratelimit"></span></span>
+  <span class="topic-pill tp-scale"     data-topic="Scalability">Scalability <span class="pill-count" id="tp-scale"></span></span>
+  <span class="topic-pill tp-mcp"       data-topic="MCP Server">MCP Server <span class="pill-count" id="tp-mcp"></span></span>
+  <span class="topic-pill tp-migration" data-topic="Collection Migration">Migration <span class="pill-count" id="tp-migration"></span></span>
+  <span class="topic-pill tp-telemetry" data-topic="Telemetry">Telemetry <span class="pill-count" id="tp-telemetry"></span></span>
+  <span class="topic-pill tp-infra"     data-topic="Infrastructure">Infrastructure <span class="pill-count" id="tp-infra"></span></span>
+  <span class="topic-pill tp-ui"        data-topic="UI/UX">UI/UX <span class="pill-count" id="tp-ui"></span></span>
+  <span class="topic-pill tp-sdk"       data-topic="Python SDK">Python SDK <span class="pill-count" id="tp-sdk"></span></span>
+  <span class="topic-pill tp-data"      data-topic="Data Pipelines">Data Pipelines <span class="pill-count" id="tp-data"></span></span>
+  <span class="topic-pill tp-model"     data-topic="Model Management">Models <span class="pill-count" id="tp-model"></span></span>
+  <span class="topic-pill tp-i18n"      data-topic="Internationalization">i18n <span class="pill-count" id="tp-i18n"></span></span>
+</div>
+
+<!-- ─── Map ─────────────────────────────────────────────────── -->
+<div id="map-container">
+  <svg id="markmap" class="markmap"></svg>
+</div>
+
+<!-- ─── Legend ──────────────────────────────────────────────── -->
+<div id="legend">
+  <div class="legend-title">Legend</div>
+  <div class="legend-row"><span class="legend-dot" style="background:var(--accent-green)"></span> Merged PR</div>
+  <div class="legend-row"><span class="legend-dot" style="background:var(--open-pr)"></span> Open PR (🟡 prefix)</div>
+  <div class="legend-sep"></div>
+  <div class="legend-tip">Click nodes to expand · Scroll to zoom<br>Drag to pan · Use search to highlight</div>
+  <div class="legend-sep"></div>
+  <button id="methodology-btn" style="background:none;border:1px solid var(--border-bright);color:var(--text-secondary);font-size:10px;font-family:inherit;padding:3px 8px;border-radius:4px;cursor:pointer;width:100%;">How was this generated?</button>
+</div>
+
+<!-- ─── Filter notice ────────────────────────────────────────── -->
+<div id="filter-notice">
+  <span id="filter-notice-text">Filtered</span>
+  <button id="clear-filter-btn">Clear</button>
+</div>
+
+<div id="method-backdrop"></div>
+
+<!-- ─── Methodology panel ─────────────────────────────────────── -->
+<div id="methodology-panel">
+  <div class="method-header">
+    <span class="method-title">Methodology</span>
+    <button id="method-close" title="Close">&times;</button>
+  </div>
+  <div class="method-body">
+    <p>This report was generated using <strong>Claude Code</strong> (Claude Opus 4.6) with full transparency. Here is exactly how:</p>
+
+    <h4>1. Data Collection</h4>
+    <pre><code>gh pr list --repo h2oai/h2ogpte --state merged \
+  --search "merged:>=2026-01-10" --limit 500 \
+  --json number,title,body,author,mergedAt,url
+
+gh pr list --repo h2oai/h2ogpte --state open \
+  --limit 200 \
+  --json number,title,body,author,url</code></pre>
+    <p>This returned <strong>391 merged + 97 open = 488 total PRs</strong> from 20 unique contributors.</p>
+
+    <h4>2. Classification Prompt</h4>
+    <p>Each PR title and body snippet was classified by Claude with this criteria:</p>
+    <div class="method-criteria">
+      <strong>Include:</strong> Security fixes, CVE remediation, access control/RBAC, API rate limiting, scalability/performance, MCP server, collection migration, telemetry/observability, infrastructure (autoscaling, IAM, Helm), UI/UX enterprise quality (error handling, settings, progress), client SDK, model management, data pipelines, connectors, i18n.
+      <br><br>
+      <strong>Exclude:</strong> Version bumps, CI/CD fixes (unless security), backport PRs (duplicate the original), internal dev tooling (CLAUDE.md, worktree skills, Makefile configs), test-only fixes, minor cosmetic tweaks, narrow internal bug fixes, bot/automation PRs, h2ogpt_internal updates, code refactoring with no user-visible impact.
+    </div>
+
+    <h4>3. Human Review</h4>
+    <p>The classification (what to include/exclude) was done entirely by Claude based on the criteria above. Human review was limited to:</p>
+    <ul>
+      <li>Mapping GitHub usernames to display names (e.g., <code>pseudotensor</code> &rarr; Jon)</li>
+      <li>Adding PRs that were missed because they were authored under the <code>app/claude</code> bot account (e.g., PgBouncer #8899, MCP server #8902)</li>
+    </ul>
+    <p>No PRs were manually added or removed based on subjective judgment &mdash; the include/exclude decision was fully automated.</p>
+
+    <h4>4. Result</h4>
+    <p><strong>141 of 488 PRs (29%)</strong> were classified as enterprise-relevant. The remaining 347 were version bumps, backports, CI fixes, internal tooling, and narrow bug fixes.</p>
+
+    <h4>5. Visualization</h4>
+    <p>This page uses <a href="https://markmap.js.org" target="_blank" rel="noopener">markmap.js</a> to render an interactive mind map. The data is a static JavaScript array in this HTML file &mdash; no backend, no API calls. <a href="https://github.com/h2oai/h2ogpte/blob/gh-pages/improvements/index.html" target="_blank" rel="noopener">View source on GitHub</a>.</p>
+  </div>
+</div>
+
+<!-- ─── No match ─────────────────────────────────────────────── -->
+<div id="no-match">
+  <strong>0</strong>No items match your search
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script src="https://cdn.jsdelivr.net/npm/markmap-view@0.18.12/dist/browser/index.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/markmap-lib@0.18.12/dist/browser/index.iife.js"></script>
+<script>
+// ─── Data ──────────────────────────────────────────────────────────────────
+// Each PR: { id, title, authors: [...], open: bool, topic }
+const TOPICS = [
+  {
+    id: "Security Hardening",
+    label: "Security Hardening",
+    items: [
+      { id: 9148, title: "Recommended Security Configuration (RSC) guidance document", authors: ["Achraf"], open: false },
+      { id: 9113, title: "Harden MCP server against penetration test findings", authors: ["Achraf"], open: false },
+      { id: 9110, title: "Additional MCP security fixes", authors: ["Achraf"], open: false },
+      { id: 8556, title: "Fix DB connection pool isolation — prevent cross-user data leakage", authors: ["Bruce"], open: false },
+      { id: 8706, title: "Signup abuse prevention with admin bypass", authors: ["Achraf"], open: false },
+      { id: 8887, title: "Fix secret store integration — bad IDs and name collisions", authors: ["Achraf"], open: false },
+      { id: 9018, title: "Surface FIPS TLS validation errors", authors: ["Achraf"], open: false },
+      { id: 8661, title: "Validate global config keys to prevent invalid settings via API", authors: ["Shu"], open: false },
+      { id: 8390, title: "Do not stream output if guardrails are enabled", authors: ["Branden"], open: false },
+      { id: 8737, title: "Prevent guardrails-violated content from appearing in chat history", authors: ["Branden"], open: false },
+      { id: 8623, title: "Enable guardrails globally for all chats", authors: ["Branden"], open: true },
+      { id: 8572, title: "Futurex HSM improvements", authors: ["Fatih"], open: false },
+      { id: 8606, title: "Integrate new secret manager to replace env files", authors: ["Lakindu"], open: true },
+      { id: 8539, title: "FedRAMP embedding models in base image", authors: ["Lakindu"], open: true },
+      { id: 9160, title: "Security test suite v2 with advanced tests and multi-judge", authors: ["Ashrith"], open: true },
+      { id: 7341, title: "LLM-based security scan for custom tools", authors: ["Prathushan"], open: true },
+    ]
+  },
+  {
+    id: "CVE Remediation",
+    label: "CVE Remediation",
+    items: [
+      { id: 9079, title: "Upgrade playwright, nltk, yt-dlp, base images", authors: ["Achraf"], open: false },
+      { id: 9044, title: "Fix CVEs in h2oai-h2ogpte-base image", authors: ["Achraf"], open: false },
+      { id: 8989, title: "CVE fixes in h2ogpt_internal", authors: ["Achraf"], open: false },
+      { id: 8818, title: "CVE fixes batch", authors: ["Achraf"], open: false },
+      { id: 9233, title: "GOPROXY — Go module proxy for supply chain integrity", authors: ["Achraf"], open: false },
+    ]
+  },
+  {
+    id: "Access Control",
+    label: "Access Control & Permissions",
+    items: [
+      { id: 9189, title: "Add missing EditCollection permission checks", authors: ["Achraf"], open: false },
+      { id: 9163, title: "Enforce collection-level permission for chat deletion", authors: ["Bruce"], open: false },
+      { id: 8716, title: "Fine-grained chat deletion permissions for non-owners", authors: ["Shu"], open: false },
+      { id: 8977, title: "Hide UI elements when user lacks permission", authors: ["Martin"], open: false },
+      { id: 9124, title: "Graceful AuthZ workspace server failure handling", authors: ["Achraf"], open: false },
+      { id: 8339, title: "API key tracking (total calls, last call) + granular creation permissions", authors: ["Shu"], open: false },
+      { id: 8997, title: "Proper 401 error pages instead of infinite reload", authors: ["Bruce"], open: false },
+      { id: 8803, title: "Enforce group + permission checks only when restricted", authors: ["Achraf"], open: false },
+      { id: 8742, title: "Remove dummy workspace when AuthZ disabled (clean upgrade)", authors: ["Shu"], open: false },
+      { id: 7913, title: "LLM Role-Based Access Control (RBAC) — database layer", authors: ["shsma"], open: true },
+      { id: 7988, title: "LLM RBAC — database migrations and functions", authors: ["shsma"], open: true },
+      { id: 8021, title: "LLM RBAC — backend logic", authors: ["shsma"], open: true },
+      { id: 8472, title: "LLM RBAC — API model and OpenAPI spec", authors: ["shsma"], open: true },
+      { id: 8908, title: "RBAC for custom agent tools", authors: ["Prathushan"], open: true },
+    ]
+  },
+  {
+    id: "Rate Limiting",
+    label: "API Rate Limiting & Fairness",
+    items: [
+      { id: 9208, title: "Per-user API rate limiting — Redis, 3-tier config (Global → Role → User)", authors: ["Bruce"], open: false },
+      { id: 8715, title: "Chat fairness — prevent single-user resource monopolization", authors: ["Achraf"], open: false },
+      { id: 9106, title: "Crawl fairness — concurrent limits and queue tracking", authors: ["Achraf"], open: false },
+      { id: 9228, title: "Fairness throttle notifications + WebSocket drop recovery", authors: ["Achraf"], open: true },
+      { id: 9227, title: "Chat queue position feedback + timeout warnings", authors: ["Achraf"], open: true },
+    ]
+  },
+  {
+    id: "Scalability",
+    label: "Scalability & Database Performance",
+    items: [
+      { id: 8899, title: "PgBouncer connection pooling — fix PostgreSQL exhaustion under K8s HPA", authors: ["Achraf"], open: false },
+      { id: 8895, title: "Collection listing: 1–2.5s → <70ms on 2M collections", authors: ["Bruce"], open: false },
+      { id: 8877, title: "User listing: >2s → <50ms on 2M users", authors: ["Bruce"], open: false },
+      { id: 8869, title: "Models page: >5s → <300ms on 7M records", authors: ["Bruce"], open: false },
+      { id: 8808, title: "Fix DB pool exhaustion during concurrent uploads", authors: ["Achraf"], open: false },
+      { id: 8751, title: "Paginated user listing — fix for 200k+ users", authors: ["Bruce"], open: false },
+      { id: 8423, title: "Faster document indexing and ingest pipeline", authors: ["Achraf"], open: false },
+      { id: 8733, title: "Fix memory leaks in chat service", authors: ["Marek"], open: false },
+      { id: 8761, title: "Fix vex memory leak — close Redis connections", authors: ["Marek"], open: false },
+      { id: 9196, title: "pgvector HNSW index support for vex", authors: ["Marek"], open: false },
+      { id: 8753, title: "Fast agentic RAG mode for optimized performance", authors: ["Jon"], open: false },
+      { id: 8628, title: "Replace model status polling with SSE", authors: ["Bruce"], open: false },
+      { id: 8991, title: "Collection query optimization part 2", authors: ["Bruce"], open: true },
+    ]
+  },
+  {
+    id: "MCP Server",
+    label: "MCP Server (Model Context Protocol)",
+    items: [
+      { id: 8902, title: "Native MCP server — 44 tools, streamable HTTP/SSE, full REST API parity", authors: ["Achraf", "Marek"], open: false },
+      { id: 8985, title: "6 MCP tools for Document AI Extractors", authors: ["Marek"], open: true },
+      { id: 9167, title: "Tool name compliance for Anthropic/Bedrock 64-char limit", authors: ["Marek"], open: false },
+      { id: 8993, title: "Enhanced MCP tools — RAG config, ingestion params, metadata filtering", authors: ["Achraf"], open: false },
+      { id: 7727, title: "Predefined MCP tool configurations", authors: ["Luxshan"], open: false },
+      { id: 8279, title: "Remote MCP file upload support", authors: ["Prathushan"], open: true },
+    ]
+  },
+  {
+    id: "Collection Migration",
+    label: "Collection Migration & Import/Export",
+    items: [
+      { id: 9139, title: "Full .h2ogpte archive import/export (metadata, docs, embeddings, chats)", authors: ["Achraf"], open: true },
+      { id: 9105, title: "skip_reparse — re-embed without re-parsing for model migrations", authors: ["Shu"], open: false },
+      { id: 9041, title: "Fix connector migration — move instead of copy", authors: ["Shu"], open: false },
+      { id: 9034, title: "Copy lifecycle settings during collection import", authors: ["Shu"], open: false },
+      { id: 8935, title: "Copy linked scheduled connectors to new collection", authors: ["Shu"], open: false },
+      { id: 8912, title: "Migrate chat sessions between collections", authors: ["Shu"], open: false },
+      { id: 8760, title: "System migration tool", authors: ["Achraf"], open: false },
+      { id: 8765, title: "Preserve doc ingest_mode during collection import", authors: ["Shu"], open: false },
+    ]
+  },
+  {
+    id: "Telemetry",
+    label: "Telemetry & Observability",
+    items: [
+      { id: 8621, title: "Add Keycloak subject to telemetry events", authors: ["Shu"], open: false },
+      { id: 8882, title: "Subject in Python telemetry events", authors: ["Shu"], open: false },
+      { id: 9053, title: "Subject in API/MCP/OpenAI chat message telemetry", authors: ["Shu"], open: false },
+      { id: 8683, title: "Notifications when chats or crawl jobs are slow", authors: ["Achraf"], open: false },
+      { id: 9204, title: "Prometheus metrics endpoint for mux", authors: ["Achraf"], open: false },
+      { id: 6597, title: "Initial OpenTelemetry integration (mux + UI tracing)", authors: ["Martin"], open: true },
+      { id: 8536, title: "Eval Studio topic modeling integration", authors: ["Martin"], open: false },
+    ]
+  },
+  {
+    id: "Infrastructure",
+    label: "Infrastructure & Deployment",
+    items: [
+      { id: 8660, title: "KEDA Redis trigger — autoscale Chat, Crawl, Models services", authors: ["Achraf"], open: false },
+      { id: 9048, title: "Custom PostgreSQL Docker image", authors: ["Marek"], open: false },
+      { id: 8741, title: "AWS RDS IAM authentication for PostgreSQL", authors: ["Achraf"], open: false },
+      { id: 8634, title: "Non-admin database mode + custom migration schema", authors: ["Achraf"], open: false },
+      { id: 6834, title: "Vex support for pgvector", authors: ["Marek"], open: false },
+      { id: 8625, title: "Standardize license DynamoDB integration", authors: ["Chathurinda"], open: false },
+      { id: 8642, title: "Expose Vex connection cleanup settings in Helm", authors: ["Marek"], open: false },
+      { id: 8692, title: "New versioning system with nightly build workflow", authors: ["Lakindu"], open: false },
+      { id: 8627, title: "Configurable maximum image size", authors: ["Branden"], open: false },
+      { id: 9236, title: "Update Helm chart for PostgreSQL", authors: ["Marek"], open: true },
+    ]
+  },
+  {
+    id: "Data Pipelines",
+    label: "Data Pipelines & Connectors",
+    items: [
+      { id: 7122, title: "Data workflows framework", authors: ["Achraf"], open: true },
+      { id: 8200, title: "REST API for extractor run", authors: ["mkoptik"], open: false },
+      { id: 8336, title: "Admin page for autosync connector jobs", authors: ["Marek"], open: false },
+      { id: 8494, title: "Custom agent integration", authors: ["lafink"], open: false },
+      { id: 8566, title: "Custom metadata keys in meta_data_to_include", authors: ["Branden"], open: false },
+      { id: 8614, title: "Custom fields for stored extractors", authors: ["Tomasz"], open: false },
+      { id: 8687, title: "Recursive Language Model (RLM) RAG approach", authors: ["Jon"], open: false },
+      { id: 8698, title: "Custom agent CRUD operations and migration", authors: ["Ruben"], open: false },
+      { id: 8708, title: "UI for new extractor fields", authors: ["Tomasz"], open: false },
+      { id: 8743, title: "Run extractor job on single document", authors: ["Tomasz"], open: false },
+      { id: 8746, title: "Handle multi-page TIFFs", authors: ["Branden"], open: false },
+      { id: 8798, title: "Fix Secured GCS connector", authors: ["Marek"], open: false },
+      { id: 8142, title: "Vision-only ingest and generation mode", authors: ["Branden"], open: true },
+      { id: 7326, title: "Advanced database poller with multiple CDC strategies", authors: ["Vijitha"], open: true },
+      { id: 8922, title: "Run extractor on files without collection", authors: ["Tomasz"], open: true },
+      { id: 9102, title: "Allow shared docs to have different status across collections", authors: ["Shu"], open: true },
+      { id: 9234, title: "Handle null OAuth token in Confluence connector", authors: ["Shu"], open: true },
+      { id: 8576, title: "Async feedback CSV export with job-based progress", authors: ["Shu"], open: false },
+    ]
+  },
+  {
+    id: "UI/UX",
+    label: "UI/UX Enterprise Quality",
+    items: [
+      { id: 8940, title: "Unified collection/chat settings — single source of truth", authors: ["Martin"], open: false },
+      { id: 9138, title: "System settings — tabbed layout with search", authors: ["Shu"], open: false },
+      { id: 9039, title: "Structured error pages with error boundaries and retry", authors: ["Martin"], open: true },
+      { id: 8986, title: "RAG streaming progress indicator", authors: ["Martin"], open: false },
+      { id: 9070, title: "New model availability notifications", authors: ["Martin"], open: false },
+      { id: 8830, title: "Improved guardrail violation feedback", authors: ["Bruce"], open: false },
+      { id: 9230, title: "Phase-based job progress for document indexing", authors: ["Achraf"], open: true },
+      { id: 9137, title: "Branch from message in chat sessions", authors: ["Achraf"], open: false },
+      { id: 9092, title: "Model tiers support", authors: ["Achraf"], open: false },
+      { id: 8707, title: "Custom Agent UI", authors: ["Luxshan"], open: false },
+      { id: 8485, title: "Tool creation from agent files with UI improvements", authors: ["Luxshan"], open: false },
+      { id: 8309, title: "Share chat (private/public, frozen/live, include artifacts)", authors: ["Luxshan"], open: true },
+      { id: 8686, title: "Artifact viewer full-screen support", authors: ["Luxshan"], open: false },
+      { id: 8771, title: "File version history and grouping", authors: ["Luxshan"], open: false },
+      { id: 8961, title: "Share chat replay", authors: ["Luxshan"], open: true },
+      { id: 8963, title: "Agent task tracker tab", authors: ["Luxshan"], open: true },
+      { id: 8981, title: "Presentation export (PPTX/PDF)", authors: ["Luxshan"], open: true },
+      { id: 9120, title: "Download tool support (local + code tool)", authors: ["Luxshan"], open: true },
+      { id: 8640, title: "More robust inline citations handling", authors: ["Martin"], open: false },
+      { id: 8677, title: "Collection pinning", authors: ["Martin"], open: false },
+      { id: 8758, title: "Customizable reference highlight color", authors: ["Martin"], open: false },
+      { id: 8732, title: "Chat drag-and-drop file validation", authors: ["Martin"], open: false },
+      { id: 8752, title: "Track original files in chat history for LLM context", authors: ["Jon"], open: false },
+      { id: 8705, title: "Fail ingest job when PDF conversion fails", authors: ["Branden"], open: false },
+      { id: 7899, title: "Simplified UI mode", authors: ["Ivan"], open: true },
+      { id: 9203, title: "Admin system settings search and filtering", authors: ["Bruce"], open: false },
+      { id: 8657, title: "Fix misleading config names for Admin setup", authors: ["Achraf"], open: false },
+      { id: 8632, title: "PDF page number previews", authors: ["Achraf"], open: false },
+      { id: 8904, title: "Scheduled tasks UI — CRUD, cron scheduling, execution tracking", authors: ["Jon"], open: false },
+      { id: 8884, title: "Memory Blocks — persistent agent memory across sessions", authors: ["Jon"], open: false },
+    ]
+  },
+  {
+    id: "Model Management",
+    label: "Model Management",
+    items: [
+      { id: 8664, title: "Admin-configurable deprecated models (not hardcoded)", authors: ["Achraf"], open: false },
+      { id: 8652, title: "Hide Chinese models from UI", authors: ["Achraf"], open: false },
+    ]
+  },
+  {
+    id: "Python SDK",
+    label: "Python Client SDK",
+    items: [
+      { id: 9200, title: "X-Client-Version header on every request", authors: ["Achraf"], open: false },
+      { id: 9136, title: "Backward compatibility fixes (P0+P1)", authors: ["Achraf"], open: false },
+      { id: 8684, title: "Consistent listing functions across SDK", authors: ["Achraf"], open: false },
+      { id: 8762, title: "Add embedding_model and created_at to CollectionInfo", authors: ["Shu"], open: false },
+      { id: 8802, title: "Expose public collection permissions via py client", authors: ["Shu"], open: false },
+    ]
+  },
+  {
+    id: "Internationalization",
+    label: "Internationalization",
+    items: [
+      { id: 8714, title: "Fix CJK/Hebrew/Hindi character support in UTF-8 text ingestion", authors: ["Branden"], open: false },
+      { id: 6965, title: "Translate agent tools and 3rd-party strings pattern", authors: ["Martin"], open: true },
+    ]
+  },
+];
+
+// ─── Counts ─────────────────────────────────────────────────────────────────
+const authorCounts = {};
+TOPICS.forEach(t => t.items.forEach(item => {
+  item.authors.forEach(a => { authorCounts[a] = (authorCounts[a] || 0) + 1; });
+}));
+
+const totalItems = TOPICS.reduce((s, t) => s + t.items.length, 0);
+document.getElementById('total-count').textContent = totalItems;
+document.getElementById('contributor-count').textContent = Object.keys(authorCounts).length;
+
+// Contributor chip counts
+const CHIPPED_AUTHORS = new Set(['Achraf','Bruce','Shu','Martin','Marek','Luxshan','Jon','Branden','Prathushan']);
+['Achraf','Bruce','Shu','Martin','Marek','Luxshan','Jon','Branden','Prathushan'].forEach(name => {
+  const el = document.getElementById('cnt-' + name.toLowerCase());
+  if (el) el.textContent = authorCounts[name] || 0;
+});
+// Others count = sum of all authors not in CHIPPED_AUTHORS
+const othersCount = Object.entries(authorCounts)
+  .filter(([name]) => !CHIPPED_AUTHORS.has(name))
+  .reduce((s, [, c]) => s + c, 0);
+document.getElementById('cnt-others').textContent = othersCount;
+
+// Topic pill counts
+const topicPillMap = {
+  "Security Hardening":       "tp-security",
+  "CVE Remediation":          "tp-cve",
+  "Access Control":           "tp-acl",
+  "Rate Limiting":            "tp-ratelimit",
+  "Scalability":              "tp-scale",
+  "MCP Server":               "tp-mcp",
+  "Collection Migration":     "tp-migration",
+  "Telemetry":                "tp-telemetry",
+  "Infrastructure":           "tp-infra",
+  "UI/UX":                    "tp-ui",
+  "Python SDK":               "tp-sdk",
+  "Data Pipelines":           "tp-data",
+  "Model Management":         "tp-model",
+  "Internationalization":     "tp-i18n",
+};
+TOPICS.forEach(t => {
+  const elId = topicPillMap[t.id];
+  if (elId) {
+    const el = document.getElementById(elId);
+    if (el) el.textContent = t.items.length;
+  }
+});
+
+// ─── Markdown builder ───────────────────────────────────────────────────────
+function buildMarkdown(filteredTopics) {
+  let md = '# h2oGPTe · Enterprise Improvements\n\n';
+
+  filteredTopics.forEach(topic => {
+    if (topic.items.length === 0) return;
+    md += `## ${topic.label}\n`;
+    topic.items.forEach(item => {
+      const open = item.open ? '🟡 ' : '';
+      const authorStr = item.authors.join(', ');
+      const prLink = `[#${item.id}](https://github.com/h2oai/h2ogpte/pull/${item.id})`;
+      md += `- ${open}**${prLink}** ${item.title} *(${authorStr})*\n`;
+    });
+    md += '\n';
+  });
+
+  return md;
+}
+
+// ─── Markmap setup ──────────────────────────────────────────────────────────
+const { Transformer } = window.markmap;
+const { Markmap, loadCSS, loadJS } = window.markmap;
+const transformer = new Transformer();
+
+// Clear fold state on the live markmap state tree
+function unfoldState(node, maxDepth, depth) {
+  depth = depth || 0;
+  if (!node) return;
+  if (node.payload) node.payload.fold = depth >= maxDepth ? 1 : 0;
+  if (node.children) node.children.forEach(c => unfoldState(c, maxDepth, depth + 1));
+}
+
+// Also clear on source data before passing to markmap
+function unfoldData(node, maxDepth, depth) {
+  depth = depth || 0;
+  if (!node) return;
+  node.payload = node.payload || {};
+  node.payload.fold = depth >= maxDepth ? 1 : 0;
+  if (node.children) node.children.forEach(c => unfoldData(c, maxDepth, depth + 1));
+}
+
+// Color palette — topic depth colors
+const TOPIC_COLORS = [
+  '#5b8dee','#3ecb8a','#9b7fe8','#3ecfcf',
+  '#e8637a','#f0a843','#c97ce8','#56c8e8',
+  '#80c8a0','#f0c843','#a8c8f0','#e89b56',
+  '#b8e856','#e856c8'
+];
+
+// State
+let activeContributors = new Set();
+let activeTopics = new Set();
+let currentQuery = '';
+let originalRoot = null;
+
+function getFilteredTopics() {
+  return TOPICS.map(topic => ({
+    ...topic,
+    items: topic.items.filter(item => {
+      const passTopic = activeTopics.size === 0
+        || activeTopics.has(topic.id);
+      const passAuthor = activeContributors.size === 0
+        || item.authors.some(a => activeContributors.has(a))
+        || (activeContributors.has('Others') && item.authors.some(a => !CHIPPED_AUTHORS.has(a)));
+      const passSearch = currentQuery === ''
+        || item.title.toLowerCase().includes(currentQuery)
+        || item.authors.some(a => a.toLowerCase().includes(currentQuery))
+        || String(item.id).includes(currentQuery)
+        || topic.label.toLowerCase().includes(currentQuery);
+      return passTopic && passAuthor && passSearch;
+    })
+  })).filter(t => t.items.length > 0);
+}
+
+function countMatches(topics) {
+  return topics.reduce((s, t) => s + t.items.length, 0);
+}
+
+function renderMarkmap() {
+  const filtered = getFilteredTopics();
+  const matchCount = countMatches(filtered);
+
+  // Update match count display
+  const matchEl = document.getElementById('match-count');
+  if (currentQuery) {
+    matchEl.textContent = matchCount > 0 ? `${matchCount}` : '0';
+  } else {
+    matchEl.textContent = '';
+  }
+
+  // No match notice
+  const noMatch = document.getElementById('no-match');
+  if (matchCount === 0 && (currentQuery || activeContributors.size > 0)) {
+    noMatch.classList.add('visible');
+  } else {
+    noMatch.classList.remove('visible');
+  }
+
+  // Filter notice
+  const filterNotice = document.getElementById('filter-notice');
+  const filterText = document.getElementById('filter-notice-text');
+  if (activeContributors.size > 0 || activeTopics.size > 0) {
+    const parts = [];
+    if (activeContributors.size > 0) parts.push([...activeContributors].join(', '));
+    if (activeTopics.size > 0) parts.push([...activeTopics].join(', '));
+    filterText.textContent = `Showing: ${parts.join(' · ')} (${matchCount} PRs)`;
+    filterNotice.classList.add('visible');
+  } else {
+    filterNotice.classList.remove('visible');
+  }
+
+  if (matchCount === 0) return;
+
+  const md = buildMarkdown(filtered);
+  const { root, features } = transformer.transform(md);
+  unfoldData(root, 3);
+  const { styles, scripts } = transformer.getUsedAssets(features);
+  if (styles) loadCSS(styles);
+  if (scripts) loadJS(scripts, { getMarkmap: () => window.markmap });
+
+  mm.setData(root);
+  unfoldState(mm.state.data, 3);
+  mm.renderData();
+  setTimeout(() => mm.fit(), 50);
+}
+
+// Initial render
+const initMd = buildMarkdown(TOPICS);
+const { root: initRoot, features: initFeatures } = transformer.transform(initMd);
+unfoldData(initRoot, 1);
+const { styles: initStyles, scripts: initScripts } = transformer.getUsedAssets(initFeatures);
+if (initStyles) loadCSS(initStyles);
+if (initScripts) loadJS(initScripts, { getMarkmap: () => window.markmap });
+
+// Build a color function that markmap can apply to all SVG elements
+const colorScale = d3.scaleOrdinal(TOPIC_COLORS);
+
+const mm = Markmap.create('#markmap', {
+  autoFit: true,
+  duration: 350,
+  maxWidth: 460,
+  initialExpandLevel: 2,
+  embedGlobalCSS: true,
+  color: (node) => colorScale(`${node.state?.id ?? node.depth ?? 0}`),
+  paddingX: 20,
+  spacingHorizontal: 90,
+  spacingVertical: 5,
+}, initRoot);
+
+// Force unfold the live state tree after markmap processes it
+unfoldState(mm.state.data, 1);
+mm.renderData();
+setTimeout(() => mm.fit(), 100);
+
+// ─── Click text labels to expand/collapse ────────────────────────────────────
+document.getElementById('markmap').addEventListener('click', (e) => {
+  // Find the closest foreignObject ancestor (text label container)
+  const fo = e.target.closest('foreignObject');
+  if (!fo) return;
+  // Don't intercept clicks on links
+  if (e.target.closest('a')) return;
+  // The foreignObject is inside a <g> that has the node data bound by d3
+  const g = fo.closest('g.markmap-node');
+  if (!g) return;
+  const d = d3.select(g).datum();
+  if (!d || !d.children || d.children.length === 0) return;
+  // Toggle fold
+  d.payload = d.payload || {};
+  d.payload.fold = d.payload.fold ? 0 : 1;
+  mm.renderData();
+});
+
+// Style text labels as clickable when node has children
+const style = document.createElement('style');
+style.textContent = 'g.markmap-node foreignObject { cursor: pointer; }';
+document.head.appendChild(style);
+
+// ─── Search ─────────────────────────────────────────────────────────────────
+const searchBox = document.getElementById('search-box');
+let debounceTimer;
+
+searchBox.addEventListener('input', (e) => {
+  clearTimeout(debounceTimer);
+  debounceTimer = setTimeout(() => {
+    currentQuery = e.target.value.toLowerCase().trim();
+    renderMarkmap();
+  }, 220);
+});
+
+// ─── Contributor chips ──────────────────────────────────────────────────────
+document.querySelectorAll('.chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    const name = chip.dataset.contributor;
+    if (activeContributors.has(name)) {
+      activeContributors.delete(name);
+      chip.classList.remove('chip-active');
+    } else {
+      activeContributors.add(name);
+      chip.classList.add('chip-active');
+    }
+    renderMarkmap();
+  });
+});
+
+document.getElementById('clear-filter-btn').addEventListener('click', () => {
+  activeContributors.clear();
+  activeTopics.clear();
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('chip-active'));
+  document.querySelectorAll('.topic-pill').forEach(p => p.classList.remove('tp-active'));
+  renderMarkmap();
+});
+
+// ─── Topic pill clicks ──────────────────────────────────────────────────────
+document.querySelectorAll('.topic-pill').forEach(pill => {
+  pill.addEventListener('click', () => {
+    const topic = pill.dataset.topic;
+    if (activeTopics.has(topic)) {
+      activeTopics.delete(topic);
+      pill.classList.remove('tp-active');
+    } else {
+      activeTopics.add(topic);
+      pill.classList.add('tp-active');
+    }
+    renderMarkmap();
+  });
+});
+
+// ─── Methodology panel toggle ────────────────────────────────────────────────
+const methodPanel = document.getElementById('methodology-panel');
+const methodBackdrop = document.getElementById('method-backdrop');
+
+function openMethodology() {
+  methodPanel.classList.add('visible');
+  methodBackdrop.classList.add('visible');
+}
+function closeMethodology() {
+  methodPanel.classList.remove('visible');
+  methodBackdrop.classList.remove('visible');
+}
+
+document.getElementById('methodology-btn').addEventListener('click', openMethodology);
+document.getElementById('method-close').addEventListener('click', closeMethodology);
+methodBackdrop.addEventListener('click', closeMethodology);
+
+</script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+# AgentServerFile
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**id** | **str** |  | 
+**object** | **str** |  | 
+**bytes** | **int** |  | 
+**created_at** | **int** |  | 
+**filename** | **str** |  | 
+**purpose** | **str** |  | 
+
+## Example
+
+```python
+from h2ogpte.rest_async.models.agent_server_file import AgentServerFile
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of AgentServerFile from a JSON string
+agent_server_file_instance = AgentServerFile.from_json(json)
+# print the JSON string representation of the object
+print(AgentServerFile.to_json())
+
+# convert the object into a dict
+agent_server_file_dict = agent_server_file_instance.to_dict()
+# create an instance of AgentServerFile from a dict
+agent_server_file_from_dict = AgentServerFile.from_dict(agent_server_file_dict)
+```
+
+
+

@@ -1,0 +1,40 @@
+# AgentServerDirectoryFileStats
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**name** | **str** |  | 
+**path** | **str** |  | 
+**size_bytes** | **int** |  | 
+**size_human_readable** | **str** |  | 
+**created_timestamp** | **float** |  | 
+**modified_timestamp** | **float** |  | 
+**created_date** | **str** |  | 
+**modified_date** | **str** |  | 
+**is_directory** | **bool** |  | 
+**owner** | **str** | Unix systems only | 
+**permissions** | **str** | Unix systems only | 
+**sha256** | **str** | Only for files, not directories | [optional] 
+
+## Example
+
+```python
+from h2ogpte.rest_sync.models.agent_server_directory_file_stats import AgentServerDirectoryFileStats
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of AgentServerDirectoryFileStats from a JSON string
+agent_server_directory_file_stats_instance = AgentServerDirectoryFileStats.from_json(json)
+# print the JSON string representation of the object
+print(AgentServerDirectoryFileStats.to_json())
+
+# convert the object into a dict
+agent_server_directory_file_stats_dict = agent_server_directory_file_stats_instance.to_dict()
+# create an instance of AgentServerDirectoryFileStats from a dict
+agent_server_directory_file_stats_from_dict = AgentServerDirectoryFileStats.from_dict(agent_server_directory_file_stats_dict)
+```
+
+
+

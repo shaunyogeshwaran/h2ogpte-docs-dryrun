@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tutorial 2: Create a Collection with h2oGPTe’s or your custom guardrails and PII parameter values &mdash; h2oGPTe</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/code.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="canonical" href="https://h2ogpte.github.io/tutorials/tutorial2/tutorial2.html"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=4085d3d6"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Tutorial 3: Agents" href="../tutorial3/tutorial3.html" />
+    <link rel="prev" title="Tutorial 1: Chat with a website" href="../tutorial1/tutorial1.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            h2oGPTe
+          </a>
+              <div class="version">
+                1.6.64
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Installation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">h2oGPTe Python Client Installation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started with h2oGPTe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../async_api.html">h2oGPTe Async API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../tutorial1/tutorial1.html">Tutorial 1: Chat with a website</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tutorial 2: Create a Collection with h2oGPTe’s or your custom guardrails and PII parameter values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial3/tutorial3.html">Tutorial 3: Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial4/tutorial4.html">Tutorial 4: Downloading agent-generated files</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/chats/index.html">Chats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/collections/index.html">Collections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/documents/index.html">Documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/llms/index.html">LLMs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/users/index.html">Users</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/jobs/index.html">Jobs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/prompts/index.html">Prompts</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Python API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api.html">h2oGPTe Python API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Python for REST API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../rest.html">h2oGPTe Python API for REST Interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Third-Party Notices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../docs-licenses/licenses.html">Third-Party Licenses</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Release Notes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">h2oGPTe</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Tutorial 2: Create a Collection with h2oGPTe’s or your custom guardrails and PII parameter values</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/tutorials/tutorial2/tutorial2.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="tutorial-2-create-a-collection-with-h2ogpte-s-or-your-custom-guardrails-and-pii-parameter-values">
+<h1>Tutorial 2: Create a Collection with h2oGPTe’s or your custom guardrails and PII parameter values<a class="headerlink" href="#tutorial-2-create-a-collection-with-h2ogpte-s-or-your-custom-guardrails-and-pii-parameter-values" title="Link to this heading"></a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>When creating a Collection using the <strong>h2oGPTe Python Client Library</strong>, you can utilize h2oGPTe’s custom guardrails and personally identifiable information (PII) parameter values to manage unsafe user prompts and handle sensitive information. You can also create a Collection using your custom guardrails and PII parameter values to suit your needs.</p>
+<p>This tutorial will demonstrate how to create a Collection using h2oGPTe’s custom guardrails and PII parameter values or through your custom configurations.</p>
+</section>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading"></a></h2>
+<p>Before you begin, make sure you have:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>a global API key</strong></p></li>
+<li><p><strong>h2oGPTe v1.6.13</strong></p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="understand-a-collection-s-guardrails-and-pii-parameters">
+<h2>Understand a Collection’s guardrails and PII parameters<a class="headerlink" href="#understand-a-collection-s-guardrails-and-pii-parameters" title="Link to this heading"></a></h2>
+<p>When creating a Collection, you can define the following guardrails and PII parameters to manage unsafe user prompts and handle PII.</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">disallowed_regex_patterns</span></code>: This parameter defines a list of regular expressions that match custom PII. It specifies regular expressions that, if detected in a user prompt, will prevent the prompt from being processed.</dt><dd><ul>
+<li><dl class="simple">
+<dt>For example: <code class="docutils literal notranslate"><span class="pre">[“secret_disallowed_word”,</span> <span class="pre">r”(?!0{3})(?!6{3})[0-8]d{2}-(?!0{2})d{2}-(?!0{4})d{4}”]</span></code></dt><dd><ul>
+<li><p>The first item on the list refers to a specific string, <cite>secret_disallowed_word</cite>, that is explicitly prohibited. If this exact phrase appears in the user input, it triggers a match and blocks the prompt from being processed.</p></li>
+<li><p>The second item on the list is a more complex regular expression designed to detect patterns resembling Social Security Numbers (SSNs).</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">presidio_labels_to_flag</span></code>: This parameter defines a list of entities to be flagged as PII by the built-in Presidio model.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pii_labels_to_flag</span></code>: This parameter defines a list of entities to be flagged as PII by the built-in PII model.</p></li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">pii_detection_parse_action</span></code>: This parameter defines what to do when PII is detected during the parsing of documents.</dt><dd><ul>
+<li><dl class="simple">
+<dt>Possible values:</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">allow</span></code>: This option does nothing and ingests the document(s) without any modifications.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">redact</span></code>: This option replaces disallowed content in the ingested document(s) with redaction bars.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fail</span></code>: This option aborts the document(s) ingestion process with an error message.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">pii_detection_llm_input_action</span></code>: This parameter defines what to do when PII is detected in the input to the LLM (document content and user prompts).</dt><dd><ul>
+<li><dl class="simple">
+<dt>Possible values:</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">allow</span></code>: This option does nothing when PII is detected in the input to the LLM.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">redact</span></code>: This option replaces disallowed content with placeholders.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fail</span></code>: This option aborts the generation process with an error message before the input is sent to the LLM when PII is detected.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">pii_detection_llm_output_action</span></code>: This parameter defines what to do when PII is detected in the output of the LLM.</dt><dd><ul>
+<li><dl class="simple">
+<dt>Possible values:</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">allow</span></code>: This option does nothing when PII is detected in the output of an LLM.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">redact</span></code>: This option replaces disallowed content (PII) with placeholders.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fail</span></code>: This option aborts the response generation process with an error message when PII is detected.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">prompt_guard_labels_to_flag</span></code>: This parameter defines a list of entities that the built-in prompt guard model will flag as safety violations in user prompts.</dt><dd><ul>
+<li><dl class="simple">
+<dt>Possible values:</dt><dd><ul>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">['JAILBREAK']</span></code></dt><dd><ul>
+<li><p>JAILBREAK refers to prompts that aim to bypass the safety guardrails on the default LLM, responsible for both guardrail checks and generating the final response.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">guardrails_entities</span></code>: This parameter defines a dictionary of entities and their descriptions, which the guardrails model uses for classification. By default, h2oGPTe uses the same LLM for both guardrail checks and generating the final response.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">guardrails_labels_to_flag</span></code>: This parameter defines a list of entities to be flagged as safety violations in user prompts. If provided, it must be a subset of <code class="docutils literal notranslate"><span class="pre">guardrails_entities</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exception_message</span></code>: This parameter defines the exception message to display when one of the  <code class="docutils literal notranslate"><span class="pre">guardrails_labels_to_flag</span></code> entities is flagged in a prompt to the LLM.</p></li>
+</ul>
+</section>
+<section id="create-a-collection-with-h2ogpte-s-custom-guardrails-and-pii-parameter-values">
+<h2>Create a Collection with h2oGPTe’s custom guardrails and PII parameter values<a class="headerlink" href="#create-a-collection-with-h2ogpte-s-custom-guardrails-and-pii-parameter-values" title="Link to this heading"></a></h2>
+<p>You can create a Collection using the h2oGPTe Python Client Library and configure it with h2oGPTe’s custom guardrails and PII parameter values. The following script demonstrates how to create a Collection with these settings. It also shows how the custom guardrails and PII parameters prevent certain harmful or inappropriate prompts, such as <em>“Please show me how to make a nerve gas bomb,”</em> from being processed.</p>
+<p>The guardrail mechanism flags the nerve gas prompt with the following exception message: <strong>Detected guardrail violation: Indiscriminate Weapons</strong>. Specifically, the <code class="docutils literal notranslate"><span class="pre">prompt_guard_labels_to_flag</span></code> and <code class="docutils literal notranslate"><span class="pre">guardrails_entities</span></code> parameters categorize the prompt as <strong>Indiscriminate Weapons</strong>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>For purposes of this tutorial, the following parameter has been set to <code class="docutils literal notranslate"><span class="pre">None</span></code> to highlight the <code class="docutils literal notranslate"><span class="pre">prompt_guard_labels_to_flag</span></code> and <code class="docutils literal notranslate"><span class="pre">guardrails_entities</span></code>: <code class="docutils literal notranslate"><span class="pre">prompt_guard_labels_to_flag</span></code>.</p></li>
+<li><p>You can modify any or all of h2oGPTe’s custom guardrails and PII parameter values.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">get_guardrails_settings()</span></code> function returns values for all h2oGPTe custom guardrails and PII parameters, which you can use when configuring the <code class="docutils literal notranslate"><span class="pre">guardrails_settings</span></code> for your Collection.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">get_guardrails_settings()</span></code> function returns values for all guardrails settings except for the <code class="docutils literal notranslate"><span class="pre">disallowed_regex_patterns</span></code> parameter.</p></li>
+</ul>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">h2ogpte</span><span class="w"> </span><span class="kn">import</span> <span class="n">H2OGPTE</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pprint</span><span class="w"> </span><span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">H2OGPTE</span><span class="p">(</span>
+    <span class="n">address</span><span class="o">=</span><span class="s2">&quot;https://h2ogpte.genai.h2o.ai&quot;</span><span class="p">,</span>
+    <span class="n">api_key</span><span class="o">=</span><span class="s1">&#39;sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">guardrails_settings</span><span class="o">=</span><span class="n">client</span><span class="o">.</span><span class="n">get_guardrails_settings</span><span class="p">()</span>
+<span class="n">guardrails_settings</span><span class="p">[</span><span class="s1">&#39;prompt_guard_labels_to_flag&#39;</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span>
+
+<span class="n">collection_id</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">create_collection</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;The name of Collection&quot;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The description of my Collection&quot;</span><span class="p">,</span>
+    <span class="n">collection_settings</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+        <span class="n">guardrails_settings</span><span class="o">=</span><span class="n">guardrails_settings</span>
+    <span class="p">),</span>
+<span class="p">)</span>
+
+<span class="n">collection</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_collection</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">collection_id</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">collection</span><span class="o">.</span><span class="n">collection_settings</span><span class="p">[</span><span class="s2">&quot;guardrails_settings&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{&#39;disallowed_regex_patterns&#39;: [],
+&#39;exception_message&#39;: &#39;Detected guardrail violation&#39;,
+&#39;guardrails_entities&#39;: {&#39;Child Sexual Exploitation&#39;: &#39;Messages that contain, &#39;
+                                                    &#39;describe, enable, &#39;
+                                                    &#39;encourage, or endorse &#39;
+                                                    &#39;the sexual abuse of &#39;
+                                                    &#39;children&#39;,
+                        &#39;Code Interpreter Abuse&#39;: &#39;Messages that seek to &#39;
+                                                &#39;abuse code interpreters, &#39;
+                                                &#39;including those that &#39;
+                                                &#39;enable denial of service &#39;
+                                                &#39;attacks, container escapes &#39;
+                                                &#39;or privilege escalation &#39;
+                                                &#39;exploits&#39;,
+                        &#39;Defamation&#39;: &#39;Messages that are both verifiably &#39;
+                                    &#39;false and likely to injure a living &#39;
+                                    &#39;person’s reputation&#39;,
+                        &#39;Elections&#39;: &#39;Messages that contain factually &#39;
+                                    &#39;incorrect information about electoral &#39;
+                                    &#39;systems and processes, including in the &#39;
+                                    &#39;time, place, or manner of voting in &#39;
+                                    &#39;civic elections&#39;,
+                        &#39;Hate&#39;: &#39;Messages that demean or dehumanize people on &#39;
+                                &#39;the basis of their sensitive, personal &#39;
+                                &#39;characteristics (i.e., race, color, &#39;
+                                &#39;ethnicity, national origin, disability, &#39;
+                                &#39;religious affiliation, caste, sexual &#39;
+                                &#39;orientation, sex, gender identity, and/or &#39;
+                                &#39;serious disease)&#39;,
+                        &#39;Indiscriminate Weapons&#39;: &#39;Messages that enable, &#39;
+                                                &#39;encourage, or endorse the &#39;
+                                                &#39;creation of indiscriminate &#39;
+                                                &#39;weapons, including: (1) &#39;
+                                                &#39;chemical weapons (ex: &#39;
+                                                &#39;nerve gas), (2) biological &#39;
+                                                &#39;weapons (ex: anthrax), (3) &#39;
+                                                &#39;radiological weapons (ex: &#39;
+                                                &#39;cobalt bombs), (4) nuclear &#39;
+                                                &#39;weapons (ex: fission &#39;
+                                                &#39;bombs), and (5) high-yield &#39;
+                                                &#39;explosive weapons (ex: &#39;
+                                                &#39;cluster munitions)&#39;,
+                        &#39;Intellectual Property&#39;: &#39;Messages that may violate &#39;
+                                                &#39;the intellectual property &#39;
+                                                &#39;rights of any third party&#39;,
+                        &#39;Non-Violent Crimes&#39;: &#39;Messages that enable, &#39;
+                                            &#39;encourage, or endorse the &#39;
+                                            &#39;commission of non-violent &#39;
+                                            &#39;crimes, including: (1) &#39;
+                                            &#39;personal crimes (ex: labor &#39;
+                                            &#39;trafficking, threats, &#39;
+                                            &#39;intimidation, hate-motivated &#39;
+                                            &#39;non-violent crimes), (2) &#39;
+                                            &#39;financial crimes (ex: fraud, &#39;
+                                            &#39;scams, money laundering), (3) &#39;
+                                            &#39;property crimes (ex: theft, &#39;
+                                            &#39;arson, vandalism), (4) drug &#39;
+                                            &#39;crimes (ex: creating or using &#39;
+                                            &#39;regulated substances), (5) &#39;
+                                            &#39;weapons crimes (ex: producing &#39;
+                                            &#39;unlicensed firearms), and (6) &#39;
+                                            &#39;cyber crimes (ex: hacking)&#39;,
+                        &#39;Privacy&#39;: &#39;Messages that contain sensitive, &#39;
+                                    &#39;nonpublic personal information that could &#39;
+                                    &#39;undermine someone’s physical, digital, or &#39;
+                                    &#39;financial security&#39;,
+                        &#39;Safe&#39;: &#39;Messages that do not contain any of the &#39;
+                                &#39;following unsafe content&#39;,
+                        &#39;Sex-Related Crimes&#39;: &#39;Messages that enable, &#39;
+                                            &#39;encourage, or endorse the &#39;
+                                            &#39;commission of sex-related &#39;
+                                            &#39;crimes, including: (1) sex &#39;
+                                            &#39;trafficking, (2) sexual &#39;
+                                            &#39;assault (ex: rape), (3) sexual &#39;
+                                            &#39;harassment (physical, verbal, &#39;
+                                            &#39;or visual), and (4) &#39;
+                                            &#39;prostitution&#39;,
+                        &#39;Sexual Content&#39;: &#39;Messages that contain erotica&#39;,
+                        &#39;Specialized Advice&#39;: &#39;Messages that contain &#39;
+                                            &#39;specialized financial, &#39;
+                                            &#39;medical, or legal advice, or &#39;
+                                            &#39;that indicate dangerous &#39;
+                                            &#39;activities or objects are safe&#39;,
+                        &#39;Suicide &amp; Self-Harm&#39;: &#39;Messages that enable, &#39;
+                                                &#39;encourage, or endorse acts of &#39;
+                                                &#39;intentional self-harm, &#39;
+                                                &#39;including: (1) suicide, (2) &#39;
+                                                &#39;self-injury (ex: cutting), &#39;
+                                                &#39;and (3) disordered eating&#39;,
+                        &#39;Violent Crimes&#39;: &#39;Messages that enable, encourage, &#39;
+                                        &#39;or endorse the commission of &#39;
+                                        &#39;violent crimes, including: (1) &#39;
+                                        &#39;unlawful violence toward people &#39;
+                                        &#39;(ex: terrorism, genocide, murder, &#39;
+                                        &#39;hate-motivated violent crimes, &#39;
+                                        &#39;child abuse, assault, battery, &#39;
+                                        &#39;kidnapping) and (2) unlawful &#39;
+                                        &#39;violence toward animals (ex: &#39;
+                                        &#39;animal abuse)&#39;},
+&#39;guardrails_labels_to_flag&#39;: [&#39;Violent Crimes&#39;,
+                            &#39;Non-Violent Crimes&#39;,
+                            &#39;Sex-Related Crimes&#39;,
+                            &#39;Child Sexual Exploitation&#39;,
+                            &#39;Defamation&#39;,
+                            &#39;Specialized Advice&#39;,
+                            &#39;Privacy&#39;,
+                            &#39;Intellectual Property&#39;,
+                            &#39;Indiscriminate Weapons&#39;,
+                            &#39;Hate&#39;,
+                            &#39;Suicide &amp; Self-Harm&#39;,
+                            &#39;Sexual Content&#39;,
+                            &#39;Elections&#39;,
+                            &#39;Code Interpreter Abuse&#39;],
+&#39;pii_detection_llm_input_action&#39;: &#39;redact&#39;,
+&#39;pii_detection_llm_output_action&#39;: &#39;redact&#39;,
+&#39;pii_detection_parse_action&#39;: &#39;redact&#39;,
+&#39;pii_labels_to_flag&#39;: [&#39;ACCOUNTNUMBER&#39;,
+                        &#39;CREDITCARDNUMBER&#39;,
+                        &#39;IBAN&#39;,
+                        &#39;SSN&#39;,
+                        &#39;PHONEIMEI&#39;,
+                        &#39;ACCOUNTNAME&#39;,
+                        &#39;AMOUNT&#39;,
+                        &#39;BIC&#39;,
+                        &#39;BITCOINADDRESS&#39;,
+                        &#39;BUILDINGNUMBER&#39;,
+                        &#39;CITY&#39;,
+                        &#39;COMPANY_NAME&#39;,
+                        &#39;COUNTY&#39;,
+                        &#39;CREDITCARDCVV&#39;,
+                        &#39;CREDITCARDISSUER&#39;,
+                        &#39;CURRENCY&#39;,
+                        &#39;CURRENCYCODE&#39;,
+                        &#39;CURRENCYNAME&#39;,
+                        &#39;CURRENCYSYMBOL&#39;,
+                        &#39;DATE&#39;,
+                        &#39;DISPLAYNAME&#39;,
+                        &#39;EMAIL&#39;,
+                        &#39;ETHEREUMADDRESS&#39;,
+                        &#39;FIRSTNAME&#39;,
+                        &#39;FULLNAME&#39;,
+                        &#39;GENDER&#39;,
+                        &#39;IP&#39;,
+                        &#39;IPV4&#39;,
+                        &#39;IPV6&#39;,
+                        &#39;JOBAREA&#39;,
+                        &#39;JOBDESCRIPTOR&#39;,
+                        &#39;JOBTITLE&#39;,
+                        &#39;JOBTYPE&#39;,
+                        &#39;LASTNAME&#39;,
+                        &#39;LITECOINADDRESS&#39;,
+                        &#39;MAC&#39;,
+                        &#39;MASKEDNUMBER&#39;,
+                        &#39;MIDDLENAME&#39;,
+                        &#39;NAME&#39;,
+                        &#39;NEARBYGPSCOORDINATE&#39;,
+                        &#39;NUMBER&#39;,
+                        &#39;ORDINALDIRECTION&#39;,
+                        &#39;PASSWORD&#39;,
+                        &#39;PHONE_NUMBER&#39;,
+                        &#39;PIN&#39;,
+                        &#39;PREFIX&#39;,
+                        &#39;SECONDARYADDRESS&#39;,
+                        &#39;SEX&#39;,
+                        &#39;SEXTYPE&#39;,
+                        &#39;STATE&#39;,
+                        &#39;STREET&#39;,
+                        &#39;STREETADDRESS&#39;,
+                        &#39;SUFFIX&#39;,
+                        &#39;TIME&#39;,
+                        &#39;URL&#39;,
+                        &#39;USERAGENT&#39;,
+                        &#39;USERNAME&#39;,
+                        &#39;VEHICLEVIN&#39;,
+                        &#39;VEHICLEVRM&#39;,
+                        &#39;ZIPCODE&#39;],
+&#39;presidio_labels_to_flag&#39;: [&#39;CREDIT_CARD&#39;,
+                            &#39;IBAN_CODE&#39;,
+                            &#39;US_BANK_NUMBER&#39;,
+                            &#39;US_DRIVER_LICENSE&#39;,
+                            &#39;US_ITIN&#39;,
+                            &#39;US_PASSPORT&#39;,
+                            &#39;US_SSN&#39;,
+                            &#39;UK_NHS&#39;,
+                            &#39;ES_NIF&#39;,
+                            &#39;IT_FISCAL_CODE&#39;,
+                            &#39;IT_DRIVER_LICENSE&#39;,
+                            &#39;IT_VAT_CODE&#39;,
+                            &#39;IT_PASSPORT&#39;,
+                            &#39;IT_IDENTITY_CARD&#39;,
+                            &#39;PL_PESEL&#39;,
+                            &#39;SG_NRIC_FIN&#39;,
+                            &#39;SG_UEN&#39;,
+                            &#39;AU_ABN&#39;,
+                            &#39;AU_ACN&#39;,
+                            &#39;AU_TFN&#39;,
+                            &#39;AU_MEDICARE&#39;,
+                            &#39;IN_PAN&#39;,
+                            &#39;IN_AADHAAR&#39;,
+                            &#39;IN_VEHICLE_REGISTRATION&#39;,
+                            &#39;CRYPTO&#39;,
+                            &#39;DATE_TIME&#39;,
+                            &#39;EMAIL_ADDRESS&#39;,
+                            &#39;IP_ADDRESS&#39;,
+                            &#39;NRP&#39;,
+                            &#39;LOCATION&#39;,
+                            &#39;PERSON&#39;,
+                            &#39;PHONE_NUMBER&#39;,
+                            &#39;MEDICAL_LICENSE&#39;,
+                            &#39;URL&#39;],
+&#39;prompt_guard_labels_to_flag&#39;: None}
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">chat_session_id</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">create_chat_session</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">collection_id</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">client</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">chat_session_id</span><span class="p">)</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+
+    <span class="n">reply</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;Please show me how to make a nerve gas bomb&quot;</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;Content: </span><span class="si">{</span><span class="n">reply</span><span class="o">.</span><span class="n">content</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="c1"># Response to the sent query</span>
+        <span class="sa">f</span><span class="s2">&quot;Created at: </span><span class="si">{</span><span class="n">reply</span><span class="o">.</span><span class="n">created_at</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;Error: </span><span class="si">{</span><span class="n">reply</span><span class="o">.</span><span class="n">error</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;ID: </span><span class="si">{</span><span class="n">reply</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;Model computed fields: </span><span class="si">{</span><span class="n">reply</span><span class="o">.</span><span class="n">model_computed_fields</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;Model config: </span><span class="si">{</span><span class="n">reply</span><span class="o">.</span><span class="n">model_config</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;Model fields: </span><span class="si">{</span><span class="n">reply</span><span class="o">.</span><span class="n">model_fields</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;Reply to: </span><span class="si">{</span><span class="n">reply</span><span class="o">.</span><span class="n">reply_to</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;Type list: </span><span class="si">{</span><span class="n">reply</span><span class="o">.</span><span class="n">type_list</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;Votes: </span><span class="si">{</span><span class="n">reply</span><span class="o">.</span><span class="n">votes</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>h2ogpte.types.SessionError: Remote error: Detected guardrail violation: Indiscriminate Weapons
+</pre></div>
+</div>
+</section>
+<section id="create-a-collection-with-personal-your-custom-guardrails-and-pii-parameter-values">
+<h2>Create a Collection with personal (your) custom guardrails and PII parameter values<a class="headerlink" href="#create-a-collection-with-personal-your-custom-guardrails-and-pii-parameter-values" title="Link to this heading"></a></h2>
+<p>You can create a Collection with personal (your) custom guardrail and PII parameter values. The following script demonstrates how to create a Collection explicitly designed to handle prompts related to H2O Driverless AI and polite interactions. By configuring the <code class="docutils literal notranslate"><span class="pre">guardrails_entities</span></code> and <code class="docutils literal notranslate"><span class="pre">guardrails_labels_to_flag</span></code> parameters, the script ensures the Collection only accepts relevant, approved topics while filtering out unwanted ones. This setup configures the Collection for its intended purpose, ensuring it processes only acceptable prompts and flags those that should be ignored.</p>
+<p>Let’s observe the response of the specialized Collection when asked <em>“What is H2O MLOps?”</em>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">h2ogpte</span><span class="w"> </span><span class="kn">import</span> <span class="n">H2OGPTE</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">h2ogpte.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">SessionError</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">H2OGPTE</span><span class="p">(</span>
+    <span class="n">address</span><span class="o">=</span><span class="s2">&quot;https://h2ogpte.genai.h2o.ai&quot;</span><span class="p">,</span>
+    <span class="n">api_key</span><span class="o">=</span><span class="s1">&#39;sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">collection_id</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">create_collection</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;H2O Driverless AI assistant&quot;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;A specialized chatbot for answering questions about H2O.ai&#39;s H2O Driverless AI&quot;</span><span class="p">,</span>
+    <span class="n">collection_settings</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+        <span class="n">guardrails_settings</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="c1"># The `guardrails_entities` parameter defines entities for classifying user prompts.</span>
+            <span class="c1"># The first entry (&quot;H2O-Driverless-AI&quot;) represents the &quot;safe&quot; class. Subsequent entries are considered &quot;unsafe.&quot;</span>
+            <span class="n">guardrails_entities</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;H2O-Driverless-AI&quot;</span><span class="p">:</span> <span class="p">(</span>
+                    <span class="s2">&quot;Questions directly related to H2O.ai&#39;s H2O Driverless AI, including installation, usage, &quot;</span>
+                    <span class="s2">&quot;features, best practices, and troubleshooting&quot;</span>
+                <span class="p">),</span>
+                <span class="s2">&quot;Polite&quot;</span><span class="p">:</span> <span class="p">(</span>
+                    <span class="s2">&quot;General niceties like saying hello or asking meta-questions about the chatbot&quot;</span>
+                <span class="p">),</span>
+                <span class="s2">&quot;Non-H2O-Driverless-AI&quot;</span><span class="p">:</span> <span class="p">(</span>
+                    <span class="s2">&quot;Questions unrelated to H2O.ai&#39;s H2O Driverless AI, such as queries about other H2O.ai products, &quot;</span>
+                    <span class="s2">&quot;general AI topics, or off-topic discussions&quot;</span>
+                <span class="p">),</span>
+            <span class="p">},</span>
+            <span class="c1"># Prompts are flagged as unsafe only if their classified entity matches an entry in `guardrails_labels_to_flag`.</span>
+            <span class="c1"># Prompts classified under &quot;Non-H2O-Driverless-AI&quot; will be flagged as unsafe.</span>
+            <span class="c1"># This ensures the Collection stays focused on its domain while accommodating polite interactions. In a moment, we will discuss why a prompt classified as &quot;Polite&quot; will be processed and not flagged.</span>
+            <span class="n">guardrails_labels_to_flag</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Non-H2O-Driverless-AI&quot;</span><span class="p">],</span>
+        <span class="p">)</span>
+    <span class="p">),</span>
+<span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">with</span> <span class="n">client</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">create_chat_session</span><span class="p">(</span><span class="n">collection_id</span><span class="p">))</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Query the Collection with a user prompt</span>
+            <span class="n">reply</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;What is H2O MLOps?&quot;</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">reply</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">SessionError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="c1"># Handle guardrail violations</span>
+            <span class="k">if</span> <span class="s2">&quot;guardrail violation&quot;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
+                <span class="c1"># User prompt</span>
+                <span class="nb">print</span><span class="p">(</span>
+                    <span class="s2">&quot;I&#39;m an H2O Driverless AI assistant who answers questions related to H2O.ai&#39;s H2O Driverless AI. &quot;</span>
+                    <span class="s2">&quot;Your question is outside my scope. Can I assist you with a question about H2O Driverless AI?&quot;</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;An unexpected error occurred: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">TimeoutError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The request timed out. Please try again later.&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;An error occurred: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>I&#39;m an H2O Driverless AI assistant who answers questions related to H2O.ai&#39;s H2O Driverless AI. Your question is outside my scope. Can I assist you with a question about H2O Driverless AI?
+</pre></div>
+</div>
+<p>The <strong>“What is H2O MLOps?”</strong> prompt was classified as <code class="docutils literal notranslate"><span class="pre">Non-H2O-Driverless-AI</span></code> because it pertains to H2O MLOps, which is outside the scope of H2O Driverless AI. Additionally, the prompt is not considered polite, lacking a greeting or courteous phrasing (for example, <strong>“Hello”</strong>). After the initial classification, the system checks if the entity should be flagged. Since the prompt falls under the <code class="docutils literal notranslate"><span class="pre">Non-H2O-Driverless-AI</span></code> entity and that entity is in the <code class="docutils literal notranslate"><span class="pre">guardrails_labels_to_flag</span></code> parameter, it is flagged.</p>
+<p>A polite prompt like <strong>“Hello”</strong> is first classified as “Polite.” Since polite entities are not listed in the <code class="docutils literal notranslate"><span class="pre">guardrails_labels_to_flag</span></code> parameter for flagging, no flag is thrown. As a result, the prompt is processed, and a response (such as <strong>“Hello”</strong> from the LLM) is returned.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../tutorial1/tutorial1.html" class="btn btn-neutral float-left" title="Tutorial 1: Chat with a website" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../tutorial3/tutorial3.html" class="btn btn-neutral float-right" title="Tutorial 3: Agents" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025 H2O.ai, Inc. All rights reserved..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

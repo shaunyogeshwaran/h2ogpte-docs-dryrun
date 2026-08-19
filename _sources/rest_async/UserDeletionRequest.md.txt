@@ -1,0 +1,29 @@
+# UserDeletionRequest
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**delete_id** | **str** | Unique identifier for the deletion request. Must be used within 5 minutes to confirm deletion. | 
+
+## Example
+
+```python
+from h2ogpte.rest_async.models.user_deletion_request import UserDeletionRequest
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of UserDeletionRequest from a JSON string
+user_deletion_request_instance = UserDeletionRequest.from_json(json)
+# print the JSON string representation of the object
+print(UserDeletionRequest.to_json())
+
+# convert the object into a dict
+user_deletion_request_dict = user_deletion_request_instance.to_dict()
+# create an instance of UserDeletionRequest from a dict
+user_deletion_request_from_dict = UserDeletionRequest.from_dict(user_deletion_request_dict)
+```
+
+
+

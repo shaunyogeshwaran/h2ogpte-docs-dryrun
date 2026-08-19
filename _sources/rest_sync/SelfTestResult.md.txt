@@ -1,0 +1,36 @@
+# SelfTestResult
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**origin** | **str** |  | 
+**llm** | **str** |  | 
+**input_tokens** | **int** |  | 
+**output_tokens** | **int** |  | 
+**time_to_first_token** | **float** |  | 
+**tokens_per_second** | **float** |  | 
+**responses** | **List[str]** |  | [optional] 
+**error** | **str** |  | [optional] 
+
+## Example
+
+```python
+from h2ogpte.rest_sync.models.self_test_result import SelfTestResult
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of SelfTestResult from a JSON string
+self_test_result_instance = SelfTestResult.from_json(json)
+# print the JSON string representation of the object
+print(SelfTestResult.to_json())
+
+# convert the object into a dict
+self_test_result_dict = self_test_result_instance.to_dict()
+# create an instance of SelfTestResult from a dict
+self_test_result_from_dict = SelfTestResult.from_dict(self_test_result_dict)
+```
+
+
+

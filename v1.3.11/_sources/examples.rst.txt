@@ -1,0 +1,14 @@
+h2oGPTe Python Client Examples
+==========================-=============
+
+h2oGPTe examples:
+
+.. toctree::
+   :maxdepth: 1
+   :caption: h2oGPTe Python Client Example
+
+   notebooks/h2ogpte-client.ipynb
+
+Find notebook also in:
+
+- H2O.ai GitHub repository: `h2ogpte-client.ipynb <https://github.com/h2oai/h2ogpte/tree/main/mux-py/examples/h2ogpte-client.ipynb>`__

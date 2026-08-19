@@ -1,0 +1,30 @@
+# SetUserConfigurationRequest
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**string_value** | **str** |  | 
+**value_type** | **str** |  | [optional] 
+
+## Example
+
+```python
+from h2ogpte.rest_sync.models.set_user_configuration_request import SetUserConfigurationRequest
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of SetUserConfigurationRequest from a JSON string
+set_user_configuration_request_instance = SetUserConfigurationRequest.from_json(json)
+# print the JSON string representation of the object
+print(SetUserConfigurationRequest.to_json())
+
+# convert the object into a dict
+set_user_configuration_request_dict = set_user_configuration_request_instance.to_dict()
+# create an instance of SetUserConfigurationRequest from a dict
+set_user_configuration_request_from_dict = SetUserConfigurationRequest.from_dict(set_user_configuration_request_dict)
+```
+
+
+

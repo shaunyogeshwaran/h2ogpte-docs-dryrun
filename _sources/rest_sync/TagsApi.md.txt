@@ -1,0 +1,399 @@
+# TagsApi
+
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**create_tag**](TagsApi.md#create-tag) | **POST** /tags | Creates a new tag.| **POST** /tags | Creates a new tag.
+[**get_tag**](TagsApi.md#get-tag) | **GET** /tags/{tag-name} | Finds a tag by its name.| **GET** /tags/{tag_name} | Finds a tag by its name.
+[**list_documents_for_tags**](TagsApi.md#list-documents-for-tags) | **GET** /tags/{tag-names}/documents | List documents associated with a tag.| **GET** /tags/{tag_names}/documents | List documents associated with a tag.
+[**list_tags**](TagsApi.md#list-tags) | **GET** /tags | List tags.| **GET** /tags | List tags.
+[**update_tag**](TagsApi.md#update-tag) | **PATCH** /tags/{tag-name} | Updates attributes of a tag.| **PATCH** /tags/{tag_name} | Updates attributes of a tag.
+
+
+# **create_tag**
+> Tag create_tag(tag_create_request)
+
+Creates a new tag.
+
+Creates a new tag that can be subsequently associated with a document.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.models.tag import Tag
+from h2ogpte.rest_sync.models.tag_create_request import TagCreateRequest
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.TagsApi(api_client)
+    tag_create_request = h2ogpte.rest_sync.TagCreateRequest() # TagCreateRequest | 
+
+    try:
+        # Creates a new tag.
+        api_response = api_instance.create_tag(tag_create_request)
+        print("The response of TagsApi->create_tag:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling TagsApi->create_tag: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **tag_create_request** | [**TagCreateRequest**](TagCreateRequest.md)|  | 
+
+### Return type
+
+[**Tag**](Tag.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **get_tag**
+> Tag get_tag(tag_name)
+
+Finds a tag by its name.
+
+Returns a single tag by its unique name.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.models.tag import Tag
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.TagsApi(api_client)
+    tag_name = 'tag_name_example' # str | Name of a tag to return
+
+    try:
+        # Finds a tag by its name.
+        api_response = api_instance.get_tag(tag_name)
+        print("The response of TagsApi->get_tag:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling TagsApi->get_tag: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **tag_name** | **str**| Name of a tag to return | 
+
+### Return type
+
+[**Tag**](Tag.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **list_documents_for_tags**
+> List[Document] list_documents_for_tags(tag_names, collection_id)
+
+List documents associated with a tag.
+
+List documents associated with a tag.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.models.document import Document
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.TagsApi(api_client)
+    tag_names = ['tag_names_example'] # List[str] | Names of a tags to return documents for
+    collection_id = 'collection_id_example' # str | Id of a collection containing the documents
+
+    try:
+        # List documents associated with a tag.
+        api_response = api_instance.list_documents_for_tags(tag_names, collection_id)
+        print("The response of TagsApi->list_documents_for_tags:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling TagsApi->list_documents_for_tags: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **tag_names** | [**List[str]**](str.md)| Names of a tags to return documents for | 
+ **collection_id** | **str**| Id of a collection containing the documents | 
+
+### Return type
+
+[**List[Document]**](Document.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **list_tags**
+> List[Tag] list_tags()
+
+List tags.
+
+List all existing tags.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.models.tag import Tag
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.TagsApi(api_client)
+
+    try:
+        # List tags.
+        api_response = api_instance.list_tags()
+        print("The response of TagsApi->list_tags:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling TagsApi->list_tags: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**List[Tag]**](Tag.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **update_tag**
+> Tag update_tag(tag_name, tag_update_request)
+
+Updates attributes of a tag.
+
+Updates attributes of an existing tag, particularly description and format.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.models.tag import Tag
+from h2ogpte.rest_sync.models.tag_update_request import TagUpdateRequest
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.TagsApi(api_client)
+    tag_name = 'tag_name_example' # str | Name of a tag to to be updated
+    tag_update_request = h2ogpte.rest_sync.TagUpdateRequest() # TagUpdateRequest | 
+
+    try:
+        # Updates attributes of a tag.
+        api_response = api_instance.update_tag(tag_name, tag_update_request)
+        print("The response of TagsApi->update_tag:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling TagsApi->update_tag: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **tag_name** | **str**| Name of a tag to to be updated | 
+ **tag_update_request** | [**TagUpdateRequest**](TagUpdateRequest.md)|  | 
+
+### Return type
+
+[**Tag**](Tag.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+

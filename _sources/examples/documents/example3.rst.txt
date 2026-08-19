@@ -1,0 +1,72 @@
+Delete a document summary 
+=========================
+
+
+Overview 
+--------
+
+
+Users can delete a summary of a document.  
+
+
+Example 
+-------
+
+
+.. code-block:: python
+
+    from h2ogpte import H2OGPTE
+
+    client = H2OGPTE(
+        address="https://h2ogpte.genai.h2o.ai",
+        api_key='sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+    )
+
+    list_of_documents_with_summaries = client.list_recent_documents_with_summaries(offset=0, limit=1)
+
+    document = list_of_documents_with_summaries[0]
+
+    list_of_summaries_of_document = client.list_recent_document_summaries(document_id=document.id, offset=0, limit=1)
+
+    first_summary = list_of_summaries_of_document[0]
+
+    print(
+        f"Content: {first_summary.content}\n"
+        f"Created at: {first_summary.created_at}\n"
+        f"Document ID: {first_summary.document_id}\n"
+        f"Error: {first_summary.error}\n"
+        f"ID: {first_summary.id}\n"
+        f"Kwargs: {first_summary.kwargs}\n"
+        f"Model computed fields: {first_summary.model_computed_fields}\n"
+        f"Model config: {first_summary.model_config}\n"
+        f"Model fields: {first_summary.model_fields}\n"
+        f"Usage stats: {first_summary.usage_stats}"
+    )
+
+    result = client.delete_document_summaries([first_summary.id])
+
+    print(
+        f"Model computed fields: {result.model_computed_fields}\n"
+        f"Model config: {result.model_config}\n"
+        f"Model fields: {result.model_fields}\n"
+        f"Status: {result.status}"
+    )
+
+
+
+.. code-block:: text
+
+    Content: Wells Fargo's 2021 Annual Report highlights strong financial performance with a 12.0% return on equity and a 14.3% return on tangible common equity. The company saw a 6% increase in revenue, driven by gains in affiliated venture capital and private equity businesses, and the sale of certain businesses. Despite the challenges posed by the COVID-19 pandemic, Wells Fargo returned $16.9 billion to shareholders through dividends and stock repurchases. The company's strong foundation, focused business, and cultural changes position it for long-term success.
+    Created at: 2024-10-31 20:06:13.522610+00:00
+    Document ID: e5d4b814-9377-4df8-a664-400dd9c577ae
+    Error: 
+    ID: 68086a4e-d89f-4196-9086-cdd8647df870
+    Kwargs: {"system_prompt": "You are h2oGPTe, an expert question-answering AI system created by H2O.ai.", "pre_prompt_summary": "In order to write a concise single-paragraph or bulleted list summary, pay attention to any chat history, any images given, or any following text:", "prompt_summary": "Using only any chat history, any images given, or any text above, write a condensed and concise well-structured Markdown summary of key results.", "llm": "h2oai/h2o-danube3-4b-chat", "llm_args": {}, "max_num_chunks": 25, "sampling_strategy": "auto", "keep_intermediate_results": false, "guided_json": null, "pages": null, "guardrails_settings": {}, "image_batch_image_prompt": "<response_instructions>\n- Act as a keen observer with a sharp eye for detail.\n- Analyze the content within the images.\n- Provide insights based on your observations.\n- Avoid making up facts.\n- Do not forget to follow the system prompt.\n</response_instructions>\n", "image_batch_final_prompt": "<response_instructions>\n- Check if the answers already given in <image> XML tags are useful.\n  - Image answers came from a vision model capable of reading text and images within the images.\n  - If image answers are useful, preserve all details the image answers provide and use them to construct a well-structured answer.\n- Ignore image answers that had no useful content, because any single batch of images may not be relevant. Focus on all details from image answers that are relevant and useful.\n- Check if the document text can answer the question.\n- Check if the chat history can answer the question.\n- Check if any figure captions can answer the question.\n- If answers conflict between text, chat history, and figure captions, do not focus your response on this conflict.\n  - In handling conflicting answers, use logical reasoning and supporting evidence to assess the plausibility of each answer.\n  - In handling conflicting answers, choose the most consistent answer -- i.e., the most common answer among conflicts (self-consistency reasoning) or one that aligns with well-established facts.\n  - In handling conflicting answers, one may choose one data source over another -- i.e., text is probably more reliable than an image when the question can be answered from text, while an image is more reliable than text for flowcharts, photos, etc.\n- Do not forget to follow the system prompt.\n- Finally, according to our chat history, the above documents, figure captions, or given images, construct a well-structured response.\n</response_instructions>\n"}
+    Model computed fields: {}
+    Model config: {}
+    Model fields: {'id': FieldInfo(annotation=str, required=True), 'content': FieldInfo(annotation=Union[str, List[str]], required=True), 'error': FieldInfo(annotation=str, required=True), 'document_id': FieldInfo(annotation=str, required=True), 'kwargs': FieldInfo(annotation=str, required=True), 'created_at': FieldInfo(annotation=datetime, required=True), 'usage_stats': FieldInfo(annotation=Union[str, NoneType], required=False, default=None)}
+    Usage stats: {"response_time": "4.2060 seconds", "cost": "0.00124 [USD]", "llm_args": {}, "num_chunks": 25, "num_images": 0, "usage": [{"llm": "h2oai/h2o-danube3-4b-chat", "input_tokens": 12104, "output_tokens": 113, "tokens_per_second": 34.412, "time_to_first_token": 1.1155519485473633, "origin": "process_document", "cost": "0.00124 [USD]"}]}
+    Model computed fields: {}
+    Model config: {'use_enum_values': True}
+    Model fields: {'status': FieldInfo(annotation=Status, required=True)}
+    Status: completed

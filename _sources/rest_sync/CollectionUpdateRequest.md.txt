@@ -1,0 +1,31 @@
+# CollectionUpdateRequest
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**name** | **str** | Name of the collection | [optional] 
+**description** | **str** | Description of the collection | [optional] 
+**rag_type** | **str** | RAG type options:   * &#x60;auto&#x60; - Automatically select the best rag_type.   * &#x60;llm_only&#x60; LLM Only - Answer the query without any supporting document contexts.   Requires 1 LLM call.   * &#x60;rag&#x60; RAG (Retrieval Augmented Generation) - Use supporting document contexts   to answer the query. Requires 1 LLM call.   * &#x60;hyde1&#x60; LLM Only + RAG composite - HyDE RAG (Hypothetical Document Embedding).   Use &#39;LLM Only&#39; response to find relevant contexts from a collection for generating   a response. Requires 2 LLM calls.   * &#x60;hyde2&#x60; HyDE + RAG composite - Use the &#39;HyDE RAG&#39; response to find relevant   contexts from a collection for generating a response. Requires 3 LLM calls.   * &#x60;rag+&#x60; Summary RAG - Like RAG, but uses more context and recursive   summarization to overcome LLM context limits. Keeps all retrieved chunks, puts   them in order, adds neighboring chunks, then uses the summary API to get the   answer. Can require several LLM calls.   * &#x60;all_data&#x60; All Data RAG - Like Summary RAG, but includes all document   chunks. Uses recursive summarization to overcome LLM context limits.   Can require several LLM calls.  | [optional] 
+
+## Example
+
+```python
+from h2ogpte.rest_sync.models.collection_update_request import CollectionUpdateRequest
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of CollectionUpdateRequest from a JSON string
+collection_update_request_instance = CollectionUpdateRequest.from_json(json)
+# print the JSON string representation of the object
+print(CollectionUpdateRequest.to_json())
+
+# convert the object into a dict
+collection_update_request_dict = collection_update_request_instance.to_dict()
+# create an instance of CollectionUpdateRequest from a dict
+collection_update_request_from_dict = CollectionUpdateRequest.from_dict(collection_update_request_dict)
+```
+
+
+

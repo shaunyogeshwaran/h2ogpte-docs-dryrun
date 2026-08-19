@@ -1,0 +1,33 @@
+# ModelExtractionAnswer
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**content** | **List[str]** |  | 
+**error** | **str** |  | 
+**llm** | **str** |  | 
+**input_tokens** | **int** |  | [optional] 
+**output_tokens** | **int** |  | [optional] 
+
+## Example
+
+```python
+from h2ogpte.rest_async.models.model_extraction_answer import ModelExtractionAnswer
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of ModelExtractionAnswer from a JSON string
+model_extraction_answer_instance = ModelExtractionAnswer.from_json(json)
+# print the JSON string representation of the object
+print(ModelExtractionAnswer.to_json())
+
+# convert the object into a dict
+model_extraction_answer_dict = model_extraction_answer_instance.to_dict()
+# create an instance of ModelExtractionAnswer from a dict
+model_extraction_answer_from_dict = ModelExtractionAnswer.from_dict(model_extraction_answer_dict)
+```
+
+
+

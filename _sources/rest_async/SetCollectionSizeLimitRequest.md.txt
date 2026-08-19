@@ -1,0 +1,29 @@
+# SetCollectionSizeLimitRequest
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**size_limit** | **str** | The bytes limit | 
+
+## Example
+
+```python
+from h2ogpte.rest_async.models.set_collection_size_limit_request import SetCollectionSizeLimitRequest
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of SetCollectionSizeLimitRequest from a JSON string
+set_collection_size_limit_request_instance = SetCollectionSizeLimitRequest.from_json(json)
+# print the JSON string representation of the object
+print(SetCollectionSizeLimitRequest.to_json())
+
+# convert the object into a dict
+set_collection_size_limit_request_dict = set_collection_size_limit_request_instance.to_dict()
+# create an instance of SetCollectionSizeLimitRequest from a dict
+set_collection_size_limit_request_from_dict = SetCollectionSizeLimitRequest.from_dict(set_collection_size_limit_request_dict)
+```
+
+
+

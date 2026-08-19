@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>h2oGPTe Python Client Example &mdash; h2oGPTe</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/code.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="canonical" href="https://h2ogpte.github.io/notebooks/h2ogpte-client.html"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=93b43ced"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="h2oGPTE Python API" href="../python_api.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="../examples.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            h2oGPTe
+          </a>
+              <div class="version">
+                1.3.12
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Installation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">h2oGPTe Python Client Installation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started with h2oGPTe</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">h2oGPTe Python Client Example</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Python API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../python_api.html">h2oGPTE Python API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Third-Party Notices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../docs-licenses/licenses.html">Third-Party Licenses</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Release Notes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">h2oGPTe</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../examples.html">&lt;no title&gt;</a></li>
+      <li class="breadcrumb-item active">h2oGPTe Python Client Example</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/notebooks/h2ogpte-client.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars and line breaks on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+    white-space: pre;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt .copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+.jp-RenderedHTMLCommon table,
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+.jp-RenderedHTMLCommon thead,
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+.jp-RenderedHTMLCommon tr,
+.jp-RenderedHTMLCommon th,
+.jp-RenderedHTMLCommon td,
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+.jp-RenderedHTMLCommon th,
+div.rendered_html th {
+  font-weight: bold;
+}
+.jp-RenderedHTMLCommon tbody tr:nth-child(odd),
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+.jp-RenderedHTMLCommon tbody tr:hover,
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="h2oGPTe-Python-Client-Example">
+<h1>h2oGPTe Python Client Example<a class="headerlink" href="#h2oGPTe-Python-Client-Example" title="Link to this heading"></a></h1>
+<p>h2oGPTe Python client example.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import os
+</pre></div>
+</div>
+</div>
+<section id="Jupyter-Notebook-installation">
+<h2>Jupyter Notebook installation<a class="headerlink" href="#Jupyter-Notebook-installation" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Install Python3.8+</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">jupyter</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">jupyter</span> <span class="pre">notebook</span></code></p></li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># get h2ogpte client from pypi:
+!python -m pip install h2ogpte
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Requirement already satisfied: h2ogpte in /home/dvorka/h/gen-ai/h2ogpte/venv/lib/python3.11/site-packages (0.9.2)
+Requirement already satisfied: pydantic==1.10.13 in /home/dvorka/h/gen-ai/h2ogpte/venv/lib/python3.11/site-packages (from pydantic[dotenv]==1.10.13-&gt;h2ogpte) (1.10.13)
+Requirement already satisfied: requests==2.31.0 in /home/dvorka/h/gen-ai/h2ogpte/venv/lib/python3.11/site-packages (from h2ogpte) (2.31.0)
+Requirement already satisfied: websockets==12.0 in /home/dvorka/h/gen-ai/h2ogpte/venv/lib/python3.11/site-packages (from h2ogpte) (11.0.3)
+Requirement already satisfied: beautifulsoup4==4.12.2 in /home/dvorka/h/gen-ai/h2ogpte/venv/lib/python3.11/site-packages (from h2ogpte) (4.12.2)
+Requirement already satisfied: bs4==0.0.1 in /home/dvorka/h/gen-ai/h2ogpte/venv/lib/python3.11/site-packages (from h2ogpte) (0.0.1)
+Requirement already satisfied: lxml==4.9.3 in /home/dvorka/h/gen-ai/h2ogpte/venv/lib/python3.11/site-packages (from h2ogpte) (4.9.3)
+Requirement already satisfied: soupsieve&gt;1.2 in /home/dvorka/h/gen-ai/h2ogpte/venv/lib/python3.11/site-packages (from beautifulsoup4==4.12.2-&gt;h2ogpte) (2.5)
+Requirement already satisfied: typing-extensions&gt;=4.2.0 in /home/dvorka/h/gen-ai/h2ogpte/venv/lib/python3.11/site-packages (from pydantic==1.10.13-&gt;pydantic[dotenv]==1.10.13-&gt;h2ogpte) (4.8.0)
+Requirement already satisfied: python-dotenv&gt;=0.10.4 in /home/dvorka/h/gen-ai/h2ogpte/venv/lib/python3.11/site-packages (from pydantic[dotenv]==1.10.13-&gt;h2ogpte) (1.0.0)
+Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /home/dvorka/h/gen-ai/h2ogpte/venv/lib/python3.11/site-packages (from requests==2.31.0-&gt;h2ogpte) (3.3.2)
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in /home/dvorka/h/gen-ai/h2ogpte/venv/lib/python3.11/site-packages (from requests==2.31.0-&gt;h2ogpte) (3.4)
+Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /home/dvorka/h/gen-ai/h2ogpte/venv/lib/python3.11/site-packages (from requests==2.31.0-&gt;h2ogpte) (2.0.7)
+Requirement already satisfied: certifi&gt;=2017.4.17 in /home/dvorka/h/gen-ai/h2ogpte/venv/lib/python3.11/site-packages (from requests==2.31.0-&gt;h2ogpte) (2023.7.22)
+</pre></div></div>
+</div>
+</section>
+<section id="h2oGPTe-configuration">
+<h2>h2oGPTe configuration<a class="headerlink" href="#h2oGPTe-configuration" title="Link to this heading"></a></h2>
+<p>To prepare the h2oGPTe <strong>API key</strong> needed to access the server:</p>
+<ul class="simple">
+<li><p>Log in to <a class="reference external" href="https://h2ogpte.genai.h2o.ai">https://h2ogpte.genai.h2o.ai</a></p></li>
+<li><p>Navigate to <code class="docutils literal notranslate"><span class="pre">Settings</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">API</span> <span class="pre">Keys</span></code> and create and/or copy &amp; paste the API Key</p></li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>API_KEY = &quot;&quot;
+
+API_KEY = API_KEY or os.getenv(&quot;H2O_GPT_E_API_KEY&quot;)
+
+if not API_KEY:
+    raise ValueError(&quot;Please configure h2ogpte API key&quot;)
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>REMOTE_ADDRESS = &quot;https://h2ogpte.genai.h2o.ai&quot;
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from h2ogpte import H2OGPTE
+
+client = H2OGPTE(address=REMOTE_ADDRESS, api_key=API_KEY)
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>[x for x in dir(client) if x[:1] != &quot;_&quot;]
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[&#39;answer_question&#39;,
+ &#39;cancel_job&#39;,
+ &#39;connect&#39;,
+ &#39;count_assets&#39;,
+ &#39;count_chat_sessions&#39;,
+ &#39;count_chat_sessions_for_collection&#39;,
+ &#39;count_collections&#39;,
+ &#39;count_documents&#39;,
+ &#39;count_documents_in_collection&#39;,
+ &#39;create_chat_session&#39;,
+ &#39;create_collection&#39;,
+ &#39;delete_chat_sessions&#39;,
+ &#39;delete_collections&#39;,
+ &#39;delete_documents&#39;,
+ &#39;delete_documents_from_collection&#39;,
+ &#39;encode_for_retrieval&#39;,
+ &#39;extract_data&#39;,
+ &#39;get_chunks&#39;,
+ &#39;get_collection&#39;,
+ &#39;get_collection_for_chat_session&#39;,
+ &#39;get_document&#39;,
+ &#39;get_job&#39;,
+ &#39;get_llms&#39;,
+ &#39;get_meta&#39;,
+ &#39;get_scheduler_stats&#39;,
+ &#39;ingest_from_file_system&#39;,
+ &#39;ingest_uploads&#39;,
+ &#39;ingest_website&#39;,
+ &#39;list_chat_message_references&#39;,
+ &#39;list_chat_messages&#39;,
+ &#39;list_chat_sessions_for_collection&#39;,
+ &#39;list_collections_for_document&#39;,
+ &#39;list_documents_in_collection&#39;,
+ &#39;list_jobs&#39;,
+ &#39;list_recent_chat_sessions&#39;,
+ &#39;list_recent_collections&#39;,
+ &#39;list_recent_documents&#39;,
+ &#39;match_chunks&#39;,
+ &#39;search_chunks&#39;,
+ &#39;set_chat_message_votes&#39;,
+ &#39;summarize_content&#39;,
+ &#39;update_collection&#39;,
+ &#39;upload&#39;]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># document: prepare your document OR download a demo data
+
+!wget https://h2o.ai/content/dam/h2o/en/marketing/documents/2017/09/Driverless-AI_datasheet.pdf
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+--2023-11-02 10:57:19--  https://h2o.ai/content/dam/h2o/en/marketing/documents/2017/09/Driverless-AI_datasheet.pdf
+Resolving h2o.ai (h2o.ai)... 151.101.3.10, 151.101.195.10, 151.101.131.10, ...
+Connecting to h2o.ai (h2o.ai)|151.101.3.10|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 560380 (547K) [application/pdf]
+Saving to: ‘Driverless-AI_datasheet.pdf.1’
+
+Driverless-AI_datas 100%[===================&gt;] 547.25K   419KB/s    in 1.3s
+
+2023-11-02 10:57:21 (419 KB/s) - ‘Driverless-AI_datasheet.pdf.1’ saved [560380/560380]
+
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def ingest_documents(client: H2OGPTE):
+    import os
+    import pathlib
+    url = &quot;https://h2o.ai/content/dam/h2o/en/marketing/documents/2017/09/Driverless-AI_datasheet.pdf&quot;
+
+    collection_id = None
+    name = &quot;h2ogpte Python client demo&quot;
+
+    print(&quot;Recent collections:&quot;)
+    recent_collections = client.list_recent_collections(0, 1000)
+    for c in recent_collections:
+        if c.name == name and c.document_count:
+            collection_id = c.id
+            break
+
+    # Create Collection
+    if collection_id is None:
+        print(f&quot;Creating collection: {name} ...&quot;)
+        collection_id = client.create_collection(
+            name=name,
+            description=&quot;PDF -&gt; text -&gt; summary&quot;,
+        )
+        print(f&quot;New collection: {collection_id} ...&quot;)
+
+        # Upload file into collection
+        file_path = pathlib.Path(os.path.basename(url))
+        with open(file_path.resolve(), &quot;rb&quot;) as f:
+            print(f&quot;Uploading {file_path} to collection {name} ({collection_id})&quot;)
+            upload_id = client.upload(file_path.name, f)
+
+        print(&quot;Converting the input into chunked text and embeddings...&quot;)
+        client.ingest_uploads(collection_id, [upload_id])
+        print(f&quot;DONE: {collection_id}&quot;)
+    return collection_id
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>collection_id = ingest_documents(client)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Recent collections:
+</pre></div></div>
+</div>
+</section>
+<section id="Talk-to-LLM">
+<h2>Talk to LLM<a class="headerlink" href="#Talk-to-LLM" title="Link to this heading"></a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># See list of different LLMs
+print([x[&quot;base_model&quot;] for x in client.get_llms()])
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[&#39;h2oai/h2ogpt-4096-llama2-70b-chat&#39;, &#39;h2oai/h2ogpt-4096-llama2-13b-chat&#39;, &#39;HuggingFaceH4/zephyr-7b-beta&#39;, &#39;lmsys/vicuna-13b-v1.5-16k&#39;, &#39;h2oai/h2ogpt-32k-codellama-34b-instruct&#39;, &#39;Yukang/LongAlpaca-70B&#39;, &#39;gpt-3.5-turbo&#39;, &#39;gpt-3.5-turbo-16k&#39;, &#39;gpt-4&#39;, &#39;gpt-4-32k&#39;]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>llm = &quot;h2oai/h2ogpt-4096-llama2-70b-chat&quot;
+
+answer = client.answer_question(question=&quot;Who are you?&quot;, llm=llm).content
+print(f&quot;{llm}: {answer}&quot;, flush=True)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+h2oai/h2ogpt-4096-llama2-70b-chat: I am LLaMA, an AI assistant developed by Meta AI that can understand and respond to human input in a conversational manner. I am trained on a massive dataset of text from the internet and can generate human-like responses to a wide range of topics and questions. I can be used to create chatbots, virtual assistants, and other applications that require natural language understanding and generation capabilities.
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Inspect and collect all text chunks
+chunks = []
+for chunk_id in range(1, 100):
+    try:
+        chunk = client.get_chunks(collection_id, [chunk_id])
+        print(chunk, flush=True)
+        chunks.append(chunk[0].text)
+    except:
+        break
+
+print(f&quot;Number of chunks: {len(chunks)}&quot;, flush=True)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[Chunk(text=&#39;It is designed to take a raw dataset and automatically visualize\nthe most interesting patterns for data exploration. It then\napplies automatic feature engineering to increase accuracy\nby using Kaggle Grandmaster recipes for solving a wide\nvariety of use-cases. Next, it auto-tunes model parameters\nand provides the user with the model that yields the best\nresults. Lastly, it gives plain English explanations of model\nresults. Driverless AI enables users of all backgrounds to draw\nthe most value from their data.\nAutomatic Visualization\n• AutoViz allows users to visualize large datasets in the form\nof various graphs and charts without having to write code\n• Takes huge datasets and displays outliers and trends in an\ninterpretable way\n• Uses statistics to automatically decide which visualizations\nto present to the user\n• Exploratory tool that presents an overview of the\ndistribution of data\nAutomatic Feature Engineering\n• AutoDL employs a library of algorithms and feature\ntransformations to automatically engineer new features for\na given dataset\n• A variable importance chart shows the significance of\nnewly engineered features\n• Data scientists can spend less time exploring data and\nengineering features; as a result, they can work on multiple\nprojects simultaneously and increase their efficiency\nBRINGING AI TO ENTERPRISE\nDriverless AI: Fast, Accurate, Interpretable AI\nDriverless AI is an expert system designed to mimic Kaggle Grandmasters. Just like a chess Grandmaster, there are\nonly a few of these in the world. Driverless AI brings you the intelligence of a Kaggle Grandmaster in a box.\n&#39;)]
+[Chunk(text=&#39;Model Interpretability\n• The Machine Learning Interpretability feature provides\nusers with clear and concise explanations of model results\n• Four dynamic graphs are generated automatically: K-LIME,\nVariable Importance, Decision Tree Chart, and Partial\nDependence Plot; each one helps explore the model\noutput more closely\n• Global interpretability techniques allow the user to broadly\nunderstand models at the level of the full dataset\n• Local interpretability techniques explain predictions\nfor individual data points, and produce plain English\nexplanations with reason codes\nH20.ai\nCLUMPY SCATTERPLOTS\nCORRELATED SCATTERPLOTS SPIKEYHISTOGRAMS\nSKEWED HISTOGRAMS\nDISPARATE BOXPLOTS\n1\n\n\nHETEROSCEDASTIC ICBOXPLOTS BIPLOTS\nOUTLIERS\nDATAHEATMAP\nMISSING HEATMAP\nH20.ai\n0.0.1\nTRAINING DATA\nDATASET\ncreditcard.csv\nROWS\n24K 25\nTARGETCOLUMN\nSTATUS:CO COMPLETE\nEXPERIMENT: SETTINGS\nCOLUMNS\nDROPPED\nIGNORED\nOOOO\nWORKERS\nCLASSIFICATION DETECTIDS\nITERATIONS\nCVFOLDS\nDROPDUPS.\n&#39;)]
+[Chunk(text=&#39;INTERPRETT THIS MODEL\ndefault payment next month\nGPUSTATS\nTYPE\nint32\nCOUNT\nMEAN\nSTODEV\n23999 0.2237 0.4167\nITERATIONS SCORES\nVARIABLEIMPORTANCE\n23_CV_TE_PAY_5_PAY_O_PAY_2_0\n26_SortedLE_PAY_O\n24_CV_TE_LIMIT_BAL_PAY_O_PAY_2_0\n5_BILL_AMTI\nTI_PAY_AMT2\nT7_Freq_PÂY_0\nO_LIMIT_BAL\n12_PAY_AMT3\n10_PAY_AMTI\n15_PAY_AM16\n6_BILL_AMT2\nH4_PAY_AMTS\n13_PAY_AMT4\nEPOCHS 9_BILL_AMT6\nFEATURE TRANSFORMATIONS\n7373.40\n1377.03\n995.83\n785.54\n63169\n606.88\n60142\n515.59\n513.09\n444.20\n392.09\n368.44 20-\n365.38 22-\n310.08\n......\n.\nRowLo Lookup\nColumn: H20FrameRowe Value:\nSEARCH Plot:| Global\nEXPLANATIONS\nGlobal KLIME Plot\nVarlable Importance\nModel Prediction KLime ModelP Prediction\nLIMIT_RAL\nPAY_AMI\nPAY_6_\nPAY_AMT4\nPAY_AM16_\nBILL_AMT4\nSEX\nUS-\n0.5.\n&#39;)]
+[Chunk(text=&#39;0.4\n06\n08\nDecision Tree\nLIMIT_BAL&lt; L&lt;105229.5\nPartial Dependence\n08-\n0.7-\n0.5-\n05-\n0.4-\n03-\n02-\n0.1.\nPAY_0&lt;1.5\nPAY_2&lt;15\nPAY_5&lt;10\nRAY_3&lt;-0.5 BILL_AMT4&lt;1016.5 PAY_0&lt;1.5\n0.188 0.431\n0.459 0.694\n0.207 0.117\n0.353 0.699\nTel: +1.650.227.4572\n@h2oai\nhttp://www.github.com/h2oai\nsales@h2o.ai\nPython Pipeline\n•\nA Jupyter notebook with the Python code that contains\nthe feature engineering and model building that\nDriverless AI performed automatically\n•\nExport Python pipelines to operate on new data in\nproduction\n•\nConveniently usable through a Jupyter notebook\nPersonas &amp; Benefits\nBusiness Users\n•\nUsers with domain knowledge will understand the new\nfeatures generated by AutoDL and their impact on\npredictions\n•\nAnalysts who have used visualization tools in the past\ncan easily transition into using the exploratory AutoViz\ntool as well as the Machine Learning Interpretability tool\nto understand the impact of a particular variable on their\nmodel\nData Analysts\n•\nUsing basic data science knowledge, users can better\nunderstand features generated by Driverless AI and use\noutcomes to draw valuable insights for&#39;)]
+[Chunk(text=&#39;their businesses\n•\nAutoViz makes data exploration extremely simple so\nusers can identify trends in data through visualizations\nData Scientists\n•\nAutoViz simplifies the data exploration process\n•\nIncrease productivity of data scientists by enabling them\nto work on multiple projects simultaneously\n•\nThe visualizations produced by the Machine Learning\nInterpretability tool streamline the process of\nunderstanding the impact of a model\nSPECIFICATIONS\nFor CPU Installations\nMinimum Hardware\n• x86-64 CPU\n• 64 GB RAM\nRecommended\nHardware\n• Dual socket Intel Xeon\nx86-64 or IBM Power\n8 CPU’s\nSoftware\n• Docker CE\nFor GPU Installations\nMinimum Hardware\n• NVIDIA K80\nRecommended\nHardware\n• NVIDIA P100 or higher\n• NVLink and NCL\nvenabled\nSoftware\n• Ubuntu 16.04\n• CUDA 8\n• NVIDIA Docker 1.0.1\nFor Cloud Installations\nEC2 Instances\n• P2 or G3\n• Ubuntu 16.04\nAzure Instances\n• NC or NV\n• Ubuntu 16.04\nLicensing\nDriverless AI is a commercially licensed product. For more\ninformation, contact sales@h2o.ai.\nAbout H2O.ai\nH2O.ai is focused on bringing AI to businesses through software. Its flagship product is H2O, the leading open source platform that makes it\neasy for financial services, insurance and healthcare companies to deploy machine learning and predictive analytics to solve complex problems.\n&#39;)]
+[Chunk(text=&#39;More than 10,000 organizations and 100,000+ data scientists depend on H2O for critical applications like predictive maintenance and operational\nintelligence. The company accelerates business transformation for 169 Fortune 500 enterprises, 8 of the world’s 12 largest banks, 7 of the 10\nlargest auto insurance companies and all 5 major telecommunications providers.\nFollow us on Twitter @h2oai. To learn more about H2O customer use cases, please visit http://www.h2o.ai/customers/. Join the Movement.\n&#39;)]
+Number of chunks: 6
+</pre></div></div>
+</div>
+</section>
+<section id="Talk-to-Collection">
+<h2>Talk to Collection<a class="headerlink" href="#Talk-to-Collection" title="Link to this heading"></a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Start with a Q&amp;A session
+print(&quot;\n==== Q&amp;A ====&quot;)
+chat_session_id = client.create_chat_session(collection_id)
+with client.connect(chat_session_id) as session:
+    for i, q in enumerate(
+        [
+            &quot;What is Driverless AI?&quot;,
+            &quot;What are the features?&quot;,
+            &quot;What are the HW requirements?&quot;,
+        ]
+    ):
+        a = session.query(q, llm=llm).content
+        print(f&quot;Q{i+1}: {q}\nA{i+1}: {a}\n\n&quot;, flush=True)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+==== Q&amp;A ====
+Q1: What is Driverless AI?
+A1: According to the information provided in the context, Driverless AI is an expert system designed to mimic Kaggle Grandmasters. It is a commercially licensed product that enables users of all backgrounds to draw the most value from their data. It is an automated machine learning platform that can take a raw dataset and automatically visualize the most interesting patterns for data exploration. It then applies automatic feature engineering to increase accuracy by using Kaggle Grandmaster recipes for solving a wide variety of use-cases. Next, it auto-tunes model parameters and provides the user with the model that yields the best results. Finally, it gives plain English explanations of model results.
+
+
+Q2: What are the features?
+A2: Based on the information provided in the context, the features of Driverless AI include:
+
+1. AutoViz: An automatic visualization tool that allows users to visualize large datasets in various graphs and charts without having to write code. It takes huge datasets and displays outliers and trends in an interpretable way, and uses statistics to automatically decide which visualizations to present to the user.
+2. AutoDL: An automatic feature engineering tool that employs a library of algorithms and feature transformations to automatically engineer new features for a given dataset. It also generates a variable importance chart to show the significance of newly engineered features.
+3. Machine Learning Interpretability: A feature that provides users with clear and concise explanations of model results. It generates four dynamic graphs automatically: K-LIME, Variable Importance, Decision Tree Chart, and Partial Dependence Plot; each one helps explore the model output more closely.
+4. Global interpretability techniques: Allow the user to broadly understand models at the level of the full dataset.
+5. Local interpretability techniques: Explain predictions for individual data points, and produce plain English explanations with reason codes.
+6. Python Pipeline: A Jupyter notebook with the Python code that contains the feature engineering and model building that Driverless AI performed automatically. It can be used to export Python pipelines to operate on new data in production, and is conveniently usable through a Jupyter notebook.
+7. Personas &amp; Benefits: Driverless AI is designed for business users and data analysts. It helps users with domain knowledge understand the new features generated by AutoDL and their impact on predictions. Analysts who have used visualization tools in the past can easily transition into using the exploratory AutoViz tool as well as the Machine Learning Interpretability tool to understand the impact of a particular variable on their model.
+
+
+Q3: What are the HW requirements?
+A3: According to the information provided in the context, the hardware requirements for running Driverless AI are:
+
+For CPU Installations:
+
+* Minimum: x86-64 CPU, 64 GB RAM
+* Recommended: Dual socket Intel Xeon or IBM Power8 CPU, 8 CPU’s
+
+For GPU Installations:
+
+* Minimum: NVIDIA K80
+* Recommended: NVIDIA P100 or higher, NVLink and NCL enabled
+
+For Cloud Installations:
+
+* EC2 Instances: P2 or G3, Ubuntu 16.04
+* Azure Instances: NC or NV, Ubuntu 16.04
+
+It&#39;s also mentioned that Docker CE is required for CPU and GPU installations, and Ubuntu 16.04 is recommended for cloud installations. Additionally, CUDA 8 and NVIDIA Docker 1.0.1 are required for GPU installations.
+
+
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Create summary
+summary = client.summarize_content(
+    pre_prompt_summary=&quot;Summarize the content below into a list of bullets.\n&quot;,
+    text_context_list=chunks,
+    prompt_summary=&quot;Now summarize the above into a couple of paragraphs.&quot;,
+    llm=llm,
+)
+
+print(&quot;\n==== SUMMARY ====&quot;)
+for s in summary.content.split(&quot;\n&quot;):
+    print(s, flush=True)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+==== SUMMARY ====
+Sure! Here&#39;s a list of bullets summarizing the content:
+
+* Driverless AI is an expert system for automating machine learning model building and interpretation
+* Intended to be user-friendly, allowing users with various backgrounds to extract insights from data
+* Includes features such as AutoViz, AutoDL, and Machine Learning Interpretability
+* AutoViz automatically generates visualizations of large datasets to identify trends and outliers
+* AutoDL applies feature engineering to create new features for a given dataset
+* Machine Learning Interpretability provides clear explanations of model results
+* Python pipeline allows users to export models and use them on new data in production
+* Benefits various personas, including business users and data analysts
+* Aims to make machine learning more accessible and interpretable for users of all backgrounds
+
+And here&#39;s a summary in two paragraphs:
+
+Driverless AI is an expert system designed to automate the process of building and interpreting machine learning models, making it user-friendly and accessible to users with various backgrounds. The system includes several features such as AutoViz, AutoDL, and Machine Learning Interpretability, which help users identify trends and outliers, create new features, and provide clear explanations of model results. Additionally, a Python pipeline allows users to export their models and use them on new data in production.
+
+Driverless AI benefits various personas, including business users who can use it to understand the impact of new features on their models and data analysts who can use it to draw valuable insights from their data. Overall, the system aims to make machine learning more accessible and interpretable for users of all backgrounds, allowing them to extract valuable insights from their data without needing extensive knowledge of machine learning.
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Create Hashtags
+hashtags = client.summarize_content(
+    pre_prompt_summary=&quot;Look for hashtags in the text below, get at most 5 hash tags that are most relevant\n&quot;,
+    text_context_list=chunks,
+    prompt_summary=&quot;Collect no more than 5 hashtags from the text above, and list them.&quot;,
+    llm=llm,
+)
+print(&quot;\n==== HASHTAGS ====&quot;)
+for s in hashtags.content.split(&quot;\n&quot;):
+    print(s, flush=True)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+==== HASHTAGS ====
+Sure! Here are the 5 most relevant hashtags that can be extracted from the text:
+
+1. #MachineLearning
+2. #DataScience
+3. #AI
+4. #DataVisualization
+5. #FeatureEngineering
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Now translate the summary into another language, using GPT-4
+llm = &quot;gpt-4&quot;
+translation = client.answer_question(
+    system_prompt=f&quot;Du bist ein Deutscher Professor der Englischen Sprache und machst keine Fehler.&quot;,
+    text_context_list=[summary.content],
+    question=&quot;Übersetze den obigen Text auf Deutsch.&quot;,
+    llm=llm,
+)
+print(&quot;\n==== TRANSLATION ====&quot;)
+for s in translation.content.split(&quot;\n&quot;):
+    print(s, flush=True)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+==== TRANSLATION ====
+Sicher! Hier ist eine Liste von Stichpunkten, die den Inhalt zusammenfassen:
+
+* Driverless AI ist ein Expertensystem zur Automatisierung des Aufbaus und der Interpretation von maschinellen Lernmodellen.
+* Es soll benutzerfreundlich sein und es Benutzern mit unterschiedlichem Hintergrund ermöglichen, Erkenntnisse aus Daten zu gewinnen.
+* Enthält Funktionen wie AutoViz, AutoDL und Machine Learning Interpretability.
+* AutoViz generiert automatisch Visualisierungen großer Datensätze, um Trends und Ausreißer zu identifizieren.
+* AutoDL wendet Feature Engineering an, um neue Merkmale für einen gegebenen Datensatz zu erstellen.
+* Machine Learning Interpretability liefert klare Erklärungen der Modellergebnisse.
+* Eine Python-Pipeline ermöglicht es Benutzern, Modelle zu exportieren und sie auf neuen Daten in der Produktion zu verwenden.
+* Nutzt verschiedenen Personengruppen, einschließlich Geschäftsanwendern und Datenanalysten.
+* Ziel ist es, maschinelles Lernen für Benutzer aller Hintergründe zugänglicher und interpretierbarer zu machen.
+
+Und hier ist eine Zusammenfassung in zwei Absätzen:
+
+Driverless AI ist ein Expertensystem, das entwickelt wurde, um den Prozess des Aufbaus und der Interpretation von maschinellen Lernmodellen zu automatisieren und es so benutzerfreundlich und zugänglich für Benutzer mit unterschiedlichem Hintergrund zu machen. Das System umfasst verschiedene Funktionen wie AutoViz, AutoDL und Machine Learning Interpretability, die Benutzern helfen, Trends und Ausreißer zu identifizieren, neue Merkmale zu erstellen und klare Erklärungen der Modellergebnisse zu liefern. Darüber hinaus ermöglicht eine Python-Pipeline Benutzern, ihre Modelle zu exportieren und sie auf neuen Daten in der Produktion zu verwenden.
+
+Driverless AI bietet Vorteile für verschiedene Personengruppen, darunter Geschäftsanwender, die es verwenden können, um den Einfluss neuer Merkmale auf ihre Modelle zu verstehen, und Datenanalysten, die wertvolle Erkenntnisse aus ihren Daten ziehen können. Insgesamt zielt das Systemdarauf ab
+</pre></div></div>
+</div>
+<p>Note: For more information on h2oGPT, see the official <a class="reference external" href="https://github.com/h2oai/h2ogpt">h2oGPT GitHub repository</a>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../examples.html" class="btn btn-neutral float-left" title="&lt;no title&gt;" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../python_api.html" class="btn btn-neutral float-right" title="h2oGPTE Python API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024 H2O.ai, Inc. All rights reserved..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

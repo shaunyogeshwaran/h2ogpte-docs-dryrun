@@ -1,0 +1,33 @@
+# ListCustomAgentTools200ResponseInner
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**id** | **str** | The ID of the custom agent tool | [optional] 
+**tool_name** | **str** | The name of the tool | [optional] 
+**tool_type** | **str** | The type of the tool | [optional] 
+**tool_args** | **object** | The tool arguments | [optional] 
+**owner_email** | **str** | The owner&#39;s email | [optional] 
+
+## Example
+
+```python
+from h2ogpte.rest_sync.models.list_custom_agent_tools200_response_inner import ListCustomAgentTools200ResponseInner
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of ListCustomAgentTools200ResponseInner from a JSON string
+list_custom_agent_tools200_response_inner_instance = ListCustomAgentTools200ResponseInner.from_json(json)
+# print the JSON string representation of the object
+print(ListCustomAgentTools200ResponseInner.to_json())
+
+# convert the object into a dict
+list_custom_agent_tools200_response_inner_dict = list_custom_agent_tools200_response_inner_instance.to_dict()
+# create an instance of ListCustomAgentTools200ResponseInner from a dict
+list_custom_agent_tools200_response_inner_from_dict = ListCustomAgentTools200ResponseInner.from_dict(list_custom_agent_tools200_response_inner_dict)
+```
+
+
+

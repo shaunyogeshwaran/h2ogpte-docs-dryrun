@@ -1,0 +1,46 @@
+Changelog
+=========
+
+The format is based on `Keep a Changelog <http://keepachangelog.com/>`__
+and this project adheres to `Semantic
+Versioning <http://semver.org/>`__.
+
+`v1.0.0 <https://pypi.org/project/h2ogpte/1.0.0/>`__ — 2023/11/07
+-----------------------------------------------------------------------
+
+h2oGPTe Python client release.
+
+Added
+~~~~~
+
+- Added Session().query() API to talk to a collection in a chat session.
+- Added answer_question() API to get answers from LLM, with or without provided context.
+- Added summarize_content() API to summarize multiple text inputs.
+- Added extract_data() API to extract data from multiple text inputs.
+- Added streaming chat responses.
+- Added choice of LLM, and extra arguments for LLM.
+
+Fixed
+~~~~~
+
+- Type hint fixed to make the client work with Python 3.7/3.8/3.9 again.
+
+Changed
+~~~~~~~
+
+No changes (initial release).
+
+Deprecated
+~~~~~~~~~~
+
+No deprecations (initial release).
+
+Removed
+~~~~~~~
+
+No removals (initial release).
+
+Security
+~~~~~~~~
+
+No security fixes (initial release).

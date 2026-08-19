@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Getting Started with h2oGPTe &mdash; h2oGPTe</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/code.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="canonical" href="https://h2ogpte.github.io/getting_started.html"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=93b43ced"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="&lt;no title&gt;" href="examples.html" />
+    <link rel="prev" title="h2oGPTe Python Client Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            h2oGPTe
+          </a>
+              <div class="version">
+                1.3.12
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Installation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">h2oGPTe Python Client Installation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started with h2oGPTe</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/h2ogpte-client.html">h2oGPTe Python Client Example</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Python API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="python_api.html">h2oGPTE Python API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Third-Party Notices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="docs-licenses/licenses.html">Third-Party Licenses</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Release Notes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">h2oGPTe</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Getting Started with h2oGPTe</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/getting_started.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="getting-started-with-h2ogpte">
+<h1>Getting Started with h2oGPTe<a class="headerlink" href="#getting-started-with-h2ogpte" title="Link to this heading"></a></h1>
+<p>The <cite>h2ogpte</cite> Python client lets users integrate with <a class="reference external" href="https://h2o.ai/platform/enterprise-h2ogpt/">h2oGPTe</a>.</p>
+<p>To access h2oGPTe, use the following URL:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://h2ogpte.genai.h2o.ai">https://h2ogpte.genai.h2o.ai</a></p></li>
+</ul>
+<section id="h2ogpte-configuration">
+<h2>h2oGPTe Configuration<a class="headerlink" href="#h2ogpte-configuration" title="Link to this heading"></a></h2>
+<p>The following steps describe how to prepare the h2oGPTe <strong>API key</strong> needed to access the server:</p>
+<ol class="arabic simple">
+<li><p>Log in to <a class="reference external" href="https://h2ogpte.genai.h2o.ai">https://h2ogpte.genai.h2o.ai</a></p></li>
+<li><p>Navigate to <code class="docutils literal notranslate"><span class="pre">Settings</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">API</span> <span class="pre">Keys</span></code> and create or get the API key.</p></li>
+</ol>
+</section>
+<section id="upload-documents-audio-video-images">
+<h2>Upload Documents, Audio, Video, Images …<a class="headerlink" href="#upload-documents-audio-video-images" title="Link to this heading"></a></h2>
+<p>h2oGPTe is able to ingest a wide variety of data ranging from documents (PDF, text, web pages) to video.
+Create h2oGPTe client and use it to upload the documents and ingest them:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">h2ogpte</span> <span class="kn">import</span> <span class="n">H2OGPTE</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">H2OGPTE</span><span class="p">(</span>
+    <span class="n">address</span><span class="o">=</span><span class="s2">&quot;https://playground.h2ogpte.h2o.ai&quot;</span><span class="p">,</span>
+    <span class="n">api_key</span><span class="o">=</span><span class="n">API_KEY</span><span class="p">)</span>
+
+<span class="c1"># Talk to LLM</span>
+<span class="n">answer</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">answer_question</span><span class="p">(</span>
+    <span class="n">question</span><span class="o">=</span><span class="s2">&quot;Can you hallucinate?&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
+
+<span class="c1"># Talk to LLM about text</span>
+<span class="n">answer</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">answer_question</span><span class="p">(</span>
+    <span class="n">text_context_list</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Roses are red.&quot;</span><span class="p">,</span> <span class="s2">&quot;Violets are blue.&quot;</span><span class="p">]</span>
+    <span class="n">question</span><span class="o">=</span><span class="s2">&quot;Are roses blue?&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
+
+<span class="c1"># Create Collection</span>
+<span class="n">collection_id</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">create_collection</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;My first h2oGPTe collection&quot;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;PDF -&gt; text -&gt; summary&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">file_path</span> <span class="o">=</span> <span class="s2">&quot;...path to document(s)...&quot;</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="o">.</span><span class="n">resolve</span><span class="p">(),</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">upload_id</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">upload</span><span class="p">(</span><span class="n">file_path</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+
+<span class="c1"># Converting the input into chunked text and embeddings...</span>
+<span class="n">client</span><span class="o">.</span><span class="n">ingest_uploads</span><span class="p">(</span><span class="n">collection_id</span><span class="p">,</span> <span class="p">[</span><span class="n">upload_id</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+<section id="talk-to-collection">
+<h2>Talk to Collection<a class="headerlink" href="#talk-to-collection" title="Link to this heading"></a></h2>
+<p>Start a Q&amp;A session:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">chat_session_id</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">create_chat_session</span><span class="p">(</span><span class="n">collection_id</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">client</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">chat_session_id</span><span class="p">)</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+    <span class="c1"># Simple Question for Document Collection</span>
+    <span class="n">answer</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
+        <span class="s2">&quot;What was net revenue?&quot;</span><span class="p">,</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">content</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="advanced-controls-for-document-q-a">
+<h2>Advanced Controls for Document Q&amp;A<a class="headerlink" href="#advanced-controls-for-document-q-a" title="Link to this heading"></a></h2>
+<p>From the client, you can control the LLM, the RAG type, and the prompting. The client can also return streaming responses.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">chat_session_id</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">create_chat_session</span><span class="p">(</span><span class="n">collection_id</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">client</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">chat_session_id</span><span class="p">)</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+    <span class="c1"># Choose different LLM</span>
+    <span class="n">answer</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
+        <span class="s2">&quot;What was net revenue?&quot;</span><span class="p">,</span>
+        <span class="n">llm</span><span class="o">=</span><span class="s2">&quot;gpt-4-0613&quot;</span><span class="p">,</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">content</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
+
+    <span class="c1"># No RAG (LLM only) - documents ignored</span>
+    <span class="n">answer</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
+        <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Who are you?&quot;</span><span class="p">,</span>
+        <span class="n">rag_config</span><span class="o">=</span><span class="p">{</span>
+            <span class="s2">&quot;rag_type&quot;</span><span class="p">:</span> <span class="s2">&quot;llm_only&quot;</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">content</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
+
+    <span class="c1"># RAG (Retrieval Augmented Generation)</span>
+    <span class="n">answer</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
+        <span class="n">message</span><span class="o">=</span><span class="s2">&quot;What was net revenue?&quot;</span><span class="p">,</span>
+        <span class="n">rag_config</span><span class="o">=</span><span class="p">{</span>
+            <span class="s2">&quot;rag_type&quot;</span><span class="p">:</span> <span class="s2">&quot;rag&quot;</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">content</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
+
+    <span class="c1"># HyDE RAG (Hypothetical Document Embedding)</span>
+    <span class="n">hyde1</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
+        <span class="n">message</span><span class="o">=</span><span class="s2">&quot;What was net revenue?&quot;</span><span class="p">,</span>
+        <span class="n">rag_config</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;rag_type&quot;</span><span class="p">:</span> <span class="s2">&quot;hyde1&quot;</span><span class="p">},</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">content</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">hyde1</span><span class="p">)</span>
+
+    <span class="c1"># HyDE RAG+ (Combined HyDE+RAG)</span>
+    <span class="n">hyde2</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
+        <span class="n">message</span><span class="o">=</span><span class="s2">&quot;What was net revenue?&quot;</span><span class="p">,</span>
+        <span class="n">rag_config</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;rag_type&quot;</span><span class="p">:</span> <span class="s2">&quot;hyde2&quot;</span><span class="p">},</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">content</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">hyde2</span><span class="p">)</span>
+
+    <span class="c1"># Custom System Prompt</span>
+    <span class="n">answer</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
+        <span class="n">message</span><span class="o">=</span><span class="s2">&quot;What was net revenue?&quot;</span><span class="p">,</span>
+        <span class="n">system_prompt</span><span class="o">=</span><span class="s2">&quot;YOU ARE THE UPPERCASE MACHINE. YOU ANSWER IN UPPERCASE LETTERS.&quot;</span><span class="p">,</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">content</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
+
+    <span class="c1"># Custom RAG prompting (e.g., for foreign languages)</span>
+    <span class="n">answer</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
+        <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Was war der Umsatz?&quot;</span><span class="p">,</span>
+        <span class="n">system_prompt</span><span class="o">=</span><span class="s2">&quot;Sie sind ein Professor der Deutschen Sprache.&quot;</span><span class="p">,</span>
+        <span class="n">pre_prompt_query</span><span class="o">=</span><span class="s2">&quot;Achten Sie darauf und merken Sie sich die folgenden Informationen, die bei der Beantwortung der Frage oder des Imperativs nach Ende des Kontexts hilfreich sein werden.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="n">prompt_query</span><span class="o">=</span><span class="s2">&quot;Nur nach den Informationen in den Dokumentenquellen, die im oben genannten Kontext bereitgestellt wurden, &quot;</span><span class="p">,</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">content</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
+
+    <span class="c1"># Streaming</span>
+    <span class="n">partial_msg</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">full_msg</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
+        <span class="k">nonlocal</span> <span class="n">full_msg</span>
+        <span class="k">nonlocal</span> <span class="n">partial_msg</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">ChatMessage</span><span class="p">):</span>
+            <span class="n">full_msg</span> <span class="o">=</span> <span class="n">message</span><span class="o">.</span><span class="n">content</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">PartialChatMessage</span><span class="p">):</span>
+            <span class="n">partial_msg</span> <span class="o">+=</span> <span class="n">message</span><span class="o">.</span><span class="n">content</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">partial_msg</span><span class="p">)</span>
+    <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;What was net revenue?&quot;</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="n">callback</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="self-reflection">
+<h2>Self-Reflection<a class="headerlink" href="#self-reflection" title="Link to this heading"></a></h2>
+<p>Ask another LLM for a reflection of the answer given the question and the context provided.
+Can be used to evaluate the LLM’s performance (to some extent, requires a strong LLM).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">self_reflection_config</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+    <span class="n">llm_reflection</span><span class="o">=</span><span class="s2">&quot;gpt-4-0613&quot;</span><span class="p">,</span>
+    <span class="n">pre_prompt_reflection</span><span class="o">=</span><span class="s2">&quot;Evaluate the quality of the response for the given question.&quot;</span><span class="p">,</span>
+    <span class="n">prompt_reflection</span><span class="o">=</span><span class="s1">&#39;Given the above context, here</span><span class="se">\&#39;</span><span class="s1">s the prompt and the response:</span><span class="se">\n</span><span class="s1">&quot;&quot;&quot;Prompt:</span><span class="se">\n</span><span class="si">%s</span><span class="se">\n</span><span class="s1">&quot;&quot;&quot;</span><span class="se">\n\n</span><span class="s1">&quot;&quot;&quot;Response:</span><span class="se">\n</span><span class="si">%s</span><span class="se">\n</span><span class="s1">&quot;&quot;&quot;</span><span class="se">\n\n</span><span class="s1">What is the quality of the response for the given prompt? Answer with GOOD or BAD.&#39;</span><span class="p">,</span>
+    <span class="n">system_prompt_reflection</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="n">llm_args_reflection</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">chat_session_id</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">create_chat_session</span><span class="p">(</span><span class="n">collection_id</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">client</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">chat_session_id</span><span class="p">)</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+    <span class="n">reply</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
+        <span class="n">message</span><span class="o">=</span><span class="s2">&quot;What color are roses&quot;</span><span class="p">,</span>
+        <span class="n">self_reflection_config</span><span class="o">=</span><span class="n">self_reflection_config</span><span class="p">,</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">content</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">reply</span><span class="p">)</span>
+
+    <span class="n">reflection</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">list_chat_message_meta_part</span><span class="p">(</span>
+        <span class="n">reply</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="s2">&quot;self_reflection&quot;</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">content</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">reflection</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="summarization-of-documents">
+<h2>Summarization of Documents<a class="headerlink" href="#summarization-of-documents" title="Link to this heading"></a></h2>
+<p>Create a custom summary of a document:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">documents</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">list_documents_in_collection</span><span class="p">(</span><span class="n">collection_id</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">99</span><span class="p">)</span>
+<span class="n">document_id</span> <span class="o">=</span> <span class="n">documents</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">id</span>
+<span class="n">summary</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">summarize_document</span><span class="p">(</span>
+    <span class="n">document_id</span><span class="o">=</span><span class="n">document_id</span><span class="p">,</span>
+    <span class="n">pre_prompt_summary</span><span class="o">=</span><span class="s2">&quot;Summarize the content below into a list of bullets.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="n">prompt_summary</span><span class="o">=</span><span class="s2">&quot;Now summarize the above into a couple of paragraphs.&quot;</span><span class="p">,</span>
+    <span class="n">max_num_chunks</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+    <span class="n">sampling_strategy</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Summary</span>
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">summary</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="summarization-of-arbitrary-text-chunks">
+<h2>Summarization of Arbitrary Text Chunks<a class="headerlink" href="#summarization-of-arbitrary-text-chunks" title="Link to this heading"></a></h2>
+<p>Create a summary from arbitrary text blocks:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">summary</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">summarize_content</span><span class="p">(</span>
+    <span class="n">pre_prompt_summary</span><span class="o">=</span><span class="s2">&quot;Summarize the content below into a list of bullets.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="n">text_context_list</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;long text to summarize&quot;</span><span class="p">,</span> <span class="s2">&quot;more text to summarize&quot;</span><span class="p">,</span> <span class="s2">&quot;yet more tet to summarize&quot;</span><span class="p">],</span>
+    <span class="n">prompt_summary</span><span class="o">=</span><span class="s2">&quot;Now summarize the above into a couple of paragraphs.&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Summary</span>
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">summary</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="data-extraction">
+<h2>Data Extraction<a class="headerlink" href="#data-extraction" title="Link to this heading"></a></h2>
+<p>You can extract data with custom prompts:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">extract</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">extract_data</span><span class="p">(</span>
+    <span class="n">text_context_list</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Jack Smith&quot;</span><span class="p">,</span> <span class="s2">&quot;Jane Doe and her husband Jim Doe&quot;</span><span class="p">,</span> <span class="s2">&quot;This is nothing important&quot;</span><span class="p">],</span>
+    <span class="n">pre_prompt_extract</span><span class="o">=</span><span class="s2">&quot;Pay attention and look at all people. Your job is to collect their names.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="n">prompt_extract</span><span class="o">=</span><span class="s2">&quot;List all people names as JSON.&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># List of LLM answers per text input</span>
+<span class="k">for</span> <span class="n">extract_list_item</span> <span class="ow">in</span> <span class="n">extract</span><span class="o">.</span><span class="n">content</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">extract_list_item</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Similarly get action plans, translations, hashtags, …</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="h2oGPTe Python Client Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="examples.html" class="btn btn-neutral float-right" title="&lt;no title&gt;" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024 H2O.ai, Inc. All rights reserved..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

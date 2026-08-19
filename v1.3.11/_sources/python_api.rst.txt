@@ -1,0 +1,15 @@
+h2oGPTE Python API
+==================
+h2oGPTe Python client API reference.
+
+.. toctree::
+   :maxdepth: 6
+   :caption: Python API
+
+   h2ogpte.rst
+
+Indices and Tables
+------------------
+
+* :ref:`modindex`
+* :ref:`genindex`

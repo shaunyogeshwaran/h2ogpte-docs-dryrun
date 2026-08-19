@@ -1,0 +1,33 @@
+# GuardrailsSettingsCreateRequest
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**action** | **str** | What to do when detecting PII, either \&quot;redact\&quot; or \&quot;fail\&quot; (\&quot;allow\&quot; would keep PII intact). Guardrails models always fail upon detecting safety violations.  | [optional] [default to 'redact']
+**sensitive** | **bool** | Whether to include the most sensitive PII entities like SSN, bank account info. | [optional] [default to True]
+**non_sensitive** | **bool** | Whether to include all non-sensitive PII entities, such as IP addresses, locations, names, e-mail addresses etc. | [optional] [default to True]
+**all_guardrails** | **bool** | Whether to include all possible entities for prompt guard and guardrails models, or just system defaults. | [optional] [default to True]
+**guardrails_settings** | [**GuardrailsSettings**](GuardrailsSettings.md) | Existing guardrails settings (e.g., from collection settings) to obtain guardrails entities, guardrails_entities_to_flag, custom_pii_entities, custom_pii_entities_to_flag from instead of system defaults  | [optional] 
+
+## Example
+
+```python
+from h2ogpte.rest_async.models.guardrails_settings_create_request import GuardrailsSettingsCreateRequest
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of GuardrailsSettingsCreateRequest from a JSON string
+guardrails_settings_create_request_instance = GuardrailsSettingsCreateRequest.from_json(json)
+# print the JSON string representation of the object
+print(GuardrailsSettingsCreateRequest.to_json())
+
+# convert the object into a dict
+guardrails_settings_create_request_dict = guardrails_settings_create_request_instance.to_dict()
+# create an instance of GuardrailsSettingsCreateRequest from a dict
+guardrails_settings_create_request_from_dict = GuardrailsSettingsCreateRequest.from_dict(guardrails_settings_create_request_dict)
+```
+
+
+

@@ -1,0 +1,596 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "1d3a3315",
+   "metadata": {
+    "collapsed": false,
+    "jupyter": {
+     "outputs_hidden": false
+    }
+   },
+   "source": [
+    "# h2oGPTe Python Client Example\n",
+    "\n",
+    "h2oGPTe Python client example."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "id": "e961d968-f7e6-49b7-b063-0b5884d4eaec",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import os"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "d9f1261a-fa28-4309-bcd1-2ca158780541",
+   "metadata": {},
+   "source": [
+    "## Jupyter Notebook installation\n",
+    "- Install Python3.8+\n",
+    "- `python -m pip install jupyter`\n",
+    "- `jupyter notebook`"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "id": "287cbe9f-333e-493f-9269-917661191574",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Requirement already satisfied: h2ogpte in /home/dvorka/h/gen-ai/h2ogpte/venv/lib/python3.11/site-packages (0.9.2)\n",
+      "Requirement already satisfied: pydantic==1.10.13 in /home/dvorka/h/gen-ai/h2ogpte/venv/lib/python3.11/site-packages (from pydantic[dotenv]==1.10.13->h2ogpte) (1.10.13)\n",
+      "Requirement already satisfied: requests==2.31.0 in /home/dvorka/h/gen-ai/h2ogpte/venv/lib/python3.11/site-packages (from h2ogpte) (2.31.0)\n",
+      "Requirement already satisfied: websockets==12.0 in /home/dvorka/h/gen-ai/h2ogpte/venv/lib/python3.11/site-packages (from h2ogpte) (11.0.3)\n",
+      "Requirement already satisfied: beautifulsoup4==4.12.2 in /home/dvorka/h/gen-ai/h2ogpte/venv/lib/python3.11/site-packages (from h2ogpte) (4.12.2)\n",
+      "Requirement already satisfied: bs4==0.0.1 in /home/dvorka/h/gen-ai/h2ogpte/venv/lib/python3.11/site-packages (from h2ogpte) (0.0.1)\n",
+      "Requirement already satisfied: lxml==4.9.3 in /home/dvorka/h/gen-ai/h2ogpte/venv/lib/python3.11/site-packages (from h2ogpte) (4.9.3)\n",
+      "Requirement already satisfied: soupsieve>1.2 in /home/dvorka/h/gen-ai/h2ogpte/venv/lib/python3.11/site-packages (from beautifulsoup4==4.12.2->h2ogpte) (2.5)\n",
+      "Requirement already satisfied: typing-extensions>=4.2.0 in /home/dvorka/h/gen-ai/h2ogpte/venv/lib/python3.11/site-packages (from pydantic==1.10.13->pydantic[dotenv]==1.10.13->h2ogpte) (4.8.0)\n",
+      "Requirement already satisfied: python-dotenv>=0.10.4 in /home/dvorka/h/gen-ai/h2ogpte/venv/lib/python3.11/site-packages (from pydantic[dotenv]==1.10.13->h2ogpte) (1.0.0)\n",
+      "Requirement already satisfied: charset-normalizer<4,>=2 in /home/dvorka/h/gen-ai/h2ogpte/venv/lib/python3.11/site-packages (from requests==2.31.0->h2ogpte) (3.3.2)\n",
+      "Requirement already satisfied: idna<4,>=2.5 in /home/dvorka/h/gen-ai/h2ogpte/venv/lib/python3.11/site-packages (from requests==2.31.0->h2ogpte) (3.4)\n",
+      "Requirement already satisfied: urllib3<3,>=1.21.1 in /home/dvorka/h/gen-ai/h2ogpte/venv/lib/python3.11/site-packages (from requests==2.31.0->h2ogpte) (2.0.7)\n",
+      "Requirement already satisfied: certifi>=2017.4.17 in /home/dvorka/h/gen-ai/h2ogpte/venv/lib/python3.11/site-packages (from requests==2.31.0->h2ogpte) (2023.7.22)\n"
+     ]
+    }
+   ],
+   "source": [
+    "# get h2ogpte client from pypi:\n",
+    "!python -m pip install h2ogpte"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "6812f4c3-5757-418f-9a1b-5596ad0b681e",
+   "metadata": {},
+   "source": [
+    "## h2oGPTe configuration\n",
+    "\n",
+    "To prepare the h2oGPTe **API key** needed to access the server:\n",
+    "\n",
+    "* Log in to https://h2ogpte.genai.h2o.ai\n",
+    "* Navigate to `Settings` > `API Keys` and create and/or copy & paste the API Key"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "id": "5e69cdb7-d035-4268-8f54-274801fbcff0",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "API_KEY = \"\"\n",
+    "\n",
+    "API_KEY = API_KEY or os.getenv(\"H2O_GPT_E_API_KEY\")\n",
+    "\n",
+    "if not API_KEY:\n",
+    "    raise ValueError(\"Please configure h2ogpte API key\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "id": "9d544add-e06f-4cd0-bc2a-3fbd1f7c2838",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "REMOTE_ADDRESS = \"https://h2ogpte.genai.h2o.ai\""
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "id": "ec4f078f-46d8-4d10-b3cd-48db62717eaf",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from h2ogpte import H2OGPTE\n",
+    "\n",
+    "client = H2OGPTE(address=REMOTE_ADDRESS, api_key=API_KEY)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "id": "cd2fdf6e-a925-48f0-8e38-8f139f02e2d9",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "['answer_question',\n",
+       " 'cancel_job',\n",
+       " 'connect',\n",
+       " 'count_assets',\n",
+       " 'count_chat_sessions',\n",
+       " 'count_chat_sessions_for_collection',\n",
+       " 'count_collections',\n",
+       " 'count_documents',\n",
+       " 'count_documents_in_collection',\n",
+       " 'create_chat_session',\n",
+       " 'create_collection',\n",
+       " 'delete_chat_sessions',\n",
+       " 'delete_collections',\n",
+       " 'delete_documents',\n",
+       " 'delete_documents_from_collection',\n",
+       " 'encode_for_retrieval',\n",
+       " 'extract_data',\n",
+       " 'get_chunks',\n",
+       " 'get_collection',\n",
+       " 'get_collection_for_chat_session',\n",
+       " 'get_document',\n",
+       " 'get_job',\n",
+       " 'get_llms',\n",
+       " 'get_meta',\n",
+       " 'get_scheduler_stats',\n",
+       " 'ingest_from_file_system',\n",
+       " 'ingest_uploads',\n",
+       " 'ingest_website',\n",
+       " 'list_chat_message_references',\n",
+       " 'list_chat_messages',\n",
+       " 'list_chat_sessions_for_collection',\n",
+       " 'list_collections_for_document',\n",
+       " 'list_documents_in_collection',\n",
+       " 'list_jobs',\n",
+       " 'list_recent_chat_sessions',\n",
+       " 'list_recent_collections',\n",
+       " 'list_recent_documents',\n",
+       " 'match_chunks',\n",
+       " 'search_chunks',\n",
+       " 'set_chat_message_votes',\n",
+       " 'summarize_content',\n",
+       " 'update_collection',\n",
+       " 'upload']"
+      ]
+     },
+     "execution_count": 6,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "[x for x in dir(client) if x[:1] != \"_\"]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "id": "053e7b58-06ca-401b-a0c3-a7ac97fb2542",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "--2023-11-02 10:57:19--  https://h2o.ai/content/dam/h2o/en/marketing/documents/2017/09/Driverless-AI_datasheet.pdf\n",
+      "Resolving h2o.ai (h2o.ai)... 151.101.3.10, 151.101.195.10, 151.101.131.10, ...\n",
+      "Connecting to h2o.ai (h2o.ai)|151.101.3.10|:443... connected.\n",
+      "HTTP request sent, awaiting response... 200 OK\n",
+      "Length: 560380 (547K) [application/pdf]\n",
+      "Saving to: ‘Driverless-AI_datasheet.pdf.1’\n",
+      "\n",
+      "Driverless-AI_datas 100%[===================>] 547.25K   419KB/s    in 1.3s    \n",
+      "\n",
+      "2023-11-02 10:57:21 (419 KB/s) - ‘Driverless-AI_datasheet.pdf.1’ saved [560380/560380]\n",
+      "\n"
+     ]
+    }
+   ],
+   "source": [
+    "# document: prepare your document OR download a demo data\n",
+    "\n",
+    "!wget https://h2o.ai/content/dam/h2o/en/marketing/documents/2017/09/Driverless-AI_datasheet.pdf"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "id": "48371b38-949b-47bd-aec1-8e7c829b2a36",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def ingest_documents(client: H2OGPTE):\n",
+    "    import os\n",
+    "    import pathlib\n",
+    "    url = \"https://h2o.ai/content/dam/h2o/en/marketing/documents/2017/09/Driverless-AI_datasheet.pdf\"\n",
+    "\n",
+    "    collection_id = None\n",
+    "    name = \"h2ogpte Python client demo\"\n",
+    "    \n",
+    "    print(\"Recent collections:\")\n",
+    "    recent_collections = client.list_recent_collections(0, 1000)\n",
+    "    for c in recent_collections:\n",
+    "        if c.name == name and c.document_count:\n",
+    "            collection_id = c.id\n",
+    "            break\n",
+    "\n",
+    "    # Create Collection\n",
+    "    if collection_id is None:\n",
+    "        print(f\"Creating collection: {name} ...\")\n",
+    "        collection_id = client.create_collection(\n",
+    "            name=name,\n",
+    "            description=\"PDF -> text -> summary\",\n",
+    "        )\n",
+    "        print(f\"New collection: {collection_id} ...\")\n",
+    "\n",
+    "        # Upload file into collection\n",
+    "        file_path = pathlib.Path(os.path.basename(url))\n",
+    "        with open(file_path.resolve(), \"rb\") as f:\n",
+    "            print(f\"Uploading {file_path} to collection {name} ({collection_id})\")\n",
+    "            upload_id = client.upload(file_path.name, f)\n",
+    "\n",
+    "        print(\"Converting the input into chunked text and embeddings...\")\n",
+    "        client.ingest_uploads(collection_id, [upload_id])\n",
+    "        print(f\"DONE: {collection_id}\")\n",
+    "    return collection_id"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "id": "1e69320a-03a0-4a7d-94f3-3e9211040531",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Recent collections:\n"
+     ]
+    }
+   ],
+   "source": [
+    "collection_id = ingest_documents(client)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "03b8203c-9fc2-4de7-bc69-0b62aee611af",
+   "metadata": {},
+   "source": [
+    "## Talk to LLM"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "id": "e4e2b511-463e-4101-856b-a06bfaa15407",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "['h2oai/h2ogpt-4096-llama2-70b-chat', 'h2oai/h2ogpt-4096-llama2-13b-chat', 'HuggingFaceH4/zephyr-7b-beta', 'lmsys/vicuna-13b-v1.5-16k', 'h2oai/h2ogpt-32k-codellama-34b-instruct', 'Yukang/LongAlpaca-70B', 'gpt-3.5-turbo', 'gpt-3.5-turbo-16k', 'gpt-4', 'gpt-4-32k']\n"
+     ]
+    }
+   ],
+   "source": [
+    "# See list of different LLMs\n",
+    "print([x[\"base_model\"] for x in client.get_llms()])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "id": "1301ab4d-f784-48a8-8512-10461ec05c82",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "h2oai/h2ogpt-4096-llama2-70b-chat: I am LLaMA, an AI assistant developed by Meta AI that can understand and respond to human input in a conversational manner. I am trained on a massive dataset of text from the internet and can generate human-like responses to a wide range of topics and questions. I can be used to create chatbots, virtual assistants, and other applications that require natural language understanding and generation capabilities.\n"
+     ]
+    }
+   ],
+   "source": [
+    "llm = \"h2oai/h2ogpt-4096-llama2-70b-chat\"\n",
+    "\n",
+    "answer = client.answer_question(question=\"Who are you?\", llm=llm).content\n",
+    "print(f\"{llm}: {answer}\", flush=True)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "id": "6c5335ae-cda9-4f21-8afe-a014fcd1c4a5",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[Chunk(text='It is designed to take a raw dataset and automatically visualize\\nthe most interesting patterns for data exploration. It then\\napplies automatic feature engineering to increase accuracy\\nby using Kaggle Grandmaster recipes for solving a wide\\nvariety of use-cases. Next, it auto-tunes model parameters\\nand provides the user with the model that yields the best\\nresults. Lastly, it gives plain English explanations of model\\nresults. Driverless AI enables users of all backgrounds to draw\\nthe most value from their data.\\nAutomatic Visualization\\n• AutoViz allows users to visualize large datasets in the form\\nof various graphs and charts without having to write code\\n• Takes huge datasets and displays outliers and trends in an\\ninterpretable way\\n• Uses statistics to automatically decide which visualizations\\nto present to the user\\n• Exploratory tool that presents an overview of the\\ndistribution of data\\nAutomatic Feature Engineering\\n• AutoDL employs a library of algorithms and feature\\ntransformations to automatically engineer new features for\\na given dataset\\n• A variable importance chart shows the significance of\\nnewly engineered features\\n• Data scientists can spend less time exploring data and\\nengineering features; as a result, they can work on multiple\\nprojects simultaneously and increase their efficiency\\nBRINGING AI TO ENTERPRISE\\nDriverless AI: Fast, Accurate, Interpretable AI\\nDriverless AI is an expert system designed to mimic Kaggle Grandmasters. Just like a chess Grandmaster, there are\\nonly a few of these in the world. Driverless AI brings you the intelligence of a Kaggle Grandmaster in a box.\\n')]\n",
+      "[Chunk(text='Model Interpretability\\n• The Machine Learning Interpretability feature provides\\nusers with clear and concise explanations of model results\\n• Four dynamic graphs are generated automatically: K-LIME,\\nVariable Importance, Decision Tree Chart, and Partial\\nDependence Plot; each one helps explore the model\\noutput more closely\\n• Global interpretability techniques allow the user to broadly\\nunderstand models at the level of the full dataset\\n• Local interpretability techniques explain predictions\\nfor individual data points, and produce plain English\\nexplanations with reason codes\\nH20.ai\\nCLUMPY SCATTERPLOTS\\nCORRELATED SCATTERPLOTS SPIKEYHISTOGRAMS\\nSKEWED HISTOGRAMS\\nDISPARATE BOXPLOTS\\n1\\n\\n\\nHETEROSCEDASTIC ICBOXPLOTS BIPLOTS\\nOUTLIERS\\nDATAHEATMAP\\nMISSING HEATMAP\\nH20.ai\\n0.0.1\\nTRAINING DATA\\nDATASET\\ncreditcard.csv\\nROWS\\n24K 25\\nTARGETCOLUMN\\nSTATUS:CO COMPLETE\\nEXPERIMENT: SETTINGS\\nCOLUMNS\\nDROPPED\\nIGNORED\\nOOOO\\nWORKERS\\nCLASSIFICATION DETECTIDS\\nITERATIONS\\nCVFOLDS\\nDROPDUPS.\\n')]\n",
+      "[Chunk(text='INTERPRETT THIS MODEL\\ndefault payment next month\\nGPUSTATS\\nTYPE\\nint32\\nCOUNT\\nMEAN\\nSTODEV\\n23999 0.2237 0.4167\\nITERATIONS SCORES\\nVARIABLEIMPORTANCE\\n23_CV_TE_PAY_5_PAY_O_PAY_2_0\\n26_SortedLE_PAY_O\\n24_CV_TE_LIMIT_BAL_PAY_O_PAY_2_0\\n5_BILL_AMTI\\nTI_PAY_AMT2\\nT7_Freq_PÂY_0\\nO_LIMIT_BAL\\n12_PAY_AMT3\\n10_PAY_AMTI\\n15_PAY_AM16\\n6_BILL_AMT2\\nH4_PAY_AMTS\\n13_PAY_AMT4\\nEPOCHS 9_BILL_AMT6\\nFEATURE TRANSFORMATIONS\\n7373.40\\n1377.03\\n995.83\\n785.54\\n63169\\n606.88\\n60142\\n515.59\\n513.09\\n444.20\\n392.09\\n368.44 20-\\n365.38 22-\\n310.08\\n......\\n.\\nRowLo Lookup\\nColumn: H20FrameRowe Value:\\nSEARCH Plot:| Global\\nEXPLANATIONS\\nGlobal KLIME Plot\\nVarlable Importance\\nModel Prediction KLime ModelP Prediction\\nLIMIT_RAL\\nPAY_AMI\\nPAY_6_\\nPAY_AMT4\\nPAY_AM16_\\nBILL_AMT4\\nSEX\\nUS-\\n0.5.\\n')]\n",
+      "[Chunk(text='0.4\\n06\\n08\\nDecision Tree\\nLIMIT_BAL< L<105229.5\\nPartial Dependence\\n08-\\n0.7-\\n0.5-\\n05-\\n0.4-\\n03-\\n02-\\n0.1.\\nPAY_0<1.5\\nPAY_2<15\\nPAY_5<10\\nRAY_3<-0.5 BILL_AMT4<1016.5 PAY_0<1.5\\n0.188 0.431\\n0.459 0.694\\n0.207 0.117\\n0.353 0.699\\nTel: +1.650.227.4572\\n@h2oai\\nhttp://www.github.com/h2oai\\nsales@h2o.ai\\nPython Pipeline\\n•\\nA Jupyter notebook with the Python code that contains\\nthe feature engineering and model building that\\nDriverless AI performed automatically\\n•\\nExport Python pipelines to operate on new data in\\nproduction\\n•\\nConveniently usable through a Jupyter notebook\\nPersonas & Benefits\\nBusiness Users\\n•\\nUsers with domain knowledge will understand the new\\nfeatures generated by AutoDL and their impact on\\npredictions\\n•\\nAnalysts who have used visualization tools in the past\\ncan easily transition into using the exploratory AutoViz\\ntool as well as the Machine Learning Interpretability tool\\nto understand the impact of a particular variable on their\\nmodel\\nData Analysts\\n•\\nUsing basic data science knowledge, users can better\\nunderstand features generated by Driverless AI and use\\noutcomes to draw valuable insights for')]\n",
+      "[Chunk(text='their businesses\\n•\\nAutoViz makes data exploration extremely simple so\\nusers can identify trends in data through visualizations\\nData Scientists\\n•\\nAutoViz simplifies the data exploration process\\n•\\nIncrease productivity of data scientists by enabling them\\nto work on multiple projects simultaneously\\n•\\nThe visualizations produced by the Machine Learning\\nInterpretability tool streamline the process of\\nunderstanding the impact of a model\\nSPECIFICATIONS\\nFor CPU Installations\\nMinimum Hardware\\n• x86-64 CPU\\n• 64 GB RAM\\nRecommended\\nHardware\\n• Dual socket Intel Xeon\\nx86-64 or IBM Power\\n8 CPU’s\\nSoftware\\n• Docker CE\\nFor GPU Installations\\nMinimum Hardware\\n• NVIDIA K80\\nRecommended\\nHardware\\n• NVIDIA P100 or higher\\n• NVLink and NCL\\nvenabled\\nSoftware\\n• Ubuntu 16.04\\n• CUDA 8\\n• NVIDIA Docker 1.0.1\\nFor Cloud Installations\\nEC2 Instances\\n• P2 or G3\\n• Ubuntu 16.04\\nAzure Instances\\n• NC or NV\\n• Ubuntu 16.04\\nLicensing\\nDriverless AI is a commercially licensed product. For more\\ninformation, contact sales@h2o.ai.\\nAbout H2O.ai\\nH2O.ai is focused on bringing AI to businesses through software. Its flagship product is H2O, the leading open source platform that makes it\\neasy for financial services, insurance and healthcare companies to deploy machine learning and predictive analytics to solve complex problems.\\n')]\n",
+      "[Chunk(text='More than 10,000 organizations and 100,000+ data scientists depend on H2O for critical applications like predictive maintenance and operational\\nintelligence. The company accelerates business transformation for 169 Fortune 500 enterprises, 8 of the world’s 12 largest banks, 7 of the 10\\nlargest auto insurance companies and all 5 major telecommunications providers.\\nFollow us on Twitter @h2oai. To learn more about H2O customer use cases, please visit http://www.h2o.ai/customers/. Join the Movement.\\n')]\n",
+      "Number of chunks: 6\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Inspect and collect all text chunks\n",
+    "chunks = []\n",
+    "for chunk_id in range(1, 100):\n",
+    "    try:\n",
+    "        chunk = client.get_chunks(collection_id, [chunk_id])\n",
+    "        print(chunk, flush=True)\n",
+    "        chunks.append(chunk[0].text)\n",
+    "    except:\n",
+    "        break\n",
+    "\n",
+    "print(f\"Number of chunks: {len(chunks)}\", flush=True)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "b25b01b5-d768-4ef6-88dc-566af1f048e0",
+   "metadata": {},
+   "source": [
+    "## Talk to Collection"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "id": "ecc0db7c-1fab-418f-969a-4efd3219fd4c",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "\n",
+      "==== Q&A ====\n",
+      "Q1: What is Driverless AI?\n",
+      "A1: According to the information provided in the context, Driverless AI is an expert system designed to mimic Kaggle Grandmasters. It is a commercially licensed product that enables users of all backgrounds to draw the most value from their data. It is an automated machine learning platform that can take a raw dataset and automatically visualize the most interesting patterns for data exploration. It then applies automatic feature engineering to increase accuracy by using Kaggle Grandmaster recipes for solving a wide variety of use-cases. Next, it auto-tunes model parameters and provides the user with the model that yields the best results. Finally, it gives plain English explanations of model results.\n",
+      "\n",
+      "\n",
+      "Q2: What are the features?\n",
+      "A2: Based on the information provided in the context, the features of Driverless AI include:\n",
+      "\n",
+      "1. AutoViz: An automatic visualization tool that allows users to visualize large datasets in various graphs and charts without having to write code. It takes huge datasets and displays outliers and trends in an interpretable way, and uses statistics to automatically decide which visualizations to present to the user.\n",
+      "2. AutoDL: An automatic feature engineering tool that employs a library of algorithms and feature transformations to automatically engineer new features for a given dataset. It also generates a variable importance chart to show the significance of newly engineered features.\n",
+      "3. Machine Learning Interpretability: A feature that provides users with clear and concise explanations of model results. It generates four dynamic graphs automatically: K-LIME, Variable Importance, Decision Tree Chart, and Partial Dependence Plot; each one helps explore the model output more closely.\n",
+      "4. Global interpretability techniques: Allow the user to broadly understand models at the level of the full dataset.\n",
+      "5. Local interpretability techniques: Explain predictions for individual data points, and produce plain English explanations with reason codes.\n",
+      "6. Python Pipeline: A Jupyter notebook with the Python code that contains the feature engineering and model building that Driverless AI performed automatically. It can be used to export Python pipelines to operate on new data in production, and is conveniently usable through a Jupyter notebook.\n",
+      "7. Personas & Benefits: Driverless AI is designed for business users and data analysts. It helps users with domain knowledge understand the new features generated by AutoDL and their impact on predictions. Analysts who have used visualization tools in the past can easily transition into using the exploratory AutoViz tool as well as the Machine Learning Interpretability tool to understand the impact of a particular variable on their model.\n",
+      "\n",
+      "\n",
+      "Q3: What are the HW requirements?\n",
+      "A3: According to the information provided in the context, the hardware requirements for running Driverless AI are:\n",
+      "\n",
+      "For CPU Installations:\n",
+      "\n",
+      "* Minimum: x86-64 CPU, 64 GB RAM\n",
+      "* Recommended: Dual socket Intel Xeon or IBM Power8 CPU, 8 CPU’s\n",
+      "\n",
+      "For GPU Installations:\n",
+      "\n",
+      "* Minimum: NVIDIA K80\n",
+      "* Recommended: NVIDIA P100 or higher, NVLink and NCL enabled\n",
+      "\n",
+      "For Cloud Installations:\n",
+      "\n",
+      "* EC2 Instances: P2 or G3, Ubuntu 16.04\n",
+      "* Azure Instances: NC or NV, Ubuntu 16.04\n",
+      "\n",
+      "It's also mentioned that Docker CE is required for CPU and GPU installations, and Ubuntu 16.04 is recommended for cloud installations. Additionally, CUDA 8 and NVIDIA Docker 1.0.1 are required for GPU installations.\n",
+      "\n",
+      "\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Start with a Q&A session\n",
+    "print(\"\\n==== Q&A ====\")\n",
+    "chat_session_id = client.create_chat_session(collection_id)\n",
+    "with client.connect(chat_session_id) as session:\n",
+    "    for i, q in enumerate(\n",
+    "        [ \n",
+    "            \"What is Driverless AI?\",\n",
+    "            \"What are the features?\",\n",
+    "            \"What are the HW requirements?\",\n",
+    "        ] \n",
+    "    ):\n",
+    "        a = session.query(q, llm=llm).content\n",
+    "        print(f\"Q{i+1}: {q}\\nA{i+1}: {a}\\n\\n\", flush=True)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 14,
+   "id": "05f86adf-3dd9-43f0-8aa4-9fcaf798f3a2",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "\n",
+      "==== SUMMARY ====\n",
+      "Sure! Here's a list of bullets summarizing the content:\n",
+      "\n",
+      "* Driverless AI is an expert system for automating machine learning model building and interpretation\n",
+      "* Intended to be user-friendly, allowing users with various backgrounds to extract insights from data\n",
+      "* Includes features such as AutoViz, AutoDL, and Machine Learning Interpretability\n",
+      "* AutoViz automatically generates visualizations of large datasets to identify trends and outliers\n",
+      "* AutoDL applies feature engineering to create new features for a given dataset\n",
+      "* Machine Learning Interpretability provides clear explanations of model results\n",
+      "* Python pipeline allows users to export models and use them on new data in production\n",
+      "* Benefits various personas, including business users and data analysts\n",
+      "* Aims to make machine learning more accessible and interpretable for users of all backgrounds\n",
+      "\n",
+      "And here's a summary in two paragraphs:\n",
+      "\n",
+      "Driverless AI is an expert system designed to automate the process of building and interpreting machine learning models, making it user-friendly and accessible to users with various backgrounds. The system includes several features such as AutoViz, AutoDL, and Machine Learning Interpretability, which help users identify trends and outliers, create new features, and provide clear explanations of model results. Additionally, a Python pipeline allows users to export their models and use them on new data in production.\n",
+      "\n",
+      "Driverless AI benefits various personas, including business users who can use it to understand the impact of new features on their models and data analysts who can use it to draw valuable insights from their data. Overall, the system aims to make machine learning more accessible and interpretable for users of all backgrounds, allowing them to extract valuable insights from their data without needing extensive knowledge of machine learning.\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Create summary\n",
+    "summary = client.summarize_content(\n",
+    "    pre_prompt_summary=\"Summarize the content below into a list of bullets.\\n\",\n",
+    "    text_context_list=chunks,\n",
+    "    prompt_summary=\"Now summarize the above into a couple of paragraphs.\",\n",
+    "    llm=llm,\n",
+    ")\n",
+    "\n",
+    "print(\"\\n==== SUMMARY ====\")\n",
+    "for s in summary.content.split(\"\\n\"):\n",
+    "    print(s, flush=True)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 15,
+   "id": "403c88b6-c691-4073-9eb8-befd56111cb3",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "\n",
+      "==== HASHTAGS ====\n",
+      "Sure! Here are the 5 most relevant hashtags that can be extracted from the text:\n",
+      "\n",
+      "1. #MachineLearning\n",
+      "2. #DataScience\n",
+      "3. #AI\n",
+      "4. #DataVisualization\n",
+      "5. #FeatureEngineering\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Create Hashtags\n",
+    "hashtags = client.summarize_content(\n",
+    "    pre_prompt_summary=\"Look for hashtags in the text below, get at most 5 hash tags that are most relevant\\n\",\n",
+    "    text_context_list=chunks,\n",
+    "    prompt_summary=\"Collect no more than 5 hashtags from the text above, and list them.\",\n",
+    "    llm=llm,\n",
+    ")\n",
+    "print(\"\\n==== HASHTAGS ====\")\n",
+    "for s in hashtags.content.split(\"\\n\"):\n",
+    "    print(s, flush=True)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 16,
+   "id": "25e080a6-cfb7-4e8b-b9b0-f7bb8d42c346",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "\n",
+      "==== TRANSLATION ====\n",
+      "Sicher! Hier ist eine Liste von Stichpunkten, die den Inhalt zusammenfassen:\n",
+      "\n",
+      "* Driverless AI ist ein Expertensystem zur Automatisierung des Aufbaus und der Interpretation von maschinellen Lernmodellen.\n",
+      "* Es soll benutzerfreundlich sein und es Benutzern mit unterschiedlichem Hintergrund ermöglichen, Erkenntnisse aus Daten zu gewinnen.\n",
+      "* Enthält Funktionen wie AutoViz, AutoDL und Machine Learning Interpretability.\n",
+      "* AutoViz generiert automatisch Visualisierungen großer Datensätze, um Trends und Ausreißer zu identifizieren.\n",
+      "* AutoDL wendet Feature Engineering an, um neue Merkmale für einen gegebenen Datensatz zu erstellen.\n",
+      "* Machine Learning Interpretability liefert klare Erklärungen der Modellergebnisse.\n",
+      "* Eine Python-Pipeline ermöglicht es Benutzern, Modelle zu exportieren und sie auf neuen Daten in der Produktion zu verwenden.\n",
+      "* Nutzt verschiedenen Personengruppen, einschließlich Geschäftsanwendern und Datenanalysten.\n",
+      "* Ziel ist es, maschinelles Lernen für Benutzer aller Hintergründe zugänglicher und interpretierbarer zu machen.\n",
+      "\n",
+      "Und hier ist eine Zusammenfassung in zwei Absätzen:\n",
+      "\n",
+      "Driverless AI ist ein Expertensystem, das entwickelt wurde, um den Prozess des Aufbaus und der Interpretation von maschinellen Lernmodellen zu automatisieren und es so benutzerfreundlich und zugänglich für Benutzer mit unterschiedlichem Hintergrund zu machen. Das System umfasst verschiedene Funktionen wie AutoViz, AutoDL und Machine Learning Interpretability, die Benutzern helfen, Trends und Ausreißer zu identifizieren, neue Merkmale zu erstellen und klare Erklärungen der Modellergebnisse zu liefern. Darüber hinaus ermöglicht eine Python-Pipeline Benutzern, ihre Modelle zu exportieren und sie auf neuen Daten in der Produktion zu verwenden.\n",
+      "\n",
+      "Driverless AI bietet Vorteile für verschiedene Personengruppen, darunter Geschäftsanwender, die es verwenden können, um den Einfluss neuer Merkmale auf ihre Modelle zu verstehen, und Datenanalysten, die wertvolle Erkenntnisse aus ihren Daten ziehen können. Insgesamt zielt das Systemdarauf ab\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Now translate the summary into another language, using GPT-4\n",
+    "llm = \"gpt-4\"\n",
+    "translation = client.answer_question(\n",
+    "    system_prompt=f\"Du bist ein Deutscher Professor der Englischen Sprache und machst keine Fehler.\",\n",
+    "    text_context_list=[summary.content],\n",
+    "    question=\"Übersetze den obigen Text auf Deutsch.\",\n",
+    "    llm=llm,\n",
+    ")\n",
+    "print(\"\\n==== TRANSLATION ====\")\n",
+    "for s in translation.content.split(\"\\n\"):\n",
+    "    print(s, flush=True)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "bbe61bb4-99f3-42c1-991a-ee5ed9d7a3cf",
+   "metadata": {},
+   "source": [
+    "Note: For more information on h2oGPT, see the official [h2oGPT GitHub repository](https://github.com/h2oai/h2ogpt).\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "e5e06826",
+   "metadata": {},
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.11.5"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}

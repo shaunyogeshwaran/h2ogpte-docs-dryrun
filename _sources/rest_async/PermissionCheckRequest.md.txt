@@ -1,0 +1,29 @@
+# PermissionCheckRequest
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**permission** | **str** |  | 
+
+## Example
+
+```python
+from h2ogpte.rest_async.models.permission_check_request import PermissionCheckRequest
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of PermissionCheckRequest from a JSON string
+permission_check_request_instance = PermissionCheckRequest.from_json(json)
+# print the JSON string representation of the object
+print(PermissionCheckRequest.to_json())
+
+# convert the object into a dict
+permission_check_request_dict = permission_check_request_instance.to_dict()
+# create an instance of PermissionCheckRequest from a dict
+permission_check_request_from_dict = PermissionCheckRequest.from_dict(permission_check_request_dict)
+```
+
+
+
