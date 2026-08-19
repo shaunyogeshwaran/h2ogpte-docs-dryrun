@@ -73,6 +73,15 @@
           });
       });
 
+      // Restore the control after a back/forward-cache restore: the browser
+      // preserves DOM state, so the select would otherwise come back disabled
+      // and showing the version the reader navigated away to.
+      const currentValue = currentVersion || versions[0];
+      window.addEventListener("pageshow", () => {
+        select.disabled = false;
+        select.value = currentValue;
+      });
+
       const label = document.createElement("label");
       label.htmlFor = "version-switcher-select";
       label.textContent = "Version: ";
