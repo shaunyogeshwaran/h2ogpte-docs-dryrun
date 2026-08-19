@@ -1,0 +1,30 @@
+Count the total number of owned documents 
+=========================================
+
+
+Overview 
+--------
+
+Users can identify the number of documents they own.
+
+Example 
+-------
+
+
+.. code-block:: python
+
+    from h2ogpte import H2OGPTE
+
+    client = H2OGPTE(
+        address="https://h2ogpte.genai.h2o.ai",
+        api_key='sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+    )
+
+    number_of_owned_documents = client.count_documents_owned_by_me() 
+
+    print(number_of_owned_documents)
+
+
+.. code-block:: text
+
+    3

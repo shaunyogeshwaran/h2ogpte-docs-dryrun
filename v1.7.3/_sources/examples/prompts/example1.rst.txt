@@ -1,0 +1,144 @@
+Create a prompt template
+========================
+
+
+Overview 
+--------
+
+A prompt template allows users to guide the language model in generating specific, tailored text for a Collection. For example, a prompt template can be used to customize the description of a Collection.
+
+It is a structured outline with instructions that ensure consistent and relevant outputs. By providing reusable instructions alongside the user's query, a prompt template helps customize responses from h2oGPTe, ensuring the output meets specific needs.
+
+Example
+-------
+
+
+.. code-block:: python
+
+    from h2ogpte import H2OGPTE
+
+    client = H2OGPTE(
+        address="https://h2ogpte.genai.h2o.ai",
+        api_key='sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+    )
+
+    prompt_template_id = client.create_prompt_template(
+        name="My prompt template",
+        description="My first prompt template",
+        lang="en",
+        system_prompt="You are h2oGPTe, an expert question-answering AI system created by H2O.ai.",
+        pre_prompt_query=(
+            "Pay attention and remember the information below. You will need to use only any "
+            "chat history, any images given, or any document text in order to answer the "
+            "question or imperative at the end."
+        ),
+        prompt_query=(
+            """According to only the information in any chat history, any images given, or any document """
+            """text provided within the context above, give a well-structured response (that starts with """
+            """ "According to") to:"""
+        ),
+        hyde_no_rag_llm_prompt_extension="Keep the answer brief, and list the 5 most relevant key words at the end.",
+        pre_prompt_summary=(
+            "In order to write a concise single-paragraph or bulleted list summary, pay attention "
+            "to any chat history, any images given, or any following text:"
+        ),
+        prompt_summary=(
+            "Using only any chat history, any images given, or any text above, write a condensed "
+            "and concise well-structured Markdown summary of key results."
+        ),
+        system_prompt_reflection=(
+            "You are acting as a judge. You must be fair and impartial and pay attention to details."
+        ),
+        prompt_reflection=(
+            """Review the user's question and the corresponding response using the additive 5-point """
+            """scoring system described below. Points are accumulated based on the satisfaction of """
+            """each criterion:\n"""
+            """- Add 1 point if the response is relevant and provides some information related to the """
+            """user's inquiry, even if it is incomplete or contains some irrelevant content.\n"""
+            """- Add another point if the response addresses a substantial portion of the user's question, """
+            """but does not completely resolve the query or provide a direct answer.\n"""
+            """- Award a third point if the response answers the basic elements of the user's question in """
+            """a useful way, regardless of whether it seems to have been written by an AI Assistant or """
+            """if it has elements typically found in blogs or search results.\n"""
+            """- Grant a fourth point if the response is clearly written from an AI Assistant's """
+            """perspective, addressing the user's question directly and comprehensively, and is """
+            """well-organized and helpful, even if there is slight room for improvement in clarity, """
+            """conciseness or focus.\n"""
+            """- Bestow a fifth point for a response that is impeccably tailored to the user's question """
+            """by an AI Assistant, without extraneous information, reflecting expert knowledge, and """
+            """demonstrating a high-quality, engaging, and insightful answer.\n"""
+            "\n<user>\n%s\n</user>\n\n<response>\n%s\n</response>\n\n"
+            """After examining the user's instruction and the response:\n\n"""
+            """- Briefly justify your total score, up to 100 words.\n"""
+            """- Conclude with the score using the format: "Score: <total points> / 5"\n\n"""
+            """Remember to assess from the AI Assistant perspective, utilizing web search knowledge as """
+            """necessary. To evaluate the response in alignment with this additive scoring model, we'll """
+            """systematically attribute points based on the outlined criteria."""
+        ),
+        auto_gen_description_prompt=(
+            "Create a short one-sentence summary from the above context, with the goal to make it "
+            "clear to the reader what this is about."
+        ),
+        auto_gen_document_summary_pre_prompt_summary=(
+            "In order to write a concise single-paragraph summary, pay attention to the following text:"
+        ),
+        auto_gen_document_summary_prompt_summary=(
+            "Using only the text above, write a condensed and concise summary of key results "
+            "(preferably as one paragraph)."
+        ),
+        auto_gen_document_sample_questions_prompt=(
+            'Create 10 interesting questions for which the answers are contained in the information '
+            'provided above. Respond in JSON, like this: {{"q1": "Question 1?", "q2": "Question 2?", ..., "q10": "Question 10?"}}.'
+        ),
+        default_sample_questions=[
+            "Create five good questions",
+            "Summarize in one sentence",
+            "Explain this to a 5-year old",
+            "Tell me something interesting",
+        ],
+        image_batch_image_prompt=(
+            """<response_instructions>\n"""
+            """- Act as a keen observer with a sharp eye for detail.\n"""
+            """- Analyze the content within the images.\n"""
+            """- Provide insights based on your observations.\n"""
+            """- Avoid making up facts.\n"""
+            """- Do not forget to follow the system prompt.\n"""
+            """</response_instructions>"""
+        ),
+        image_batch_final_prompt=(
+            """<response_instructions>\n"""
+            """- Check if the answers already given in <image> XML tags are useful.\n"""
+            """- Image answers came from a vision model capable of reading text and images within """
+            """the images.\n"""
+            """- If image answers are useful, preserve all details the image answers provide and use """
+            """them to construct a well-structured answer.\n"""
+            """- Ignore image answers that had no useful content, because any single batch of images """
+            """may not be relevant. Focus on all details from image answers that are relevant and useful.\n"""
+            """- Check if the document text can answer the question.\n"""
+            """- Check if the chat history can answer the question.\n"""
+            """- Check if any figure captions can answer the question.\n"""
+            """- If answers conflict between text, chat history, and figure captions, do not focus """
+            """your response on this conflict.\n"""
+            """- In handling conflicting answers, use logical reasoning and supporting evidence to """
+            """assess the plausibility of each answer.\n"""
+            """- In handling conflicting answers, choose the most consistent answer -- i.e., the """
+            """most common answer among conflicts (self-consistency reasoning) or one that aligns """
+            """with well-established facts.\n"""
+            """- In handling conflicting answers, one may choose one data source over another -- i.e., """
+            """text is probably more reliable than an image when the question can be answered from """
+            """text, while an image is more reliable than text for flowcharts, photos, etc.\n"""
+            """- Do not forget to follow the system prompt.\n"""
+            """- Finally, according to our chat history, the above documents, figure captions, or given """
+            """images, construct a well-structured response.\n"""
+            """</response_instructions>"""
+        ),
+    )
+
+    print(prompt_template_id)
+
+
+.. code-block:: text
+
+    b7f06049-2aae-4db3-84fa-77....
+
+

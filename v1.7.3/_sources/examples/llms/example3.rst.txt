@@ -1,0 +1,52 @@
+View performance metrics for configured and unconfigured LLMs
+=============================================================
+
+Overview 
+--------
+
+Users can view the performance metrics of large language models (LLMs) configured or no longer configured within the environment.
+
+Example 
+-------
+
+.. code-block:: python
+
+    from h2ogpte import H2OGPTE
+
+    client = H2OGPTE(
+        address="https://h2ogpte.genai.h2o.ai",
+        api_key='sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+    )
+
+    # The `get_llm_performance_by_llm` method returns a list containing performance metrics for each configured or no longer configured LLM within the environment.
+    # The available units for time intervals are:
+    # - minute / minutes (for example, 5 minutes)
+    # - hour / hours (for example, 2 hours)
+    # - day / days (for example, 3 days)
+    # - week / weeks (for example, 1 week)
+    # - year / years (for example, 1 year)
+    list_of_performance_metrics = client.get_llm_performance_by_llm(interval="3 months") 
+
+    for performance in list_of_performance_metrics[:1]:
+        print(
+            f"LLM name: {performance.llm_name}\n"
+            f"Input tokens: {performance.input_tokens}\n"
+            f"Model computed fields: {performance.model_computed_fields}\n"
+            f"Model config: {performance.model_config}\n"
+            f"Model fields: {performance.model_fields}\n"
+            f"Output tokens: {performance.output_tokens}\n"
+            f"Time to first token: {performance.time_to_first_token}\n"
+            f"Tokens per second: {performance.tokens_per_second}"
+        )
+
+
+.. code-block:: text
+
+    LLM name: claude-3-5-sonnet-20240620
+    Input tokens: 347003436
+    Model computed fields: {}
+    Model config: {}
+    Model fields: {'llm_name': FieldInfo(annotation=str, required=True), 'call_count': FieldInfo(annotation=int, required=True), 'input_tokens': FieldInfo(annotation=int, required=True), 'output_tokens': FieldInfo(annotation=int, required=True), 'tokens_per_second': FieldInfo(annotation=float, required=True), 'time_to_first_token': FieldInfo(annotation=float, required=True)}
+    Output tokens: 34691224
+    Time to first token: 1.7457449999999999
+    Tokens per second: 45.505

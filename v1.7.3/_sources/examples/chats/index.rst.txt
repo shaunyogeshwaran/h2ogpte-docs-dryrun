@@ -1,0 +1,17 @@
+Chats
+=====
+
+Overview
+--------
+
+This section contains code examples of how to perform an array of actions around chats in h2oGPTe. 
+
+Examples
+--------
+
+.. toctree::
+   :maxdepth: 1
+
+   example1
+   example2
+   example3

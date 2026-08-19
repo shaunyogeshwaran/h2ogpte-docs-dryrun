@@ -1,0 +1,27 @@
+Create a Collection
+==================
+
+
+Overview 
+--------
+
+A Collection refers to a group of related Documents. A Collection lets a user aggregate documents in one location. A user can utilize Collections to group particular sets of material (documents) to explore individually through Chats utilizing a large language model (LLM). 
+
+
+Example 
+-------
+
+
+.. code-block:: python
+    
+    from h2ogpte import H2OGPTE
+
+    client = H2OGPTE(
+        address="https://h2ogpte.genai.h2o.ai",
+        api_key='sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+    )
+
+    collection_id = client.create_collection(
+        name="The name of my Collection",
+        description="The description of my Collection",
+    )
