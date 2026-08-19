@@ -131,7 +131,43 @@ div.document div.output-cell:before {
   opacity: 0.6;
   padding: 1px 10px 1px 5px;
 }
-.version-switcher {
-  padding: 0.5em 1em;
-  font-size: 90%;
+/* Version switcher - styled to match the sidebar search pill on the H2O-yellow header */
+.wy-side-nav-search .version-switcher {
+  margin-top: 6px;
+}
+.wy-side-nav-search .version-switcher label {
+  /* visually hidden, kept for screen readers */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+.wy-side-nav-search .version-switcher select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  padding: 6px 30px 6px 12px;
+  border: 1px solid #2472a4;
+  border-radius: 50px;
+  font-family: inherit;
+  font-size: 85%;
+  color: #404040;
+  background-color: #fff;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%23404040' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  cursor: pointer;
+  text-align: center;
+  text-align-last: center;
+}
+.wy-side-nav-search .version-switcher select:focus {
+  outline: 2px solid #2472a4;
+  outline-offset: 1px;
+}
+.wy-side-nav-search .version-switcher select:disabled {
+  opacity: 0.6;
+  cursor: wait;
 }
