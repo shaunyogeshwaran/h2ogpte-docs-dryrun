@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>h2oGPTe Python API &mdash; h2oGPTe</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/code.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="canonical" href="https://h2oai.github.io/h2ogpte/python_api.html"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=153204dd"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script defer="defer" src="_static/js/versions.js?v=17ffda95"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="h2ogpte package" href="h2ogpte.html" />
+    <link rel="prev" title="Unshare a prompt template" href="examples/prompts/example4.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            h2oGPTe
+          </a>
+              <div class="version">
+                1.7.5-3
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Installation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">h2oGPTe Python Client Installation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started with h2oGPTe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="async_api.html">h2oGPTe Async API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/tutorial1/tutorial1.html">Tutorial 1: Chat with a website</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/tutorial2/tutorial2.html">Tutorial 2: Create a Collection with h2oGPTe’s or your custom guardrails and PII parameter values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/tutorial3/tutorial3.html">Tutorial 3: Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/tutorial4/tutorial4.html">Tutorial 4: Downloading agent-generated files</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples/chats/index.html">Chats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/collections/index.html">Collections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/documents/index.html">Documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/llms/index.html">LLMs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/users/index.html">Users</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/jobs/index.html">Jobs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/prompts/index.html">Prompts</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Python API</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">h2oGPTe Python API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="h2ogpte.html">h2ogpte package</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Python for REST API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="rest.html">h2oGPTe Python API for REST Interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Third-Party Notices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="docs-licenses/licenses.html">Third-Party Licenses</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Release Notes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">h2oGPTe</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">h2oGPTe Python API</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/python_api.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="h2ogpte-python-api">
+<h1>h2oGPTe Python API<a class="headerlink" href="#h2ogpte-python-api" title="Permalink to this heading"></a></h1>
+<p>h2oGPTe Python client API reference.</p>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Python API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="h2ogpte.html">h2ogpte package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="h2ogpte.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="h2ogpte.html#h2ogpte-h2ogpte-module">h2ogpte.h2ogpte module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="h2ogpte.html#module-h2ogpte.session">h2ogpte.session module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.session.Session"><code class="docutils literal notranslate"><span class="pre">Session</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.session.Session.connect"><code class="docutils literal notranslate"><span class="pre">Session.connect()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.session.Session.connection"><code class="docutils literal notranslate"><span class="pre">Session.connection</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.session.Session.disconnect"><code class="docutils literal notranslate"><span class="pre">Session.disconnect()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.session.Session.query"><code class="docutils literal notranslate"><span class="pre">Session.query()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.session.deserialize"><code class="docutils literal notranslate"><span class="pre">deserialize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.session.serialize"><code class="docutils literal notranslate"><span class="pre">serialize()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="h2ogpte.html#module-h2ogpte.types">h2ogpte.types module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.APIKey"><code class="docutils literal notranslate"><span class="pre">APIKey</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.APIKey.collection_id"><code class="docutils literal notranslate"><span class="pre">APIKey.collection_id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.APIKey.collection_name"><code class="docutils literal notranslate"><span class="pre">APIKey.collection_name</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.APIKey.created_at"><code class="docutils literal notranslate"><span class="pre">APIKey.created_at</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.APIKey.expires_at"><code class="docutils literal notranslate"><span class="pre">APIKey.expires_at</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.APIKey.hint"><code class="docutils literal notranslate"><span class="pre">APIKey.hint</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.APIKey.id"><code class="docutils literal notranslate"><span class="pre">APIKey.id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.APIKey.inactivity_interval"><code class="docutils literal notranslate"><span class="pre">APIKey.inactivity_interval</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.APIKey.is_active"><code class="docutils literal notranslate"><span class="pre">APIKey.is_active</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.APIKey.is_global_key"><code class="docutils literal notranslate"><span class="pre">APIKey.is_global_key</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.APIKey.last_used_at"><code class="docutils literal notranslate"><span class="pre">APIKey.last_used_at</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.APIKey.model_config"><code class="docutils literal notranslate"><span class="pre">APIKey.model_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.APIKey.name"><code class="docutils literal notranslate"><span class="pre">APIKey.name</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.APIKey.total_calls"><code class="docutils literal notranslate"><span class="pre">APIKey.total_calls</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.APIKey.username"><code class="docutils literal notranslate"><span class="pre">APIKey.username</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Answer"><code class="docutils literal notranslate"><span class="pre">Answer</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Answer.content"><code class="docutils literal notranslate"><span class="pre">Answer.content</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Answer.error"><code class="docutils literal notranslate"><span class="pre">Answer.error</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Answer.input_tokens"><code class="docutils literal notranslate"><span class="pre">Answer.input_tokens</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Answer.llm"><code class="docutils literal notranslate"><span class="pre">Answer.llm</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Answer.model_config"><code class="docutils literal notranslate"><span class="pre">Answer.model_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Answer.origin"><code class="docutils literal notranslate"><span class="pre">Answer.origin</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Answer.output_tokens"><code class="docutils literal notranslate"><span class="pre">Answer.output_tokens</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Answer.prompt_raw"><code class="docutils literal notranslate"><span class="pre">Answer.prompt_raw</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatAcknowledgement"><code class="docutils literal notranslate"><span class="pre">ChatAcknowledgement</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatAcknowledgement.body"><code class="docutils literal notranslate"><span class="pre">ChatAcknowledgement.body</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatAcknowledgement.correlation_id"><code class="docutils literal notranslate"><span class="pre">ChatAcknowledgement.correlation_id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatAcknowledgement.message_id"><code class="docutils literal notranslate"><span class="pre">ChatAcknowledgement.message_id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatAcknowledgement.session_id"><code class="docutils literal notranslate"><span class="pre">ChatAcknowledgement.session_id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatAcknowledgement.t"><code class="docutils literal notranslate"><span class="pre">ChatAcknowledgement.t</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatAcknowledgement.use_agent"><code class="docutils literal notranslate"><span class="pre">ChatAcknowledgement.use_agent</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatAcknowledgement.username"><code class="docutils literal notranslate"><span class="pre">ChatAcknowledgement.username</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatMessage"><code class="docutils literal notranslate"><span class="pre">ChatMessage</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatMessage.content"><code class="docutils literal notranslate"><span class="pre">ChatMessage.content</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatMessage.created_at"><code class="docutils literal notranslate"><span class="pre">ChatMessage.created_at</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatMessage.error"><code class="docutils literal notranslate"><span class="pre">ChatMessage.error</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatMessage.id"><code class="docutils literal notranslate"><span class="pre">ChatMessage.id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatMessage.model_config"><code class="docutils literal notranslate"><span class="pre">ChatMessage.model_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatMessage.reply_to"><code class="docutils literal notranslate"><span class="pre">ChatMessage.reply_to</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatMessage.type_list"><code class="docutils literal notranslate"><span class="pre">ChatMessage.type_list</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatMessage.votes"><code class="docutils literal notranslate"><span class="pre">ChatMessage.votes</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatMessageFull"><code class="docutils literal notranslate"><span class="pre">ChatMessageFull</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatMessageFull.collection_id"><code class="docutils literal notranslate"><span class="pre">ChatMessageFull.collection_id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatMessageFull.collection_name"><code class="docutils literal notranslate"><span class="pre">ChatMessageFull.collection_name</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatMessageFull.content"><code class="docutils literal notranslate"><span class="pre">ChatMessageFull.content</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatMessageFull.created_at"><code class="docutils literal notranslate"><span class="pre">ChatMessageFull.created_at</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatMessageFull.error"><code class="docutils literal notranslate"><span class="pre">ChatMessageFull.error</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatMessageFull.has_references"><code class="docutils literal notranslate"><span class="pre">ChatMessageFull.has_references</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatMessageFull.id"><code class="docutils literal notranslate"><span class="pre">ChatMessageFull.id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatMessageFull.llm_args"><code class="docutils literal notranslate"><span class="pre">ChatMessageFull.llm_args</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatMessageFull.model_config"><code class="docutils literal notranslate"><span class="pre">ChatMessageFull.model_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatMessageFull.reply_to"><code class="docutils literal notranslate"><span class="pre">ChatMessageFull.reply_to</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatMessageFull.total_references"><code class="docutils literal notranslate"><span class="pre">ChatMessageFull.total_references</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatMessageFull.type_list"><code class="docutils literal notranslate"><span class="pre">ChatMessageFull.type_list</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatMessageFull.username"><code class="docutils literal notranslate"><span class="pre">ChatMessageFull.username</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatMessageFull.votes"><code class="docutils literal notranslate"><span class="pre">ChatMessageFull.votes</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatMessageMeta"><code class="docutils literal notranslate"><span class="pre">ChatMessageMeta</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatMessageMeta.content"><code class="docutils literal notranslate"><span class="pre">ChatMessageMeta.content</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatMessageMeta.message_type"><code class="docutils literal notranslate"><span class="pre">ChatMessageMeta.message_type</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatMessageMeta.model_config"><code class="docutils literal notranslate"><span class="pre">ChatMessageMeta.model_config</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatMessageReference"><code class="docutils literal notranslate"><span class="pre">ChatMessageReference</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatMessageReference.chunk_id"><code class="docutils literal notranslate"><span class="pre">ChatMessageReference.chunk_id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatMessageReference.collection_id"><code class="docutils literal notranslate"><span class="pre">ChatMessageReference.collection_id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatMessageReference.content"><code class="docutils literal notranslate"><span class="pre">ChatMessageReference.content</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatMessageReference.document_id"><code class="docutils literal notranslate"><span class="pre">ChatMessageReference.document_id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatMessageReference.document_name"><code class="docutils literal notranslate"><span class="pre">ChatMessageReference.document_name</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatMessageReference.model_config"><code class="docutils literal notranslate"><span class="pre">ChatMessageReference.model_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatMessageReference.pages"><code class="docutils literal notranslate"><span class="pre">ChatMessageReference.pages</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatMessageReference.score"><code class="docutils literal notranslate"><span class="pre">ChatMessageReference.score</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatMessageReference.uri"><code class="docutils literal notranslate"><span class="pre">ChatMessageReference.uri</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatMessageReference.were_references_deleted"><code class="docutils literal notranslate"><span class="pre">ChatMessageReference.were_references_deleted</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatRequest"><code class="docutils literal notranslate"><span class="pre">ChatRequest</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatRequest.body"><code class="docutils literal notranslate"><span class="pre">ChatRequest.body</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatRequest.correlation_id"><code class="docutils literal notranslate"><span class="pre">ChatRequest.correlation_id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatRequest.image_batch_final_prompt"><code class="docutils literal notranslate"><span class="pre">ChatRequest.image_batch_final_prompt</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatRequest.image_batch_image_prompt"><code class="docutils literal notranslate"><span class="pre">ChatRequest.image_batch_image_prompt</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatRequest.include_chat_history"><code class="docutils literal notranslate"><span class="pre">ChatRequest.include_chat_history</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatRequest.llm"><code class="docutils literal notranslate"><span class="pre">ChatRequest.llm</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatRequest.llm_args"><code class="docutils literal notranslate"><span class="pre">ChatRequest.llm_args</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatRequest.metadata_filter"><code class="docutils literal notranslate"><span class="pre">ChatRequest.metadata_filter</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatRequest.mode"><code class="docutils literal notranslate"><span class="pre">ChatRequest.mode</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatRequest.pre_prompt_query"><code class="docutils literal notranslate"><span class="pre">ChatRequest.pre_prompt_query</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatRequest.pre_prompt_summary"><code class="docutils literal notranslate"><span class="pre">ChatRequest.pre_prompt_summary</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatRequest.prompt_query"><code class="docutils literal notranslate"><span class="pre">ChatRequest.prompt_query</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatRequest.prompt_summary"><code class="docutils literal notranslate"><span class="pre">ChatRequest.prompt_summary</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatRequest.rag_config"><code class="docutils literal notranslate"><span class="pre">ChatRequest.rag_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatRequest.self_reflection_config"><code class="docutils literal notranslate"><span class="pre">ChatRequest.self_reflection_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatRequest.session_id"><code class="docutils literal notranslate"><span class="pre">ChatRequest.session_id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatRequest.system_prompt"><code class="docutils literal notranslate"><span class="pre">ChatRequest.system_prompt</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatRequest.t"><code class="docutils literal notranslate"><span class="pre">ChatRequest.t</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatRequest.tags"><code class="docutils literal notranslate"><span class="pre">ChatRequest.tags</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatResponse"><code class="docutils literal notranslate"><span class="pre">ChatResponse</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatResponse.body"><code class="docutils literal notranslate"><span class="pre">ChatResponse.body</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatResponse.correlation_id"><code class="docutils literal notranslate"><span class="pre">ChatResponse.correlation_id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatResponse.error"><code class="docutils literal notranslate"><span class="pre">ChatResponse.error</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatResponse.error_type"><code class="docutils literal notranslate"><span class="pre">ChatResponse.error_type</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatResponse.message_id"><code class="docutils literal notranslate"><span class="pre">ChatResponse.message_id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatResponse.meta"><code class="docutils literal notranslate"><span class="pre">ChatResponse.meta</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatResponse.reply_to_id"><code class="docutils literal notranslate"><span class="pre">ChatResponse.reply_to_id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatResponse.retry_after"><code class="docutils literal notranslate"><span class="pre">ChatResponse.retry_after</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatResponse.session_id"><code class="docutils literal notranslate"><span class="pre">ChatResponse.session_id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatResponse.t"><code class="docutils literal notranslate"><span class="pre">ChatResponse.t</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatSessionCount"><code class="docutils literal notranslate"><span class="pre">ChatSessionCount</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatSessionCount.chat_session_count"><code class="docutils literal notranslate"><span class="pre">ChatSessionCount.chat_session_count</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatSessionCount.model_config"><code class="docutils literal notranslate"><span class="pre">ChatSessionCount.model_config</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatSessionForCollection"><code class="docutils literal notranslate"><span class="pre">ChatSessionForCollection</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatSessionForCollection.id"><code class="docutils literal notranslate"><span class="pre">ChatSessionForCollection.id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatSessionForCollection.latest_message_content"><code class="docutils literal notranslate"><span class="pre">ChatSessionForCollection.latest_message_content</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatSessionForCollection.model_config"><code class="docutils literal notranslate"><span class="pre">ChatSessionForCollection.model_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatSessionForCollection.name"><code class="docutils literal notranslate"><span class="pre">ChatSessionForCollection.name</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatSessionForCollection.source"><code class="docutils literal notranslate"><span class="pre">ChatSessionForCollection.source</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatSessionForCollection.updated_at"><code class="docutils literal notranslate"><span class="pre">ChatSessionForCollection.updated_at</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatSessionForCollection.username"><code class="docutils literal notranslate"><span class="pre">ChatSessionForCollection.username</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatSessionForDocument"><code class="docutils literal notranslate"><span class="pre">ChatSessionForDocument</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatSessionForDocument.id"><code class="docutils literal notranslate"><span class="pre">ChatSessionForDocument.id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatSessionForDocument.latest_message_content"><code class="docutils literal notranslate"><span class="pre">ChatSessionForDocument.latest_message_content</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatSessionForDocument.model_config"><code class="docutils literal notranslate"><span class="pre">ChatSessionForDocument.model_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatSessionForDocument.source"><code class="docutils literal notranslate"><span class="pre">ChatSessionForDocument.source</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatSessionForDocument.updated_at"><code class="docutils literal notranslate"><span class="pre">ChatSessionForDocument.updated_at</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatSessionInfo"><code class="docutils literal notranslate"><span class="pre">ChatSessionInfo</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatSessionInfo.archived_at"><code class="docutils literal notranslate"><span class="pre">ChatSessionInfo.archived_at</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatSessionInfo.collection_id"><code class="docutils literal notranslate"><span class="pre">ChatSessionInfo.collection_id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatSessionInfo.collection_name"><code class="docutils literal notranslate"><span class="pre">ChatSessionInfo.collection_name</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatSessionInfo.expiry_date"><code class="docutils literal notranslate"><span class="pre">ChatSessionInfo.expiry_date</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatSessionInfo.id"><code class="docutils literal notranslate"><span class="pre">ChatSessionInfo.id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatSessionInfo.inactivity_interval"><code class="docutils literal notranslate"><span class="pre">ChatSessionInfo.inactivity_interval</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatSessionInfo.keep_forever"><code class="docutils literal notranslate"><span class="pre">ChatSessionInfo.keep_forever</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatSessionInfo.latest_message_content"><code class="docutils literal notranslate"><span class="pre">ChatSessionInfo.latest_message_content</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatSessionInfo.model_config"><code class="docutils literal notranslate"><span class="pre">ChatSessionInfo.model_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatSessionInfo.name"><code class="docutils literal notranslate"><span class="pre">ChatSessionInfo.name</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatSessionInfo.prompt_template_id"><code class="docutils literal notranslate"><span class="pre">ChatSessionInfo.prompt_template_id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatSessionInfo.source"><code class="docutils literal notranslate"><span class="pre">ChatSessionInfo.source</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatSessionInfo.status"><code class="docutils literal notranslate"><span class="pre">ChatSessionInfo.status</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatSessionInfo.updated_at"><code class="docutils literal notranslate"><span class="pre">ChatSessionInfo.updated_at</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatSessionInfo.username"><code class="docutils literal notranslate"><span class="pre">ChatSessionInfo.username</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatSessionInfo.workspace"><code class="docutils literal notranslate"><span class="pre">ChatSessionInfo.workspace</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatShareUrl"><code class="docutils literal notranslate"><span class="pre">ChatShareUrl</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatShareUrl.relative_path"><code class="docutils literal notranslate"><span class="pre">ChatShareUrl.relative_path</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ChatShareUrl.url"><code class="docutils literal notranslate"><span class="pre">ChatShareUrl.url</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Chunk"><code class="docutils literal notranslate"><span class="pre">Chunk</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Chunk.end_time"><code class="docutils literal notranslate"><span class="pre">Chunk.end_time</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Chunk.id"><code class="docutils literal notranslate"><span class="pre">Chunk.id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Chunk.model_config"><code class="docutils literal notranslate"><span class="pre">Chunk.model_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Chunk.name"><code class="docutils literal notranslate"><span class="pre">Chunk.name</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Chunk.pages"><code class="docutils literal notranslate"><span class="pre">Chunk.pages</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Chunk.size"><code class="docutils literal notranslate"><span class="pre">Chunk.size</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Chunk.start_time"><code class="docutils literal notranslate"><span class="pre">Chunk.start_time</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Chunk.text"><code class="docutils literal notranslate"><span class="pre">Chunk.text</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Collection"><code class="docutils literal notranslate"><span class="pre">Collection</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Collection.chat_settings"><code class="docutils literal notranslate"><span class="pre">Collection.chat_settings</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Collection.collection_settings"><code class="docutils literal notranslate"><span class="pre">Collection.collection_settings</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Collection.created_at"><code class="docutils literal notranslate"><span class="pre">Collection.created_at</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Collection.description"><code class="docutils literal notranslate"><span class="pre">Collection.description</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Collection.description_auto_generated"><code class="docutils literal notranslate"><span class="pre">Collection.description_auto_generated</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Collection.description_dirty_at"><code class="docutils literal notranslate"><span class="pre">Collection.description_dirty_at</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Collection.description_generated_at"><code class="docutils literal notranslate"><span class="pre">Collection.description_generated_at</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Collection.description_generation_started_at"><code class="docutils literal notranslate"><span class="pre">Collection.description_generation_started_at</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Collection.document_count"><code class="docutils literal notranslate"><span class="pre">Collection.document_count</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Collection.document_size"><code class="docutils literal notranslate"><span class="pre">Collection.document_size</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Collection.embedding_model"><code class="docutils literal notranslate"><span class="pre">Collection.embedding_model</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Collection.exempt_from_chat_expiry"><code class="docutils literal notranslate"><span class="pre">Collection.exempt_from_chat_expiry</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Collection.expiry_date"><code class="docutils literal notranslate"><span class="pre">Collection.expiry_date</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Collection.has_default_guardrails"><code class="docutils literal notranslate"><span class="pre">Collection.has_default_guardrails</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Collection.id"><code class="docutils literal notranslate"><span class="pre">Collection.id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Collection.inactivity_interval"><code class="docutils literal notranslate"><span class="pre">Collection.inactivity_interval</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Collection.is_public"><code class="docutils literal notranslate"><span class="pre">Collection.is_public</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Collection.metadata_dict"><code class="docutils literal notranslate"><span class="pre">Collection.metadata_dict</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Collection.model_config"><code class="docutils literal notranslate"><span class="pre">Collection.model_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Collection.name"><code class="docutils literal notranslate"><span class="pre">Collection.name</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Collection.prompt_template_id"><code class="docutils literal notranslate"><span class="pre">Collection.prompt_template_id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Collection.rag_type"><code class="docutils literal notranslate"><span class="pre">Collection.rag_type</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Collection.size_limit"><code class="docutils literal notranslate"><span class="pre">Collection.size_limit</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Collection.status"><code class="docutils literal notranslate"><span class="pre">Collection.status</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Collection.thumbnail"><code class="docutils literal notranslate"><span class="pre">Collection.thumbnail</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Collection.updated_at"><code class="docutils literal notranslate"><span class="pre">Collection.updated_at</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Collection.username"><code class="docutils literal notranslate"><span class="pre">Collection.username</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Collection.vex_encryption"><code class="docutils literal notranslate"><span class="pre">Collection.vex_encryption</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Collection.workspace"><code class="docutils literal notranslate"><span class="pre">Collection.workspace</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.CollectionCount"><code class="docutils literal notranslate"><span class="pre">CollectionCount</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.CollectionCount.collection_count"><code class="docutils literal notranslate"><span class="pre">CollectionCount.collection_count</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.CollectionCount.model_config"><code class="docutils literal notranslate"><span class="pre">CollectionCount.model_config</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.CollectionInfo"><code class="docutils literal notranslate"><span class="pre">CollectionInfo</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.CollectionInfo.archived_at"><code class="docutils literal notranslate"><span class="pre">CollectionInfo.archived_at</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.CollectionInfo.created_at"><code class="docutils literal notranslate"><span class="pre">CollectionInfo.created_at</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.CollectionInfo.description"><code class="docutils literal notranslate"><span class="pre">CollectionInfo.description</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.CollectionInfo.document_count"><code class="docutils literal notranslate"><span class="pre">CollectionInfo.document_count</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.CollectionInfo.document_size"><code class="docutils literal notranslate"><span class="pre">CollectionInfo.document_size</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.CollectionInfo.embedding_model"><code class="docutils literal notranslate"><span class="pre">CollectionInfo.embedding_model</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.CollectionInfo.exempt_from_chat_expiry"><code class="docutils literal notranslate"><span class="pre">CollectionInfo.exempt_from_chat_expiry</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.CollectionInfo.expiry_date"><code class="docutils literal notranslate"><span class="pre">CollectionInfo.expiry_date</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.CollectionInfo.id"><code class="docutils literal notranslate"><span class="pre">CollectionInfo.id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.CollectionInfo.inactivity_interval"><code class="docutils literal notranslate"><span class="pre">CollectionInfo.inactivity_interval</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.CollectionInfo.is_public"><code class="docutils literal notranslate"><span class="pre">CollectionInfo.is_public</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.CollectionInfo.metadata_dict"><code class="docutils literal notranslate"><span class="pre">CollectionInfo.metadata_dict</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.CollectionInfo.model_config"><code class="docutils literal notranslate"><span class="pre">CollectionInfo.model_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.CollectionInfo.name"><code class="docutils literal notranslate"><span class="pre">CollectionInfo.name</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.CollectionInfo.sessions_count"><code class="docutils literal notranslate"><span class="pre">CollectionInfo.sessions_count</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.CollectionInfo.size_limit"><code class="docutils literal notranslate"><span class="pre">CollectionInfo.size_limit</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.CollectionInfo.status"><code class="docutils literal notranslate"><span class="pre">CollectionInfo.status</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.CollectionInfo.updated_at"><code class="docutils literal notranslate"><span class="pre">CollectionInfo.updated_at</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.CollectionInfo.user_count"><code class="docutils literal notranslate"><span class="pre">CollectionInfo.user_count</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.CollectionInfo.username"><code class="docutils literal notranslate"><span class="pre">CollectionInfo.username</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.CollectionInfo.workspace"><code class="docutils literal notranslate"><span class="pre">CollectionInfo.workspace</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ConfigItem"><code class="docutils literal notranslate"><span class="pre">ConfigItem</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ConfigItem.key_name"><code class="docutils literal notranslate"><span class="pre">ConfigItem.key_name</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ConfigItem.model_config"><code class="docutils literal notranslate"><span class="pre">ConfigItem.model_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ConfigItem.string_value"><code class="docutils literal notranslate"><span class="pre">ConfigItem.string_value</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ConfigItem.value_type"><code class="docutils literal notranslate"><span class="pre">ConfigItem.value_type</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Document"><code class="docutils literal notranslate"><span class="pre">Document</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Document.connector"><code class="docutils literal notranslate"><span class="pre">Document.connector</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Document.created_at"><code class="docutils literal notranslate"><span class="pre">Document.created_at</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Document.encrypted_dek"><code class="docutils literal notranslate"><span class="pre">Document.encrypted_dek</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Document.guardrails_settings"><code class="docutils literal notranslate"><span class="pre">Document.guardrails_settings</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Document.id"><code class="docutils literal notranslate"><span class="pre">Document.id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Document.is_encrypted"><code class="docutils literal notranslate"><span class="pre">Document.is_encrypted</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Document.meta_data_dict"><code class="docutils literal notranslate"><span class="pre">Document.meta_data_dict</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Document.metadata_dict"><code class="docutils literal notranslate"><span class="pre">Document.metadata_dict</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Document.model_config"><code class="docutils literal notranslate"><span class="pre">Document.model_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Document.name"><code class="docutils literal notranslate"><span class="pre">Document.name</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Document.original_mtime"><code class="docutils literal notranslate"><span class="pre">Document.original_mtime</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Document.original_type"><code class="docutils literal notranslate"><span class="pre">Document.original_type</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Document.page_count"><code class="docutils literal notranslate"><span class="pre">Document.page_count</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Document.page_layout_dict"><code class="docutils literal notranslate"><span class="pre">Document.page_layout_dict</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Document.page_ocr_model_dict"><code class="docutils literal notranslate"><span class="pre">Document.page_ocr_model_dict</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Document.size"><code class="docutils literal notranslate"><span class="pre">Document.size</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Document.status"><code class="docutils literal notranslate"><span class="pre">Document.status</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Document.type"><code class="docutils literal notranslate"><span class="pre">Document.type</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Document.updated_at"><code class="docutils literal notranslate"><span class="pre">Document.updated_at</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Document.uri"><code class="docutils literal notranslate"><span class="pre">Document.uri</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Document.user_source_file"><code class="docutils literal notranslate"><span class="pre">Document.user_source_file</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentCount"><code class="docutils literal notranslate"><span class="pre">DocumentCount</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentCount.document_count"><code class="docutils literal notranslate"><span class="pre">DocumentCount.document_count</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentCount.model_config"><code class="docutils literal notranslate"><span class="pre">DocumentCount.model_config</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentExtractionResult"><code class="docutils literal notranslate"><span class="pre">DocumentExtractionResult</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentExtractionResult.content"><code class="docutils literal notranslate"><span class="pre">DocumentExtractionResult.content</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentExtractionResult.document_id"><code class="docutils literal notranslate"><span class="pre">DocumentExtractionResult.document_id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentExtractionResult.document_name"><code class="docutils literal notranslate"><span class="pre">DocumentExtractionResult.document_name</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentExtractionResult.error"><code class="docutils literal notranslate"><span class="pre">DocumentExtractionResult.error</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentExtractionResult.id"><code class="docutils literal notranslate"><span class="pre">DocumentExtractionResult.id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentExtractionResult.model_config"><code class="docutils literal notranslate"><span class="pre">DocumentExtractionResult.model_config</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentInfo"><code class="docutils literal notranslate"><span class="pre">DocumentInfo</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentInfo.connector"><code class="docutils literal notranslate"><span class="pre">DocumentInfo.connector</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentInfo.guardrails_settings"><code class="docutils literal notranslate"><span class="pre">DocumentInfo.guardrails_settings</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentInfo.id"><code class="docutils literal notranslate"><span class="pre">DocumentInfo.id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentInfo.is_encrypted"><code class="docutils literal notranslate"><span class="pre">DocumentInfo.is_encrypted</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentInfo.meta_data_dict"><code class="docutils literal notranslate"><span class="pre">DocumentInfo.meta_data_dict</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentInfo.metadata_dict"><code class="docutils literal notranslate"><span class="pre">DocumentInfo.metadata_dict</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentInfo.model_config"><code class="docutils literal notranslate"><span class="pre">DocumentInfo.model_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentInfo.name"><code class="docutils literal notranslate"><span class="pre">DocumentInfo.name</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentInfo.original_type"><code class="docutils literal notranslate"><span class="pre">DocumentInfo.original_type</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentInfo.page_count"><code class="docutils literal notranslate"><span class="pre">DocumentInfo.page_count</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentInfo.page_layout_dict"><code class="docutils literal notranslate"><span class="pre">DocumentInfo.page_layout_dict</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentInfo.page_ocr_model_dict"><code class="docutils literal notranslate"><span class="pre">DocumentInfo.page_ocr_model_dict</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentInfo.size"><code class="docutils literal notranslate"><span class="pre">DocumentInfo.size</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentInfo.status"><code class="docutils literal notranslate"><span class="pre">DocumentInfo.status</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentInfo.type"><code class="docutils literal notranslate"><span class="pre">DocumentInfo.type</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentInfo.updated_at"><code class="docutils literal notranslate"><span class="pre">DocumentInfo.updated_at</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentInfo.uri"><code class="docutils literal notranslate"><span class="pre">DocumentInfo.uri</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentInfo.user_source_file"><code class="docutils literal notranslate"><span class="pre">DocumentInfo.user_source_file</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentInfo.username"><code class="docutils literal notranslate"><span class="pre">DocumentInfo.username</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentInfoSummary"><code class="docutils literal notranslate"><span class="pre">DocumentInfoSummary</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentInfoSummary.connector"><code class="docutils literal notranslate"><span class="pre">DocumentInfoSummary.connector</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentInfoSummary.guardrails_settings"><code class="docutils literal notranslate"><span class="pre">DocumentInfoSummary.guardrails_settings</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentInfoSummary.id"><code class="docutils literal notranslate"><span class="pre">DocumentInfoSummary.id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentInfoSummary.is_encrypted"><code class="docutils literal notranslate"><span class="pre">DocumentInfoSummary.is_encrypted</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentInfoSummary.meta_data_dict"><code class="docutils literal notranslate"><span class="pre">DocumentInfoSummary.meta_data_dict</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentInfoSummary.metadata_dict"><code class="docutils literal notranslate"><span class="pre">DocumentInfoSummary.metadata_dict</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentInfoSummary.model_config"><code class="docutils literal notranslate"><span class="pre">DocumentInfoSummary.model_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentInfoSummary.name"><code class="docutils literal notranslate"><span class="pre">DocumentInfoSummary.name</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentInfoSummary.original_type"><code class="docutils literal notranslate"><span class="pre">DocumentInfoSummary.original_type</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentInfoSummary.page_count"><code class="docutils literal notranslate"><span class="pre">DocumentInfoSummary.page_count</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentInfoSummary.page_layout_dict"><code class="docutils literal notranslate"><span class="pre">DocumentInfoSummary.page_layout_dict</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentInfoSummary.page_ocr_model_dict"><code class="docutils literal notranslate"><span class="pre">DocumentInfoSummary.page_ocr_model_dict</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentInfoSummary.size"><code class="docutils literal notranslate"><span class="pre">DocumentInfoSummary.size</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentInfoSummary.status"><code class="docutils literal notranslate"><span class="pre">DocumentInfoSummary.status</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentInfoSummary.summary"><code class="docutils literal notranslate"><span class="pre">DocumentInfoSummary.summary</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentInfoSummary.summary_parameters"><code class="docutils literal notranslate"><span class="pre">DocumentInfoSummary.summary_parameters</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentInfoSummary.type"><code class="docutils literal notranslate"><span class="pre">DocumentInfoSummary.type</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentInfoSummary.updated_at"><code class="docutils literal notranslate"><span class="pre">DocumentInfoSummary.updated_at</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentInfoSummary.uri"><code class="docutils literal notranslate"><span class="pre">DocumentInfoSummary.uri</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentInfoSummary.usage_stats"><code class="docutils literal notranslate"><span class="pre">DocumentInfoSummary.usage_stats</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentInfoSummary.user_source_file"><code class="docutils literal notranslate"><span class="pre">DocumentInfoSummary.user_source_file</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentInfoSummary.username"><code class="docutils literal notranslate"><span class="pre">DocumentInfoSummary.username</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentInfoSummaryListing"><code class="docutils literal notranslate"><span class="pre">DocumentInfoSummaryListing</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentInfoSummaryListing.documents"><code class="docutils literal notranslate"><span class="pre">DocumentInfoSummaryListing.documents</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentInfoSummaryListing.model_config"><code class="docutils literal notranslate"><span class="pre">DocumentInfoSummaryListing.model_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentInfoSummaryListing.total"><code class="docutils literal notranslate"><span class="pre">DocumentInfoSummaryListing.total</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentSummary"><code class="docutils literal notranslate"><span class="pre">DocumentSummary</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentSummary.content"><code class="docutils literal notranslate"><span class="pre">DocumentSummary.content</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.DocumentSummary.model_config"><code class="docutils literal notranslate"><span class="pre">DocumentSummary.model_config</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ExtractionAnswer"><code class="docutils literal notranslate"><span class="pre">ExtractionAnswer</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ExtractionAnswer.content"><code class="docutils literal notranslate"><span class="pre">ExtractionAnswer.content</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ExtractionAnswer.error"><code class="docutils literal notranslate"><span class="pre">ExtractionAnswer.error</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ExtractionAnswer.input_tokens"><code class="docutils literal notranslate"><span class="pre">ExtractionAnswer.input_tokens</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ExtractionAnswer.llm"><code class="docutils literal notranslate"><span class="pre">ExtractionAnswer.llm</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ExtractionAnswer.model_config"><code class="docutils literal notranslate"><span class="pre">ExtractionAnswer.model_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ExtractionAnswer.output_tokens"><code class="docutils literal notranslate"><span class="pre">ExtractionAnswer.output_tokens</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Extractor"><code class="docutils literal notranslate"><span class="pre">Extractor</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Extractor.created_at"><code class="docutils literal notranslate"><span class="pre">Extractor.created_at</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Extractor.description"><code class="docutils literal notranslate"><span class="pre">Extractor.description</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Extractor.extractor_schema"><code class="docutils literal notranslate"><span class="pre">Extractor.extractor_schema</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Extractor.guardrails_settings"><code class="docutils literal notranslate"><span class="pre">Extractor.guardrails_settings</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Extractor.id"><code class="docutils literal notranslate"><span class="pre">Extractor.id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Extractor.image_batch_final_prompt"><code class="docutils literal notranslate"><span class="pre">Extractor.image_batch_final_prompt</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Extractor.image_batch_image_prompt"><code class="docutils literal notranslate"><span class="pre">Extractor.image_batch_image_prompt</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Extractor.is_public"><code class="docutils literal notranslate"><span class="pre">Extractor.is_public</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Extractor.keep_intermediate_results"><code class="docutils literal notranslate"><span class="pre">Extractor.keep_intermediate_results</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Extractor.llm"><code class="docutils literal notranslate"><span class="pre">Extractor.llm</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Extractor.max_num_chunks"><code class="docutils literal notranslate"><span class="pre">Extractor.max_num_chunks</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Extractor.model_config"><code class="docutils literal notranslate"><span class="pre">Extractor.model_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Extractor.name"><code class="docutils literal notranslate"><span class="pre">Extractor.name</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Extractor.pre_prompt_summary"><code class="docutils literal notranslate"><span class="pre">Extractor.pre_prompt_summary</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Extractor.prompt"><code class="docutils literal notranslate"><span class="pre">Extractor.prompt</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Extractor.system_prompt"><code class="docutils literal notranslate"><span class="pre">Extractor.system_prompt</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Extractor.vision"><code class="docutils literal notranslate"><span class="pre">Extractor.vision</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Extractor.vision_llm"><code class="docutils literal notranslate"><span class="pre">Extractor.vision_llm</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.GlobalConfigItem"><code class="docutils literal notranslate"><span class="pre">GlobalConfigItem</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.GlobalConfigItem.can_overwrite"><code class="docutils literal notranslate"><span class="pre">GlobalConfigItem.can_overwrite</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.GlobalConfigItem.is_public"><code class="docutils literal notranslate"><span class="pre">GlobalConfigItem.is_public</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.GlobalConfigItem.key_name"><code class="docutils literal notranslate"><span class="pre">GlobalConfigItem.key_name</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.GlobalConfigItem.model_config"><code class="docutils literal notranslate"><span class="pre">GlobalConfigItem.model_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.GlobalConfigItem.string_value"><code class="docutils literal notranslate"><span class="pre">GlobalConfigItem.string_value</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.GlobalConfigItem.upper_bound"><code class="docutils literal notranslate"><span class="pre">GlobalConfigItem.upper_bound</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.GlobalConfigItem.value_type"><code class="docutils literal notranslate"><span class="pre">GlobalConfigItem.value_type</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.GraphStatus"><code class="docutils literal notranslate"><span class="pre">GraphStatus</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.GraphStatus.built_at"><code class="docutils literal notranslate"><span class="pre">GraphStatus.built_at</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.GraphStatus.model_config"><code class="docutils literal notranslate"><span class="pre">GraphStatus.model_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.GraphStatus.outdated"><code class="docutils literal notranslate"><span class="pre">GraphStatus.outdated</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.GraphStatus.status"><code class="docutils literal notranslate"><span class="pre">GraphStatus.status</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.GroupSharePermission"><code class="docutils literal notranslate"><span class="pre">GroupSharePermission</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.GroupSharePermission.group_id"><code class="docutils literal notranslate"><span class="pre">GroupSharePermission.group_id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.GroupSharePermission.model_config"><code class="docutils literal notranslate"><span class="pre">GroupSharePermission.model_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.GroupSharePermission.permissions"><code class="docutils literal notranslate"><span class="pre">GroupSharePermission.permissions</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Identifier"><code class="docutils literal notranslate"><span class="pre">Identifier</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Identifier.error"><code class="docutils literal notranslate"><span class="pre">Identifier.error</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Identifier.id"><code class="docutils literal notranslate"><span class="pre">Identifier.id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Identifier.model_config"><code class="docutils literal notranslate"><span class="pre">Identifier.model_config</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Job"><code class="docutils literal notranslate"><span class="pre">Job</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Job.cancel_reason"><code class="docutils literal notranslate"><span class="pre">Job.cancel_reason</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Job.canceled"><code class="docutils literal notranslate"><span class="pre">Job.canceled</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Job.canceled_by"><code class="docutils literal notranslate"><span class="pre">Job.canceled_by</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Job.completed"><code class="docutils literal notranslate"><span class="pre">Job.completed</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Job.date"><code class="docutils literal notranslate"><span class="pre">Job.date</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Job.duration"><code class="docutils literal notranslate"><span class="pre">Job.duration</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Job.duration_seconds"><code class="docutils literal notranslate"><span class="pre">Job.duration_seconds</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Job.errors"><code class="docutils literal notranslate"><span class="pre">Job.errors</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Job.failed"><code class="docutils literal notranslate"><span class="pre">Job.failed</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Job.files_failed"><code class="docutils literal notranslate"><span class="pre">Job.files_failed</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Job.files_total"><code class="docutils literal notranslate"><span class="pre">Job.files_total</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Job.id"><code class="docutils literal notranslate"><span class="pre">Job.id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Job.kind"><code class="docutils literal notranslate"><span class="pre">Job.kind</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Job.last_update_date"><code class="docutils literal notranslate"><span class="pre">Job.last_update_date</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Job.model_config"><code class="docutils literal notranslate"><span class="pre">Job.model_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Job.name"><code class="docutils literal notranslate"><span class="pre">Job.name</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Job.passed"><code class="docutils literal notranslate"><span class="pre">Job.passed</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Job.progress"><code class="docutils literal notranslate"><span class="pre">Job.progress</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Job.start_time"><code class="docutils literal notranslate"><span class="pre">Job.start_time</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Job.statuses"><code class="docutils literal notranslate"><span class="pre">Job.statuses</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Job.timeout"><code class="docutils literal notranslate"><span class="pre">Job.timeout</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.JobKind"><code class="docutils literal notranslate"><span class="pre">JobKind</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.JobKind.BuildCollectionGraphJob"><code class="docutils literal notranslate"><span class="pre">JobKind.BuildCollectionGraphJob</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.JobKind.BuildSystemPromptJob"><code class="docutils literal notranslate"><span class="pre">JobKind.BuildSystemPromptJob</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.JobKind.CreateTopicModelJob"><code class="docutils literal notranslate"><span class="pre">JobKind.CreateTopicModelJob</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.JobKind.DeleteArchivedChatSessionsJob"><code class="docutils literal notranslate"><span class="pre">JobKind.DeleteArchivedChatSessionsJob</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.JobKind.DeleteChatSessionsAsAdminJob"><code class="docutils literal notranslate"><span class="pre">JobKind.DeleteChatSessionsAsAdminJob</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.JobKind.DeleteChatSessionsJob"><code class="docutils literal notranslate"><span class="pre">JobKind.DeleteChatSessionsJob</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.JobKind.DeleteCollectionThumbnailJob"><code class="docutils literal notranslate"><span class="pre">JobKind.DeleteCollectionThumbnailJob</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.JobKind.DeleteCollectionsAsAdminJob"><code class="docutils literal notranslate"><span class="pre">JobKind.DeleteCollectionsAsAdminJob</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.JobKind.DeleteCollectionsJob"><code class="docutils literal notranslate"><span class="pre">JobKind.DeleteCollectionsJob</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.JobKind.DeleteDocumentsFromCollectionJob"><code class="docutils literal notranslate"><span class="pre">JobKind.DeleteDocumentsFromCollectionJob</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.JobKind.DeleteDocumentsJob"><code class="docutils literal notranslate"><span class="pre">JobKind.DeleteDocumentsJob</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.JobKind.DeleteUserJob"><code class="docutils literal notranslate"><span class="pre">JobKind.DeleteUserJob</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.JobKind.DocumentSummaryJob"><code class="docutils literal notranslate"><span class="pre">JobKind.DocumentSummaryJob</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.JobKind.EvalCollectionJob"><code class="docutils literal notranslate"><span class="pre">JobKind.EvalCollectionJob</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.JobKind.EvalMessageJob"><code class="docutils literal notranslate"><span class="pre">JobKind.EvalMessageJob</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.JobKind.ExportFeedbackCSVJob"><code class="docutils literal notranslate"><span class="pre">JobKind.ExportFeedbackCSVJob</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.JobKind.ImportCollectionIntoCollectionJob"><code class="docutils literal notranslate"><span class="pre">JobKind.ImportCollectionIntoCollectionJob</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.JobKind.ImportDocumentIntoCollectionJob"><code class="docutils literal notranslate"><span class="pre">JobKind.ImportDocumentIntoCollectionJob</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.JobKind.IndexFilesJob"><code class="docutils literal notranslate"><span class="pre">JobKind.IndexFilesJob</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.JobKind.IngestAgentOnlyToStandardJob"><code class="docutils literal notranslate"><span class="pre">JobKind.IngestAgentOnlyToStandardJob</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.JobKind.IngestFromCloudStorageJob"><code class="docutils literal notranslate"><span class="pre">JobKind.IngestFromCloudStorageJob</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.JobKind.IngestFromFileSystemJob"><code class="docutils literal notranslate"><span class="pre">JobKind.IngestFromFileSystemJob</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.JobKind.IngestPlainTextJob"><code class="docutils literal notranslate"><span class="pre">JobKind.IngestPlainTextJob</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.JobKind.IngestUploadsJob"><code class="docutils literal notranslate"><span class="pre">JobKind.IngestUploadsJob</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.JobKind.IngestWebsiteJob"><code class="docutils literal notranslate"><span class="pre">JobKind.IngestWebsiteJob</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.JobKind.IngestWithScheduledConnectorJob"><code class="docutils literal notranslate"><span class="pre">JobKind.IngestWithScheduledConnectorJob</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.JobKind.MigrateCollectionChatSessionsJob"><code class="docutils literal notranslate"><span class="pre">JobKind.MigrateCollectionChatSessionsJob</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.JobKind.MigrateScheduledConnectorsToCollectionJob"><code class="docutils literal notranslate"><span class="pre">JobKind.MigrateScheduledConnectorsToCollectionJob</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.JobKind.NoOpJob"><code class="docutils literal notranslate"><span class="pre">JobKind.NoOpJob</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.JobKind.RegenerateCollectionDescriptionJob"><code class="docutils literal notranslate"><span class="pre">JobKind.RegenerateCollectionDescriptionJob</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.JobKind.RunExtractorJob"><code class="docutils literal notranslate"><span class="pre">JobKind.RunExtractorJob</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.JobKind.RunExtractorOnUploadsJob"><code class="docutils literal notranslate"><span class="pre">JobKind.RunExtractorOnUploadsJob</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.JobKind.ScheduledTaskExecutionJob"><code class="docutils literal notranslate"><span class="pre">JobKind.ScheduledTaskExecutionJob</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.JobKind.UpdateCollectionStatsJob"><code class="docutils literal notranslate"><span class="pre">JobKind.UpdateCollectionStatsJob</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.JobKind.UpdateCollectionThumbnailJob"><code class="docutils literal notranslate"><span class="pre">JobKind.UpdateCollectionThumbnailJob</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.JobStatus"><code class="docutils literal notranslate"><span class="pre">JobStatus</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.JobStatus.id"><code class="docutils literal notranslate"><span class="pre">JobStatus.id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.JobStatus.model_config"><code class="docutils literal notranslate"><span class="pre">JobStatus.model_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.JobStatus.status"><code class="docutils literal notranslate"><span class="pre">JobStatus.status</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.LLMPerformance"><code class="docutils literal notranslate"><span class="pre">LLMPerformance</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.LLMPerformance.call_count"><code class="docutils literal notranslate"><span class="pre">LLMPerformance.call_count</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.LLMPerformance.input_tokens"><code class="docutils literal notranslate"><span class="pre">LLMPerformance.input_tokens</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.LLMPerformance.llm_name"><code class="docutils literal notranslate"><span class="pre">LLMPerformance.llm_name</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.LLMPerformance.model_config"><code class="docutils literal notranslate"><span class="pre">LLMPerformance.model_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.LLMPerformance.output_tokens"><code class="docutils literal notranslate"><span class="pre">LLMPerformance.output_tokens</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.LLMPerformance.time_to_first_token"><code class="docutils literal notranslate"><span class="pre">LLMPerformance.time_to_first_token</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.LLMPerformance.tokens_per_second"><code class="docutils literal notranslate"><span class="pre">LLMPerformance.tokens_per_second</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.LLMUsage"><code class="docutils literal notranslate"><span class="pre">LLMUsage</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.LLMUsage.call_count"><code class="docutils literal notranslate"><span class="pre">LLMUsage.call_count</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.LLMUsage.input_tokens"><code class="docutils literal notranslate"><span class="pre">LLMUsage.input_tokens</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.LLMUsage.llm_cost"><code class="docutils literal notranslate"><span class="pre">LLMUsage.llm_cost</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.LLMUsage.llm_name"><code class="docutils literal notranslate"><span class="pre">LLMUsage.llm_name</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.LLMUsage.model_config"><code class="docutils literal notranslate"><span class="pre">LLMUsage.model_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.LLMUsage.output_tokens"><code class="docutils literal notranslate"><span class="pre">LLMUsage.output_tokens</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.LLMUsageLimit"><code class="docutils literal notranslate"><span class="pre">LLMUsageLimit</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.LLMUsageLimit.cost_unit"><code class="docutils literal notranslate"><span class="pre">LLMUsageLimit.cost_unit</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.LLMUsageLimit.current"><code class="docutils literal notranslate"><span class="pre">LLMUsageLimit.current</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.LLMUsageLimit.interval"><code class="docutils literal notranslate"><span class="pre">LLMUsageLimit.interval</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.LLMUsageLimit.max_allowed_24h"><code class="docutils literal notranslate"><span class="pre">LLMUsageLimit.max_allowed_24h</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.LLMUsageLimit.model_config"><code class="docutils literal notranslate"><span class="pre">LLMUsageLimit.model_config</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.LLMWithUserUsage"><code class="docutils literal notranslate"><span class="pre">LLMWithUserUsage</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.LLMWithUserUsage.llm_name"><code class="docutils literal notranslate"><span class="pre">LLMWithUserUsage.llm_name</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.LLMWithUserUsage.model_config"><code class="docutils literal notranslate"><span class="pre">LLMWithUserUsage.model_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.LLMWithUserUsage.total_calls"><code class="docutils literal notranslate"><span class="pre">LLMWithUserUsage.total_calls</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.LLMWithUserUsage.total_cost"><code class="docutils literal notranslate"><span class="pre">LLMWithUserUsage.total_cost</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.LLMWithUserUsage.total_input_tokens"><code class="docutils literal notranslate"><span class="pre">LLMWithUserUsage.total_input_tokens</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.LLMWithUserUsage.total_output_tokens"><code class="docutils literal notranslate"><span class="pre">LLMWithUserUsage.total_output_tokens</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.LLMWithUserUsage.user_usage"><code class="docutils literal notranslate"><span class="pre">LLMWithUserUsage.user_usage</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Meta"><code class="docutils literal notranslate"><span class="pre">Meta</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Meta.build"><code class="docutils literal notranslate"><span class="pre">Meta.build</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Meta.email"><code class="docutils literal notranslate"><span class="pre">Meta.email</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Meta.global_configs"><code class="docutils literal notranslate"><span class="pre">Meta.global_configs</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Meta.groups"><code class="docutils literal notranslate"><span class="pre">Meta.groups</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Meta.is_guest"><code class="docutils literal notranslate"><span class="pre">Meta.is_guest</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Meta.license_expired"><code class="docutils literal notranslate"><span class="pre">Meta.license_expired</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Meta.license_expiry_date"><code class="docutils literal notranslate"><span class="pre">Meta.license_expiry_date</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Meta.model_config"><code class="docutils literal notranslate"><span class="pre">Meta.model_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Meta.permissions"><code class="docutils literal notranslate"><span class="pre">Meta.permissions</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Meta.picture"><code class="docutils literal notranslate"><span class="pre">Meta.picture</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Meta.subject"><code class="docutils literal notranslate"><span class="pre">Meta.subject</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Meta.ui_config"><code class="docutils literal notranslate"><span class="pre">Meta.ui_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Meta.user_configs"><code class="docutils literal notranslate"><span class="pre">Meta.user_configs</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Meta.user_id"><code class="docutils literal notranslate"><span class="pre">Meta.user_id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Meta.username"><code class="docutils literal notranslate"><span class="pre">Meta.username</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Meta.version"><code class="docutils literal notranslate"><span class="pre">Meta.version</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Meta.workspaces"><code class="docutils literal notranslate"><span class="pre">Meta.workspaces</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.MetaUIConfig"><code class="docutils literal notranslate"><span class="pre">MetaUIConfig</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.MetaUIConfig.chat_logo"><code class="docutils literal notranslate"><span class="pre">MetaUIConfig.chat_logo</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.MetaUIConfig.chat_name"><code class="docutils literal notranslate"><span class="pre">MetaUIConfig.chat_name</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.MetaUIConfig.greeting"><code class="docutils literal notranslate"><span class="pre">MetaUIConfig.greeting</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.MetaUIConfig.logo"><code class="docutils literal notranslate"><span class="pre">MetaUIConfig.logo</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.MetaUIConfig.model_config"><code class="docutils literal notranslate"><span class="pre">MetaUIConfig.model_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.MetaUIConfig.primary_color"><code class="docutils literal notranslate"><span class="pre">MetaUIConfig.primary_color</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.MetaUIConfig.public_mode"><code class="docutils literal notranslate"><span class="pre">MetaUIConfig.public_mode</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.MetaUIConfig.show_eval"><code class="docutils literal notranslate"><span class="pre">MetaUIConfig.show_eval</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.MetaUIConfig.show_extractors"><code class="docutils literal notranslate"><span class="pre">MetaUIConfig.show_extractors</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.MetaUIConfig.show_live_logs"><code class="docutils literal notranslate"><span class="pre">MetaUIConfig.show_live_logs</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.MetaUIConfig.show_private_button"><code class="docutils literal notranslate"><span class="pre">MetaUIConfig.show_private_button</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.MetaUIConfig.show_workers_status"><code class="docutils literal notranslate"><span class="pre">MetaUIConfig.show_workers_status</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ObjectCount"><code class="docutils literal notranslate"><span class="pre">ObjectCount</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ObjectCount.chat_session_count"><code class="docutils literal notranslate"><span class="pre">ObjectCount.chat_session_count</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ObjectCount.collection_count"><code class="docutils literal notranslate"><span class="pre">ObjectCount.collection_count</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ObjectCount.document_count"><code class="docutils literal notranslate"><span class="pre">ObjectCount.document_count</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ObjectCount.model_config"><code class="docutils literal notranslate"><span class="pre">ObjectCount.model_config</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.PartialChatMessage"><code class="docutils literal notranslate"><span class="pre">PartialChatMessage</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.PartialChatMessage.content"><code class="docutils literal notranslate"><span class="pre">PartialChatMessage.content</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.PartialChatMessage.id"><code class="docutils literal notranslate"><span class="pre">PartialChatMessage.id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.PartialChatMessage.meta"><code class="docutils literal notranslate"><span class="pre">PartialChatMessage.meta</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.PartialChatMessage.model_config"><code class="docutils literal notranslate"><span class="pre">PartialChatMessage.model_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.PartialChatMessage.reply_to"><code class="docutils literal notranslate"><span class="pre">PartialChatMessage.reply_to</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.PostProcessor"><code class="docutils literal notranslate"><span class="pre">PostProcessor</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.PostProcessor.created_at"><code class="docutils literal notranslate"><span class="pre">PostProcessor.created_at</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.PostProcessor.description"><code class="docutils literal notranslate"><span class="pre">PostProcessor.description</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.PostProcessor.id"><code class="docutils literal notranslate"><span class="pre">PostProcessor.id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.PostProcessor.llm_prompt"><code class="docutils literal notranslate"><span class="pre">PostProcessor.llm_prompt</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.PostProcessor.model_config"><code class="docutils literal notranslate"><span class="pre">PostProcessor.model_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.PostProcessor.name"><code class="docutils literal notranslate"><span class="pre">PostProcessor.name</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.PostProcessor.updated_at"><code class="docutils literal notranslate"><span class="pre">PostProcessor.updated_at</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.PostProcessor.user_id"><code class="docutils literal notranslate"><span class="pre">PostProcessor.user_id</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ProcessedDocument"><code class="docutils literal notranslate"><span class="pre">ProcessedDocument</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ProcessedDocument.content"><code class="docutils literal notranslate"><span class="pre">ProcessedDocument.content</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ProcessedDocument.created_at"><code class="docutils literal notranslate"><span class="pre">ProcessedDocument.created_at</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ProcessedDocument.document_id"><code class="docutils literal notranslate"><span class="pre">ProcessedDocument.document_id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ProcessedDocument.error"><code class="docutils literal notranslate"><span class="pre">ProcessedDocument.error</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ProcessedDocument.id"><code class="docutils literal notranslate"><span class="pre">ProcessedDocument.id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ProcessedDocument.kwargs"><code class="docutils literal notranslate"><span class="pre">ProcessedDocument.kwargs</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ProcessedDocument.model_config"><code class="docutils literal notranslate"><span class="pre">ProcessedDocument.model_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ProcessedDocument.usage_stats"><code class="docutils literal notranslate"><span class="pre">ProcessedDocument.usage_stats</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.PromptTemplate"><code class="docutils literal notranslate"><span class="pre">PromptTemplate</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.PromptTemplate.auto_gen_description_prompt"><code class="docutils literal notranslate"><span class="pre">PromptTemplate.auto_gen_description_prompt</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.PromptTemplate.auto_gen_document_sample_questions_prompt"><code class="docutils literal notranslate"><span class="pre">PromptTemplate.auto_gen_document_sample_questions_prompt</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.PromptTemplate.auto_gen_document_summary_pre_prompt_summary"><code class="docutils literal notranslate"><span class="pre">PromptTemplate.auto_gen_document_summary_pre_prompt_summary</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.PromptTemplate.auto_gen_document_summary_prompt_summary"><code class="docutils literal notranslate"><span class="pre">PromptTemplate.auto_gen_document_summary_prompt_summary</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.PromptTemplate.created_at"><code class="docutils literal notranslate"><span class="pre">PromptTemplate.created_at</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.PromptTemplate.default_sample_questions"><code class="docutils literal notranslate"><span class="pre">PromptTemplate.default_sample_questions</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.PromptTemplate.description"><code class="docutils literal notranslate"><span class="pre">PromptTemplate.description</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.PromptTemplate.group_count"><code class="docutils literal notranslate"><span class="pre">PromptTemplate.group_count</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.PromptTemplate.hyde_no_rag_llm_prompt_extension"><code class="docutils literal notranslate"><span class="pre">PromptTemplate.hyde_no_rag_llm_prompt_extension</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.PromptTemplate.id"><code class="docutils literal notranslate"><span class="pre">PromptTemplate.id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.PromptTemplate.image_batch_final_prompt"><code class="docutils literal notranslate"><span class="pre">PromptTemplate.image_batch_final_prompt</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.PromptTemplate.image_batch_image_prompt"><code class="docutils literal notranslate"><span class="pre">PromptTemplate.image_batch_image_prompt</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.PromptTemplate.is_default"><code class="docutils literal notranslate"><span class="pre">PromptTemplate.is_default</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.PromptTemplate.is_public"><code class="docutils literal notranslate"><span class="pre">PromptTemplate.is_public</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.PromptTemplate.is_system_default"><code class="docutils literal notranslate"><span class="pre">PromptTemplate.is_system_default</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.PromptTemplate.lang"><code class="docutils literal notranslate"><span class="pre">PromptTemplate.lang</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.PromptTemplate.model_config"><code class="docutils literal notranslate"><span class="pre">PromptTemplate.model_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.PromptTemplate.name"><code class="docutils literal notranslate"><span class="pre">PromptTemplate.name</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.PromptTemplate.pre_prompt_query"><code class="docutils literal notranslate"><span class="pre">PromptTemplate.pre_prompt_query</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.PromptTemplate.pre_prompt_reflection"><code class="docutils literal notranslate"><span class="pre">PromptTemplate.pre_prompt_reflection</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.PromptTemplate.pre_prompt_summary"><code class="docutils literal notranslate"><span class="pre">PromptTemplate.pre_prompt_summary</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.PromptTemplate.prompt_query"><code class="docutils literal notranslate"><span class="pre">PromptTemplate.prompt_query</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.PromptTemplate.prompt_reflection"><code class="docutils literal notranslate"><span class="pre">PromptTemplate.prompt_reflection</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.PromptTemplate.prompt_summary"><code class="docutils literal notranslate"><span class="pre">PromptTemplate.prompt_summary</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.PromptTemplate.system_prompt"><code class="docutils literal notranslate"><span class="pre">PromptTemplate.system_prompt</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.PromptTemplate.system_prompt_reflection"><code class="docutils literal notranslate"><span class="pre">PromptTemplate.system_prompt_reflection</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.PromptTemplate.user_count"><code class="docutils literal notranslate"><span class="pre">PromptTemplate.user_count</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.PromptTemplate.user_id"><code class="docutils literal notranslate"><span class="pre">PromptTemplate.user_id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.PromptTemplate.username"><code class="docutils literal notranslate"><span class="pre">PromptTemplate.username</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.PromptTemplate.visible"><code class="docutils literal notranslate"><span class="pre">PromptTemplate.visible</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.PromptTemplateCount"><code class="docutils literal notranslate"><span class="pre">PromptTemplateCount</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.PromptTemplateCount.model_config"><code class="docutils literal notranslate"><span class="pre">PromptTemplateCount.model_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.PromptTemplateCount.prompt_template_count"><code class="docutils literal notranslate"><span class="pre">PromptTemplateCount.prompt_template_count</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.QuestionReplyData"><code class="docutils literal notranslate"><span class="pre">QuestionReplyData</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.QuestionReplyData.chat_session_id"><code class="docutils literal notranslate"><span class="pre">QuestionReplyData.chat_session_id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.QuestionReplyData.collection_documents"><code class="docutils literal notranslate"><span class="pre">QuestionReplyData.collection_documents</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.QuestionReplyData.collection_id"><code class="docutils literal notranslate"><span class="pre">QuestionReplyData.collection_id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.QuestionReplyData.collection_name"><code class="docutils literal notranslate"><span class="pre">QuestionReplyData.collection_name</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.QuestionReplyData.expected_answer"><code class="docutils literal notranslate"><span class="pre">QuestionReplyData.expected_answer</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.QuestionReplyData.include_chat_history"><code class="docutils literal notranslate"><span class="pre">QuestionReplyData.include_chat_history</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.QuestionReplyData.llm"><code class="docutils literal notranslate"><span class="pre">QuestionReplyData.llm</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.QuestionReplyData.model_config"><code class="docutils literal notranslate"><span class="pre">QuestionReplyData.model_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.QuestionReplyData.pre_prompt_query"><code class="docutils literal notranslate"><span class="pre">QuestionReplyData.pre_prompt_query</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.QuestionReplyData.pre_prompt_summary"><code class="docutils literal notranslate"><span class="pre">QuestionReplyData.pre_prompt_summary</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.QuestionReplyData.prompt_query"><code class="docutils literal notranslate"><span class="pre">QuestionReplyData.prompt_query</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.QuestionReplyData.prompt_summary"><code class="docutils literal notranslate"><span class="pre">QuestionReplyData.prompt_summary</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.QuestionReplyData.prompt_template_id"><code class="docutils literal notranslate"><span class="pre">QuestionReplyData.prompt_template_id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.QuestionReplyData.question_content"><code class="docutils literal notranslate"><span class="pre">QuestionReplyData.question_content</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.QuestionReplyData.question_id"><code class="docutils literal notranslate"><span class="pre">QuestionReplyData.question_id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.QuestionReplyData.rag_config"><code class="docutils literal notranslate"><span class="pre">QuestionReplyData.rag_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.QuestionReplyData.reply_content"><code class="docutils literal notranslate"><span class="pre">QuestionReplyData.reply_content</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.QuestionReplyData.reply_id"><code class="docutils literal notranslate"><span class="pre">QuestionReplyData.reply_id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.QuestionReplyData.response_created_at_time"><code class="docutils literal notranslate"><span class="pre">QuestionReplyData.response_created_at_time</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.QuestionReplyData.system_prompt"><code class="docutils literal notranslate"><span class="pre">QuestionReplyData.system_prompt</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.QuestionReplyData.user_comment"><code class="docutils literal notranslate"><span class="pre">QuestionReplyData.user_comment</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.QuestionReplyData.voted_user_id"><code class="docutils literal notranslate"><span class="pre">QuestionReplyData.voted_user_id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.QuestionReplyData.voted_username"><code class="docutils literal notranslate"><span class="pre">QuestionReplyData.voted_username</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.QuestionReplyData.votes"><code class="docutils literal notranslate"><span class="pre">QuestionReplyData.votes</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.QuestionReplyDataCount"><code class="docutils literal notranslate"><span class="pre">QuestionReplyDataCount</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.QuestionReplyDataCount.model_config"><code class="docutils literal notranslate"><span class="pre">QuestionReplyDataCount.model_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.QuestionReplyDataCount.question_reply_data_count"><code class="docutils literal notranslate"><span class="pre">QuestionReplyDataCount.question_reply_data_count</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.QueueInfo"><code class="docutils literal notranslate"><span class="pre">QueueInfo</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.QueueInfo.length"><code class="docutils literal notranslate"><span class="pre">QueueInfo.length</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.QueueInfo.model_config"><code class="docutils literal notranslate"><span class="pre">QueueInfo.model_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.QueueInfo.name"><code class="docutils literal notranslate"><span class="pre">QueueInfo.name</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.RateLimitError"><code class="docutils literal notranslate"><span class="pre">RateLimitError</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Result"><code class="docutils literal notranslate"><span class="pre">Result</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Result.model_config"><code class="docutils literal notranslate"><span class="pre">Result.model_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Result.status"><code class="docutils literal notranslate"><span class="pre">Result.status</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ScheduledConnectorDetails"><code class="docutils literal notranslate"><span class="pre">ScheduledConnectorDetails</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ScheduledConnectorDetails.collection_id"><code class="docutils literal notranslate"><span class="pre">ScheduledConnectorDetails.collection_id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ScheduledConnectorDetails.collection_name"><code class="docutils literal notranslate"><span class="pre">ScheduledConnectorDetails.collection_name</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ScheduledConnectorDetails.config"><code class="docutils literal notranslate"><span class="pre">ScheduledConnectorDetails.config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ScheduledConnectorDetails.created_at"><code class="docutils literal notranslate"><span class="pre">ScheduledConnectorDetails.created_at</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ScheduledConnectorDetails.id"><code class="docutils literal notranslate"><span class="pre">ScheduledConnectorDetails.id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ScheduledConnectorDetails.last_sync_at"><code class="docutils literal notranslate"><span class="pre">ScheduledConnectorDetails.last_sync_at</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ScheduledConnectorDetails.last_sync_error"><code class="docutils literal notranslate"><span class="pre">ScheduledConnectorDetails.last_sync_error</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ScheduledConnectorDetails.last_sync_job_id"><code class="docutils literal notranslate"><span class="pre">ScheduledConnectorDetails.last_sync_job_id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ScheduledConnectorDetails.last_sync_status"><code class="docutils literal notranslate"><span class="pre">ScheduledConnectorDetails.last_sync_status</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ScheduledConnectorDetails.model_config"><code class="docutils literal notranslate"><span class="pre">ScheduledConnectorDetails.model_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ScheduledConnectorDetails.schedule"><code class="docutils literal notranslate"><span class="pre">ScheduledConnectorDetails.schedule</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ScheduledConnectorDetails.type"><code class="docutils literal notranslate"><span class="pre">ScheduledConnectorDetails.type</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ScheduledConnectorDetails.user_email"><code class="docutils literal notranslate"><span class="pre">ScheduledConnectorDetails.user_email</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ScheduledConnectorDetails.user_id"><code class="docutils literal notranslate"><span class="pre">ScheduledConnectorDetails.user_id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ScheduledConnectorDetails.user_name"><code class="docutils literal notranslate"><span class="pre">ScheduledConnectorDetails.user_name</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.SchedulerStats"><code class="docutils literal notranslate"><span class="pre">SchedulerStats</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.SchedulerStats.model_config"><code class="docutils literal notranslate"><span class="pre">SchedulerStats.model_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.SchedulerStats.queue_infos"><code class="docutils literal notranslate"><span class="pre">SchedulerStats.queue_infos</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.SchedulerStats.queue_length"><code class="docutils literal notranslate"><span class="pre">SchedulerStats.queue_length</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.SearchResult"><code class="docutils literal notranslate"><span class="pre">SearchResult</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.SearchResult.id"><code class="docutils literal notranslate"><span class="pre">SearchResult.id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.SearchResult.model_config"><code class="docutils literal notranslate"><span class="pre">SearchResult.model_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.SearchResult.name"><code class="docutils literal notranslate"><span class="pre">SearchResult.name</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.SearchResult.pages"><code class="docutils literal notranslate"><span class="pre">SearchResult.pages</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.SearchResult.score"><code class="docutils literal notranslate"><span class="pre">SearchResult.score</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.SearchResult.size"><code class="docutils literal notranslate"><span class="pre">SearchResult.size</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.SearchResult.text"><code class="docutils literal notranslate"><span class="pre">SearchResult.text</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.SearchResult.topic"><code class="docutils literal notranslate"><span class="pre">SearchResult.topic</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.SearchResults"><code class="docutils literal notranslate"><span class="pre">SearchResults</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.SearchResults.model_config"><code class="docutils literal notranslate"><span class="pre">SearchResults.model_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.SearchResults.result"><code class="docutils literal notranslate"><span class="pre">SearchResults.result</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.SessionError"><code class="docutils literal notranslate"><span class="pre">SessionError</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.SharePermission"><code class="docutils literal notranslate"><span class="pre">SharePermission</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.SharePermission.model_config"><code class="docutils literal notranslate"><span class="pre">SharePermission.model_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.SharePermission.permissions"><code class="docutils literal notranslate"><span class="pre">SharePermission.permissions</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.SharePermission.username"><code class="docutils literal notranslate"><span class="pre">SharePermission.username</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ShareResponseStatus"><code class="docutils literal notranslate"><span class="pre">ShareResponseStatus</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ShareResponseStatus.model_config"><code class="docutils literal notranslate"><span class="pre">ShareResponseStatus.model_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.ShareResponseStatus.status"><code class="docutils literal notranslate"><span class="pre">ShareResponseStatus.status</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.SharedChatDetail"><code class="docutils literal notranslate"><span class="pre">SharedChatDetail</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.SharedChatDetail.includes_artifacts"><code class="docutils literal notranslate"><span class="pre">SharedChatDetail.includes_artifacts</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.SharedChatDetail.is_frozen"><code class="docutils literal notranslate"><span class="pre">SharedChatDetail.is_frozen</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.SharedChatDetail.is_private"><code class="docutils literal notranslate"><span class="pre">SharedChatDetail.is_private</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.SharedChatDetail.messages"><code class="docutils literal notranslate"><span class="pre">SharedChatDetail.messages</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.SharedChatDetail.name"><code class="docutils literal notranslate"><span class="pre">SharedChatDetail.name</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.SharedChatDetail.shared_at"><code class="docutils literal notranslate"><span class="pre">SharedChatDetail.shared_at</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.SharedChatDetail.shared_by"><code class="docutils literal notranslate"><span class="pre">SharedChatDetail.shared_by</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.SharedChatInfo"><code class="docutils literal notranslate"><span class="pre">SharedChatInfo</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.SharedChatInfo.chat_session_id"><code class="docutils literal notranslate"><span class="pre">SharedChatInfo.chat_session_id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.SharedChatInfo.created_at"><code class="docutils literal notranslate"><span class="pre">SharedChatInfo.created_at</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.SharedChatInfo.id"><code class="docutils literal notranslate"><span class="pre">SharedChatInfo.id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.SharedChatInfo.includes_artifacts"><code class="docutils literal notranslate"><span class="pre">SharedChatInfo.includes_artifacts</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.SharedChatInfo.is_frozen"><code class="docutils literal notranslate"><span class="pre">SharedChatInfo.is_frozen</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.SharedChatInfo.is_private"><code class="docutils literal notranslate"><span class="pre">SharedChatInfo.is_private</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.SharedChatInfo.name"><code class="docutils literal notranslate"><span class="pre">SharedChatInfo.name</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.SharedChatInfo.showcase_id"><code class="docutils literal notranslate"><span class="pre">SharedChatInfo.showcase_id</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Status"><code class="docutils literal notranslate"><span class="pre">Status</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Status.AgentOnly"><code class="docutils literal notranslate"><span class="pre">Status.AgentOnly</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Status.Canceled"><code class="docutils literal notranslate"><span class="pre">Status.Canceled</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Status.Completed"><code class="docutils literal notranslate"><span class="pre">Status.Completed</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Status.Failed"><code class="docutils literal notranslate"><span class="pre">Status.Failed</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Status.Queued"><code class="docutils literal notranslate"><span class="pre">Status.Queued</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Status.Running"><code class="docutils literal notranslate"><span class="pre">Status.Running</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Status.Scheduled"><code class="docutils literal notranslate"><span class="pre">Status.Scheduled</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Status.Unknown"><code class="docutils literal notranslate"><span class="pre">Status.Unknown</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.SuggestedQuestion"><code class="docutils literal notranslate"><span class="pre">SuggestedQuestion</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.SuggestedQuestion.model_config"><code class="docutils literal notranslate"><span class="pre">SuggestedQuestion.model_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.SuggestedQuestion.question"><code class="docutils literal notranslate"><span class="pre">SuggestedQuestion.question</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Tag"><code class="docutils literal notranslate"><span class="pre">Tag</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Tag.description"><code class="docutils literal notranslate"><span class="pre">Tag.description</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Tag.format"><code class="docutils literal notranslate"><span class="pre">Tag.format</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Tag.id"><code class="docutils literal notranslate"><span class="pre">Tag.id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Tag.model_config"><code class="docutils literal notranslate"><span class="pre">Tag.model_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.Tag.name"><code class="docutils literal notranslate"><span class="pre">Tag.name</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.TagFilter"><code class="docutils literal notranslate"><span class="pre">TagFilter</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.TagFilter.document_ids"><code class="docutils literal notranslate"><span class="pre">TagFilter.document_ids</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.TagFilter.exclude"><code class="docutils literal notranslate"><span class="pre">TagFilter.exclude</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.TagFilter.include"><code class="docutils literal notranslate"><span class="pre">TagFilter.include</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.User"><code class="docutils literal notranslate"><span class="pre">User</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.User.email"><code class="docutils literal notranslate"><span class="pre">User.email</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.User.id"><code class="docutils literal notranslate"><span class="pre">User.id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.User.model_config"><code class="docutils literal notranslate"><span class="pre">User.model_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.User.username"><code class="docutils literal notranslate"><span class="pre">User.username</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.UserGroup"><code class="docutils literal notranslate"><span class="pre">UserGroup</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.UserGroup.description"><code class="docutils literal notranslate"><span class="pre">UserGroup.description</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.UserGroup.id"><code class="docutils literal notranslate"><span class="pre">UserGroup.id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.UserGroup.model_config"><code class="docutils literal notranslate"><span class="pre">UserGroup.model_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.UserGroup.name"><code class="docutils literal notranslate"><span class="pre">UserGroup.name</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.UserJobs"><code class="docutils literal notranslate"><span class="pre">UserJobs</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.UserJobs.jobs"><code class="docutils literal notranslate"><span class="pre">UserJobs.jobs</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.UserJobs.model_config"><code class="docutils literal notranslate"><span class="pre">UserJobs.model_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.UserJobs.user_id"><code class="docutils literal notranslate"><span class="pre">UserJobs.user_id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.UserJobs.username"><code class="docutils literal notranslate"><span class="pre">UserJobs.username</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.UserPermission"><code class="docutils literal notranslate"><span class="pre">UserPermission</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.UserPermission.category"><code class="docutils literal notranslate"><span class="pre">UserPermission.category</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.UserPermission.dependencies"><code class="docutils literal notranslate"><span class="pre">UserPermission.dependencies</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.UserPermission.description"><code class="docutils literal notranslate"><span class="pre">UserPermission.description</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.UserPermission.id"><code class="docutils literal notranslate"><span class="pre">UserPermission.id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.UserPermission.model_config"><code class="docutils literal notranslate"><span class="pre">UserPermission.model_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.UserPermission.name"><code class="docutils literal notranslate"><span class="pre">UserPermission.name</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.UserRole"><code class="docutils literal notranslate"><span class="pre">UserRole</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.UserRole.description"><code class="docutils literal notranslate"><span class="pre">UserRole.description</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.UserRole.id"><code class="docutils literal notranslate"><span class="pre">UserRole.id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.UserRole.model_config"><code class="docutils literal notranslate"><span class="pre">UserRole.model_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.UserRole.name"><code class="docutils literal notranslate"><span class="pre">UserRole.name</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.UserRole.priority"><code class="docutils literal notranslate"><span class="pre">UserRole.priority</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.UserUsage"><code class="docutils literal notranslate"><span class="pre">UserUsage</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.UserUsage.call_count"><code class="docutils literal notranslate"><span class="pre">UserUsage.call_count</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.UserUsage.email"><code class="docutils literal notranslate"><span class="pre">UserUsage.email</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.UserUsage.input_tokens"><code class="docutils literal notranslate"><span class="pre">UserUsage.input_tokens</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.UserUsage.llm_cost"><code class="docutils literal notranslate"><span class="pre">UserUsage.llm_cost</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.UserUsage.model_config"><code class="docutils literal notranslate"><span class="pre">UserUsage.model_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.UserUsage.output_tokens"><code class="docutils literal notranslate"><span class="pre">UserUsage.output_tokens</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.UserUsage.user_id"><code class="docutils literal notranslate"><span class="pre">UserUsage.user_id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.UserUsage.username"><code class="docutils literal notranslate"><span class="pre">UserUsage.username</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.UserWithLLMUsage"><code class="docutils literal notranslate"><span class="pre">UserWithLLMUsage</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.UserWithLLMUsage.email"><code class="docutils literal notranslate"><span class="pre">UserWithLLMUsage.email</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.UserWithLLMUsage.llm_usage"><code class="docutils literal notranslate"><span class="pre">UserWithLLMUsage.llm_usage</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.UserWithLLMUsage.model_config"><code class="docutils literal notranslate"><span class="pre">UserWithLLMUsage.model_config</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.UserWithLLMUsage.user_id"><code class="docutils literal notranslate"><span class="pre">UserWithLLMUsage.user_id</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="h2ogpte.html#h2ogpte.types.UserWithLLMUsage.username"><code class="docutils literal notranslate"><span class="pre">UserWithLLMUsage.username</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="h2ogpte.html#module-contents">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<section id="indices-and-tables">
+<h2>Indices and Tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="examples/prompts/example4.html" class="btn btn-neutral float-left" title="Unshare a prompt template" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="h2ogpte.html" class="btn btn-neutral float-right" title="h2ogpte package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025 H2O.ai, Inc. All rights reserved..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

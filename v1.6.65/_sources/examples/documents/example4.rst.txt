@@ -1,0 +1,124 @@
+Upload a file from your local machine
+=====================================
+
+
+Overview
+--------
+
+Users can upload a supported file type to a Collection from their local machine.
+
+
+
+
+Example
+-------
+
+
+.. code-block:: python
+
+    from h2ogpte import H2OGPTE
+
+    client = H2OGPTE(
+        address="https://h2ogpte.genai.h2o.ai",
+        api_key='sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+    )
+
+    collection_id = client.create_collection(
+        name="The name of my Collection",
+        description="The description of my Collection",
+    )
+
+    with open("annual-report.pdf", "rb") as f:
+        upload_id = client.upload("annual-report.pdf", f)
+
+    client.ingest_uploads(
+        collection_id=collection_id,
+        upload_ids=[upload_id]
+    )
+
+
+Upload with Metadata
+--------------------
+
+You can attach metadata to documents during ingestion. The metadata dictionary must use the
+``upload_id`` as the key, with a nested dictionary containing your metadata key-value pairs.
+
+.. code-block:: python
+
+    from h2ogpte import H2OGPTE
+
+    client = H2OGPTE(
+        address="https://h2ogpte.genai.h2o.ai",
+        api_key='sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+    )
+
+    collection_id = client.create_collection(
+        name="Annual Reports",
+        description="Company annual reports with metadata",
+    )
+
+    # Upload the document
+    with open("annual-report-2024.pdf", "rb") as f:
+        upload_id = client.upload("annual-report-2024.pdf", f)
+
+    # Structure metadata with upload_id as the key
+    metadata = {
+        upload_id: {
+            "year": "2024",
+            "document_type": "annual_report",
+            "department": "finance"
+        }
+    }
+
+    # Ingest with metadata
+    client.ingest_uploads(
+        collection_id=collection_id,
+        upload_ids=[upload_id],
+        metadata=metadata
+    )
+
+
+Upload Multiple Files with Metadata
+-----------------------------------
+
+When uploading multiple files, structure the metadata dictionary with each ``upload_id`` as a key.
+
+.. code-block:: python
+
+    # Upload multiple documents
+    with open("report-2023.pdf", "rb") as f:
+        upload_id_1 = client.upload("report-2023.pdf", f)
+
+    with open("report-2024.pdf", "rb") as f:
+        upload_id_2 = client.upload("report-2024.pdf", f)
+
+    # Structure metadata for multiple documents
+    metadata = {
+        upload_id_1: {"year": "2023", "document_type": "annual_report"},
+        upload_id_2: {"year": "2024", "document_type": "annual_report"}
+    }
+
+    # Ingest all with metadata
+    client.ingest_uploads(
+        collection_id=collection_id,
+        upload_ids=[upload_id_1, upload_id_2],
+        metadata=metadata
+    )
+
+
+Filtering Documents by Metadata
+-------------------------------
+
+After ingesting documents with metadata, you can filter them using the ``metadata_filter`` parameter.
+
+.. code-block:: python
+
+    # Filter documents in a collection by metadata
+    documents = client.list_documents_in_collection(
+        collection_id, 0, 10, metadata_filter={"year": "2024"}
+    )
+
+    # Filter across all your recent documents
+    documents = client.list_recent_documents(
+        0, 10, metadata_filter={"document_type": "annual_report"}
+    )

@@ -1,0 +1,64 @@
+List Jobs 
+=========
+
+Overview 
+--------
+
+A user can list its Jobs. 
+
+Example 
+-------
+
+
+.. code-block:: python
+
+    from h2ogpte import H2OGPTE
+
+    client = H2OGPTE(
+        address="https://h2ogpte.genai.h2o.ai",
+        api_key='sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+    )
+
+    jobs = client.list_jobs()
+
+    for job in jobs: 
+        print(
+        f"Canceled: {job.canceled}\n"
+        f"Completed: {job.completed}\n"
+        f"Date: {job.date}\n"
+        f"Duration: {job.duration}\n"
+        f"Duration seconds: {job.duration_seconds}\n"
+        f"Errors: {job.errors}\n"
+        f"Failed: {job.failed}\n"
+        f"ID: {job.id}\n"
+        f"Kind: {job.kind}\n"
+        f"Last update date: {job.last_update_date}\n"
+        f"Model computed fields: {job.model_computed_fields}\n"
+        f"Model config: {job.model_config}\n"
+        f"Model fields: {job.model_fields}\n"
+        f"Name: {job.name}\n"
+        f"Passed: {job.passed}\n"
+        f"Progress: {job.progress}\n"
+        f"Statuses: {job.statuses}"
+        )
+
+
+.. code-block:: text
+    
+    Canceled: False
+    Completed: True
+    Date: 2024-11-08 19:23:38+00:00
+    Duration: 12s
+    Duration seconds: 12.0
+    Errors: []
+    Failed: 0.0
+    ID: 206b4754-e83b-498b-89ef-ed8fbfcbc9ed
+    Kind: JobKind.DeleteCollectionsJob
+    Last update date: 2024-11-08 19:23:50+00:00
+    Model computed fields: {}
+    Model config: {}
+    Model fields: {'id': FieldInfo(annotation=str, required=True), 'name': FieldInfo(annotation=str, required=True), 'passed': FieldInfo(annotation=float, required=True), 'failed': FieldInfo(annotation=float, required=True), 'progress': FieldInfo(annotation=float, required=True), 'completed': FieldInfo(annotation=bool, required=True), 'canceled': FieldInfo(annotation=bool, required=True), 'date': FieldInfo(annotation=datetime, required=True), 'kind': FieldInfo(annotation=JobKind, required=True), 'statuses': FieldInfo(annotation=List[JobStatus], required=True), 'errors': FieldInfo(annotation=List[str], required=True), 'last_update_date': FieldInfo(annotation=datetime, required=True), 'duration': FieldInfo(annotation=str, required=True), 'duration_seconds': FieldInfo(annotation=float, required=True)}
+    Name: Deleting 5 collections
+    Passed: 1.0
+    Progress: 1.0
+    Statuses: [JobStatus(id='15b96b2f10fa4b09bf1d27c26e7c1d3d', status='Deleting indexes...')]

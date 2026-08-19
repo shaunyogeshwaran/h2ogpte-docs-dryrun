@@ -1,0 +1,31 @@
+Delete a Chat session
+====================
+
+Overview 
+--------
+
+A Collection can include multiple chat sessions, each containing several related messages. Users have the option to delete a specific chat session within a Collection.
+
+Example
+-------
+
+
+.. code-block:: python
+
+    from h2ogpte import H2OGPTE
+
+    client = H2OGPTE(
+        address="https://h2ogpte.genai.h2o.ai",
+        api_key='sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+    )
+
+    collections = client.list_recent_collections(offset=0, limit=1)
+    collection_id = collections[0].id
+    collection_chat_sessions = client.list_chat_sessions_for_collection(collection_id=collection_id, offset=0, limit=1)
+
+    print(client.delete_chat_sessions([collection_chat_sessions[0].id]))
+
+
+.. code-block:: text
+    
+    status='completed'

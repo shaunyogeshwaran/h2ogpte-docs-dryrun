@@ -1,0 +1,94 @@
+Create a document summary in a Collection
+=========================================
+
+
+Overview 
+--------
+
+Users can create a document summary if the document is part of a collection.
+
+Example 
+-------
+
+.. code-block:: python
+
+    from h2ogpte import H2OGPTE
+
+    client = H2OGPTE(
+        address="https://h2ogpte.genai.h2o.ai",
+        api_key='sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+    )
+
+    collection_id = client.create_collection(
+        name="The name of my Collection",
+        description="The description of my Collection",
+    )
+
+    with open("annual-report.pdf", "rb") as f:
+        report = client.upload("annual-report.pdf", f)
+
+    client.ingest_uploads(
+        collection_id=collection_id, 
+        upload_ids=[report]
+    )
+
+    list_of_documents = client.list_documents_in_collection(collection_id=collection_id, offset=0, limit=1)
+
+    uploaded_document = list_of_documents[0]
+
+    print(
+        f"Connector: {uploaded_document.connector}\n"
+        f"Guardrails settings: {uploaded_document.guardrails_settings}\n"
+        f"ID: {uploaded_document.id}\n"
+        f"Metadata dictionary: {uploaded_document.meta_data_dict}\n"
+        f"Model computed fields: {uploaded_document.model_computed_fields}\n"
+        f"Model config: {uploaded_document.model_config}\n"
+        f"Model fields: {uploaded_document.model_fields}\n"
+        f"Name: {uploaded_document.name}\n"
+        f"Original type: {uploaded_document.original_type}\n"
+        f"Page count: {uploaded_document.page_count}\n"
+        f"Size: {uploaded_document.size}\n"
+        f"Status: {uploaded_document.status}\n"
+        f"Type: {uploaded_document.type}\n"
+        f"Updated at: {uploaded_document.updated_at}\n"
+        f"URI: {uploaded_document.uri}\n"
+        f"Username: {uploaded_document.username}"
+    )
+
+    document_summary = client.summarize_document(document_id=uploaded_document.id)
+
+    print(
+        f"Content: {document_summary.content}\n"
+        f"Model computed fields: {document_summary.model_computed_fields}\n"
+        f"Model config: {document_summary.model_config}\n"
+        f"Model fields: {document_summary.model_fields}"
+    )
+
+
+.. code-block:: text
+
+    Connector: Upload
+    Guardrails settings: None
+    ID: e714254b-9d2f-4e42-b368-55707cb2cc7d
+    Metadata dictionary: {}
+    Model computed fields: {}
+    Model config: {'use_enum_values': True}
+    Model fields: {'id': FieldInfo(annotation=str, required=True), 'username': FieldInfo(annotation=str, required=True), 'name': FieldInfo(annotation=str, required=True), 'type': FieldInfo(annotation=str, required=True), 'size': FieldInfo(annotation=int, required=True), 'page_count': FieldInfo(annotation=int, required=True), 'guardrails_settings': FieldInfo(annotation=Union[dict, NoneType], required=False, default=None), 'connector': FieldInfo(annotation=Union[str, NoneType], required=False, default=None), 'uri': FieldInfo(annotation=Union[str, NoneType], required=False, default=None), 'original_type': FieldInfo(annotation=Union[str, NoneType], required=False, default=None), 'meta_data_dict': FieldInfo(annotation=Union[dict, NoneType], required=False, default=None), 'status': FieldInfo(annotation=Status, required=True), 'updated_at': FieldInfo(annotation=datetime, required=True)}
+    Name: annual-report.pdf
+    Original type: PDF
+    Page count: 226
+    Size: 3590271
+    Status: completed
+    Type: PDF
+    Updated at: 2024-10-31 19:34:29.483403+00:00
+    URI: None
+    Username: sergio.perez@h2o.ai
+    Content: Wells Fargo's 2021 Annual Report highlights strong financial performance with a 12.0% return on equity and a 14.3% return on tangible common equity. The company saw a 6% increase in revenue, driven by gains in affiliated venture capital and private equity businesses, and the sale of certain businesses. Despite the challenges posed by the COVID-19 pandemic, Wells Fargo returned $16.9 billion to shareholders through dividends and stock repurchases. The company's strong foundation, focused business, and cultural changes position it for long-term success.
+    Model computed fields: {}
+    Model config: {}
+    Model fields: {'id': FieldInfo(annotation=str, required=True), 'content': FieldInfo(annotation=str, required=True), 'error': FieldInfo(annotation=str, required=True), 'document_id': FieldInfo(annotation=str, required=True), 'kwargs': FieldInfo(annotation=str, required=True), 'created_at': FieldInfo(annotation=datetime, required=True), 'usage_stats': FieldInfo(annotation=Union[str, NoneType], required=False, default=None)}
+
+
+
+
+

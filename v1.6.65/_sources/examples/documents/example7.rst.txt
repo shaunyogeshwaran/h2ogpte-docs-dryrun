@@ -1,0 +1,31 @@
+Import an already imported document into a Collection 
+=====================================================
+
+
+Overview 
+--------
+
+Users can import an already imported (stored) document into a Collection. 
+
+
+Example 
+-------
+
+
+.. code-block:: python
+
+    from h2ogpte import H2OGPTE
+
+    client = H2OGPTE(
+        address="https://h2ogpte.genai.h2o.ai",
+        api_key='sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+    )
+
+    most_recent_collection = client.list_recent_collections(offset=0, limit=1)
+
+    list_of_recent_documents = client.list_recent_documents(offset=0, limit=1)
+
+    client.import_document_into_collection(
+        collection_id=most_recent_collection[0].id, 
+        document_id=list_of_recent_documents[0].id
+    )

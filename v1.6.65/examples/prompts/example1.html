@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create a prompt template &mdash; h2oGPTe</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/code.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="canonical" href="https://h2oai.github.io/h2ogpte/examples/prompts/example1.html"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=153204dd"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script defer="defer" src="../../_static/js/versions.js?v=17ffda95"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Get a prompt template" href="example2.html" />
+    <link rel="prev" title="Prompts" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            h2oGPTe
+          </a>
+              <div class="version">
+                1.7.5-3
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Installation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">h2oGPTe Python Client Installation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started with h2oGPTe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../async_api.html">h2oGPTe Async API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorial1/tutorial1.html">Tutorial 1: Chat with a website</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorial2/tutorial2.html">Tutorial 2: Create a Collection with h2oGPTe’s or your custom guardrails and PII parameter values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorial3/tutorial3.html">Tutorial 3: Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorial4/tutorial4.html">Tutorial 4: Downloading agent-generated files</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../chats/index.html">Chats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../collections/index.html">Collections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../documents/index.html">Documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../llms/index.html">LLMs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../users/index.html">Users</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../jobs/index.html">Jobs</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Prompts</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Create a prompt template</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example2.html">Get a prompt template</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example3.html">Share a prompt template</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example4.html">Unshare a prompt template</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Python API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api.html">h2oGPTe Python API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Python for REST API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../rest.html">h2oGPTe Python API for REST Interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Third-Party Notices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../docs-licenses/licenses.html">Third-Party Licenses</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Release Notes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">h2oGPTe</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Prompts</a></li>
+      <li class="breadcrumb-item active">Create a prompt template</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/examples/prompts/example1.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="create-a-prompt-template">
+<h1>Create a prompt template<a class="headerlink" href="#create-a-prompt-template" title="Permalink to this heading"></a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>A prompt template allows users to guide the language model in generating specific, tailored text for a Collection. For example, a prompt template can be used to customize the description of a Collection.</p>
+<p>It is a structured outline with instructions that ensure consistent and relevant outputs. By providing reusable instructions alongside the user’s query, a prompt template helps customize responses from h2oGPTe, ensuring the output meets specific needs.</p>
+</section>
+<section id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this heading"></a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">h2ogpte</span><span class="w"> </span><span class="kn">import</span> <span class="n">H2OGPTE</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">H2OGPTE</span><span class="p">(</span>
+    <span class="n">address</span><span class="o">=</span><span class="s2">&quot;https://h2ogpte.genai.h2o.ai&quot;</span><span class="p">,</span>
+    <span class="n">api_key</span><span class="o">=</span><span class="s1">&#39;sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">prompt_template_id</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">create_prompt_template</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;My prompt template&quot;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;My first prompt template&quot;</span><span class="p">,</span>
+    <span class="n">lang</span><span class="o">=</span><span class="s2">&quot;en&quot;</span><span class="p">,</span>
+    <span class="n">system_prompt</span><span class="o">=</span><span class="s2">&quot;You are h2oGPTe, an expert question-answering AI system created by H2O.ai.&quot;</span><span class="p">,</span>
+    <span class="n">pre_prompt_query</span><span class="o">=</span><span class="p">(</span>
+        <span class="s2">&quot;Pay attention and remember the information below. You will need to use only any &quot;</span>
+        <span class="s2">&quot;chat history, any images given, or any document text in order to answer the &quot;</span>
+        <span class="s2">&quot;question or imperative at the end.&quot;</span>
+    <span class="p">),</span>
+    <span class="n">prompt_query</span><span class="o">=</span><span class="p">(</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;According to only the information in any chat history, any images given, or any document &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;text provided within the context above, give a well-structured response (that starts with &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; &quot;According to&quot;) to:&quot;&quot;&quot;</span>
+    <span class="p">),</span>
+    <span class="n">hyde_no_rag_llm_prompt_extension</span><span class="o">=</span><span class="s2">&quot;Keep the answer brief, and list the 5 most relevant key words at the end.&quot;</span><span class="p">,</span>
+    <span class="n">pre_prompt_summary</span><span class="o">=</span><span class="p">(</span>
+        <span class="s2">&quot;In order to write a concise single-paragraph or bulleted list summary, pay attention &quot;</span>
+        <span class="s2">&quot;to any chat history, any images given, or any following text:&quot;</span>
+    <span class="p">),</span>
+    <span class="n">prompt_summary</span><span class="o">=</span><span class="p">(</span>
+        <span class="s2">&quot;Using only any chat history, any images given, or any text above, write a condensed &quot;</span>
+        <span class="s2">&quot;and concise well-structured Markdown summary of key results.&quot;</span>
+    <span class="p">),</span>
+    <span class="n">system_prompt_reflection</span><span class="o">=</span><span class="p">(</span>
+        <span class="s2">&quot;You are acting as a judge. You must be fair and impartial and pay attention to details.&quot;</span>
+    <span class="p">),</span>
+    <span class="n">prompt_reflection</span><span class="o">=</span><span class="p">(</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Review the user&#39;s question and the corresponding response using the additive 5-point &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;scoring system described below. Points are accumulated based on the satisfaction of &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;each criterion:\n&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;- Add 1 point if the response is relevant and provides some information related to the &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;user&#39;s inquiry, even if it is incomplete or contains some irrelevant content.\n&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;- Add another point if the response addresses a substantial portion of the user&#39;s question, &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;but does not completely resolve the query or provide a direct answer.\n&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;- Award a third point if the response answers the basic elements of the user&#39;s question in &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;a useful way, regardless of whether it seems to have been written by an AI Assistant or &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;if it has elements typically found in blogs or search results.\n&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;- Grant a fourth point if the response is clearly written from an AI Assistant&#39;s &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;perspective, addressing the user&#39;s question directly and comprehensively, and is &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;well-organized and helpful, even if there is slight room for improvement in clarity, &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;conciseness or focus.\n&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;- Bestow a fifth point for a response that is impeccably tailored to the user&#39;s question &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;by an AI Assistant, without extraneous information, reflecting expert knowledge, and &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;demonstrating a high-quality, engaging, and insightful answer.\n&quot;&quot;&quot;</span>
+        <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&lt;user&gt;</span><span class="se">\n</span><span class="si">%s</span><span class="se">\n</span><span class="s2">&lt;/user&gt;</span><span class="se">\n\n</span><span class="s2">&lt;response&gt;</span><span class="se">\n</span><span class="si">%s</span><span class="se">\n</span><span class="s2">&lt;/response&gt;</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;After examining the user&#39;s instruction and the response:\n\n&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;- Briefly justify your total score, up to 100 words.\n&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;- Conclude with the score using the format: &quot;Score: &lt;total points&gt; / 5&quot;\n\n&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Remember to assess from the AI Assistant perspective, utilizing web search knowledge as &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;necessary. To evaluate the response in alignment with this additive scoring model, we&#39;ll &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;systematically attribute points based on the outlined criteria.&quot;&quot;&quot;</span>
+    <span class="p">),</span>
+    <span class="n">auto_gen_description_prompt</span><span class="o">=</span><span class="p">(</span>
+        <span class="s2">&quot;Create a short one-sentence summary from the above context, with the goal to make it &quot;</span>
+        <span class="s2">&quot;clear to the reader what this is about.&quot;</span>
+    <span class="p">),</span>
+    <span class="n">auto_gen_document_summary_pre_prompt_summary</span><span class="o">=</span><span class="p">(</span>
+        <span class="s2">&quot;In order to write a concise single-paragraph summary, pay attention to the following text:&quot;</span>
+    <span class="p">),</span>
+    <span class="n">auto_gen_document_summary_prompt_summary</span><span class="o">=</span><span class="p">(</span>
+        <span class="s2">&quot;Using only the text above, write a condensed and concise summary of key results &quot;</span>
+        <span class="s2">&quot;(preferably as one paragraph).&quot;</span>
+    <span class="p">),</span>
+    <span class="n">auto_gen_document_sample_questions_prompt</span><span class="o">=</span><span class="p">(</span>
+        <span class="s1">&#39;Create 10 interesting questions for which the answers are contained in the information &#39;</span>
+        <span class="s1">&#39;provided above. Respond in JSON, like this: {{&quot;q1&quot;: &quot;Question 1?&quot;, &quot;q2&quot;: &quot;Question 2?&quot;, ..., &quot;q10&quot;: &quot;Question 10?&quot;}}.&#39;</span>
+    <span class="p">),</span>
+    <span class="n">default_sample_questions</span><span class="o">=</span><span class="p">[</span>
+        <span class="s2">&quot;Create five good questions&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Summarize in one sentence&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Explain this to a 5-year old&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Tell me something interesting&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="n">image_batch_image_prompt</span><span class="o">=</span><span class="p">(</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;&lt;response_instructions&gt;\n&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;- Act as a keen observer with a sharp eye for detail.\n&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;- Analyze the content within the images.\n&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;- Provide insights based on your observations.\n&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;- Avoid making up facts.\n&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;- Do not forget to follow the system prompt.\n&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;&lt;/response_instructions&gt;&quot;&quot;&quot;</span>
+    <span class="p">),</span>
+    <span class="n">image_batch_final_prompt</span><span class="o">=</span><span class="p">(</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;&lt;response_instructions&gt;\n&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;- Check if the answers already given in &lt;image&gt; XML tags are useful.\n&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;- Image answers came from a vision model capable of reading text and images within &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;the images.\n&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;- If image answers are useful, preserve all details the image answers provide and use &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;them to construct a well-structured answer.\n&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;- Ignore image answers that had no useful content, because any single batch of images &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;may not be relevant. Focus on all details from image answers that are relevant and useful.\n&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;- Check if the document text can answer the question.\n&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;- Check if the chat history can answer the question.\n&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;- Check if any figure captions can answer the question.\n&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;- If answers conflict between text, chat history, and figure captions, do not focus &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;your response on this conflict.\n&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;- In handling conflicting answers, use logical reasoning and supporting evidence to &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;assess the plausibility of each answer.\n&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;- In handling conflicting answers, choose the most consistent answer -- i.e., the &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;most common answer among conflicts (self-consistency reasoning) or one that aligns &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;with well-established facts.\n&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;- In handling conflicting answers, one may choose one data source over another -- i.e., &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;text is probably more reliable than an image when the question can be answered from &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;text, while an image is more reliable than text for flowcharts, photos, etc.\n&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;- Do not forget to follow the system prompt.\n&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;- Finally, according to our chat history, the above documents, figure captions, or given &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;images, construct a well-structured response.\n&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;&lt;/response_instructions&gt;&quot;&quot;&quot;</span>
+    <span class="p">),</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">prompt_template_id</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>b7f06049-2aae-4db3-84fa-77....
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Prompts" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="example2.html" class="btn btn-neutral float-right" title="Get a prompt template" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025 H2O.ai, Inc. All rights reserved..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

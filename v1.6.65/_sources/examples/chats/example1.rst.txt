@@ -1,0 +1,58 @@
+Chat without a Collection (directly to an LLM)
+==============================================
+
+
+Overview 
+--------
+
+Users can chat directly with a language model (LLM) without creating a Collection. To do so, a user can start a new chat session without specifying a collection ID. 
+
+
+Example
+-------
+
+.. code-block:: python
+
+    from h2ogpte import H2OGPTE
+
+    client = H2OGPTE(
+        address="https://h2ogpte.genai.h2o.ai",
+        api_key='sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+    )
+
+    # Specifying a Collection ID is not required when using the `create_chat_session` method to interact directly with the large language model (LLM). However, if you wish to converse with a Collection, you must include a Collection ID as a parameter in the `create_chat_session` method.
+    chat_session_id = client.create_chat_session()
+
+    with client.connect(chat_session_id) as session:
+
+        reply = session.query("What is H2O.ai?")
+
+        print(
+            f"Content: {reply.content}\n" # Response to the sent query
+            f"Created at: {reply.created_at}\n"
+            f"Error: {reply.error}\n"
+            f"ID: {reply.id}\n"
+            f"Model computed fields: {reply.model_computed_fields}\n"
+            f"Model config: {reply.model_config}\n"
+            f"Model fields: {reply.model_fields}\n"
+            f"Reply to: {reply.reply_to}\n"
+            f"Type list: {reply.type_list}\n"
+            f"Votes: {reply.votes}"
+        )
+
+
+.. code-block:: text
+
+    Content: H2O.ai is a research organization that focuses on developing and advancing artificial intelligence technologies. They are known for their work in natural language processing, machine learning, and other areas of AI research.
+    Created at: 2024-10-30 17:53:43.893784
+    Error: None
+    ID: faa62d72-2213-4a39-8cc6-382a710d653d
+    Model computed fields: {}
+    Model config: {}
+    Model fields: {'id': FieldInfo(annotation=str, required=True), 'content': FieldInfo(annotation=str, required=True), 'reply_to': FieldInfo(annotation=Union[str, NoneType], required=False, default=None), 'votes': FieldInfo(annotation=int, required=True), 'created_at': FieldInfo(annotation=datetime, required=True), 'type_list': FieldInfo(annotation=Union[List[str], NoneType], required=False, default=None), 'error': FieldInfo(annotation=Union[str, NoneType], required=False, default=None)}
+    Reply to: 4a499ecb-c655-43fc-bc04-1a7e1c70d0e2
+    Type list: []
+    Votes: 0
+
+
+

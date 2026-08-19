@@ -1,0 +1,36 @@
+h2oGPTe Async API
+=================
+The `h2ogpte <https://pypi.org/project/h2ogpte/>`__ Python package also contains asynchronous version of API.
+It offers the same capabilities as the synchronous version.
+
+.. code-block:: python
+
+    from pathlib import Path
+    from h2ogpte import H2OGPTEAsync
+
+    client = H2OGPTEAsync(
+        address="https://h2ogpte.genai.h2o.ai",
+        api_key=API_KEY,
+    )
+
+    # Create Collection
+    collection_id = await client.create_collection(
+        name="My first h2oGPTe collection",
+        description="PDF -> text -> summary",
+    )
+
+    file_path = Path("...path to document(s)...")
+    with open(file_path.resolve(), "rb") as f:
+        upload_id = await client.upload(file_path.name, f)
+
+    # Converting the input into chunked text and embeddings...
+    await client.ingest_uploads(collection_id, [upload_id])
+
+    # Chat with LLM
+    chat_session_id = await client.create_chat_session(collection_id)
+    async with client.connect(chat_session_id) as session:
+        # Simple Question for Document Collection
+        answer = await session.query(
+            "What was net revenue?",
+        )
+        print(answer.content)

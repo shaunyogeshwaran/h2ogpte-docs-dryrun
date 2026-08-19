@@ -1,0 +1,35 @@
+Third-Party Licenses
+====================
+
+`h2oGPTe` uses and distributes third-party software under the following licenses:
+
+beautifulsoup4
+--------------
+
+.. literalinclude:: ../../../licenses/beautifulsoup4-license.txt
+
+bs4
+---
+
+.. literalinclude:: ../../../licenses/bs4-license.txt
+
+lxml
+----
+
+.. literalinclude:: ../../../licenses/lxml-license.txt
+
+requests
+--------
+
+.. literalinclude:: ../../../licenses/requests-license.txt
+
+websockets
+----------
+
+.. literalinclude:: ../../../licenses/websockets-license.txt
+
+msg_parser
+----------
+
+.. literalinclude:: ../../../licenses/msg_parser-license.txt
+

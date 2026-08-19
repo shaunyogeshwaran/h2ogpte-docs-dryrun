@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chat without a Collection (directly to an LLM) &mdash; h2oGPTe</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/code.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="canonical" href="https://h2oai.github.io/h2ogpte/examples/chats/example1.html"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=153204dd"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script defer="defer" src="../../_static/js/versions.js?v=17ffda95"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Chat with a Collection (document interaction)" href="example2.html" />
+    <link rel="prev" title="Chats" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            h2oGPTe
+          </a>
+              <div class="version">
+                1.7.5-3
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Installation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">h2oGPTe Python Client Installation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started with h2oGPTe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../async_api.html">h2oGPTe Async API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorial1/tutorial1.html">Tutorial 1: Chat with a website</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorial2/tutorial2.html">Tutorial 2: Create a Collection with h2oGPTe’s or your custom guardrails and PII parameter values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorial3/tutorial3.html">Tutorial 3: Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorial4/tutorial4.html">Tutorial 4: Downloading agent-generated files</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Chats</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Chat without a Collection (directly to an LLM)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example2.html">Chat with a Collection (document interaction)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example3.html">Delete a Chat session</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../collections/index.html">Collections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../documents/index.html">Documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../llms/index.html">LLMs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../users/index.html">Users</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../jobs/index.html">Jobs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../prompts/index.html">Prompts</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Python API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api.html">h2oGPTe Python API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Python for REST API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../rest.html">h2oGPTe Python API for REST Interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Third-Party Notices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../docs-licenses/licenses.html">Third-Party Licenses</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Release Notes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">h2oGPTe</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Chats</a></li>
+      <li class="breadcrumb-item active">Chat without a Collection (directly to an LLM)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/examples/chats/example1.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="chat-without-a-collection-directly-to-an-llm">
+<h1>Chat without a Collection (directly to an LLM)<a class="headerlink" href="#chat-without-a-collection-directly-to-an-llm" title="Permalink to this heading"></a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>Users can chat directly with a language model (LLM) without creating a Collection. To do so, a user can start a new chat session without specifying a collection ID.</p>
+</section>
+<section id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this heading"></a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">h2ogpte</span><span class="w"> </span><span class="kn">import</span> <span class="n">H2OGPTE</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">H2OGPTE</span><span class="p">(</span>
+    <span class="n">address</span><span class="o">=</span><span class="s2">&quot;https://h2ogpte.genai.h2o.ai&quot;</span><span class="p">,</span>
+    <span class="n">api_key</span><span class="o">=</span><span class="s1">&#39;sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Specifying a Collection ID is not required when using the `create_chat_session` method to interact directly with the large language model (LLM). However, if you wish to converse with a Collection, you must include a Collection ID as a parameter in the `create_chat_session` method.</span>
+<span class="n">chat_session_id</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">create_chat_session</span><span class="p">()</span>
+
+<span class="k">with</span> <span class="n">client</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">chat_session_id</span><span class="p">)</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+
+    <span class="n">reply</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;What is H2O.ai?&quot;</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;Content: </span><span class="si">{</span><span class="n">reply</span><span class="o">.</span><span class="n">content</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="c1"># Response to the sent query</span>
+        <span class="sa">f</span><span class="s2">&quot;Created at: </span><span class="si">{</span><span class="n">reply</span><span class="o">.</span><span class="n">created_at</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;Error: </span><span class="si">{</span><span class="n">reply</span><span class="o">.</span><span class="n">error</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;ID: </span><span class="si">{</span><span class="n">reply</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;Model computed fields: </span><span class="si">{</span><span class="n">reply</span><span class="o">.</span><span class="n">model_computed_fields</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;Model config: </span><span class="si">{</span><span class="n">reply</span><span class="o">.</span><span class="n">model_config</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;Model fields: </span><span class="si">{</span><span class="n">reply</span><span class="o">.</span><span class="n">model_fields</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;Reply to: </span><span class="si">{</span><span class="n">reply</span><span class="o">.</span><span class="n">reply_to</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;Type list: </span><span class="si">{</span><span class="n">reply</span><span class="o">.</span><span class="n">type_list</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;Votes: </span><span class="si">{</span><span class="n">reply</span><span class="o">.</span><span class="n">votes</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Content: H2O.ai is a research organization that focuses on developing and advancing artificial intelligence technologies. They are known for their work in natural language processing, machine learning, and other areas of AI research.
+Created at: 2024-10-30 17:53:43.893784
+Error: None
+ID: faa62d72-2213-4a39-8cc6-382a710d653d
+Model computed fields: {}
+Model config: {}
+Model fields: {&#39;id&#39;: FieldInfo(annotation=str, required=True), &#39;content&#39;: FieldInfo(annotation=str, required=True), &#39;reply_to&#39;: FieldInfo(annotation=Union[str, NoneType], required=False, default=None), &#39;votes&#39;: FieldInfo(annotation=int, required=True), &#39;created_at&#39;: FieldInfo(annotation=datetime, required=True), &#39;type_list&#39;: FieldInfo(annotation=Union[List[str], NoneType], required=False, default=None), &#39;error&#39;: FieldInfo(annotation=Union[str, NoneType], required=False, default=None)}
+Reply to: 4a499ecb-c655-43fc-bc04-1a7e1c70d0e2
+Type list: []
+Votes: 0
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Chats" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="example2.html" class="btn btn-neutral float-right" title="Chat with a Collection (document interaction)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025 H2O.ai, Inc. All rights reserved..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

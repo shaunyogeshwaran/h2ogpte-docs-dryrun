@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tutorial 4: Downloading agent-generated files &mdash; h2oGPTe</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/code.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="canonical" href="https://h2oai.github.io/h2ogpte/tutorials/tutorial4/tutorial4.html"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=153204dd"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script defer="defer" src="../../_static/js/versions.js?v=17ffda95"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Chats" href="../../examples/chats/index.html" />
+    <link rel="prev" title="Tutorial 3: Agents" href="../tutorial3/tutorial3.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            h2oGPTe
+          </a>
+              <div class="version">
+                1.7.5-3
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Installation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">h2oGPTe Python Client Installation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started with h2oGPTe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../async_api.html">h2oGPTe Async API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../tutorial1/tutorial1.html">Tutorial 1: Chat with a website</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial2/tutorial2.html">Tutorial 2: Create a Collection with h2oGPTe’s or your custom guardrails and PII parameter values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial3/tutorial3.html">Tutorial 3: Agents</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tutorial 4: Downloading agent-generated files</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/chats/index.html">Chats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/collections/index.html">Collections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/documents/index.html">Documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/llms/index.html">LLMs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/users/index.html">Users</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/jobs/index.html">Jobs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/prompts/index.html">Prompts</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Python API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api.html">h2oGPTe Python API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Python for REST API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../rest.html">h2oGPTe Python API for REST Interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Third-Party Notices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../docs-licenses/licenses.html">Third-Party Licenses</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Release Notes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">h2oGPTe</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Tutorial 4: Downloading agent-generated files</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/tutorials/tutorial4/tutorial4.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="tutorial-4-downloading-agent-generated-files">
+<h1>Tutorial 4: Downloading agent-generated files<a class="headerlink" href="#tutorial-4-downloading-agent-generated-files" title="Permalink to this heading"></a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>This tutorial shows you how to use the <strong>h2oGPTe</strong> Python client to download files that <a class="reference external" href="https://docs.h2o.ai/enterprise-h2ogpte/guide/agents">agents</a> generate during chat sessions. You can use this process to retrieve documents, images, code, or other files that agents create.</p>
+</section>
+<section id="what-you-ll-learn">
+<h2>What you’ll learn<a class="headerlink" href="#what-you-ll-learn" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>How to retrieve and download files generated by <strong>h2oGPTe</strong> agents</p></li>
+<li><p>How to handle file download errors</p></li>
+<li><p>How to manage local file storage</p></li>
+</ul>
+</section>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading"></a></h2>
+<p>Before you begin, make sure you have:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>the h2oGPTe Python library installed</p></li>
+<li><p>a global API key and endpoint URL</p></li>
+<li><p><strong>h2oGPTe</strong> v1.6.29 or later</p></li>
+</ul>
+</div></blockquote>
+<section id="install-the-h2ogpte-library">
+<h3>Install the h2oGPTe library<a class="headerlink" href="#install-the-h2ogpte-library" title="Permalink to this heading"></a></h3>
+<p>Install the library using pip:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>h2ogpte
+</pre></div>
+</div>
+</section>
+<section id="get-your-api-credentials">
+<h3>Get your API credentials<a class="headerlink" href="#get-your-api-credentials" title="Permalink to this heading"></a></h3>
+<p>Requirements:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>An API key.</p></li>
+<li><p>The endpoint URL for your h2oGPTe instance. The <code class="docutils literal notranslate"><span class="pre">address</span></code> should be where the API key was created.</p></li>
+</ul>
+</div></blockquote>
+<p>To create a global API key, see <a class="reference external" href="https://docs.h2o.ai/enterprise-h2ogpte/guide/apis#create-an-api-key">Create an API key</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Make sure the agent tool you want to use is configured and available in your h2oGPTe environment. Some tools require additional setup.
+For more information, see <a class="reference external" href="https://docs.h2o.ai/enterprise-h2ogpte/guide/agents#toolss">Agents tool documentation</a> .</p>
+</div>
+</section>
+</section>
+<section id="download-agent-generated-files">
+<h2>Download agent-generated files<a class="headerlink" href="#download-agent-generated-files" title="Permalink to this heading"></a></h2>
+<section id="create-a-client-connection">
+<h3>1. Create a client connection<a class="headerlink" href="#create-a-client-connection" title="Permalink to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">h2ogpte</span><span class="w"> </span><span class="kn">import</span> <span class="n">H2OGPTE</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">H2OGPTE</span><span class="p">(</span>
+    <span class="n">address</span><span class="o">=</span><span class="s1">&#39;https://h2ogpte.genai.h2o.ai&#39;</span><span class="p">,</span>
+    <span class="n">api_key</span><span class="o">=</span><span class="s1">&#39;sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Replace the <code class="docutils literal notranslate"><span class="pre">address</span></code> and <code class="docutils literal notranslate"><span class="pre">api_key</span></code> values with your actual endpoint and API key.</p>
+</section>
+<section id="start-a-chat-session">
+<h3>2. Start a chat session<a class="headerlink" href="#start-a-chat-session" title="Permalink to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">chat_session_id</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">create_chat_session</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="send-a-prompt-to-generate-a-file">
+<h3>3. Send a prompt to generate a file<a class="headerlink" href="#send-a-prompt-to-generate-a-file" title="Permalink to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">client</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">chat_session_id</span><span class="p">)</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+    <span class="n">reply</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
+        <span class="n">message</span><span class="o">=</span><span class="s1">&#39;Generate an image of a zebra in a tophat&#39;</span><span class="p">,</span> <span class="c1"># The prompt for the agent</span>
+        <span class="n">timeout</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span>
+        <span class="n">llm_args</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;use_agent&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>  <span class="c1"># Enable agent tools for this query</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="get-the-file-references">
+<h3>4. Get the file references<a class="headerlink" href="#get-the-file-references" title="Permalink to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+
+<span class="n">agent_files</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">list_chat_message_meta_part</span><span class="p">(</span><span class="n">reply</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="s2">&quot;agent_files&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">content</span>
+<span class="n">agent_files</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">agent_files</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">agent_files</span></code> variable contains a list of dictionaries that map document IDs to filenames. For example:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="nt">&quot;document_id1&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;image_filename.png&quot;</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="nt">&quot;document_id2&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;output.pdf&quot;</span><span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="download-the-files">
+<h3>5. Download the files<a class="headerlink" href="#download-the-files" title="Permalink to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">agent_files</span><span class="p">:</span>
+ <span class="n">doc_id</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
+ <span class="n">doc_name</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="n">doc_id</span><span class="p">]</span>
+
+ <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Attempting to download: </span><span class="si">{</span><span class="n">doc_name</span><span class="si">}</span><span class="s2"> (ID: </span><span class="si">{</span><span class="n">doc_id</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+
+ <span class="k">try</span><span class="p">:</span>
+     <span class="n">client</span><span class="o">.</span><span class="n">download_document</span><span class="p">(</span><span class="s2">&quot;./&quot;</span><span class="p">,</span> <span class="n">doc_name</span><span class="p">,</span> <span class="n">doc_id</span><span class="p">)</span>
+     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SUCCESS: Downloaded </span><span class="si">{</span><span class="n">doc_name</span><span class="si">}</span><span class="s2"> to current folder.&quot;</span><span class="p">)</span>
+ <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;FAILED to download </span><span class="si">{</span><span class="n">doc_name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">download_document()</span></code> method saves files to the specified directory. Make sure you have write permissions for the target directory.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Important considerations</strong></p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">agent_files</span></code> list might be empty if the agent didn’t generate any files. Make sure the agent tool is enabled and configured correctly.</p></li>
+<li><p>Always store API keys securely. Don’t share your API key or expose it in client-side code.</p></li>
+<li><p>You can change the download path by modifying the first parameter of <code class="docutils literal notranslate"><span class="pre">download_document()</span></code>.</p></li>
+</ul>
+</div>
+</section>
+</section>
+<section id="what-s-next">
+<h2>What’s next<a class="headerlink" href="#what-s-next" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Learn about <a class="reference external" href="https://docs.h2o.ai/enterprise-h2ogpte/guide/agents#tools">available agent tools</a></p></li>
+<li><p>Learn about <a class="reference external" href="https://docs.h2o.ai/enterprise-h2ogpte/tutorials/tutorial-9">custom agent tools</a></p></li>
+<li><p>Read the <a class="reference external" href="https://docs.h2o.ai/enterprise-h2ogpte/guide/agents">Agents documentation</a></p></li>
+<li><p>Explore the <a class="reference external" href="https://h2oai.github.io/h2ogpte/python_api.html">Python API reference</a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../tutorial3/tutorial3.html" class="btn btn-neutral float-left" title="Tutorial 3: Agents" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../examples/chats/index.html" class="btn btn-neutral float-right" title="Chats" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025 H2O.ai, Inc. All rights reserved..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

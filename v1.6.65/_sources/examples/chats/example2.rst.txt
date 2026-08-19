@@ -1,0 +1,68 @@
+Chat with a Collection (document interaction)
+=============================================
+
+
+Overview 
+--------
+
+Users can upload a file (document) to a Collection, which allows them to later interact with the document via a language model to ask questions or chat about its content.
+
+
+
+Example
+-------
+
+
+.. code-block:: python
+
+    from h2ogpte import H2OGPTE
+
+    client = H2OGPTE(
+        address="https://h2ogpte.genai.h2o.ai",
+        api_key='sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+    )
+
+    collection_id = client.create_collection(
+        name="The name of my Collection",
+        description="The description of my Collection",
+    )
+
+    with open("annual-report.pdf", "rb") as f:
+        report = client.upload("annual-report.pdf", f)
+
+    client.ingest_uploads(collection_id, [report])
+
+    # To converse with a Collection, you must include a Collection ID as a parameter in the `create_chat_session` method. However, specifying a Collection ID is not required when using the `create_chat_session` method to interact directly with the large language model (LLM). 
+    chat_session_id = client.create_chat_session(collection_id=collection_id)
+
+    with client.connect(chat_session_id) as session:
+
+        reply = session.query("What is the current goodwill balance?")
+
+        print(
+            f"Content: {reply.content}\n" # Response to the sent query
+            f"Created at: {reply.created_at}\n"
+            f"Error: {reply.error}\n"
+            f"ID: {reply.id}\n"
+            f"Model computed fields: {reply.model_computed_fields}\n"
+            f"Model config: {reply.model_config}\n"
+            f"Model fields: {reply.model_fields}\n"
+            f"Reply to: {reply.reply_to}\n"
+            f"Type list: {reply.type_list}\n"
+            f"Votes: {reply.votes}"
+        )
+
+
+
+.. code-block:: text
+
+    Content: According to the provided context, the current goodwill balance is $25,180 million.
+    Created at: 2024-10-30 18:44:16.936827
+    Error: None
+    ID: af585b7a-6099-456f-b1ef-4e9fcde98f98
+    Model computed fields: {}
+    Model config: {}
+    Model fields: {'id': FieldInfo(annotation=str, required=True), 'content': FieldInfo(annotation=str, required=True), 'reply_to': FieldInfo(annotation=Union[str, NoneType], required=False, default=None), 'votes': FieldInfo(annotation=int, required=True), 'created_at': FieldInfo(annotation=datetime, required=True), 'type_list': FieldInfo(annotation=Union[List[str], NoneType], required=False, default=None), 'error': FieldInfo(annotation=Union[str, NoneType], required=False, default=None)}
+    Reply to: d4b895fc-972b-409c-864d-302b45b7e0eb
+    Type list: []
+    Votes: 0

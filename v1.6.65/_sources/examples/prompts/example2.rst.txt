@@ -1,0 +1,58 @@
+Get a prompt template 
+=====================
+
+Overview 
+--------
+
+A user can get a prompt template and determine whether to retrieve its most recently updated prompt template. 
+
+Example
+-------
+
+.. code-block:: python
+
+    from h2ogpte import H2OGPTE
+
+    client = H2OGPTE(
+        address="https://h2ogpte.genai.h2o.ai",
+        api_key='sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+    )
+
+    # Retrieves the user's most recently updated prompt template.
+    most_recent_prompt_template = client.list_recent_prompt_templates_sort(offset=0,limit=1,sort_column="created_at",ascending=False)
+
+    prompt_template = client.get_prompt_template(id=most_recent_prompt_template[0].id)
+
+    print(
+        f"Auto-generated description prompt: {prompt_template.auto_gen_description_prompt}",
+        f"Auto-generated document sample questions prompt: {prompt_template.auto_gen_document_sample_questions_prompt}",
+        f"Auto-generated document summary pre-prompt summary: {prompt_template.auto_gen_document_summary_pre_prompt_summary}",
+        f"Auto-generated document summary prompt summary: {prompt_template.auto_gen_document_summary_prompt_summary}",
+        f"Created at: {prompt_template.created_at}",
+        f"Default sample questions: {prompt_template.default_sample_questions}",
+        f"Description: {prompt_template.description}",
+        f"Hyde no rag LLM prompt extension: {prompt_template.hyde_no_rag_llm_prompt_extension}",
+        f"ID: {prompt_template.id}",
+        f"Image batch final prompt: {prompt_template.image_batch_final_prompt}",
+        f"Image batch image prompt: {prompt_template.image_batch_image_prompt}",
+        f"Is default: {prompt_template.is_default}",
+        f"Language: {prompt_template.lang}",
+        f"Model computed fields: {prompt_template.model_computed_fields}",
+        f"Model configuration: {prompt_template.model_config}",
+        f"Model fields: {prompt_template.model_fields}",
+        f"Name: {prompt_template.name}",
+        f"Pre-prompt query: {prompt_template.pre_prompt_query}",
+        f"Pre-prompt reflection: {prompt_template.pre_prompt_reflection}",
+        f"Pre-prompt summary: {prompt_template.pre_prompt_summary}",
+        f"Prompt query: {prompt_template.prompt_query}",
+        f"Prompt reflection: {prompt_template.prompt_reflection}",
+        f"Prompt summary: {prompt_template.prompt_summary}",
+        f"System prompt: {prompt_template.system_prompt}",
+        f"System prompt reflection: {prompt_template.system_prompt_reflection}",
+        f"User count: {prompt_template.user_count}",
+        f"User ID: {prompt_template.user_id}",
+        f"Username: {prompt_template.username}",
+        sep="\n"
+    )
+
+
