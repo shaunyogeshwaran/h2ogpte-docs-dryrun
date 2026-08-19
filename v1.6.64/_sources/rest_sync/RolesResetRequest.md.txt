@@ -1,0 +1,29 @@
+# RolesResetRequest
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**new_roles** | **List[str]** |  | 
+
+## Example
+
+```python
+from h2ogpte.rest_sync.models.roles_reset_request import RolesResetRequest
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of RolesResetRequest from a JSON string
+roles_reset_request_instance = RolesResetRequest.from_json(json)
+# print the JSON string representation of the object
+print(RolesResetRequest.to_json())
+
+# convert the object into a dict
+roles_reset_request_dict = roles_reset_request_instance.to_dict()
+# create an instance of RolesResetRequest from a dict
+roles_reset_request_from_dict = RolesResetRequest.from_dict(roles_reset_request_dict)
+```
+
+
+

@@ -1,0 +1,33 @@
+# IngestFromAzureBlobStorageBody
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**container** | **str** | Name of the Azure Blob Storage container. | 
+**paths** | **List[str]** | Path or list of paths to files or directories within an Azure Blob Storage container. | 
+**account_name** | **str** | Name of a storage account | 
+**credentials** | [**AzureCredentials**](AzureCredentials.md) |  | [optional] 
+**metadata** | **object** | Metadata for the document. | [optional] 
+
+## Example
+
+```python
+from h2ogpte.rest_async.models.ingest_from_azure_blob_storage_body import IngestFromAzureBlobStorageBody
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of IngestFromAzureBlobStorageBody from a JSON string
+ingest_from_azure_blob_storage_body_instance = IngestFromAzureBlobStorageBody.from_json(json)
+# print the JSON string representation of the object
+print(IngestFromAzureBlobStorageBody.to_json())
+
+# convert the object into a dict
+ingest_from_azure_blob_storage_body_dict = ingest_from_azure_blob_storage_body_instance.to_dict()
+# create an instance of IngestFromAzureBlobStorageBody from a dict
+ingest_from_azure_blob_storage_body_from_dict = IngestFromAzureBlobStorageBody.from_dict(ingest_from_azure_blob_storage_body_dict)
+```
+
+
+

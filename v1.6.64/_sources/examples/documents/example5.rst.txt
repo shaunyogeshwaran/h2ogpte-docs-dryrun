@@ -1,0 +1,32 @@
+Import content (documents) from a URL (website)
+==============================================
+
+
+Overview 
+--------
+
+A user can import a website by specifying its URL. The specified website is imported and converted to PDFs (documents) that can later be interacted with an LLM. 
+
+
+Example 
+-------
+
+
+.. code-block:: python
+
+    from h2ogpte import H2OGPTE
+
+    client = H2OGPTE(
+        address="https://h2ogpte.genai.h2o.ai",
+        api_key='sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+    )
+
+    collection_id = client.create_collection(
+        name="Website",
+        description="Website",
+    )
+
+    website = client.ingest_website(
+        collection_id=collection_id, 
+        url="https://docs.h2o.ai/wave-apps/h2o-label-genie/"
+    )

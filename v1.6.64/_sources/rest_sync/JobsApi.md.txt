@@ -1,0 +1,535 @@
+# JobsApi
+
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**cancel_job**](JobsApi.md#cancel-job) | **POST** /jobs/{job-id}/cancel | Stops a specific job from running for the user.| **POST** /jobs/{job_id}/cancel | Stops a specific job from running for the user.
+[**cancel_user_job**](JobsApi.md#cancel-user-job) | **POST** /user-jobs/{job-id}/cancel | Stops a specific job from running on the server.| **POST** /user_jobs/{job_id}/cancel | Stops a specific job from running on the server.
+[**count_pending_jobs**](JobsApi.md#count-pending-jobs) | **GET** /jobs/pending/count | Counts the number of global, pending jobs on the server.| **GET** /jobs/pending/count | Counts the number of global, pending jobs on the server.
+[**delete_job**](JobsApi.md#delete-job) | **DELETE** /jobs/{job-id} | Deletes job.| **DELETE** /jobs/{job_id} | Deletes job.
+[**get_job**](JobsApi.md#get-job) | **GET** /jobs/{job-id} | Lists jobs associated with the user.| **GET** /jobs/{job_id} | Lists jobs associated with the user.
+[**list_jobs**](JobsApi.md#list-jobs) | **GET** /jobs | Lists jobs associated with the user.| **GET** /jobs | Lists jobs associated with the user.
+[**list_user_jobs**](JobsApi.md#list-user-jobs) | **GET** /user-jobs | Lists all jobs running on the system for all users.| **GET** /user_jobs | Lists all jobs running on the system for all users.
+
+
+# **cancel_job**
+> JobDetails cancel_job(job_id)
+
+Stops a specific job from running for the user.
+
+Stops a specific job from running for the user.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.models.job_details import JobDetails
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.JobsApi(api_client)
+    job_id = 'job_id_example' # str | Id of the job
+
+    try:
+        # Stops a specific job from running for the user.
+        api_response = api_instance.cancel_job(job_id)
+        print("The response of JobsApi->cancel_job:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling JobsApi->cancel_job: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **job_id** | **str**| Id of the job | 
+
+### Return type
+
+[**JobDetails**](JobDetails.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **cancel_user_job**
+> cancel_user_job(job_id)
+
+Stops a specific job from running on the server.
+
+As an admin, stops a specific user job from running on the server.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.JobsApi(api_client)
+    job_id = 'job_id_example' # str | Id of the job
+
+    try:
+        # Stops a specific job from running on the server.
+        api_instance.cancel_user_job(job_id)
+    except Exception as e:
+        print("Exception when calling JobsApi->cancel_user_job: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **job_id** | **str**| Id of the job | 
+
+### Return type
+
+void (empty response body)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **count_pending_jobs**
+> CountWithQueueDetails count_pending_jobs()
+
+Counts the number of global, pending jobs on the server.
+
+Counts the number of global, pending jobs on the server.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.models.count_with_queue_details import CountWithQueueDetails
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.JobsApi(api_client)
+
+    try:
+        # Counts the number of global, pending jobs on the server.
+        api_response = api_instance.count_pending_jobs()
+        print("The response of JobsApi->count_pending_jobs:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling JobsApi->count_pending_jobs: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**CountWithQueueDetails**](CountWithQueueDetails.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **delete_job**
+> delete_job(job_id)
+
+Deletes job.
+
+Deletes job with a given unique identifier.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.JobsApi(api_client)
+    job_id = 'job_id_example' # str | Id of the job
+
+    try:
+        # Deletes job.
+        api_instance.delete_job(job_id)
+    except Exception as e:
+        print("Exception when calling JobsApi->delete_job: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **job_id** | **str**| Id of the job | 
+
+### Return type
+
+void (empty response body)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **get_job**
+> JobDetails get_job(job_id)
+
+Lists jobs associated with the user.
+
+Lists jobs associated with the user calling this endpoint.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.models.job_details import JobDetails
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.JobsApi(api_client)
+    job_id = 'job_id_example' # str | Id of the job
+
+    try:
+        # Lists jobs associated with the user.
+        api_response = api_instance.get_job(job_id)
+        print("The response of JobsApi->get_job:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling JobsApi->get_job: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **job_id** | **str**| Id of the job | 
+
+### Return type
+
+[**JobDetails**](JobDetails.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **list_jobs**
+> List[JobDetails] list_jobs()
+
+Lists jobs associated with the user.
+
+Lists jobs associated with the user making call.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.models.job_details import JobDetails
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.JobsApi(api_client)
+
+    try:
+        # Lists jobs associated with the user.
+        api_response = api_instance.list_jobs()
+        print("The response of JobsApi->list_jobs:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling JobsApi->list_jobs: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**List[JobDetails]**](JobDetails.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **list_user_jobs**
+> List[UserJobDetails] list_user_jobs()
+
+Lists all jobs running on the system for all users.
+
+Lists all jobs running on the system for all users (to be used by admins only).
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.models.user_job_details import UserJobDetails
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.JobsApi(api_client)
+
+    try:
+        # Lists all jobs running on the system for all users.
+        api_response = api_instance.list_user_jobs()
+        print("The response of JobsApi->list_user_jobs:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling JobsApi->list_user_jobs: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**List[UserJobDetails]**](UserJobDetails.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+

@@ -1,0 +1,32 @@
+# SearchCollectionChunksRequest
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**query** | **str** | Question or imperative from the end user to search a collection for. | 
+**topics** | **List[str]** | A list of document_ids used to filter which documents in the collection to search. | 
+**offset** | **int** | How many chunks to skip before returning chunks. | [optional] [default to 0]
+**limit** | **int** | How many chunks to return. | [optional] [default to 100]
+
+## Example
+
+```python
+from h2ogpte.rest_async.models.search_collection_chunks_request import SearchCollectionChunksRequest
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of SearchCollectionChunksRequest from a JSON string
+search_collection_chunks_request_instance = SearchCollectionChunksRequest.from_json(json)
+# print the JSON string representation of the object
+print(SearchCollectionChunksRequest.to_json())
+
+# convert the object into a dict
+search_collection_chunks_request_dict = search_collection_chunks_request_instance.to_dict()
+# create an instance of SearchCollectionChunksRequest from a dict
+search_collection_chunks_request_from_dict = SearchCollectionChunksRequest.from_dict(search_collection_chunks_request_dict)
+```
+
+
+

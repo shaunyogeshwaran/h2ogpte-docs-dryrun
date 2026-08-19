@@ -1,0 +1,42 @@
+Share a prompt template 
+=======================
+
+Overview
+--------
+
+A user can share a prompt template with read-only access, allowing the recipient to use the template without the ability to make any modifications.
+
+**Note**: Users can only share prompt templates they own.
+
+
+Example
+-------
+
+.. code-block:: python
+
+    from h2ogpte import H2OGPTE
+    from h2ogpte.types import SharePermission
+
+    client = H2OGPTE(
+        address="https://h2ogpte.genai.h2o.ai",
+        api_key='sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+    )
+
+    # Retrieves the user's most recently updated prompt template.
+    most_recent_prompt_template = client.list_recent_prompt_templates_sort(offset=0,limit=1,sort_column="created_at",ascending=False)
+
+    prompt_template = client.get_prompt_template(id=most_recent_prompt_template[0].id)
+
+    status = client.share_prompt(
+        prompt_id=prompt_template.id, 
+        permission=SharePermission(username="USERNAME_OF_RECIPIENT_TO_SHARE_PROMPT_TEMPLATE")
+        )
+
+    print(status.status)
+
+
+.. code-block:: text
+    
+    completed
+
+

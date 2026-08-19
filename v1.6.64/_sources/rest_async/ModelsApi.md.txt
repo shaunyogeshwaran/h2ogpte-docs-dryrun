@@ -1,0 +1,1552 @@
+# ModelsApi
+
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**answer_question**](ModelsApi.md#answer-question) | **POST** /models/{model-name}/answer-question | Send a message and get a response from an LLM.| **POST** /models/{model_name}/answer_question | Send a message and get a response from an LLM.
+[**create_guardrails_settings**](ModelsApi.md#create-guardrails-settings) | **POST** /guardrails-settings | Helper to get reasonable (easy to use) defaults for Guardrails/PII settings.| **POST** /guardrails_settings | Helper to get reasonable (easy to use) defaults for Guardrails/PII settings.
+[**create_topic_model**](ModelsApi.md#create-topic-model) | **POST** /collections/{collection-id}/topic-model | Creates a topic model on the collection.| **POST** /collections/{collection_id}/topic_model | Creates a topic model on the collection.
+[**create_topic_model_job**](ModelsApi.md#create-topic-model-job) | **POST** /models/create-topic-model-job | Creates job for creation of a topic model.| **POST** /models/create_topic_model_job | Creates job for creation of a topic model.
+[**encode_chunks_for_retrieval**](ModelsApi.md#encode-chunks-for-retrieval) | **POST** /embedding-models/{model-id}/encode-chunks-for-retrieval | Encode texts for semantic searching.| **POST** /embedding_models/{model_id}/encode_chunks_for_retrieval | Encode texts for semantic searching.
+[**extract_data**](ModelsApi.md#extract-data) | **POST** /models/{model-name}/extract-data | Extract information from one or more contexts using an LLM.| **POST** /models/{model_name}/extract_data | Extract information from one or more contexts using an LLM.
+[**get_default_embedding_model**](ModelsApi.md#get-default-embedding-model) | **GET** /embedding-models/default | Gets default embedding model.| **GET** /embedding_models/default | Gets default embedding model.
+[**get_model_to_reasoning_model_mapping**](ModelsApi.md#get-model-to-reasoning-model-mapping) | **GET** /models/model-to-reasoning-model-mapping | Get mapping of llm to its reasoning-model when [\&quot;auto\&quot;] is passed as visible-reasoning-models.| **GET** /models/model_to_reasoning_model_mapping | Get mapping of llm to its reasoning_model when [\&quot;auto\&quot;] is passed as visible_reasoning_models.
+[**get_model_to_vision_model_mapping**](ModelsApi.md#get-model-to-vision-model-mapping) | **GET** /models/model-to-vision-model-mapping | Get mapping of llm to its vision-model when [\&quot;auto\&quot;] is passed as visible-vision-models.| **GET** /models/model_to_vision_model_mapping | Get mapping of llm to its vision_model when [\&quot;auto\&quot;] is passed as visible_vision_models.
+[**get_performance_stats_by_model**](ModelsApi.md#get-performance-stats-by-model) | **GET** /stats/performance-by-model | Returns performance statistics grouped by models.| **GET** /stats/performance_by_model | Returns performance statistics grouped by models.
+[**get_reasoning_capable_model_names**](ModelsApi.md#get-reasoning-capable-model-names) | **GET** /models/reasoning-capable-model-names | Lists names of available reasoning-capable (that can natively reason) in the environment.| **GET** /models/reasoning_capable_model_names | Lists names of available reasoning-capable (that can natively reason) in the environment.
+[**get_usage_stats**](ModelsApi.md#get-usage-stats) | **GET** /stats/usage | Returns usage statistics for all models.| **GET** /stats/usage | Returns usage statistics for all models.
+[**get_usage_stats_by_model**](ModelsApi.md#get-usage-stats-by-model) | **GET** /stats/usage-by-model | Returns usage statistics grouped by models.| **GET** /stats/usage_by_model | Returns usage statistics grouped by models.
+[**get_usage_stats_by_model_and_user**](ModelsApi.md#get-usage-stats-by-model-and-user) | **GET** /stats/usage-by-model-and-user | Returns usage statistics grouped by models and users.| **GET** /stats/usage_by_model_and_user | Returns usage statistics grouped by models and users.
+[**get_usage_stats_by_user**](ModelsApi.md#get-usage-stats-by-user) | **GET** /stats/usage-by-user | Returns usage statistics grouped by users.| **GET** /stats/usage_by_user | Returns usage statistics grouped by users.
+[**get_vision_capable_model_names**](ModelsApi.md#get-vision-capable-model-names) | **GET** /models/vision-capable-model-names | Lists names of available vision-capable multi-modal LLMs in the environment.| **GET** /models/vision_capable_model_names | Lists names of available vision-capable multi-modal LLMs in the environment.
+[**list_embedding_models**](ModelsApi.md#list-embedding-models) | **GET** /embedding-models | Lists all available embedding models.| **GET** /embedding_models | Lists all available embedding models.
+[**list_models**](ModelsApi.md#list-models) | **GET** /models | Lists all available large language models.| **GET** /models | Lists all available large language models.
+[**run_model_self_test**](ModelsApi.md#run-model-self-test) | **POST** /models/{model-name}/self-test/{mode} | Runs a self-test for a given model.| **POST** /models/{model_name}/self_test/{mode} | Runs a self-test for a given model.
+[**summarize_content**](ModelsApi.md#summarize-content) | **POST** /models/{model-name}/summarize-content | Summarize one or more contexts using an LLM.| **POST** /models/{model_name}/summarize_content | Summarize one or more contexts using an LLM.
+
+
+# **answer_question**
+> ModelAnswer answer_question(model_name, question_request)
+
+Send a message and get a response from an LLM.
+
+Send a message and get a response from an LLM. Note: This method is only recommended if you are passing a chat conversation or for low-volume testing.       For general chat with an LLM, use \"POST /chats/{session_id}/completions\" endpoint. 
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.model_answer import ModelAnswer
+from h2ogpte.rest_async.models.question_request import QuestionRequest
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.ModelsApi(api_client)
+    model_name = 'model_name_example' # str | Name of LLM. Use auto, when you are not interested in particular model.
+    question_request = h2ogpte.rest_async.QuestionRequest() # QuestionRequest | 
+
+    try:
+        # Send a message and get a response from an LLM.
+        api_response = await api_instance.answer_question(model_name, question_request)
+        print("The response of ModelsApi->answer_question:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ModelsApi->answer_question: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **model_name** | **str**| Name of LLM. Use auto, when you are not interested in particular model. | 
+ **question_request** | [**QuestionRequest**](QuestionRequest.md)|  | 
+
+### Return type
+
+[**ModelAnswer**](ModelAnswer.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **create_guardrails_settings**
+> GuardrailsSettings create_guardrails_settings(guardrails_settings_create_request)
+
+Helper to get reasonable (easy to use) defaults for Guardrails/PII settings.
+
+Helper to get reasonable (easy to use) defaults for Guardrails/PII settings. To be further customized.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.guardrails_settings import GuardrailsSettings
+from h2ogpte.rest_async.models.guardrails_settings_create_request import GuardrailsSettingsCreateRequest
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.ModelsApi(api_client)
+    guardrails_settings_create_request = h2ogpte.rest_async.GuardrailsSettingsCreateRequest() # GuardrailsSettingsCreateRequest | 
+
+    try:
+        # Helper to get reasonable (easy to use) defaults for Guardrails/PII settings.
+        api_response = await api_instance.create_guardrails_settings(guardrails_settings_create_request)
+        print("The response of ModelsApi->create_guardrails_settings:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ModelsApi->create_guardrails_settings: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **guardrails_settings_create_request** | [**GuardrailsSettingsCreateRequest**](GuardrailsSettingsCreateRequest.md)|  | 
+
+### Return type
+
+[**GuardrailsSettings**](GuardrailsSettings.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **create_topic_model**
+> create_topic_model(collection_id, timeout=timeout)
+
+Creates a topic model on the collection.
+
+Creates a topic model on the collection.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.ModelsApi(api_client)
+    collection_id = 'collection_id_example' # str | Id of the collection
+    timeout = 3.4 # float | Timeout in seconds (optional)
+
+    try:
+        # Creates a topic model on the collection.
+        await api_instance.create_topic_model(collection_id, timeout=timeout)
+    except Exception as e:
+        print("Exception when calling ModelsApi->create_topic_model: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **collection_id** | **str**| Id of the collection | 
+ **timeout** | **float**| Timeout in seconds | [optional] 
+
+### Return type
+
+void (empty response body)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **create_topic_model_job**
+> JobDetails create_topic_model_job(create_topic_model_job_request, timeout=timeout)
+
+Creates job for creation of a topic model.
+
+Creates job for creation of a topic model.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.create_topic_model_job_request import CreateTopicModelJobRequest
+from h2ogpte.rest_async.models.job_details import JobDetails
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.ModelsApi(api_client)
+    create_topic_model_job_request = h2ogpte.rest_async.CreateTopicModelJobRequest() # CreateTopicModelJobRequest | 
+    timeout = 3.4 # float | Timeout in seconds (optional)
+
+    try:
+        # Creates job for creation of a topic model.
+        api_response = await api_instance.create_topic_model_job(create_topic_model_job_request, timeout=timeout)
+        print("The response of ModelsApi->create_topic_model_job:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ModelsApi->create_topic_model_job: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **create_topic_model_job_request** | [**CreateTopicModelJobRequest**](CreateTopicModelJobRequest.md)|  | 
+ **timeout** | **float**| Timeout in seconds | [optional] 
+
+### Return type
+
+[**JobDetails**](JobDetails.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **encode_chunks_for_retrieval**
+> List[List[float]] encode_chunks_for_retrieval(model_id, encode_chunks_for_retrieval_request)
+
+Encode texts for semantic searching.
+
+Encode texts for semantic searching.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.encode_chunks_for_retrieval_request import EncodeChunksForRetrievalRequest
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.ModelsApi(api_client)
+    model_id = 'model_id_example' # str | Id of the embedding model that will be used for operation.
+    encode_chunks_for_retrieval_request = h2ogpte.rest_async.EncodeChunksForRetrievalRequest() # EncodeChunksForRetrievalRequest | 
+
+    try:
+        # Encode texts for semantic searching.
+        api_response = await api_instance.encode_chunks_for_retrieval(model_id, encode_chunks_for_retrieval_request)
+        print("The response of ModelsApi->encode_chunks_for_retrieval:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ModelsApi->encode_chunks_for_retrieval: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **model_id** | **str**| Id of the embedding model that will be used for operation. | 
+ **encode_chunks_for_retrieval_request** | [**EncodeChunksForRetrievalRequest**](EncodeChunksForRetrievalRequest.md)|  | 
+
+### Return type
+
+**List[List[float]]**
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **extract_data**
+> ModelExtractionAnswer extract_data(model_name, extraction_request)
+
+Extract information from one or more contexts using an LLM.
+
+Extract information from one or more contexts using an LLM. `pre_prompt_extract` and `prompt_extract` variables must be used together. If these         variables are not set, the inputs texts will be summarized into bullet points. 
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.extraction_request import ExtractionRequest
+from h2ogpte.rest_async.models.model_extraction_answer import ModelExtractionAnswer
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.ModelsApi(api_client)
+    model_name = 'model_name_example' # str | Name of LLM. Use auto, when you are not interested in particular model.
+    extraction_request = h2ogpte.rest_async.ExtractionRequest() # ExtractionRequest | 
+
+    try:
+        # Extract information from one or more contexts using an LLM.
+        api_response = await api_instance.extract_data(model_name, extraction_request)
+        print("The response of ModelsApi->extract_data:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ModelsApi->extract_data: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **model_name** | **str**| Name of LLM. Use auto, when you are not interested in particular model. | 
+ **extraction_request** | [**ExtractionRequest**](ExtractionRequest.md)|  | 
+
+### Return type
+
+[**ModelExtractionAnswer**](ModelExtractionAnswer.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **get_default_embedding_model**
+> EmbeddingModel get_default_embedding_model()
+
+Gets default embedding model.
+
+Gets default embedding model.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.embedding_model import EmbeddingModel
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.ModelsApi(api_client)
+
+    try:
+        # Gets default embedding model.
+        api_response = await api_instance.get_default_embedding_model()
+        print("The response of ModelsApi->get_default_embedding_model:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ModelsApi->get_default_embedding_model: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**EmbeddingModel**](EmbeddingModel.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+**404** | Not found |  -  |
+
+
+
+# **get_model_to_reasoning_model_mapping**
+> Dict[str, str] get_model_to_reasoning_model_mapping()
+
+Get mapping of llm to its reasoning_model when [\"auto\"] is passed as visible_reasoning_models.
+
+Get mapping of llm to its reasoning_model when [\"auto\"] is passed as visible_reasoning_models.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.ModelsApi(api_client)
+
+    try:
+        # Get mapping of llm to its reasoning_model when [\"auto\"] is passed as visible_reasoning_models.
+        api_response = await api_instance.get_model_to_reasoning_model_mapping()
+        print("The response of ModelsApi->get_model_to_reasoning_model_mapping:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ModelsApi->get_model_to_reasoning_model_mapping: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+**Dict[str, str]**
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **get_model_to_vision_model_mapping**
+> Dict[str, str] get_model_to_vision_model_mapping()
+
+Get mapping of llm to its vision_model when [\"auto\"] is passed as visible_vision_models.
+
+Get mapping of llm to its vision_model when [\"auto\"] is passed as visible_vision_models.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.ModelsApi(api_client)
+
+    try:
+        # Get mapping of llm to its vision_model when [\"auto\"] is passed as visible_vision_models.
+        api_response = await api_instance.get_model_to_vision_model_mapping()
+        print("The response of ModelsApi->get_model_to_vision_model_mapping:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ModelsApi->get_model_to_vision_model_mapping: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+**Dict[str, str]**
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **get_performance_stats_by_model**
+> List[PerformanceStatsPerModel] get_performance_stats_by_model(interval)
+
+Returns performance statistics grouped by models.
+
+Returns performance statistics grouped by models.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.performance_stats_per_model import PerformanceStatsPerModel
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.ModelsApi(api_client)
+    interval = '24 hours' # str | The length of an interval for which the stats will be obtained. The interval ends now.
+
+    try:
+        # Returns performance statistics grouped by models.
+        api_response = await api_instance.get_performance_stats_by_model(interval)
+        print("The response of ModelsApi->get_performance_stats_by_model:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ModelsApi->get_performance_stats_by_model: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **interval** | **str**| The length of an interval for which the stats will be obtained. The interval ends now. | 
+
+### Return type
+
+[**List[PerformanceStatsPerModel]**](PerformanceStatsPerModel.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **get_reasoning_capable_model_names**
+> List[str] get_reasoning_capable_model_names()
+
+Lists names of available reasoning-capable (that can natively reason) in the environment.
+
+Lists names of available reasoning-capable (that can natively reason) in the environment.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.ModelsApi(api_client)
+
+    try:
+        # Lists names of available reasoning-capable (that can natively reason) in the environment.
+        api_response = await api_instance.get_reasoning_capable_model_names()
+        print("The response of ModelsApi->get_reasoning_capable_model_names:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ModelsApi->get_reasoning_capable_model_names: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+**List[str]**
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **get_usage_stats**
+> UsageStats get_usage_stats(interval)
+
+Returns usage statistics for all models.
+
+Returns usage statistics for all models.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.usage_stats import UsageStats
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.ModelsApi(api_client)
+    interval = '24 hours' # str | The length of an interval for which the stats will be obtained. The interval ends now.
+
+    try:
+        # Returns usage statistics for all models.
+        api_response = await api_instance.get_usage_stats(interval)
+        print("The response of ModelsApi->get_usage_stats:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ModelsApi->get_usage_stats: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **interval** | **str**| The length of an interval for which the stats will be obtained. The interval ends now. | 
+
+### Return type
+
+[**UsageStats**](UsageStats.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **get_usage_stats_by_model**
+> List[UsageStatsPerModel] get_usage_stats_by_model(interval)
+
+Returns usage statistics grouped by models.
+
+Returns usage statistics grouped by models.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.usage_stats_per_model import UsageStatsPerModel
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.ModelsApi(api_client)
+    interval = '24 hours' # str | The length of an interval for which the stats will be obtained. The interval ends now.
+
+    try:
+        # Returns usage statistics grouped by models.
+        api_response = await api_instance.get_usage_stats_by_model(interval)
+        print("The response of ModelsApi->get_usage_stats_by_model:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ModelsApi->get_usage_stats_by_model: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **interval** | **str**| The length of an interval for which the stats will be obtained. The interval ends now. | 
+
+### Return type
+
+[**List[UsageStatsPerModel]**](UsageStatsPerModel.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **get_usage_stats_by_model_and_user**
+> List[UsageStatsPerModelAndUser] get_usage_stats_by_model_and_user(interval)
+
+Returns usage statistics grouped by models and users.
+
+Returns usage statistics grouped by models and users.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.usage_stats_per_model_and_user import UsageStatsPerModelAndUser
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.ModelsApi(api_client)
+    interval = '24 hours' # str | The length of an interval for which the stats will be obtained. The interval ends now.
+
+    try:
+        # Returns usage statistics grouped by models and users.
+        api_response = await api_instance.get_usage_stats_by_model_and_user(interval)
+        print("The response of ModelsApi->get_usage_stats_by_model_and_user:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ModelsApi->get_usage_stats_by_model_and_user: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **interval** | **str**| The length of an interval for which the stats will be obtained. The interval ends now. | 
+
+### Return type
+
+[**List[UsageStatsPerModelAndUser]**](UsageStatsPerModelAndUser.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **get_usage_stats_by_user**
+> List[UsageStatsPerUser] get_usage_stats_by_user(interval)
+
+Returns usage statistics grouped by users.
+
+Returns usage statistics grouped by users.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.usage_stats_per_user import UsageStatsPerUser
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.ModelsApi(api_client)
+    interval = '24 hours' # str | The length of an interval for which the stats will be obtained. The interval ends now.
+
+    try:
+        # Returns usage statistics grouped by users.
+        api_response = await api_instance.get_usage_stats_by_user(interval)
+        print("The response of ModelsApi->get_usage_stats_by_user:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ModelsApi->get_usage_stats_by_user: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **interval** | **str**| The length of an interval for which the stats will be obtained. The interval ends now. | 
+
+### Return type
+
+[**List[UsageStatsPerUser]**](UsageStatsPerUser.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **get_vision_capable_model_names**
+> List[str] get_vision_capable_model_names()
+
+Lists names of available vision-capable multi-modal LLMs in the environment.
+
+Lists names of available vision-capable multi-modal LLMs (that can natively handle images as input) in the environment.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.ModelsApi(api_client)
+
+    try:
+        # Lists names of available vision-capable multi-modal LLMs in the environment.
+        api_response = await api_instance.get_vision_capable_model_names()
+        print("The response of ModelsApi->get_vision_capable_model_names:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ModelsApi->get_vision_capable_model_names: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+**List[str]**
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **list_embedding_models**
+> List[EmbeddingModel] list_embedding_models()
+
+Lists all available embedding models.
+
+Lists all available embedding models.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.embedding_model import EmbeddingModel
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.ModelsApi(api_client)
+
+    try:
+        # Lists all available embedding models.
+        api_response = await api_instance.list_embedding_models()
+        print("The response of ModelsApi->list_embedding_models:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ModelsApi->list_embedding_models: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**List[EmbeddingModel]**](EmbeddingModel.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **list_models**
+> List[Model] list_models()
+
+Lists all available large language models.
+
+Lists all available large language models.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.model import Model
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.ModelsApi(api_client)
+
+    try:
+        # Lists all available large language models.
+        api_response = await api_instance.list_models()
+        print("The response of ModelsApi->list_models:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ModelsApi->list_models: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**List[Model]**](Model.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **run_model_self_test**
+> SelfTestResult run_model_self_test(model_name, mode)
+
+Runs a self-test for a given model.
+
+Runs a self-test for a given model.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.self_test_result import SelfTestResult
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.ModelsApi(api_client)
+    model_name = 'model_name_example' # str | Name of LLM.
+    mode = 'mode_example' # str | Mode of the self test.
+
+    try:
+        # Runs a self-test for a given model.
+        api_response = await api_instance.run_model_self_test(model_name, mode)
+        print("The response of ModelsApi->run_model_self_test:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ModelsApi->run_model_self_test: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **model_name** | **str**| Name of LLM. | 
+ **mode** | **str**| Mode of the self test. | 
+
+### Return type
+
+[**SelfTestResult**](SelfTestResult.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **summarize_content**
+> ModelAnswer summarize_content(model_name, summarize_request)
+
+Summarize one or more contexts using an LLM.
+
+Summarize one or more contexts using an LLM.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.model_answer import ModelAnswer
+from h2ogpte.rest_async.models.summarize_request import SummarizeRequest
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.ModelsApi(api_client)
+    model_name = 'model_name_example' # str | Name of LLM. Use auto, when you are not interested in particular model.
+    summarize_request = h2ogpte.rest_async.SummarizeRequest() # SummarizeRequest | 
+
+    try:
+        # Summarize one or more contexts using an LLM.
+        api_response = await api_instance.summarize_content(model_name, summarize_request)
+        print("The response of ModelsApi->summarize_content:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ModelsApi->summarize_content: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **model_name** | **str**| Name of LLM. Use auto, when you are not interested in particular model. | 
+ **summarize_request** | [**SummarizeRequest**](SummarizeRequest.md)|  | 
+
+### Return type
+
+[**ModelAnswer**](ModelAnswer.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+

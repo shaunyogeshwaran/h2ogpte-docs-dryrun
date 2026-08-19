@@ -1,0 +1,45 @@
+# Document
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**id** | **str** | A unique identifier of the document | 
+**name** | **str** | Name of the document | 
+**username** | **str** | A username owning the document | 
+**type** | **str** | Type of the document | 
+**size** | **int** | Size of the document in bytes | 
+**page_count** | **int** | A number of pages contained in the document | 
+**status** | **str** | Status of the document | 
+**usage_stats** | **str** | Usage stats | [optional] 
+**connector** | **str** |  | [optional] 
+**original_type** | **str** |  | [optional] 
+**original_mtime** | **str** |  | [optional] 
+**created_at** | **datetime** | Time when document was created | 
+**updated_at** | **datetime** | Last time when document was modified | 
+**uri** | **str** |  | [optional] 
+**summary** | **str** |  | [optional] 
+**summary_parameters** | **str** |  | [optional] 
+**metadata_dict** | **Dict[str, object]** |  | [optional] 
+
+## Example
+
+```python
+from h2ogpte.rest_async.models.document import Document
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of Document from a JSON string
+document_instance = Document.from_json(json)
+# print the JSON string representation of the object
+print(Document.to_json())
+
+# convert the object into a dict
+document_dict = document_instance.to_dict()
+# create an instance of Document from a dict
+document_from_dict = Document.from_dict(document_dict)
+```
+
+
+

@@ -1,0 +1,49 @@
+# Collection
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**id** | **str** | A unique identifier of the collection | 
+**name** | **str** | Name of the collection | 
+**description** | **str** | Description of the collection | 
+**embedding_model** | **str** |  | 
+**document_count** | **int** | A number of documents in the collection | 
+**document_size** | **int** | Total size in bytes of all documents in the collection | 
+**created_at** | **datetime** | Time when the collection was created | 
+**updated_at** | **datetime** | Last time when the collection was modified | 
+**user_count** | **int** | A number of users having access to the collection | 
+**is_public** | **bool** | Is publicly accessible | 
+**username** | **str** | Name of the user owning the collection | 
+**sessions_count** | **int** | A number of chat sessions with the collection | 
+**status** | **str** | Status of the collection | 
+**prompt_template_id** | **str** | A unique identifier of a prompt template associated with the collection. | [optional] 
+**thumbnail** | **str** | A file name of a thumbnail image. | [optional] 
+**size_limit** | **int** | Maximum size of data that could be contained in the collection. | [optional] 
+**expiry_date** | **datetime** | An expiry date | [optional] 
+**inactivity_interval** | **int** | The inactivity interval as an integer number of days. | [optional] 
+**rag_type** | **str** | RAG type options:   * &#x60;auto&#x60; - Automatically select the best rag_type.   * &#x60;llm_only&#x60; LLM Only - Answer the query without any supporting document contexts.   Requires 1 LLM call.   * &#x60;rag&#x60; RAG (Retrieval Augmented Generation) - Use supporting document contexts   to answer the query. Requires 1 LLM call.   * &#x60;hyde1&#x60; LLM Only + RAG composite - HyDE RAG (Hypothetical Document Embedding).   Use &#39;LLM Only&#39; response to find relevant contexts from a collection for generating   a response. Requires 2 LLM calls.   * &#x60;hyde2&#x60; HyDE + RAG composite - Use the &#39;HyDE RAG&#39; response to find relevant   contexts from a collection for generating a response. Requires 3 LLM calls.   * &#x60;rag+&#x60; Summary RAG - Like RAG, but uses more context and recursive   summarization to overcome LLM context limits. Keeps all retrieved chunks, puts   them in order, adds neighboring chunks, then uses the summary API to get the   answer. Can require several LLM calls.   * &#x60;all_data&#x60; All Data RAG - Like Summary RAG, but includes all document   chunks. Uses recursive summarization to overcome LLM context limits.   Can require several LLM calls.  | [optional] 
+**metadata_dict** | **Dict[str, object]** |  | [optional] 
+**workspace** | **str** | The workspace associated with the collection. | [optional] 
+
+## Example
+
+```python
+from h2ogpte.rest_sync.models.collection import Collection
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of Collection from a JSON string
+collection_instance = Collection.from_json(json)
+# print the JSON string representation of the object
+print(Collection.to_json())
+
+# convert the object into a dict
+collection_dict = collection_instance.to_dict()
+# create an instance of Collection from a dict
+collection_from_dict = Collection.from_dict(collection_dict)
+```
+
+
+

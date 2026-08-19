@@ -1,0 +1,32 @@
+# CreateAgentToolRequest
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**tool_type** | **str** |  | 
+**tool_args** | **object** |  | 
+**custom_tool_path** | **str** |  | [optional] 
+**filename** | **str** |  | [optional] 
+
+## Example
+
+```python
+from h2ogpte.rest_sync.models.create_agent_tool_request import CreateAgentToolRequest
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of CreateAgentToolRequest from a JSON string
+create_agent_tool_request_instance = CreateAgentToolRequest.from_json(json)
+# print the JSON string representation of the object
+print(CreateAgentToolRequest.to_json())
+
+# convert the object into a dict
+create_agent_tool_request_dict = create_agent_tool_request_instance.to_dict()
+# create an instance of CreateAgentToolRequest from a dict
+create_agent_tool_request_from_dict = CreateAgentToolRequest.from_dict(create_agent_tool_request_dict)
+```
+
+
+

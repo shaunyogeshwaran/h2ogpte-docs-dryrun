@@ -1,0 +1,48 @@
+# QAFeedback
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**question_content** | **str** |  | 
+**reply_content** | **str** |  | 
+**question_id** | **str** |  | 
+**reply_id** | **str** |  | 
+**llm** | **str** |  | [optional] 
+**system_prompt** | **str** |  | [optional] 
+**pre_prompt_query** | **str** |  | [optional] 
+**prompt_query** | **str** |  | [optional] 
+**pre_prompt_summary** | **str** |  | [optional] 
+**prompt_summary** | **str** |  | [optional] 
+**rag_config** | **str** |  | [optional] 
+**collection_documents** | **List[str]** |  | [optional] 
+**votes** | **int** |  | 
+**expected_answer** | **str** |  | [optional] 
+**user_comment** | **str** |  | [optional] 
+**collection_id** | **str** |  | [optional] 
+**collection_name** | **str** |  | [optional] 
+**response_created_at_time** | **str** |  | 
+**prompt_template_id** | **str** |  | [optional] 
+**include_chat_history** | **str** |  | [optional] 
+
+## Example
+
+```python
+from h2ogpte.rest_async.models.qa_feedback import QAFeedback
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of QAFeedback from a JSON string
+qa_feedback_instance = QAFeedback.from_json(json)
+# print the JSON string representation of the object
+print(QAFeedback.to_json())
+
+# convert the object into a dict
+qa_feedback_dict = qa_feedback_instance.to_dict()
+# create an instance of QAFeedback from a dict
+qa_feedback_from_dict = QAFeedback.from_dict(qa_feedback_dict)
+```
+
+
+

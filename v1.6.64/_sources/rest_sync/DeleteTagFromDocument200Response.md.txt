@@ -1,0 +1,29 @@
+# DeleteTagFromDocument200Response
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**tag_id** | **str** |  | 
+
+## Example
+
+```python
+from h2ogpte.rest_sync.models.delete_tag_from_document200_response import DeleteTagFromDocument200Response
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of DeleteTagFromDocument200Response from a JSON string
+delete_tag_from_document200_response_instance = DeleteTagFromDocument200Response.from_json(json)
+# print the JSON string representation of the object
+print(DeleteTagFromDocument200Response.to_json())
+
+# convert the object into a dict
+delete_tag_from_document200_response_dict = delete_tag_from_document200_response_instance.to_dict()
+# create an instance of DeleteTagFromDocument200Response from a dict
+delete_tag_from_document200_response_from_dict = DeleteTagFromDocument200Response.from_dict(delete_tag_from_document200_response_dict)
+```
+
+
+

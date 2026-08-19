@@ -1,0 +1,885 @@
+# ConfigurationsApi
+
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**delete_global_configurations**](ConfigurationsApi.md#delete-global-configurations) | **DELETE** /configurations/{key-names} | Deletes global configuration items.| **DELETE** /configurations/{key_names} | Deletes global configuration items.
+[**delete_role_configurations**](ConfigurationsApi.md#delete-role-configurations) | **DELETE** /roles/{role-id}/configurations/{key-names} | Deletes role configuration items.| **DELETE** /roles/{role_id}/configurations/{key_names} | Deletes role configuration items.
+[**delete_user_configurations**](ConfigurationsApi.md#delete-user-configurations) | **DELETE** /users/{user-id}/configurations/{key-names} | Deletes user configuration items.| **DELETE** /users/{user_id}/configurations/{key_names} | Deletes user configuration items.
+[**list_current_user_configurations**](ConfigurationsApi.md#list-current-user-configurations) | **GET** /users/current/configurations | Gets configurations for current users.| **GET** /users/current/configurations | Gets configurations for current users.
+[**list_global_configurations**](ConfigurationsApi.md#list-global-configurations) | **GET** /configurations | Gets global configurations.| **GET** /configurations | Gets global configurations.
+[**list_role_configurations**](ConfigurationsApi.md#list-role-configurations) | **GET** /roles/{role-id}/configurations | Gets configurations for a given role.| **GET** /roles/{role_id}/configurations | Gets configurations for a given role.
+[**list_user_configurations**](ConfigurationsApi.md#list-user-configurations) | **GET** /users/{user-id}/configurations | Gets user configurations.| **GET** /users/{user_id}/configurations | Gets user configurations.
+[**reset_user_configuration**](ConfigurationsApi.md#reset-user-configuration) | **POST** /users/{user-id}/configurations/{key-name}/reset | Resets user configuration item.| **POST** /users/{user_id}/configurations/{key_name}/reset | Resets user configuration item.
+[**set_global_configuration**](ConfigurationsApi.md#set-global-configuration) | **PUT** /configurations/{key-name} | Sets global configuration item.| **PUT** /configurations/{key_name} | Sets global configuration item.
+[**set_role_configuration**](ConfigurationsApi.md#set-role-configuration) | **PUT** /roles/{role-id}/configurations/{key-name} | Sets configuration item for a given role.| **PUT** /roles/{role_id}/configurations/{key_name} | Sets configuration item for a given role.
+[**set_user_configuration**](ConfigurationsApi.md#set-user-configuration) | **PUT** /users/{user-id}/configurations/{key-name} | Sets user configuration item.| **PUT** /users/{user_id}/configurations/{key_name} | Sets user configuration item.
+
+
+# **delete_global_configurations**
+> List[GlobalConfigurationItem] delete_global_configurations(key_names)
+
+Deletes global configuration items.
+
+Deletes global configuration items (to be used by admins only).
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.models.global_configuration_item import GlobalConfigurationItem
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.ConfigurationsApi(api_client)
+    key_names = ['key_names_example'] # List[str] | Keys of the configuration items that will be deleted.
+
+    try:
+        # Deletes global configuration items.
+        api_response = api_instance.delete_global_configurations(key_names)
+        print("The response of ConfigurationsApi->delete_global_configurations:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ConfigurationsApi->delete_global_configurations: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **key_names** | [**List[str]**](str.md)| Keys of the configuration items that will be deleted. | 
+
+### Return type
+
+[**List[GlobalConfigurationItem]**](GlobalConfigurationItem.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **delete_role_configurations**
+> List[UserConfigurationItem] delete_role_configurations(role_id, key_names)
+
+Deletes role configuration items.
+
+Deletes role configuration items for a given role.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.models.user_configuration_item import UserConfigurationItem
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.ConfigurationsApi(api_client)
+    role_id = 'role_id_example' # str | The unique identifier of the role.
+    key_names = ['key_names_example'] # List[str] | Keys of the configuration items that will be deleted.
+
+    try:
+        # Deletes role configuration items.
+        api_response = api_instance.delete_role_configurations(role_id, key_names)
+        print("The response of ConfigurationsApi->delete_role_configurations:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ConfigurationsApi->delete_role_configurations: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **role_id** | **str**| The unique identifier of the role. | 
+ **key_names** | [**List[str]**](str.md)| Keys of the configuration items that will be deleted. | 
+
+### Return type
+
+[**List[UserConfigurationItem]**](UserConfigurationItem.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+**404** | Not found |  -  |
+**500** | Internal server error |  -  |
+
+
+
+# **delete_user_configurations**
+> List[UserConfigurationItem] delete_user_configurations(user_id, key_names)
+
+Deletes user configuration items.
+
+Deletes user configuration items (to be used by admins only).
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.models.user_configuration_item import UserConfigurationItem
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.ConfigurationsApi(api_client)
+    user_id = 'user_id_example' # str | The unique identifier of the user.
+    key_names = ['key_names_example'] # List[str] | Keys of the configuration items that will be deleted.
+
+    try:
+        # Deletes user configuration items.
+        api_response = api_instance.delete_user_configurations(user_id, key_names)
+        print("The response of ConfigurationsApi->delete_user_configurations:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ConfigurationsApi->delete_user_configurations: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **user_id** | **str**| The unique identifier of the user. | 
+ **key_names** | [**List[str]**](str.md)| Keys of the configuration items that will be deleted. | 
+
+### Return type
+
+[**List[UserConfigurationItem]**](UserConfigurationItem.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **list_current_user_configurations**
+> List[UserConfigurationItem] list_current_user_configurations()
+
+Gets configurations for current users.
+
+Gets configurations for current users.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.models.user_configuration_item import UserConfigurationItem
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.ConfigurationsApi(api_client)
+
+    try:
+        # Gets configurations for current users.
+        api_response = api_instance.list_current_user_configurations()
+        print("The response of ConfigurationsApi->list_current_user_configurations:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ConfigurationsApi->list_current_user_configurations: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**List[UserConfigurationItem]**](UserConfigurationItem.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **list_global_configurations**
+> List[GlobalConfigurationItem] list_global_configurations(as_admin=as_admin)
+
+Gets global configurations.
+
+Gets global configurations.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.models.global_configuration_item import GlobalConfigurationItem
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.ConfigurationsApi(api_client)
+    as_admin = False # bool | If set, lists global configurations with admin permissions. The user must be admin. (optional) (default to False)
+
+    try:
+        # Gets global configurations.
+        api_response = api_instance.list_global_configurations(as_admin=as_admin)
+        print("The response of ConfigurationsApi->list_global_configurations:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ConfigurationsApi->list_global_configurations: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **as_admin** | **bool**| If set, lists global configurations with admin permissions. The user must be admin. | [optional] [default to False]
+
+### Return type
+
+[**List[GlobalConfigurationItem]**](GlobalConfigurationItem.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **list_role_configurations**
+> List[UserConfigurationItem] list_role_configurations(role_id)
+
+Gets configurations for a given role.
+
+Gets configurations for a given role.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.models.user_configuration_item import UserConfigurationItem
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.ConfigurationsApi(api_client)
+    role_id = 'role_id_example' # str | The unique identifier of an role.
+
+    try:
+        # Gets configurations for a given role.
+        api_response = api_instance.list_role_configurations(role_id)
+        print("The response of ConfigurationsApi->list_role_configurations:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ConfigurationsApi->list_role_configurations: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **role_id** | **str**| The unique identifier of an role. | 
+
+### Return type
+
+[**List[UserConfigurationItem]**](UserConfigurationItem.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+**404** | Not found |  -  |
+**500** | Internal server error |  -  |
+
+
+
+# **list_user_configurations**
+> List[UserConfigurationItem] list_user_configurations(user_id)
+
+Gets user configurations.
+
+Gets user configurations (to be used by admins only).
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.models.user_configuration_item import UserConfigurationItem
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.ConfigurationsApi(api_client)
+    user_id = 'user_id_example' # str | The unique identifier of the user.
+
+    try:
+        # Gets user configurations.
+        api_response = api_instance.list_user_configurations(user_id)
+        print("The response of ConfigurationsApi->list_user_configurations:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ConfigurationsApi->list_user_configurations: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **user_id** | **str**| The unique identifier of the user. | 
+
+### Return type
+
+[**List[UserConfigurationItem]**](UserConfigurationItem.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **reset_user_configuration**
+> List[UserConfigurationItem] reset_user_configuration(user_id, key_name)
+
+Resets user configuration item.
+
+Resets user configuration item (to be used by admins only).
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.models.user_configuration_item import UserConfigurationItem
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.ConfigurationsApi(api_client)
+    user_id = 'user_id_example' # str | The unique identifier of the user.
+    key_name = 'key_name_example' # str | The key of the configuration item that will be set.
+
+    try:
+        # Resets user configuration item.
+        api_response = api_instance.reset_user_configuration(user_id, key_name)
+        print("The response of ConfigurationsApi->reset_user_configuration:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ConfigurationsApi->reset_user_configuration: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **user_id** | **str**| The unique identifier of the user. | 
+ **key_name** | **str**| The key of the configuration item that will be set. | 
+
+### Return type
+
+[**List[UserConfigurationItem]**](UserConfigurationItem.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **set_global_configuration**
+> List[GlobalConfigurationItem] set_global_configuration(key_name, set_global_configuration_request)
+
+Sets global configuration item.
+
+Sets global configuration item (to be used by admins only).
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.models.global_configuration_item import GlobalConfigurationItem
+from h2ogpte.rest_sync.models.set_global_configuration_request import SetGlobalConfigurationRequest
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.ConfigurationsApi(api_client)
+    key_name = 'key_name_example' # str | The key of the configuration item that will be set.
+    set_global_configuration_request = h2ogpte.rest_sync.SetGlobalConfigurationRequest() # SetGlobalConfigurationRequest | 
+
+    try:
+        # Sets global configuration item.
+        api_response = api_instance.set_global_configuration(key_name, set_global_configuration_request)
+        print("The response of ConfigurationsApi->set_global_configuration:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ConfigurationsApi->set_global_configuration: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **key_name** | **str**| The key of the configuration item that will be set. | 
+ **set_global_configuration_request** | [**SetGlobalConfigurationRequest**](SetGlobalConfigurationRequest.md)|  | 
+
+### Return type
+
+[**List[GlobalConfigurationItem]**](GlobalConfigurationItem.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **set_role_configuration**
+> List[UserConfigurationItem] set_role_configuration(role_id, key_name, user_configuration_item)
+
+Sets configuration item for a given role.
+
+Sets configuration item for a given role.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.models.user_configuration_item import UserConfigurationItem
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.ConfigurationsApi(api_client)
+    role_id = 'role_id_example' # str | The unique identifier of an role.
+    key_name = 'key_name_example' # str | The key of the configuration item that will be set.
+    user_configuration_item = h2ogpte.rest_sync.UserConfigurationItem() # UserConfigurationItem | 
+
+    try:
+        # Sets configuration item for a given role.
+        api_response = api_instance.set_role_configuration(role_id, key_name, user_configuration_item)
+        print("The response of ConfigurationsApi->set_role_configuration:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ConfigurationsApi->set_role_configuration: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **role_id** | **str**| The unique identifier of an role. | 
+ **key_name** | **str**| The key of the configuration item that will be set. | 
+ **user_configuration_item** | [**UserConfigurationItem**](UserConfigurationItem.md)|  | 
+
+### Return type
+
+[**List[UserConfigurationItem]**](UserConfigurationItem.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+**404** | Not found |  -  |
+**500** | Internal server error |  -  |
+
+
+
+# **set_user_configuration**
+> List[UserConfigurationItem] set_user_configuration(user_id, key_name, set_user_configuration_request)
+
+Sets user configuration item.
+
+Sets user configuration item (to be used by admins only).
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.models.set_user_configuration_request import SetUserConfigurationRequest
+from h2ogpte.rest_sync.models.user_configuration_item import UserConfigurationItem
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.ConfigurationsApi(api_client)
+    user_id = 'user_id_example' # str | The unique identifier of the user.
+    key_name = 'key_name_example' # str | The key of the configuration item that will be set.
+    set_user_configuration_request = h2ogpte.rest_sync.SetUserConfigurationRequest() # SetUserConfigurationRequest | 
+
+    try:
+        # Sets user configuration item.
+        api_response = api_instance.set_user_configuration(user_id, key_name, set_user_configuration_request)
+        print("The response of ConfigurationsApi->set_user_configuration:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ConfigurationsApi->set_user_configuration: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **user_id** | **str**| The unique identifier of the user. | 
+ **key_name** | **str**| The key of the configuration item that will be set. | 
+ **set_user_configuration_request** | [**SetUserConfigurationRequest**](SetUserConfigurationRequest.md)|  | 
+
+### Return type
+
+[**List[UserConfigurationItem]**](UserConfigurationItem.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+

@@ -1,0 +1,31 @@
+# IngestFromGcsBody
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**urls** | **List[str]** | The path or list of paths of GCS files or directories. | 
+**credentials** | [**GCSCredentials**](GCSCredentials.md) |  | [optional] 
+**metadata** | **object** | Metadata for the document. | [optional] 
+
+## Example
+
+```python
+from h2ogpte.rest_sync.models.ingest_from_gcs_body import IngestFromGcsBody
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of IngestFromGcsBody from a JSON string
+ingest_from_gcs_body_instance = IngestFromGcsBody.from_json(json)
+# print the JSON string representation of the object
+print(IngestFromGcsBody.to_json())
+
+# convert the object into a dict
+ingest_from_gcs_body_dict = ingest_from_gcs_body_instance.to_dict()
+# create an instance of IngestFromGcsBody from a dict
+ingest_from_gcs_body_from_dict = IngestFromGcsBody.from_dict(ingest_from_gcs_body_dict)
+```
+
+
+

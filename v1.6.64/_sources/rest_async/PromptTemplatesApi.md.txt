@@ -1,0 +1,1501 @@
+# PromptTemplatesApi
+
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**create_prompt_template**](PromptTemplatesApi.md#create-prompt-template) | **POST** /prompt-templates | Creates a new prompt template.| **POST** /prompt_templates | Creates a new prompt template.
+[**delete_prompt_template**](PromptTemplatesApi.md#delete-prompt-template) | **DELETE** /prompt-templates/{prompt-template-id} | Deletes a prompt template.| **DELETE** /prompt_templates/{prompt_template_id} | Deletes a prompt template.
+[**get_default_prompt_template**](PromptTemplatesApi.md#get-default-prompt-template) | **GET** /prompt-templates/default | Returns the default prompt template.| **GET** /prompt_templates/default | Returns the default prompt template.
+[**get_prompt_template**](PromptTemplatesApi.md#get-prompt-template) | **GET** /prompt-templates/{prompt-template-id} | Finds a prompt template by id.| **GET** /prompt_templates/{prompt_template_id} | Finds a prompt template by id.
+[**get_prompt_template_count**](PromptTemplatesApi.md#get-prompt-template-count) | **GET** /prompt-templates/count | Counts a number of prompt templates.| **GET** /prompt_templates/count | Counts a number of prompt templates.
+[**get_prompt_template_group_permissions**](PromptTemplatesApi.md#get-prompt-template-group-permissions) | **GET** /prompt-templates/{prompt-template-id}/group-permissions | Returns a list of group access permissions for a given prompt template.| **GET** /prompt_templates/{prompt_template_id}/group_permissions | Returns a list of group access permissions for a given prompt template.
+[**get_prompt_template_permissions**](PromptTemplatesApi.md#get-prompt-template-permissions) | **GET** /prompt-templates/{prompt-template-id}/permissions | Returns a list of access permissions for a given prompt template.| **GET** /prompt_templates/{prompt_template_id}/permissions | Returns a list of access permissions for a given prompt template.
+[**list_all_prompt_templates**](PromptTemplatesApi.md#list-all-prompt-templates) | **GET** /prompt-templates/all | Lists prompt templates, including hidden default templates.| **GET** /prompt_templates/all | Lists prompt templates, including hidden default templates.
+[**list_prompt_templates**](PromptTemplatesApi.md#list-prompt-templates) | **GET** /prompt-templates | List prompt templates.| **GET** /prompt_templates | List prompt templates.
+[**reset_and_share_prompt_template**](PromptTemplatesApi.md#reset-and-share-prompt-template) | **PUT** /prompt-templates/{prompt-template-id}/permissions | Resets and shares a prompt template to a new list of users.| **PUT** /prompt_templates/{prompt_template_id}/permissions | Resets and shares a prompt template to a new list of users.
+[**reset_and_share_prompt_template_with_groups**](PromptTemplatesApi.md#reset-and-share-prompt-template-with-groups) | **PUT** /prompt-templates/{prompt-template-id}/group-permissions | Resets and shares a prompt template to a new list of groups.| **PUT** /prompt_templates/{prompt_template_id}/group_permissions | Resets and shares a prompt template to a new list of groups.
+[**share_prompt_template**](PromptTemplatesApi.md#share-prompt-template) | **PUT** /prompt-templates/{prompt-template-id}/permissions/{username} | Shares a prompt template to a user.| **PUT** /prompt_templates/{prompt_template_id}/permissions/{username} | Shares a prompt template to a user.
+[**share_prompt_template_with_group**](PromptTemplatesApi.md#share-prompt-template-with-group) | **PUT** /prompt-templates/{prompt-template-id}/group-permissions/{group-id} | Shares a prompt template with a group.| **PUT** /prompt_templates/{prompt_template_id}/group_permissions/{group_id} | Shares a prompt template with a group.
+[**unshare_prompt_template**](PromptTemplatesApi.md#unshare-prompt-template) | **DELETE** /prompt-templates/{prompt-template-id}/permissions/{username} | Removes sharing of a prompt template to a user.| **DELETE** /prompt_templates/{prompt_template_id}/permissions/{username} | Removes sharing of a prompt template to a user.
+[**unshare_prompt_template_for_all**](PromptTemplatesApi.md#unshare-prompt-template-for-all) | **DELETE** /prompt-templates/{prompt-template-id}/permissions | Removes sharing of a prompt template to all other users except the original owner.| **DELETE** /prompt_templates/{prompt_template_id}/permissions | Removes sharing of a prompt template to all other users except the original owner.
+[**unshare_prompt_template_from_group**](PromptTemplatesApi.md#unshare-prompt-template-from-group) | **DELETE** /prompt-templates/{prompt-template-id}/group-permissions/{group-id} | Removes access to a prompt template for a group.| **DELETE** /prompt_templates/{prompt_template_id}/group_permissions/{group_id} | Removes access to a prompt template for a group.
+[**update_default_prompt_template_visibility**](PromptTemplatesApi.md#update-default-prompt-template-visibility) | **PUT** /prompt-templates/{prompt-template-id}/is-visible | Updates a flag specifying whether a default prompt template is visible or hidden to users.| **PUT** /prompt_templates/{prompt_template_id}/is_visible | Updates a flag specifying whether a default prompt template is visible or hidden to users.
+[**update_prompt_template**](PromptTemplatesApi.md#update-prompt-template) | **PATCH** /prompt-templates/{prompt-template-id} | Updates attributes of a given prompt template.| **PATCH** /prompt_templates/{prompt_template_id} | Updates attributes of a given prompt template.
+[**update_prompt_template_privacy**](PromptTemplatesApi.md#update-prompt-template-privacy) | **POST** /prompt-templates/{prompt-template-id}/is-public | Updates a flag specifying whether a prompt template is private or public.| **POST** /prompt_templates/{prompt_template_id}/is_public | Updates a flag specifying whether a prompt template is private or public.
+
+
+# **create_prompt_template**
+> PromptTemplate create_prompt_template(prompt_template_create_request)
+
+Creates a new prompt template.
+
+Creates a new prompt template that can be subsequently associated with a collection.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.prompt_template import PromptTemplate
+from h2ogpte.rest_async.models.prompt_template_create_request import PromptTemplateCreateRequest
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PromptTemplatesApi(api_client)
+    prompt_template_create_request = h2ogpte.rest_async.PromptTemplateCreateRequest() # PromptTemplateCreateRequest | 
+
+    try:
+        # Creates a new prompt template.
+        api_response = await api_instance.create_prompt_template(prompt_template_create_request)
+        print("The response of PromptTemplatesApi->create_prompt_template:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PromptTemplatesApi->create_prompt_template: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **prompt_template_create_request** | [**PromptTemplateCreateRequest**](PromptTemplateCreateRequest.md)|  | 
+
+### Return type
+
+[**PromptTemplate**](PromptTemplate.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **delete_prompt_template**
+> delete_prompt_template(prompt_template_id)
+
+Deletes a prompt template.
+
+Deletes a prompt template with a given unique identifier.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PromptTemplatesApi(api_client)
+    prompt_template_id = ['prompt_template_id_example'] # List[str] | Id of a prompt template to delete
+
+    try:
+        # Deletes a prompt template.
+        await api_instance.delete_prompt_template(prompt_template_id)
+    except Exception as e:
+        print("Exception when calling PromptTemplatesApi->delete_prompt_template: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **prompt_template_id** | [**List[str]**](str.md)| Id of a prompt template to delete | 
+
+### Return type
+
+void (empty response body)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **get_default_prompt_template**
+> PromptTemplate get_default_prompt_template()
+
+Returns the default prompt template.
+
+Returns the default prompt template.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.prompt_template import PromptTemplate
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PromptTemplatesApi(api_client)
+
+    try:
+        # Returns the default prompt template.
+        api_response = await api_instance.get_default_prompt_template()
+        print("The response of PromptTemplatesApi->get_default_prompt_template:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PromptTemplatesApi->get_default_prompt_template: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**PromptTemplate**](PromptTemplate.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **get_prompt_template**
+> PromptTemplate get_prompt_template(prompt_template_id)
+
+Finds a prompt template by id.
+
+Returns a single prompt template by its unique identifier.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.prompt_template import PromptTemplate
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PromptTemplatesApi(api_client)
+    prompt_template_id = 'prompt_template_id_example' # str | Id of a prompt template to return
+
+    try:
+        # Finds a prompt template by id.
+        api_response = await api_instance.get_prompt_template(prompt_template_id)
+        print("The response of PromptTemplatesApi->get_prompt_template:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PromptTemplatesApi->get_prompt_template: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **prompt_template_id** | **str**| Id of a prompt template to return | 
+
+### Return type
+
+[**PromptTemplate**](PromptTemplate.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **get_prompt_template_count**
+> Count get_prompt_template_count()
+
+Counts a number of prompt templates.
+
+Counts a number of prompt templates.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.count import Count
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PromptTemplatesApi(api_client)
+
+    try:
+        # Counts a number of prompt templates.
+        api_response = await api_instance.get_prompt_template_count()
+        print("The response of PromptTemplatesApi->get_prompt_template_count:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PromptTemplatesApi->get_prompt_template_count: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**Count**](Count.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **get_prompt_template_group_permissions**
+> List[GroupSharePermission] get_prompt_template_group_permissions(prompt_template_id)
+
+Returns a list of group access permissions for a given prompt template.
+
+The returned list of group permissions denotes which groups have access to the prompt template.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.group_share_permission import GroupSharePermission
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PromptTemplatesApi(api_client)
+    prompt_template_id = 'prompt_template_id_example' # str | Id of a prompt template
+
+    try:
+        # Returns a list of group access permissions for a given prompt template.
+        api_response = await api_instance.get_prompt_template_group_permissions(prompt_template_id)
+        print("The response of PromptTemplatesApi->get_prompt_template_group_permissions:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PromptTemplatesApi->get_prompt_template_group_permissions: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **prompt_template_id** | **str**| Id of a prompt template | 
+
+### Return type
+
+[**List[GroupSharePermission]**](GroupSharePermission.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+**500** | Internal server error |  -  |
+
+
+
+# **get_prompt_template_permissions**
+> List[SharePermission] get_prompt_template_permissions(prompt_template_id)
+
+Returns a list of access permissions for a given prompt template.
+
+The returned list of permissions denotes who has access to the prompt template.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.share_permission import SharePermission
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PromptTemplatesApi(api_client)
+    prompt_template_id = 'prompt_template_id_example' # str | Id of a prompt template
+
+    try:
+        # Returns a list of access permissions for a given prompt template.
+        api_response = await api_instance.get_prompt_template_permissions(prompt_template_id)
+        print("The response of PromptTemplatesApi->get_prompt_template_permissions:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PromptTemplatesApi->get_prompt_template_permissions: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **prompt_template_id** | **str**| Id of a prompt template | 
+
+### Return type
+
+[**List[SharePermission]**](SharePermission.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **list_all_prompt_templates**
+> List[PromptTemplate] list_all_prompt_templates(offset=offset, limit=limit, sort_column=sort_column, ascending=ascending, template_type=template_type, filter=filter)
+
+Lists prompt templates, including hidden default templates.
+
+Lists prompt templates, including hidden default templates. Only for users who have the permission to manage prompt templates.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.prompt_template import PromptTemplate
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PromptTemplatesApi(api_client)
+    offset = 0 # int | How many prompt templates to skip before returning. (optional) (default to 0)
+    limit = 100 # int | How many prompt templates to return. (optional) (default to 100)
+    sort_column = updated_at # str | Sort column. (optional) (default to updated_at)
+    ascending = True # bool | When true, returns sorted by sort_column in ascending order. (optional) (default to True)
+    template_type = all # str | When set, will be used as a type filter. (optional) (default to all)
+    filter = 'filter_example' # str | When set, will be used as a filter on some prompt template columns. (optional)
+
+    try:
+        # Lists prompt templates, including hidden default templates.
+        api_response = await api_instance.list_all_prompt_templates(offset=offset, limit=limit, sort_column=sort_column, ascending=ascending, template_type=template_type, filter=filter)
+        print("The response of PromptTemplatesApi->list_all_prompt_templates:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PromptTemplatesApi->list_all_prompt_templates: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **offset** | **int**| How many prompt templates to skip before returning. | [optional] [default to 0]
+ **limit** | **int**| How many prompt templates to return. | [optional] [default to 100]
+ **sort_column** | **str**| Sort column. | [optional] [default to updated_at]
+ **ascending** | **bool**| When true, returns sorted by sort_column in ascending order. | [optional] [default to True]
+ **template_type** | **str**| When set, will be used as a type filter. | [optional] [default to all]
+ **filter** | **str**| When set, will be used as a filter on some prompt template columns. | [optional] 
+
+### Return type
+
+[**List[PromptTemplate]**](PromptTemplate.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **list_prompt_templates**
+> List[PromptTemplate] list_prompt_templates(offset=offset, limit=limit, sort_column=sort_column, ascending=ascending, template_type=template_type, filter=filter)
+
+List prompt templates.
+
+List all existing prompt templates.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.prompt_template import PromptTemplate
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PromptTemplatesApi(api_client)
+    offset = 0 # int | How many prompt templates to skip before returning. (optional) (default to 0)
+    limit = 100 # int | How many prompt templates to return. (optional) (default to 100)
+    sort_column = updated_at # str | Sort column. (optional) (default to updated_at)
+    ascending = True # bool | When true, returns sorted by sort_column in ascending order. (optional) (default to True)
+    template_type = all # str | When set, will be used as a type filter. (optional) (default to all)
+    filter = 'filter_example' # str | When set, will be used as a filter on some prompt template columns. (optional)
+
+    try:
+        # List prompt templates.
+        api_response = await api_instance.list_prompt_templates(offset=offset, limit=limit, sort_column=sort_column, ascending=ascending, template_type=template_type, filter=filter)
+        print("The response of PromptTemplatesApi->list_prompt_templates:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PromptTemplatesApi->list_prompt_templates: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **offset** | **int**| How many prompt templates to skip before returning. | [optional] [default to 0]
+ **limit** | **int**| How many prompt templates to return. | [optional] [default to 100]
+ **sort_column** | **str**| Sort column. | [optional] [default to updated_at]
+ **ascending** | **bool**| When true, returns sorted by sort_column in ascending order. | [optional] [default to True]
+ **template_type** | **str**| When set, will be used as a type filter. | [optional] [default to all]
+ **filter** | **str**| When set, will be used as a filter on some prompt template columns. | [optional] 
+
+### Return type
+
+[**List[PromptTemplate]**](PromptTemplate.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **reset_and_share_prompt_template**
+> reset_and_share_prompt_template(prompt_template_id, reset_and_share_request)
+
+Resets and shares a prompt template to a new list of users.
+
+Resets and shares a prompt template to a new list of users.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.reset_and_share_request import ResetAndShareRequest
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PromptTemplatesApi(api_client)
+    prompt_template_id = 'prompt_template_id_example' # str | Id of a prompt template.
+    reset_and_share_request = h2ogpte.rest_async.ResetAndShareRequest() # ResetAndShareRequest | List of usernames the prompt template should be shared with.
+
+    try:
+        # Resets and shares a prompt template to a new list of users.
+        await api_instance.reset_and_share_prompt_template(prompt_template_id, reset_and_share_request)
+    except Exception as e:
+        print("Exception when calling PromptTemplatesApi->reset_and_share_prompt_template: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **prompt_template_id** | **str**| Id of a prompt template. | 
+ **reset_and_share_request** | [**ResetAndShareRequest**](ResetAndShareRequest.md)| List of usernames the prompt template should be shared with. | 
+
+### Return type
+
+void (empty response body)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **reset_and_share_prompt_template_with_groups**
+> reset_and_share_prompt_template_with_groups(prompt_template_id, reset_and_share_with_groups_request)
+
+Resets and shares a prompt template to a new list of groups.
+
+Resets and shares a prompt template to a new list of groups.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.reset_and_share_with_groups_request import ResetAndShareWithGroupsRequest
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PromptTemplatesApi(api_client)
+    prompt_template_id = 'prompt_template_id_example' # str | Id of a prompt template.
+    reset_and_share_with_groups_request = h2ogpte.rest_async.ResetAndShareWithGroupsRequest() # ResetAndShareWithGroupsRequest | List of group ids the prompt template should be shared with.
+
+    try:
+        # Resets and shares a prompt template to a new list of groups.
+        await api_instance.reset_and_share_prompt_template_with_groups(prompt_template_id, reset_and_share_with_groups_request)
+    except Exception as e:
+        print("Exception when calling PromptTemplatesApi->reset_and_share_prompt_template_with_groups: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **prompt_template_id** | **str**| Id of a prompt template. | 
+ **reset_and_share_with_groups_request** | [**ResetAndShareWithGroupsRequest**](ResetAndShareWithGroupsRequest.md)| List of group ids the prompt template should be shared with. | 
+
+### Return type
+
+void (empty response body)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **share_prompt_template**
+> share_prompt_template(prompt_template_id, username)
+
+Shares a prompt template to a user.
+
+Shares a prompt template to a user.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PromptTemplatesApi(api_client)
+    prompt_template_id = 'prompt_template_id_example' # str | Id of a prompt template
+    username = 'username_example' # str | User name that will obtain access to the prompt template
+
+    try:
+        # Shares a prompt template to a user.
+        await api_instance.share_prompt_template(prompt_template_id, username)
+    except Exception as e:
+        print("Exception when calling PromptTemplatesApi->share_prompt_template: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **prompt_template_id** | **str**| Id of a prompt template | 
+ **username** | **str**| User name that will obtain access to the prompt template | 
+
+### Return type
+
+void (empty response body)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+**409** | Conflict |  -  |
+
+
+
+# **share_prompt_template_with_group**
+> share_prompt_template_with_group(prompt_template_id, group_id)
+
+Shares a prompt template with a group.
+
+Shares a prompt template with a user.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PromptTemplatesApi(api_client)
+    prompt_template_id = 'prompt_template_id_example' # str | Id of a prompt template.
+    group_id = 'group_id_example' # str | Id of the group that will obtain access to the prompt template.
+
+    try:
+        # Shares a prompt template with a group.
+        await api_instance.share_prompt_template_with_group(prompt_template_id, group_id)
+    except Exception as e:
+        print("Exception when calling PromptTemplatesApi->share_prompt_template_with_group: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **prompt_template_id** | **str**| Id of a prompt template. | 
+ **group_id** | **str**| Id of the group that will obtain access to the prompt template. | 
+
+### Return type
+
+void (empty response body)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+**409** | Conflict |  -  |
+
+
+
+# **unshare_prompt_template**
+> unshare_prompt_template(prompt_template_id, username)
+
+Removes sharing of a prompt template to a user.
+
+Removes sharing of a prompt template to a user.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PromptTemplatesApi(api_client)
+    prompt_template_id = 'prompt_template_id_example' # str | Id of a prompt template
+    username = 'username_example' # str | User name that will lose access to the prompt template
+
+    try:
+        # Removes sharing of a prompt template to a user.
+        await api_instance.unshare_prompt_template(prompt_template_id, username)
+    except Exception as e:
+        print("Exception when calling PromptTemplatesApi->unshare_prompt_template: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **prompt_template_id** | **str**| Id of a prompt template | 
+ **username** | **str**| User name that will lose access to the prompt template | 
+
+### Return type
+
+void (empty response body)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+**409** | Conflict |  -  |
+
+
+
+# **unshare_prompt_template_for_all**
+> unshare_prompt_template_for_all(prompt_template_id)
+
+Removes sharing of a prompt template to all other users except the original owner.
+
+Removes sharing of a prompt template to all other users except the original owner.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PromptTemplatesApi(api_client)
+    prompt_template_id = 'prompt_template_id_example' # str | Id of a prompt template
+
+    try:
+        # Removes sharing of a prompt template to all other users except the original owner.
+        await api_instance.unshare_prompt_template_for_all(prompt_template_id)
+    except Exception as e:
+        print("Exception when calling PromptTemplatesApi->unshare_prompt_template_for_all: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **prompt_template_id** | **str**| Id of a prompt template | 
+
+### Return type
+
+void (empty response body)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+**409** | Conflict |  -  |
+
+
+
+# **unshare_prompt_template_from_group**
+> unshare_prompt_template_from_group(prompt_template_id, group_id)
+
+Removes access to a prompt template for a group.
+
+Removes access to a prompt template for a group.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PromptTemplatesApi(api_client)
+    prompt_template_id = 'prompt_template_id_example' # str | Id of a prompt template.
+    group_id = 'group_id_example' # str | Id of the group that will lose access to the prompt template.
+
+    try:
+        # Removes access to a prompt template for a group.
+        await api_instance.unshare_prompt_template_from_group(prompt_template_id, group_id)
+    except Exception as e:
+        print("Exception when calling PromptTemplatesApi->unshare_prompt_template_from_group: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **prompt_template_id** | **str**| Id of a prompt template. | 
+ **group_id** | **str**| Id of the group that will lose access to the prompt template. | 
+
+### Return type
+
+void (empty response body)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+**409** | Conflict |  -  |
+
+
+
+# **update_default_prompt_template_visibility**
+> update_default_prompt_template_visibility(prompt_template_id, update_default_prompt_template_visibility_request)
+
+Updates a flag specifying whether a default prompt template is visible or hidden to users.
+
+Updates a flag specifying whether a default prompt template is visible or hidden to users.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.update_default_prompt_template_visibility_request import UpdateDefaultPromptTemplateVisibilityRequest
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PromptTemplatesApi(api_client)
+    prompt_template_id = 'prompt_template_id_example' # str | Id of a prompt template.
+    update_default_prompt_template_visibility_request = h2ogpte.rest_async.UpdateDefaultPromptTemplateVisibilityRequest() # UpdateDefaultPromptTemplateVisibilityRequest | 
+
+    try:
+        # Updates a flag specifying whether a default prompt template is visible or hidden to users.
+        await api_instance.update_default_prompt_template_visibility(prompt_template_id, update_default_prompt_template_visibility_request)
+    except Exception as e:
+        print("Exception when calling PromptTemplatesApi->update_default_prompt_template_visibility: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **prompt_template_id** | **str**| Id of a prompt template. | 
+ **update_default_prompt_template_visibility_request** | [**UpdateDefaultPromptTemplateVisibilityRequest**](UpdateDefaultPromptTemplateVisibilityRequest.md)|  | 
+
+### Return type
+
+void (empty response body)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **update_prompt_template**
+> PromptTemplate update_prompt_template(prompt_template_id, body)
+
+Updates attributes of a given prompt template.
+
+Updates attributes of a given prompt template.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.prompt_template import PromptTemplate
+from h2ogpte.rest_async.models.prompt_template_base import PromptTemplateBase
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PromptTemplatesApi(api_client)
+    prompt_template_id = 'prompt_template_id_example' # str | Id of a prompt template to update
+    body = h2ogpte.rest_async.PromptTemplateBase() # PromptTemplateBase | 
+
+    try:
+        # Updates attributes of a given prompt template.
+        api_response = await api_instance.update_prompt_template(prompt_template_id, body)
+        print("The response of PromptTemplatesApi->update_prompt_template:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PromptTemplatesApi->update_prompt_template: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **prompt_template_id** | **str**| Id of a prompt template to update | 
+ **body** | **PromptTemplateBase**|  | 
+
+### Return type
+
+[**PromptTemplate**](PromptTemplate.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **update_prompt_template_privacy**
+> update_prompt_template_privacy(prompt_template_id, update_prompt_template_privacy_request)
+
+Updates a flag specifying whether a prompt template is private or public.
+
+Updates a flag specifying whether a prompt template is private or public.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.update_prompt_template_privacy_request import UpdatePromptTemplatePrivacyRequest
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.PromptTemplatesApi(api_client)
+    prompt_template_id = 'prompt_template_id_example' # str | Id of the prompt template.
+    update_prompt_template_privacy_request = h2ogpte.rest_async.UpdatePromptTemplatePrivacyRequest() # UpdatePromptTemplatePrivacyRequest | 
+
+    try:
+        # Updates a flag specifying whether a prompt template is private or public.
+        await api_instance.update_prompt_template_privacy(prompt_template_id, update_prompt_template_privacy_request)
+    except Exception as e:
+        print("Exception when calling PromptTemplatesApi->update_prompt_template_privacy: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **prompt_template_id** | **str**| Id of the prompt template. | 
+ **update_prompt_template_privacy_request** | [**UpdatePromptTemplatePrivacyRequest**](UpdatePromptTemplatePrivacyRequest.md)|  | 
+
+### Return type
+
+void (empty response body)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+

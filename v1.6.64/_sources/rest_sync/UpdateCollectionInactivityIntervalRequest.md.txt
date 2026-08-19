@@ -1,0 +1,29 @@
+# UpdateCollectionInactivityIntervalRequest
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**inactivity_interval** | **int** | The inactivity interval as an integer number of days. | 
+
+## Example
+
+```python
+from h2ogpte.rest_sync.models.update_collection_inactivity_interval_request import UpdateCollectionInactivityIntervalRequest
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of UpdateCollectionInactivityIntervalRequest from a JSON string
+update_collection_inactivity_interval_request_instance = UpdateCollectionInactivityIntervalRequest.from_json(json)
+# print the JSON string representation of the object
+print(UpdateCollectionInactivityIntervalRequest.to_json())
+
+# convert the object into a dict
+update_collection_inactivity_interval_request_dict = update_collection_inactivity_interval_request_instance.to_dict()
+# create an instance of UpdateCollectionInactivityIntervalRequest from a dict
+update_collection_inactivity_interval_request_from_dict = UpdateCollectionInactivityIntervalRequest.from_dict(update_collection_inactivity_interval_request_dict)
+```
+
+
+

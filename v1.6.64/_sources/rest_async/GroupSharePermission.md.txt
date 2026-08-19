@@ -1,0 +1,30 @@
+# GroupSharePermission
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**group_id** | **str** |  | 
+**permissions** | **List[str]** |  | [optional] 
+
+## Example
+
+```python
+from h2ogpte.rest_async.models.group_share_permission import GroupSharePermission
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of GroupSharePermission from a JSON string
+group_share_permission_instance = GroupSharePermission.from_json(json)
+# print the JSON string representation of the object
+print(GroupSharePermission.to_json())
+
+# convert the object into a dict
+group_share_permission_dict = group_share_permission_instance.to_dict()
+# create an instance of GroupSharePermission from a dict
+group_share_permission_from_dict = GroupSharePermission.from_dict(group_share_permission_dict)
+```
+
+
+

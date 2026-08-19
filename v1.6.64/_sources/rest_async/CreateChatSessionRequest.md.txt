@@ -1,0 +1,29 @@
+# CreateChatSessionRequest
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**workspace** | **str** | Workspace to be associated with the chat session. If not provided, the collection&#39;s workspace or default workspace will be used. | [optional] 
+
+## Example
+
+```python
+from h2ogpte.rest_async.models.create_chat_session_request import CreateChatSessionRequest
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of CreateChatSessionRequest from a JSON string
+create_chat_session_request_instance = CreateChatSessionRequest.from_json(json)
+# print the JSON string representation of the object
+print(CreateChatSessionRequest.to_json())
+
+# convert the object into a dict
+create_chat_session_request_dict = create_chat_session_request_instance.to_dict()
+# create an instance of CreateChatSessionRequest from a dict
+create_chat_session_request_from_dict = CreateChatSessionRequest.from_dict(create_chat_session_request_dict)
+```
+
+
+

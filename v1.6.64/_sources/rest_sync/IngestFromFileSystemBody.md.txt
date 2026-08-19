@@ -1,0 +1,30 @@
+# IngestFromFileSystemBody
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**root_dir** | **str** | String path of where to look for files. | 
+**glob** | **str** | String of the glob pattern used to match files in the root directory. | 
+
+## Example
+
+```python
+from h2ogpte.rest_sync.models.ingest_from_file_system_body import IngestFromFileSystemBody
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of IngestFromFileSystemBody from a JSON string
+ingest_from_file_system_body_instance = IngestFromFileSystemBody.from_json(json)
+# print the JSON string representation of the object
+print(IngestFromFileSystemBody.to_json())
+
+# convert the object into a dict
+ingest_from_file_system_body_dict = ingest_from_file_system_body_instance.to_dict()
+# create an instance of IngestFromFileSystemBody from a dict
+ingest_from_file_system_body_from_dict = IngestFromFileSystemBody.from_dict(ingest_from_file_system_body_dict)
+```
+
+
+

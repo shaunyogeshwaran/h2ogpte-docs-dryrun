@@ -1,0 +1,38 @@
+# APIKeyInfo
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**id** | **str** | The unique identifier of the API key | 
+**username** | **str** | The username of the user this key belongs to | 
+**name** | **str** | The name of the API key | 
+**hint** | **str** | Hint for the secret key of the API key | 
+**created_at** | **datetime** | The date and time of when the API key was created | 
+**expires_at** | **datetime** | The date and time of the API key expiration | [optional] 
+**is_active** | **bool** | Status denoting if the API key is active or not | 
+**collection_name** | **str** | The name of the collection associated with the API key (if it has been configured to a collection) | [optional] 
+**collection_id** | **str** | The id of the collection associated with the API key (if it has been configured to a collection) | [optional] 
+**is_global_key** | **bool** | Status denoting if the API key is global or collection specific | 
+
+## Example
+
+```python
+from h2ogpte.rest_async.models.api_key_info import APIKeyInfo
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of APIKeyInfo from a JSON string
+api_key_info_instance = APIKeyInfo.from_json(json)
+# print the JSON string representation of the object
+print(APIKeyInfo.to_json())
+
+# convert the object into a dict
+api_key_info_dict = api_key_info_instance.to_dict()
+# create an instance of APIKeyInfo from a dict
+api_key_info_from_dict = APIKeyInfo.from_dict(api_key_info_dict)
+```
+
+
+

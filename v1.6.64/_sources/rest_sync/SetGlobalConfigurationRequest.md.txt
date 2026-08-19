@@ -1,0 +1,32 @@
+# SetGlobalConfigurationRequest
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**string_value** | **str** | The value to be set for the global config. | 
+**can_overwrite** | **bool** | Whether user settings can override this global setting. | 
+**is_public** | **bool** | Whether users can see the value for this global setting. | 
+**value_type** | **str** | The type of the value to be set for the global config. | [optional] 
+
+## Example
+
+```python
+from h2ogpte.rest_sync.models.set_global_configuration_request import SetGlobalConfigurationRequest
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of SetGlobalConfigurationRequest from a JSON string
+set_global_configuration_request_instance = SetGlobalConfigurationRequest.from_json(json)
+# print the JSON string representation of the object
+print(SetGlobalConfigurationRequest.to_json())
+
+# convert the object into a dict
+set_global_configuration_request_dict = set_global_configuration_request_instance.to_dict()
+# create an instance of SetGlobalConfigurationRequest from a dict
+set_global_configuration_request_from_dict = SetGlobalConfigurationRequest.from_dict(set_global_configuration_request_dict)
+```
+
+
+

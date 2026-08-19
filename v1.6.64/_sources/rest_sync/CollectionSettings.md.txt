@@ -1,0 +1,44 @@
+# CollectionSettings
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**max_tokens_per_chunk** | **int** | Approximate max. number of tokens per chunk for text-dominated document pages. For images, chunks can be larger. | [optional] 
+**chunk_overlap_tokens** | **int** | Approximate number of tokens that are overlapping between successive chunks. | [optional] 
+**gen_doc_summaries** | **bool** | Whether to auto-generate document summaries (uses LLM) | [optional] [default to False]
+**gen_doc_questions** | **bool** | Whether to auto-generate sample questions for each document (uses LLM) | [optional] [default to False]
+**audio_input_language** | **str** | Language of audio files. Defaults to \&quot;auto\&quot; language detection. Pass empty string to see choices. | [optional] [default to 'auto']
+**ocr_model** | **str** | Which method to use to extract text from images using AI-enabled optical character recognition (OCR) models. Pass empty string to see choices. docTR is best for Latin text, PaddleOCR is best for certain non-Latin languages, Tesseract covers a wide range of languages. Mississippi works well on handwriting. auto - Automatic will auto-select the best OCR model for every page. off - Disable OCR for speed, but all images will then be skipped (also no image captions will be made). | [optional] [default to 'auto']
+**tesseract_lang** | **str** | Which language to use when using ocr_model&#x3D;\&quot;tesseract\&quot;. Pass empty string to see choices. | [optional] 
+**keep_tables_as_one_chunk** | **bool** | When tables are identified by the table parser the table tokens will be kept in a single chunk. | [optional] 
+**chunk_by_page** | **bool** | Each page will be a chunk. &#x60;keep_tables_as_one_chunk&#x60; will be ignored if this is &#x60;true&#x60;. | [optional] 
+**handwriting_check** | **bool** | Check pages for handwriting. Will use specialized models if handwriting is found. | [optional] 
+**follow_links** | **bool** | Whether to import all web pages linked from this URL will be imported. External links will be ignored. Links to other pages on the same domain will be followed as long as they are at the same level or below the URL you specify. Each page will be transformed into a PDF document. | [optional] 
+**max_depth** | **int** | Max depth of recursion when following links, only when follow_links is &#x60;true&#x60;. Max_depth of 0 means don&#39;t follow any links, max_depth of 1 means follow only top-level links, etc. Use -1 for automatic (system settings). | [optional] 
+**max_documents** | **int** | Max number of documents when following links, only when follow_links is &#x60;true&#x60;. Use None for automatic (system defaults). Use -1 for max (system limit). | [optional] 
+**root_dir** | **str** | Root directory for document storage | [optional] 
+**copy_document** | **bool** | Whether to copy the document when importing an existing document | [optional] 
+**guardrails_settings** | [**GuardrailsSettings**](GuardrailsSettings.md) |  | [optional] 
+
+## Example
+
+```python
+from h2ogpte.rest_sync.models.collection_settings import CollectionSettings
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of CollectionSettings from a JSON string
+collection_settings_instance = CollectionSettings.from_json(json)
+# print the JSON string representation of the object
+print(CollectionSettings.to_json())
+
+# convert the object into a dict
+collection_settings_dict = collection_settings_instance.to_dict()
+# create an instance of CollectionSettings from a dict
+collection_settings_from_dict = CollectionSettings.from_dict(collection_settings_dict)
+```
+
+
+

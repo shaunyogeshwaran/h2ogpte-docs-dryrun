@@ -1,0 +1,1099 @@
+# ExtractorsApi
+
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**create_extractor**](ExtractorsApi.md#create-extractor) | **POST** /extractors | Creates extractor.| **POST** /extractors | Creates extractor.
+[**delete_extractor**](ExtractorsApi.md#delete-extractor) | **DELETE** /extractors/{extractor-id} | Deletes extractor.| **DELETE** /extractors/{extractor_id} | Deletes extractor.
+[**get_extractor**](ExtractorsApi.md#get-extractor) | **GET** /extractors/{extractor-id} | Fetch an extractor by ID| **GET** /extractors/{extractor_id} | Fetch an extractor by ID
+[**get_extractor_group_permissions**](ExtractorsApi.md#get-extractor-group-permissions) | **GET** /extractors/{extractor-id}/group-permissions | Returns a list of group access permissions for a given extractor.| **GET** /extractors/{extractor_id}/group_permissions | Returns a list of group access permissions for a given extractor.
+[**get_extractor_permissions**](ExtractorsApi.md#get-extractor-permissions) | **GET** /extractors/{extractor-id}/permissions | Returns a list of users having access to given extractor.| **GET** /extractors/{extractor_id}/permissions | Returns a list of users having access to given extractor.
+[**list_extractors**](ExtractorsApi.md#list-extractors) | **GET** /extractors | List extractors.| **GET** /extractors | List extractors.
+[**reset_and_share_extractor**](ExtractorsApi.md#reset-and-share-extractor) | **PUT** /extractors/{extractor-id}/permissions | Resets and shares an extractor to a new list of users.| **PUT** /extractors/{extractor_id}/permissions | Resets and shares an extractor to a new list of users.
+[**reset_and_share_extractor_with_groups**](ExtractorsApi.md#reset-and-share-extractor-with-groups) | **PUT** /extractors/{extractor-id}/group-permissions | Resets and shares an extractor to a new list of groups.| **PUT** /extractors/{extractor_id}/group_permissions | Resets and shares an extractor to a new list of groups.
+[**share_extractor**](ExtractorsApi.md#share-extractor) | **PUT** /extractors/{extractor-id}/permissions/{username} | Shares an extractor to a user.| **PUT** /extractors/{extractor_id}/permissions/{username} | Shares an extractor to a user.
+[**share_extractor_with_group**](ExtractorsApi.md#share-extractor-with-group) | **PUT** /extractors/{extractor-id}/group-permissions/{group-id} | Shares an extractor to a group.| **PUT** /extractors/{extractor_id}/group_permissions/{group_id} | Shares an extractor to a group.
+[**unshare_extractor**](ExtractorsApi.md#unshare-extractor) | **DELETE** /extractors/{extractor-id}/permissions/{username} | Removes sharing of an extractor to a user.| **DELETE** /extractors/{extractor_id}/permissions/{username} | Removes sharing of an extractor to a user.
+[**unshare_extractor_for_all**](ExtractorsApi.md#unshare-extractor-for-all) | **DELETE** /extractors/{extractor-id}/permissions | Removes sharing of an extractor to all other users except the original owner.| **DELETE** /extractors/{extractor_id}/permissions | Removes sharing of an extractor to all other users except the original owner.
+[**unshare_extractor_from_group**](ExtractorsApi.md#unshare-extractor-from-group) | **DELETE** /extractors/{extractor-id}/group-permissions/{group-id} | Removes sharing of an extractor from a group.| **DELETE** /extractors/{extractor_id}/group_permissions/{group_id} | Removes sharing of an extractor from a group.
+[**update_extractor_privacy**](ExtractorsApi.md#update-extractor-privacy) | **POST** /extractors/{extractor-id}/is-public | Updates a flag specifying whether an extractor is private or public.| **POST** /extractors/{extractor_id}/is_public | Updates a flag specifying whether an extractor is private or public.
+
+
+# **create_extractor**
+> Extractor create_extractor(extractor_create_request)
+
+Creates extractor.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.models.extractor import Extractor
+from h2ogpte.rest_sync.models.extractor_create_request import ExtractorCreateRequest
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.ExtractorsApi(api_client)
+    extractor_create_request = {"description":"Extracts medical data using Meta Llama 3.1-8B","llm":"meta-llama/Meta-Llama-3.1-8B-Instruct","name":"Medical data extractor","schema":"{\n  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\n  \"title\": \"H2O Field Editor Generated Schema\",\n  \"type\": \"object\",\n  \"properties\": {\n    \"fields\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"clinic_name\": {\n          \"type\": \"string\"\n        },\n        \"patient_surname\": {\n          \"type\": \"string\"\n        },\n        \"patient_first_name\": {\n          \"type\": \"string\"\n        }\n      }\n    }\n  },\n  \"required\": [\n    \"fields\"\n  ]\n}\n"} # ExtractorCreateRequest | 
+
+    try:
+        # Creates extractor.
+        api_response = api_instance.create_extractor(extractor_create_request)
+        print("The response of ExtractorsApi->create_extractor:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ExtractorsApi->create_extractor: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **extractor_create_request** | [**ExtractorCreateRequest**](ExtractorCreateRequest.md)|  | 
+
+### Return type
+
+[**Extractor**](Extractor.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+**404** | Not found |  -  |
+
+
+
+# **delete_extractor**
+> delete_extractor(extractor_id)
+
+Deletes extractor.
+
+Deletes extractor.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.ExtractorsApi(api_client)
+    extractor_id = 'extractor_id_example' # str | ID of the extractor to delete.
+
+    try:
+        # Deletes extractor.
+        api_instance.delete_extractor(extractor_id)
+    except Exception as e:
+        print("Exception when calling ExtractorsApi->delete_extractor: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **extractor_id** | **str**| ID of the extractor to delete. | 
+
+### Return type
+
+void (empty response body)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **get_extractor**
+> Extractor get_extractor(extractor_id)
+
+Fetch an extractor by ID
+
+This endpoint retrieves information about a specific extractor based on its unique ID. It requires an authenticated user and returns a JSON response containing the extractor's details. 
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.models.extractor import Extractor
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.ExtractorsApi(api_client)
+    extractor_id = 'extractor_id_example' # str | ID of the extractor to get.
+
+    try:
+        # Fetch an extractor by ID
+        api_response = api_instance.get_extractor(extractor_id)
+        print("The response of ExtractorsApi->get_extractor:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ExtractorsApi->get_extractor: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **extractor_id** | **str**| ID of the extractor to get. | 
+
+### Return type
+
+[**Extractor**](Extractor.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+**404** | Not found |  -  |
+
+
+
+# **get_extractor_group_permissions**
+> List[GroupSharePermission] get_extractor_group_permissions(extractor_id)
+
+Returns a list of group access permissions for a given extractor.
+
+The returned list of group permissions denoting which groups have access to the extractor.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.models.group_share_permission import GroupSharePermission
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.ExtractorsApi(api_client)
+    extractor_id = 'extractor_id_example' # str | Id of the extractor.
+
+    try:
+        # Returns a list of group access permissions for a given extractor.
+        api_response = api_instance.get_extractor_group_permissions(extractor_id)
+        print("The response of ExtractorsApi->get_extractor_group_permissions:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ExtractorsApi->get_extractor_group_permissions: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **extractor_id** | **str**| Id of the extractor. | 
+
+### Return type
+
+[**List[GroupSharePermission]**](GroupSharePermission.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **get_extractor_permissions**
+> List[SharePermission] get_extractor_permissions(extractor_id)
+
+Returns a list of users having access to given extractor.
+
+The returned list of permissions denotes who has access to the extractor.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.models.share_permission import SharePermission
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.ExtractorsApi(api_client)
+    extractor_id = 'extractor_id_example' # str | Id of the extractor.
+
+    try:
+        # Returns a list of users having access to given extractor.
+        api_response = api_instance.get_extractor_permissions(extractor_id)
+        print("The response of ExtractorsApi->get_extractor_permissions:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ExtractorsApi->get_extractor_permissions: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **extractor_id** | **str**| Id of the extractor. | 
+
+### Return type
+
+[**List[SharePermission]**](SharePermission.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **list_extractors**
+> List[Extractor] list_extractors(offset=offset, limit=limit, name_filter=name_filter)
+
+List extractors.
+
+List extractors. The output is sorted by create time in descending order.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.models.extractor import Extractor
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.ExtractorsApi(api_client)
+    offset = 0 # int | How many extractors to skip before returning. (optional) (default to 0)
+    limit = 100 # int | How many extractors to return. (optional) (default to 100)
+    name_filter = 'name_filter_example' # str | Filter extractors by name. (optional)
+
+    try:
+        # List extractors.
+        api_response = api_instance.list_extractors(offset=offset, limit=limit, name_filter=name_filter)
+        print("The response of ExtractorsApi->list_extractors:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ExtractorsApi->list_extractors: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **offset** | **int**| How many extractors to skip before returning. | [optional] [default to 0]
+ **limit** | **int**| How many extractors to return. | [optional] [default to 100]
+ **name_filter** | **str**| Filter extractors by name. | [optional] 
+
+### Return type
+
+[**List[Extractor]**](Extractor.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation. Fields llm and schema are not populated. |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **reset_and_share_extractor**
+> reset_and_share_extractor(extractor_id, reset_and_share_request)
+
+Resets and shares an extractor to a new list of users.
+
+Resets and shares an extractor to a new list of users.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.models.reset_and_share_request import ResetAndShareRequest
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.ExtractorsApi(api_client)
+    extractor_id = 'extractor_id_example' # str | Id of an extractor.
+    reset_and_share_request = h2ogpte.rest_sync.ResetAndShareRequest() # ResetAndShareRequest | List of usernames the extractor should be shared with.
+
+    try:
+        # Resets and shares an extractor to a new list of users.
+        api_instance.reset_and_share_extractor(extractor_id, reset_and_share_request)
+    except Exception as e:
+        print("Exception when calling ExtractorsApi->reset_and_share_extractor: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **extractor_id** | **str**| Id of an extractor. | 
+ **reset_and_share_request** | [**ResetAndShareRequest**](ResetAndShareRequest.md)| List of usernames the extractor should be shared with. | 
+
+### Return type
+
+void (empty response body)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **reset_and_share_extractor_with_groups**
+> reset_and_share_extractor_with_groups(extractor_id, reset_and_share_with_groups_request)
+
+Resets and shares an extractor to a new list of groups.
+
+Resets and shares an extractor to a new list of groups.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.models.reset_and_share_with_groups_request import ResetAndShareWithGroupsRequest
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.ExtractorsApi(api_client)
+    extractor_id = 'extractor_id_example' # str | Id of an extractor
+    reset_and_share_with_groups_request = h2ogpte.rest_sync.ResetAndShareWithGroupsRequest() # ResetAndShareWithGroupsRequest | List of group ids the extractor should be shared with.
+
+    try:
+        # Resets and shares an extractor to a new list of groups.
+        api_instance.reset_and_share_extractor_with_groups(extractor_id, reset_and_share_with_groups_request)
+    except Exception as e:
+        print("Exception when calling ExtractorsApi->reset_and_share_extractor_with_groups: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **extractor_id** | **str**| Id of an extractor | 
+ **reset_and_share_with_groups_request** | [**ResetAndShareWithGroupsRequest**](ResetAndShareWithGroupsRequest.md)| List of group ids the extractor should be shared with. | 
+
+### Return type
+
+void (empty response body)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **share_extractor**
+> share_extractor(extractor_id, username)
+
+Shares an extractor to a user.
+
+Shares an extractor to a user.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.ExtractorsApi(api_client)
+    extractor_id = 'extractor_id_example' # str | Id of the extractor.
+    username = 'username_example' # str | User name that will obtain access to the extractor
+
+    try:
+        # Shares an extractor to a user.
+        api_instance.share_extractor(extractor_id, username)
+    except Exception as e:
+        print("Exception when calling ExtractorsApi->share_extractor: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **extractor_id** | **str**| Id of the extractor. | 
+ **username** | **str**| User name that will obtain access to the extractor | 
+
+### Return type
+
+void (empty response body)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+**409** | Conflict |  -  |
+
+
+
+# **share_extractor_with_group**
+> share_extractor_with_group(extractor_id, group_id)
+
+Shares an extractor to a group.
+
+Shares an extractor to a group. The extractor_id attribute denotes the extractor to be shared.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.ExtractorsApi(api_client)
+    extractor_id = 'extractor_id_example' # str | Id of the extractor.
+    group_id = 'group_id_example' # str | Id of a group that will obtain access to the extractor.
+
+    try:
+        # Shares an extractor to a group.
+        api_instance.share_extractor_with_group(extractor_id, group_id)
+    except Exception as e:
+        print("Exception when calling ExtractorsApi->share_extractor_with_group: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **extractor_id** | **str**| Id of the extractor. | 
+ **group_id** | **str**| Id of a group that will obtain access to the extractor. | 
+
+### Return type
+
+void (empty response body)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+**409** | Conflict |  -  |
+
+
+
+# **unshare_extractor**
+> unshare_extractor(extractor_id, username)
+
+Removes sharing of an extractor to a user.
+
+Removes sharing of an extractor to a user.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.ExtractorsApi(api_client)
+    extractor_id = 'extractor_id_example' # str | Id of the extractor.
+    username = 'username_example' # str | User name that will lose access to the extractor
+
+    try:
+        # Removes sharing of an extractor to a user.
+        api_instance.unshare_extractor(extractor_id, username)
+    except Exception as e:
+        print("Exception when calling ExtractorsApi->unshare_extractor: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **extractor_id** | **str**| Id of the extractor. | 
+ **username** | **str**| User name that will lose access to the extractor | 
+
+### Return type
+
+void (empty response body)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+**409** | Conflict |  -  |
+
+
+
+# **unshare_extractor_for_all**
+> unshare_extractor_for_all(extractor_id)
+
+Removes sharing of an extractor to all other users except the original owner.
+
+Removes sharing of an extractor to all other users except the original owner.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.ExtractorsApi(api_client)
+    extractor_id = 'extractor_id_example' # str | Id of the extractor.
+
+    try:
+        # Removes sharing of an extractor to all other users except the original owner.
+        api_instance.unshare_extractor_for_all(extractor_id)
+    except Exception as e:
+        print("Exception when calling ExtractorsApi->unshare_extractor_for_all: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **extractor_id** | **str**| Id of the extractor. | 
+
+### Return type
+
+void (empty response body)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+**409** | Conflict |  -  |
+
+
+
+# **unshare_extractor_from_group**
+> unshare_extractor_from_group(extractor_id, group_id)
+
+Removes sharing of an extractor from a group.
+
+Removes sharing of an extractor from a group.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.ExtractorsApi(api_client)
+    extractor_id = 'extractor_id_example' # str | Id of the extractor.
+    group_id = 'group_id_example' # str | Id of a group that will lose access to the extractor.
+
+    try:
+        # Removes sharing of an extractor from a group.
+        api_instance.unshare_extractor_from_group(extractor_id, group_id)
+    except Exception as e:
+        print("Exception when calling ExtractorsApi->unshare_extractor_from_group: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **extractor_id** | **str**| Id of the extractor. | 
+ **group_id** | **str**| Id of a group that will lose access to the extractor. | 
+
+### Return type
+
+void (empty response body)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+**409** | Conflict |  -  |
+
+
+
+# **update_extractor_privacy**
+> update_extractor_privacy(extractor_id, update_extractor_privacy_request)
+
+Updates a flag specifying whether an extractor is private or public.
+
+Updates a flag specifying whether an extractor is private or public.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_sync
+from h2ogpte.rest_sync.models.update_extractor_privacy_request import UpdateExtractorPrivacyRequest
+from h2ogpte.rest_sync.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_sync.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_sync.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with h2ogpte.rest_sync.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_sync.ExtractorsApi(api_client)
+    extractor_id = 'extractor_id_example' # str | Id of the extractor.
+    update_extractor_privacy_request = h2ogpte.rest_sync.UpdateExtractorPrivacyRequest() # UpdateExtractorPrivacyRequest | 
+
+    try:
+        # Updates a flag specifying whether an extractor is private or public.
+        api_instance.update_extractor_privacy(extractor_id, update_extractor_privacy_request)
+    except Exception as e:
+        print("Exception when calling ExtractorsApi->update_extractor_privacy: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **extractor_id** | **str**| Id of the extractor. | 
+ **update_extractor_privacy_request** | [**UpdateExtractorPrivacyRequest**](UpdateExtractorPrivacyRequest.md)|  | 
+
+### Return type
+
+void (empty response body)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+

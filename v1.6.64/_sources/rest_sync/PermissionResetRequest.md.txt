@@ -1,0 +1,29 @@
+# PermissionResetRequest
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**new_permissions** | **List[str]** |  | 
+
+## Example
+
+```python
+from h2ogpte.rest_sync.models.permission_reset_request import PermissionResetRequest
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of PermissionResetRequest from a JSON string
+permission_reset_request_instance = PermissionResetRequest.from_json(json)
+# print the JSON string representation of the object
+print(PermissionResetRequest.to_json())
+
+# convert the object into a dict
+permission_reset_request_dict = permission_reset_request_instance.to_dict()
+# create an instance of PermissionResetRequest from a dict
+permission_reset_request_from_dict = PermissionResetRequest.from_dict(permission_reset_request_dict)
+```
+
+
+

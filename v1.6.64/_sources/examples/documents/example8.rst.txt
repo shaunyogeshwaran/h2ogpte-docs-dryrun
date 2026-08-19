@@ -1,0 +1,29 @@
+Count the total number of accessed documents
+============================================
+
+Overview 
+--------
+
+A user can identify how many documents it has accessed. 
+
+Example 
+-------
+
+
+.. code-block:: python
+
+    from h2ogpte import H2OGPTE
+
+    client = H2OGPTE(
+        address="https://h2ogpte.genai.h2o.ai",
+        api_key='sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+    )
+
+    total_number_of_accessed_documents = client.count_documents()
+
+    print(total_number_of_accessed_documents)
+
+
+.. code-block:: text
+    
+    100

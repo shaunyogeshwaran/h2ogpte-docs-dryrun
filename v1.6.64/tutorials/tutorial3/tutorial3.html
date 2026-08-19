@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tutorial 3: Agents &mdash; h2oGPTe</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/code.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="canonical" href="https://h2ogpte.github.io/tutorials/tutorial3/tutorial3.html"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=4085d3d6"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Tutorial 4: Downloading agent-generated files" href="../tutorial4/tutorial4.html" />
+    <link rel="prev" title="Tutorial 2: Create a Collection with h2oGPTe’s or your custom guardrails and PII parameter values" href="../tutorial2/tutorial2.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            h2oGPTe
+          </a>
+              <div class="version">
+                1.6.64
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Installation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">h2oGPTe Python Client Installation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started with h2oGPTe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../async_api.html">h2oGPTe Async API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../tutorial1/tutorial1.html">Tutorial 1: Chat with a website</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial2/tutorial2.html">Tutorial 2: Create a Collection with h2oGPTe’s or your custom guardrails and PII parameter values</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tutorial 3: Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial4/tutorial4.html">Tutorial 4: Downloading agent-generated files</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/chats/index.html">Chats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/collections/index.html">Collections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/documents/index.html">Documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/llms/index.html">LLMs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/users/index.html">Users</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/jobs/index.html">Jobs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/prompts/index.html">Prompts</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Python API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api.html">h2oGPTe Python API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Python for REST API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../rest.html">h2oGPTe Python API for REST Interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Third-Party Notices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../docs-licenses/licenses.html">Third-Party Licenses</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Release Notes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">h2oGPTe</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Tutorial 3: Agents</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/tutorials/tutorial3/tutorial3.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="tutorial-3-agents">
+<h1>Tutorial 3: Agents<a class="headerlink" href="#tutorial-3-agents" title="Link to this heading"></a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>This tutorial delves into agents in <strong>h2oGPTe</strong> and the diverse tools they leverage to handle various tasks (prompts). <strong>h2oGPTe agents</strong> empower you to run code, generate plots, search the web, generate images, handle documents, develop models, and much more.
+For instance, <strong>h2oGPTe agents</strong> can:</p>
+<ul class="simple">
+<li><p>Analyze datasets and extract meaningful insights</p></li>
+<li><p>Generate visualizations to illustrate data trends</p></li>
+<li><p>Build and train machine learning models</p></li>
+<li><p>Search the web and aggregate information</p></li>
+<li><p>Generate and execute Python code and Bash scripts</p></li>
+<li><p>Handle document processing tasks</p></li>
+<li><p>Generate images</p></li>
+<li><p>Automate workflows in machine learning, scripting, and data analysis</p></li>
+</ul>
+</section>
+<section id="objectives">
+<h2>Objectives<a class="headerlink" href="#objectives" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Learn about h2oGPTe agents and the tools they can access to complete diverse and complex tasks.</p></li>
+</ul>
+</section>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading"></a></h2>
+<p>Before you begin, make sure you have:</p>
+<blockquote>
+<div><ul>
+<li><dl>
+<dt><strong>a global API key</strong></dt><dd><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To learn how to create a global API key, see <a class="reference external" href="https://docs.h2o.ai/enterprise-h2ogpte/guide/apis#create-an-api-key">Create an API key.</a></p>
+</div>
+</dd>
+</dl>
+</li>
+<li><p><strong>h2oGPTe v1.6.18</strong></p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="tools">
+<h2>Tools<a class="headerlink" href="#tools" title="Link to this heading"></a></h2>
+<p>h2oGPTe agents enhance the functionality and versatility of h2oGPTe to execute a broader range of tasks autonomously. In other words, agents allow the large language model (LLM) to perform actions such as running code, generating plots, searching the web, conducting research, developing and preparing models, and more.</p>
+<p>h2oGPTe agents are equipped with a diverse suite of tools and features designed to optimize workflows, enhance productivity, and simplify complex tasks. The tools an agent can access to complete a prompt are as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">h2ogpte</span><span class="w"> </span><span class="kn">import</span> <span class="n">H2OGPTE</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">H2OGPTE</span><span class="p">(</span>
+    <span class="n">address</span><span class="o">=</span><span class="s2">&quot;https://h2ogpte.genai.h2o.ai&quot;</span><span class="p">,</span>
+    <span class="n">api_key</span><span class="o">=</span><span class="s1">&#39;sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">client</span><span class="o">.</span><span class="n">get_agent_tools_dict</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Advanced Reasoning
+Aider Code Generation
+Ask Question About Documents
+Ask Question About Image
+Audio-Video Transcription
+Bing Search
+Convert Document to Text
+Download Web Video
+Evaluate Answer
+Google Search
+H2O Driverless AI Data Science
+Image Generation
+Internet Access
+Intranet Access
+Mermaid Chart-Diagram Renderer
+Python Coding
+RAG Text
+RAG Vision
+Scholar Papers Search
+Screenshot Webpage
+Shell Scripting
+Wayback Machine Search
+Web Image Search
+Wikipedia Articles Search
+Wolfram Alpha Math Science Search
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To learn about each available tool, see <a class="reference external" href="https://docs.h2o.ai/enterprise-h2ogpte/guide/agents#tools">Tools.</a></p>
+</div>
+</section>
+<section id="use-case-examples">
+<h2>Use case examples<a class="headerlink" href="#use-case-examples" title="Link to this heading"></a></h2>
+<p>Let’s explore and discuss the following two use case examples to understand how to enable agents and how its tools work.</p>
+<p>Both use cases use the Boston Housing Dataset, a well-known dataset used primarily for practicing regression techniques in machine learning. It contains information about various features of Boston’s housing, which can be used to predict housing prices.</p>
+<section id="use-case-1-dataset-analysis-with-h2ogpte-agents">
+<h3>Use case 1: Dataset analysis with h2oGPTe agents<a class="headerlink" href="#use-case-1-dataset-analysis-with-h2ogpte-agents" title="Link to this heading"></a></h3>
+<p>For the following prompt, when agents are disabled, h2oGPTe will respond by providing step-by-step instructions to achieve the desired result rather than performing the task itself:</p>
+<blockquote>
+<div><p><strong>Prompt</strong>: <em>Utilize the Boston Housing Dataset to calculate the correlation between the RM column (representing the average number of rooms per dwelling) and the MEDV column (indicating the median value of owner-occupied homes in thousands of dollars). After determining the correlation, create a scatter plot with RM on the x-axis and MEDV on the y-axis to visually represent their relationship. Enhance the visualization by adding a trend line highlighting the positive correlation between the number of rooms and home values. You can access the dataset here: https://www.kaggle.com/code/prasadperera/the-boston-housing-dataset.</em></p>
+</div></blockquote>
+<p>With agents enabled, h2oGPTe can first obtain the dataset by searching the web; right after, it can calculate the correlation using a Python environment and immediately generate a plot (image) showing the relationship between the <strong>RM</strong> and <strong>MEDV</strong> columns while adding a trend line to illustrate the positive correlation.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">chat_session_id</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">create_chat_session</span><span class="p">()</span>
+
+<span class="k">with</span> <span class="n">client</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">chat_session_id</span><span class="p">)</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+
+    <span class="n">reply</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
+                <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Utilize the Boston Housing Dataset to calculate the correlation between the RM column (representing the average number of rooms per dwelling) and the MEDV column (indicating the median value of owner-occupied homes in thousands of dollars). After determining the correlation, create a scatter plot with RM on the x-axis and MEDV on the y-axis to visually represent their relationship. Enhance the visualization by adding a trend line highlighting the positive correlation between the number of rooms and home values. You can access the dataset here: https://www.kaggle.com/code/prasadperera/the-boston-housing-dataset&quot;</span><span class="p">,</span>
+                <span class="n">llm</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
+                <span class="n">llm_args</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">use_agent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">reply</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>The analysis of the Boston Housing Dataset reveals a strong positive correlation between the average number of rooms per dwelling (RM) and median home values (MEDV). Here are the key findings:
+
+1. Correlation Analysis:
+- The correlation coefficient between RM and MEDV is 0.695
+- This indicates a strong positive relationship: as the number of rooms increases, home values tend to increase
+- The relationship is statistically significant with a p-value of 2.487e-74
+
+2. Statistical Significance:
+- R-squared value: 0.484
+- This means approximately 48.4% of the variance in median home values can be explained by the average number of rooms
+- The extremely low p-value confirms the relationship is not due to random chance
+
+Here&#39;s the scatter plot showing the relationship between average number of rooms and median home values:
+
+<span class="hll">![image](/file?id=568946db-b398-4603-bdfc-94c387a248bd&amp;name=boston_housing_correlation.png)
+</span>
+The visualization clearly shows:
+- A positive trend (red line) indicating higher home values with more rooms
+- Individual data points showing some variance around the trend line
+- The correlation coefficient (0.695) displayed in the top-left corner
+
+Insights:
+1. The relationship between rooms and home value is substantial but not perfect, suggesting other factors also influence home prices
+2. The spread of points around the trend line indicates varying price levels for homes with the same number of rooms
+3. The relationship appears to be roughly linear across the range of room counts
+
+Recommendations:
+1. For real estate valuation, consider the number of rooms as a significant but not sole predictor of home value
+2. When developing pricing models, include RM as an important feature but combine it with other relevant variables
+3. Consider investigating other factors that might explain the remaining 51.6% of variance in home values
+
+&lt;turn_title&gt;Boston Housing Room Count and Home Value Correlation Analysis&lt;/turn_title&gt;
+</pre></div>
+</div>
+<p>The response includes the image file name and ID corresponding to one of the files generated by the agent when completing the prompt. To download the image (the plot), use the following method:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="n">client</span><span class="o">.</span><span class="n">download_document</span><span class="p">(</span><span class="n">destination_directory</span><span class="o">=</span><span class="s2">&quot;./&quot;</span><span class="p">,</span><span class="n">destination_file_name</span><span class="o">=</span><span class="s2">&quot;boston_housing_correlation.png&quot;</span><span class="p">,</span> <span class="n">document_id</span><span class="o">=</span><span class="s2">&quot;568946db-b398-4603-bdfc-94c387a248bd&quot;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<figure class="align-center" id="id2">
+<img alt="boston_housing_correlation.png" src="../../_images/boston_housing_correlation.png" />
+<figcaption>
+<p><span class="caption-text">boston_housing_correlation.png</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In particular, h2oGPTe agents use the following tool to analyze the Boston Housing Dataset: <strong>Python coding</strong>.</p>
+</div>
+</section>
+<section id="use-case-2-model-development-and-preparation-with-h2ogpte-agents">
+<h3>Use case 2: Model development and preparation with h2oGPTe agents<a class="headerlink" href="#use-case-2-model-development-and-preparation-with-h2ogpte-agents" title="Link to this heading"></a></h3>
+<p>For the following prompt, when agents are disabled, h2oGPTe will respond by providing step-by-step instructions to achieve the desired result rather than performing the task itself:</p>
+<blockquote>
+<div><p><strong>Prompt</strong>: <em>Develop a regression model using Scikit-Learn to predict housing prices based on the Boston Housing Dataset. Ensure that the model is saved as a .pkl file. Specify the exact name of this file. Additionally, provide a Python code example demonstrating how to load and use the saved model to make predictions with example data. The target variable for the regression should be the MEDV (Median Value) column. You can access the dataset at the following link: https://www.kaggle.com/code/prasadperera/the-boston-housing-dataset.</em></p>
+</div></blockquote>
+<p>With agents enabled, h2oGPTe can create the regression model.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">chat_session_id</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">create_chat_session</span><span class="p">()</span>
+
+<span class="k">with</span> <span class="n">client</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">chat_session_id</span><span class="p">)</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+
+    <span class="n">reply</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
+        <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Develop a regression model using Scikit-Learn to predict housing prices based on the Boston Housing Dataset. Ensure that the model is saved as a .pkl file. Specify the exact name of this file. Additionally, provide a Python code example demonstrating how to load and use the saved model to make predictions with example data. The target variable for the regression should be the MEDV (Median Value) column. You can access the dataset at the following link: https://www.kaggle.com/code/prasadperera/the-boston-housing-dataset.&quot;</span><span class="p">,</span>
+        <span class="n">llm</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
+        <span class="n">llm_args</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">use_agent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">reply</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>I have developed a comprehensive regression model for predicting housing prices using the Boston Housing Dataset. Here&#39;s the complete solution:
+
+1. Model Development and Performance:
+- Tested multiple algorithms (Linear, Ridge, Lasso, Random Forest)
+- Final model: Random Forest Regressor
+- Performance metrics:
+* R-squared Score: 0.892
+* Root Mean Squared Error: 2.813
+* Cross-validation R² (mean): 0.826 (±0.095)
+
+2. Feature Importance Analysis:
+```
+Most influential features:
+1. Average rooms (rm): 50.4%
+2. Lower status population (lstat): 31.0%
+3. Distance to employment (dis): 6.1%
+4. Crime rate (crim): 3.8%
+```
+
+3. Files Created:
+<span class="hll">- boston_housing_rf_model.pkl (main model file)
+</span><span class="hll">- boston_housing_scaler.pkl (feature scaler)
+</span>
+4. Implementation Details:
+```python
+# Load and use the model
+import pickle
+import pandas as pd
+from sklearn.preprocessing import StandardScaler
+
+# Load model and scaler
+<span class="hll">with open(&#39;boston_housing_rf_model.pkl&#39;, &#39;rb&#39;) as file:
+</span>    model = pickle.load(file)
+<span class="hll">with open(&#39;boston_housing_scaler.pkl&#39;, &#39;rb&#39;) as file:
+</span>    scaler = pickle.load(file)
+
+# Example prediction
+example_data = pd.DataFrame({
+    &#39;crim&#39;: [0.02729],
+    &#39;zn&#39;: [0.0],
+    &#39;indus&#39;: [7.07],
+    &#39;chas&#39;: [0],
+    &#39;nox&#39;: [0.469],
+    &#39;rm&#39;: [6.421],
+    &#39;age&#39;: [78.9],
+    &#39;dis&#39;: [4.9671],
+    &#39;rad&#39;: [2],
+    &#39;tax&#39;: [242],
+    &#39;ptratio&#39;: [17.8],
+    &#39;b&#39;: [396.90],
+    &#39;lstat&#39;: [9.14]
+})
+
+# Scale features and predict
+scaled_data = scaler.transform(example_data)
+prediction = model.predict(scaled_data)
+```
+
+Key Insights:
+1. Housing price is primarily driven by:
+- Number of rooms (50.4% importance)
+- Socioeconomic status (31.0% importance)
+2. Location factors (distance to employment) have moderate impact (6.1%)
+3. Crime rate has relatively low impact (3.8%)
+4. Physical characteristics outweigh demographic factors
+
+Recommendations:
+1. For Model Users:
+- Focus on accurate room count measurements
+- Ensure socioeconomic data is current
+- Validate input ranges using provided validation function
+
+2. For Real Estate Applications:
+- Prioritize property size and room configuration
+- Consider proximity to employment centers
+- Monitor neighborhood socioeconomic changes
+
+3. For Model Improvement:
+- Collect additional features about interior quality
+- Update regularly with recent market data
+- Consider adding interaction terms between rooms and location
+
+&lt;turn_title&gt;Boston Housing Price Prediction Model with Random Forest Regression&lt;/turn_title&gt;
+</pre></div>
+</div>
+<p>You can run and test the model using the provided Python script example (in the prompt response), which utilizes the <strong>boston_housing_rf_model. pk</strong> and <strong>boston_housing_scaler. pk</strong> files (generated by the agent).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">agent_files</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">list_chat_message_meta_part</span><span class="p">(</span><span class="n">reply</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="s2">&quot;agent_files&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">content</span>
+<span class="n">agent_files</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">agent_files</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_key_by_value</span><span class="p">(</span><span class="n">file_list</span><span class="p">,</span> <span class="n">target_value</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">file_dict</span> <span class="ow">in</span> <span class="n">file_list</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">file_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="n">target_value</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">key</span>
+    <span class="k">return</span> <span class="kc">None</span>
+
+<span class="n">rf_model_id</span> <span class="o">=</span> <span class="n">get_key_by_value</span><span class="p">(</span><span class="n">agent_files</span><span class="p">,</span> <span class="s2">&quot;boston_housing_rf_model.pkl&quot;</span><span class="p">)</span>
+<span class="n">scaler_id</span> <span class="o">=</span> <span class="n">get_key_by_value</span><span class="p">(</span><span class="n">agent_files</span><span class="p">,</span> <span class="s2">&quot;boston_housing_scaler.pkl&quot;</span><span class="p">)</span>
+
+<span class="hll"><span class="n">client</span><span class="o">.</span><span class="n">download_document</span><span class="p">(</span><span class="n">destination_directory</span><span class="o">=</span><span class="s2">&quot;./&quot;</span><span class="p">,</span><span class="n">destination_file_name</span><span class="o">=</span><span class="s2">&quot;boston_housing_rf_model.pkl&quot;</span><span class="p">,</span> <span class="n">document_id</span><span class="o">=</span><span class="n">rf_model_id</span><span class="p">)</span>
+</span><span class="hll"><span class="n">client</span><span class="o">.</span><span class="n">download_document</span><span class="p">(</span><span class="n">destination_directory</span><span class="o">=</span><span class="s2">&quot;./&quot;</span><span class="p">,</span><span class="n">destination_file_name</span><span class="o">=</span><span class="s2">&quot;boston_housing_scaler.pkl&quot;</span><span class="p">,</span> <span class="n">document_id</span><span class="o">=</span><span class="n">scaler_id</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In particular, h2oGPTe agents use the following agent tool to build the regression model for the Boston Housing Dataset: <strong>Python coding</strong> and <strong>shell scripting</strong>.</p>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../tutorial2/tutorial2.html" class="btn btn-neutral float-left" title="Tutorial 2: Create a Collection with h2oGPTe’s or your custom guardrails and PII parameter values" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../tutorial4/tutorial4.html" class="btn btn-neutral float-right" title="Tutorial 4: Downloading agent-generated files" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025 H2O.ai, Inc. All rights reserved..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

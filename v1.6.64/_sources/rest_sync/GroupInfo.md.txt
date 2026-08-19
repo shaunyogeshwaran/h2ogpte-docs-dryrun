@@ -1,0 +1,31 @@
+# GroupInfo
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**id** | **str** |  | 
+**name** | **str** |  | 
+**description** | **str** |  | [optional] 
+
+## Example
+
+```python
+from h2ogpte.rest_sync.models.group_info import GroupInfo
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of GroupInfo from a JSON string
+group_info_instance = GroupInfo.from_json(json)
+# print the JSON string representation of the object
+print(GroupInfo.to_json())
+
+# convert the object into a dict
+group_info_dict = group_info_instance.to_dict()
+# create an instance of GroupInfo from a dict
+group_info_from_dict = GroupInfo.from_dict(group_info_dict)
+```
+
+
+

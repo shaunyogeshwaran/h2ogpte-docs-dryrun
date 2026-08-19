@@ -1,0 +1,35 @@
+# H2OGPTGPUInfo
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**name** | **str** |  | 
+**temperature** | **float** |  | [optional] 
+**utilization** | **float** |  | [optional] 
+**memory_total** | **int** |  | [optional] 
+**memory_used** | **int** |  | [optional] 
+**power_usage** | **float** |  | [optional] 
+**fan_speed** | **int** |  | [optional] 
+
+## Example
+
+```python
+from h2ogpte.rest_sync.models.h2_ogptgpu_info import H2OGPTGPUInfo
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of H2OGPTGPUInfo from a JSON string
+h2_ogptgpu_info_instance = H2OGPTGPUInfo.from_json(json)
+# print the JSON string representation of the object
+print(H2OGPTGPUInfo.to_json())
+
+# convert the object into a dict
+h2_ogptgpu_info_dict = h2_ogptgpu_info_instance.to_dict()
+# create an instance of H2OGPTGPUInfo from a dict
+h2_ogptgpu_info_from_dict = H2OGPTGPUInfo.from_dict(h2_ogptgpu_info_dict)
+```
+
+
+

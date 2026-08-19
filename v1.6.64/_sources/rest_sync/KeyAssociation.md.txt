@@ -1,0 +1,33 @@
+# KeyAssociation
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**name** | **str** |  | 
+**key_id** | **str** |  | 
+**associate_id** | **str** |  | [optional] 
+**user_id** | **str** |  | [optional] 
+**email** | **str** |  | [optional] 
+
+## Example
+
+```python
+from h2ogpte.rest_sync.models.key_association import KeyAssociation
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of KeyAssociation from a JSON string
+key_association_instance = KeyAssociation.from_json(json)
+# print the JSON string representation of the object
+print(KeyAssociation.to_json())
+
+# convert the object into a dict
+key_association_dict = key_association_instance.to_dict()
+# create an instance of KeyAssociation from a dict
+key_association_from_dict = KeyAssociation.from_dict(key_association_dict)
+```
+
+
+

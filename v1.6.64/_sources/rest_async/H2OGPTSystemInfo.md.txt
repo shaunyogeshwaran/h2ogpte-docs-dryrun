@@ -1,0 +1,61 @@
+# H2OGPTSystemInfo
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**timestamp** | **str** |  | 
+**uptime_seconds** | **float** |  | 
+**hostname** | **str** |  | 
+**os_name** | **str** |  | 
+**os_version** | **str** |  | 
+**kernel_version** | **str** |  | 
+**cpu_count_physical** | **int** |  | 
+**cpu_count_logical** | **int** |  | 
+**cpu_percent_per_cpu** | **List[float]** |  | 
+**cpu_freq_current** | **float** |  | 
+**cpu_freq_min** | **float** |  | 
+**cpu_freq_max** | **float** |  | 
+**cpu_temperature** | **float** |  | [optional] 
+**load_avg_1min** | **float** |  | 
+**load_avg_5min** | **float** |  | 
+**load_avg_15min** | **float** |  | 
+**memory_total** | **int** |  | 
+**memory_available** | **int** |  | 
+**memory_used** | **int** |  | 
+**memory_percent** | **float** |  | 
+**swap_total** | **int** |  | 
+**swap_used** | **int** |  | 
+**swap_percent** | **float** |  | 
+**disk_partitions** | **List[Dict[str, str]]** |  | 
+**disk_usage** | **Dict[str, Dict[str, float]]** |  | 
+**disk_io_counters** | **Dict[str, float]** |  | 
+**network_interfaces** | **List[str]** |  | 
+**network_io_counters** | **Dict[str, Dict[str, float]]** |  | 
+**network_connections_count** | **int** |  | 
+**gpus** | [**List[H2OGPTGPUInfo]**](H2OGPTGPUInfo.md) |  | 
+**process_count** | **int** |  | 
+**top_processes_cpu** | **List[object]** |  | 
+**top_processes_memory** | **List[object]** |  | 
+
+## Example
+
+```python
+from h2ogpte.rest_async.models.h2_ogpt_system_info import H2OGPTSystemInfo
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of H2OGPTSystemInfo from a JSON string
+h2_ogpt_system_info_instance = H2OGPTSystemInfo.from_json(json)
+# print the JSON string representation of the object
+print(H2OGPTSystemInfo.to_json())
+
+# convert the object into a dict
+h2_ogpt_system_info_dict = h2_ogpt_system_info_instance.to_dict()
+# create an instance of H2OGPTSystemInfo from a dict
+h2_ogpt_system_info_from_dict = H2OGPTSystemInfo.from_dict(h2_ogpt_system_info_dict)
+```
+
+
+

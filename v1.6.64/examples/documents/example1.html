@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create a document summary in a Collection &mdash; h2oGPTe</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/code.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="canonical" href="https://h2ogpte.github.io/examples/documents/example1.html"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=4085d3d6"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="View a document summary" href="example2.html" />
+    <link rel="prev" title="Documents" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            h2oGPTe
+          </a>
+              <div class="version">
+                1.6.64
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Installation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">h2oGPTe Python Client Installation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started with h2oGPTe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../async_api.html">h2oGPTe Async API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorial1/tutorial1.html">Tutorial 1: Chat with a website</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorial2/tutorial2.html">Tutorial 2: Create a Collection with h2oGPTe’s or your custom guardrails and PII parameter values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorial3/tutorial3.html">Tutorial 3: Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorial4/tutorial4.html">Tutorial 4: Downloading agent-generated files</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../chats/index.html">Chats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../collections/index.html">Collections</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Documents</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Create a document summary in a Collection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example2.html">View a document summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example3.html">Delete a document summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example4.html">Upload a file from your local machine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example5.html">Import content (documents) from a URL (website)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example6.html">Import documents from one Collection to another</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example7.html">Import an already imported document into a Collection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example8.html">Count the total number of accessed documents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example9.html">Count the total number of owned documents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example10.html">Count the total number of documents in a Collection</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../llms/index.html">LLMs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../users/index.html">Users</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../jobs/index.html">Jobs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../prompts/index.html">Prompts</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Python API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api.html">h2oGPTe Python API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Python for REST API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../rest.html">h2oGPTe Python API for REST Interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Third-Party Notices</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../docs-licenses/licenses.html">Third-Party Licenses</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Release Notes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">h2oGPTe</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Documents</a></li>
+      <li class="breadcrumb-item active">Create a document summary in a Collection</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/examples/documents/example1.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="create-a-document-summary-in-a-collection">
+<h1>Create a document summary in a Collection<a class="headerlink" href="#create-a-document-summary-in-a-collection" title="Link to this heading"></a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>Users can create a document summary if the document is part of a collection.</p>
+</section>
+<section id="example">
+<h2>Example<a class="headerlink" href="#example" title="Link to this heading"></a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">h2ogpte</span><span class="w"> </span><span class="kn">import</span> <span class="n">H2OGPTE</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">H2OGPTE</span><span class="p">(</span>
+    <span class="n">address</span><span class="o">=</span><span class="s2">&quot;https://h2ogpte.genai.h2o.ai&quot;</span><span class="p">,</span>
+    <span class="n">api_key</span><span class="o">=</span><span class="s1">&#39;sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">collection_id</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">create_collection</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;The name of my Collection&quot;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The description of my Collection&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;annual-report.pdf&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">report</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">upload</span><span class="p">(</span><span class="s2">&quot;annual-report.pdf&quot;</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+
+<span class="n">client</span><span class="o">.</span><span class="n">ingest_uploads</span><span class="p">(</span>
+    <span class="n">collection_id</span><span class="o">=</span><span class="n">collection_id</span><span class="p">,</span>
+    <span class="n">upload_ids</span><span class="o">=</span><span class="p">[</span><span class="n">report</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">list_of_documents</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">list_documents_in_collection</span><span class="p">(</span><span class="n">collection_id</span><span class="o">=</span><span class="n">collection_id</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">uploaded_document</span> <span class="o">=</span> <span class="n">list_of_documents</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;Connector: </span><span class="si">{</span><span class="n">uploaded_document</span><span class="o">.</span><span class="n">connector</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;Guardrails settings: </span><span class="si">{</span><span class="n">uploaded_document</span><span class="o">.</span><span class="n">guardrails_settings</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;ID: </span><span class="si">{</span><span class="n">uploaded_document</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;Metadata dictionary: </span><span class="si">{</span><span class="n">uploaded_document</span><span class="o">.</span><span class="n">meta_data_dict</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;Model computed fields: </span><span class="si">{</span><span class="n">uploaded_document</span><span class="o">.</span><span class="n">model_computed_fields</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;Model config: </span><span class="si">{</span><span class="n">uploaded_document</span><span class="o">.</span><span class="n">model_config</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;Model fields: </span><span class="si">{</span><span class="n">uploaded_document</span><span class="o">.</span><span class="n">model_fields</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;Name: </span><span class="si">{</span><span class="n">uploaded_document</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;Original type: </span><span class="si">{</span><span class="n">uploaded_document</span><span class="o">.</span><span class="n">original_type</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;Page count: </span><span class="si">{</span><span class="n">uploaded_document</span><span class="o">.</span><span class="n">page_count</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;Size: </span><span class="si">{</span><span class="n">uploaded_document</span><span class="o">.</span><span class="n">size</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;Status: </span><span class="si">{</span><span class="n">uploaded_document</span><span class="o">.</span><span class="n">status</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;Type: </span><span class="si">{</span><span class="n">uploaded_document</span><span class="o">.</span><span class="n">type</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;Updated at: </span><span class="si">{</span><span class="n">uploaded_document</span><span class="o">.</span><span class="n">updated_at</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;URI: </span><span class="si">{</span><span class="n">uploaded_document</span><span class="o">.</span><span class="n">uri</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;Username: </span><span class="si">{</span><span class="n">uploaded_document</span><span class="o">.</span><span class="n">username</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="p">)</span>
+
+<span class="n">document_summary</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">summarize_document</span><span class="p">(</span><span class="n">document_id</span><span class="o">=</span><span class="n">uploaded_document</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;Content: </span><span class="si">{</span><span class="n">document_summary</span><span class="o">.</span><span class="n">content</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;Model computed fields: </span><span class="si">{</span><span class="n">document_summary</span><span class="o">.</span><span class="n">model_computed_fields</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;Model config: </span><span class="si">{</span><span class="n">document_summary</span><span class="o">.</span><span class="n">model_config</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;Model fields: </span><span class="si">{</span><span class="n">document_summary</span><span class="o">.</span><span class="n">model_fields</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Connector: Upload
+Guardrails settings: None
+ID: e714254b-9d2f-4e42-b368-55707cb2cc7d
+Metadata dictionary: {}
+Model computed fields: {}
+Model config: {&#39;use_enum_values&#39;: True}
+Model fields: {&#39;id&#39;: FieldInfo(annotation=str, required=True), &#39;username&#39;: FieldInfo(annotation=str, required=True), &#39;name&#39;: FieldInfo(annotation=str, required=True), &#39;type&#39;: FieldInfo(annotation=str, required=True), &#39;size&#39;: FieldInfo(annotation=int, required=True), &#39;page_count&#39;: FieldInfo(annotation=int, required=True), &#39;guardrails_settings&#39;: FieldInfo(annotation=Union[dict, NoneType], required=False, default=None), &#39;connector&#39;: FieldInfo(annotation=Union[str, NoneType], required=False, default=None), &#39;uri&#39;: FieldInfo(annotation=Union[str, NoneType], required=False, default=None), &#39;original_type&#39;: FieldInfo(annotation=Union[str, NoneType], required=False, default=None), &#39;meta_data_dict&#39;: FieldInfo(annotation=Union[dict, NoneType], required=False, default=None), &#39;status&#39;: FieldInfo(annotation=Status, required=True), &#39;updated_at&#39;: FieldInfo(annotation=datetime, required=True)}
+Name: annual-report.pdf
+Original type: PDF
+Page count: 226
+Size: 3590271
+Status: completed
+Type: PDF
+Updated at: 2024-10-31 19:34:29.483403+00:00
+URI: None
+Username: sergio.perez@h2o.ai
+Content: Wells Fargo&#39;s 2021 Annual Report highlights strong financial performance with a 12.0% return on equity and a 14.3% return on tangible common equity. The company saw a 6% increase in revenue, driven by gains in affiliated venture capital and private equity businesses, and the sale of certain businesses. Despite the challenges posed by the COVID-19 pandemic, Wells Fargo returned $16.9 billion to shareholders through dividends and stock repurchases. The company&#39;s strong foundation, focused business, and cultural changes position it for long-term success.
+Model computed fields: {}
+Model config: {}
+Model fields: {&#39;id&#39;: FieldInfo(annotation=str, required=True), &#39;content&#39;: FieldInfo(annotation=str, required=True), &#39;error&#39;: FieldInfo(annotation=str, required=True), &#39;document_id&#39;: FieldInfo(annotation=str, required=True), &#39;kwargs&#39;: FieldInfo(annotation=str, required=True), &#39;created_at&#39;: FieldInfo(annotation=datetime, required=True), &#39;usage_stats&#39;: FieldInfo(annotation=Union[str, NoneType], required=False, default=None)}
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Documents" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="example2.html" class="btn btn-neutral float-right" title="View a document summary" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025 H2O.ai, Inc. All rights reserved..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

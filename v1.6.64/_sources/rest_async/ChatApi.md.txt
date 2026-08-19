@@ -1,0 +1,2062 @@
+# ChatApi
+
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**create_chat_session**](ChatApi.md#create-chat-session) | **POST** /chats | Creates chat session.| **POST** /chats | Creates chat session.
+[**create_delete_chat_session_job**](ChatApi.md#create-delete-chat-session-job) | **POST** /chats/delete-job | Creates job to delete chat sessions.| **POST** /chats/delete_job | Creates job to delete chat sessions.
+[**delete_agent_server_directories**](ChatApi.md#delete-agent-server-directories) | **DELETE** /chats/{session-ids}/agent-server-directories | Deletes agent server directories.| **DELETE** /chats/{session_ids}/agent_server_directories | Deletes agent server directories.
+[**delete_agent_server_files**](ChatApi.md#delete-agent-server-files) | **DELETE** /chats/{session-id}/agent-server-files | Deletes agent server files.| **DELETE** /chats/{session_id}/agent_server_files | Deletes agent server files.
+[**delete_chat_session**](ChatApi.md#delete-chat-session) | **DELETE** /chats/{session-id} | Deletes collection.| **DELETE** /chats/{session_id} | Deletes collection.
+[**delete_chat_session_collection**](ChatApi.md#delete-chat-session-collection) | **DELETE** /chats/{session-id}/collection | Removes a collection reference from the chat session.| **DELETE** /chats/{session_id}/collection | Removes a collection reference from the chat session.
+[**delete_chat_session_prompt_template**](ChatApi.md#delete-chat-session-prompt-template) | **DELETE** /chats/{session-id}/prompt-template | Removes a prompt template reference from the chat session.| **DELETE** /chats/{session_id}/prompt_template | Removes a prompt template reference from the chat session.
+[**delete_messages**](ChatApi.md#delete-messages) | **DELETE** /messages/{message-ids} | Deletes specific chat messages.| **DELETE** /messages/{message_ids} | Deletes specific chat messages.
+[**get_agent_server_directory_stats**](ChatApi.md#get-agent-server-directory-stats) | **GET** /chats/{session-id}/agent-server-directories/{directory-name}/stats | Gets stats of a agent server directory.| **GET** /chats/{session_id}/agent_server_directories/{directory_name}/stats | Gets stats of a agent server directory.
+[**get_chat_session**](ChatApi.md#get-chat-session) | **GET** /chats/{session-id} | Finds a chat session by id.| **GET** /chats/{session_id} | Finds a chat session by id.
+[**get_chat_session_count**](ChatApi.md#get-chat-session-count) | **GET** /chats/count | Counts a number of chat sessions.| **GET** /chats/count | Counts a number of chat sessions.
+[**get_chat_session_messages**](ChatApi.md#get-chat-session-messages) | **GET** /chats/{session-id}/messages | Fetches chat message and metadata for messages in a chat session.| **GET** /chats/{session_id}/messages | Fetches chat message and metadata for messages in a chat session.
+[**get_completion**](ChatApi.md#get-completion) | **POST** /chats/{session-id}/completions | | **POST** /chats/{session_id}/completions | 
+[**get_message_meta**](ChatApi.md#get-message-meta) | **GET** /messages/{message-id}/meta | Fetches chat message meta information.| **GET** /messages/{message_id}/meta | Fetches chat message meta information.
+[**get_message_references**](ChatApi.md#get-message-references) | **GET** /messages/{message-id}/references | Fetches metadata for references of a chat message.| **GET** /messages/{message_id}/references | Fetches metadata for references of a chat message.
+[**get_question_answer_feedback_count**](ChatApi.md#get-question-answer-feedback-count) | **GET** /question-answer-feedbacks/count | Counts a number of question-answer feedbacks.| **GET** /question_answer_feedbacks/count | Counts a number of question-answer feedbacks.
+[**list_agent_server_files**](ChatApi.md#list-agent-server-files) | **GET** /chats/{session-id}/agent-server-files | Lists agent server files.| **GET** /chats/{session_id}/agent_server_files | Lists agent server files.
+[**list_all_agent_server_directories_stats**](ChatApi.md#list-all-agent-server-directories-stats) | **GET** /chats/{session-id}/agent-server-directories/stats | Lists stats of  agent server directories.| **GET** /chats/{session_id}/agent_server_directories/stats | Lists stats of  agent server directories.
+[**list_chat_sessions**](ChatApi.md#list-chat-sessions) | **GET** /chats | List chat sessions.| **GET** /chats | List chat sessions.
+[**list_question_answer_feedbacks**](ChatApi.md#list-question-answer-feedbacks) | **GET** /question-answer-feedbacks | Lists user&| **GET** /question_answer_feedbacks | Lists user&#39;s questions and answers that have a feedback.
+[**list_questions_for_chat_session**](ChatApi.md#list-questions-for-chat-session) | **GET** /chats/{session-id}/questions | List suggested questions for a given chat session.| **GET** /chats/{session_id}/questions | List suggested questions for a given chat session.
+[**set_message_votes**](ChatApi.md#set-message-votes) | **PUT** /messages/{message-id}/votes | Changes the vote value of a chat message.| **PUT** /messages/{message_id}/votes | Changes the vote value of a chat message.
+[**update_chat_session**](ChatApi.md#update-chat-session) | **PATCH** /chats/{session-id} | Updates the name of a chat session.| **PATCH** /chats/{session_id} | Updates the name of a chat session.
+[**update_chat_session_collection**](ChatApi.md#update-chat-session-collection) | **PUT** /chats/{session-id}/collection | Updates a collection reference of a chat session.| **PUT** /chats/{session_id}/collection | Updates a collection reference of a chat session.
+[**update_chat_session_prompt_template**](ChatApi.md#update-chat-session-prompt-template) | **PUT** /chats/{session-id}/prompt-template | Updates a prompt template reference of a chat session.| **PUT** /chats/{session_id}/prompt_template | Updates a prompt template reference of a chat session.
+[**update_question_answer_feedback**](ChatApi.md#update-question-answer-feedback) | **POST** /question-answer-feedbacks/{answer-id} | Update feedback for a specific answer to a question.| **POST** /question_answer_feedbacks/{answer_id} | Update feedback for a specific answer to a question.
+
+
+# **create_chat_session**
+> ChatSession create_chat_session(collection_id=collection_id, create_chat_session_request=create_chat_session_request)
+
+Creates chat session.
+
+Creates chat session with a collection if provided. Otherwise, the session will be with a generic LLM.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.chat_session import ChatSession
+from h2ogpte.rest_async.models.create_chat_session_request import CreateChatSessionRequest
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.ChatApi(api_client)
+    collection_id = 'collection_id_example' # str | Id of collection (optional)
+    create_chat_session_request = h2ogpte.rest_async.CreateChatSessionRequest() # CreateChatSessionRequest |  (optional)
+
+    try:
+        # Creates chat session.
+        api_response = await api_instance.create_chat_session(collection_id=collection_id, create_chat_session_request=create_chat_session_request)
+        print("The response of ChatApi->create_chat_session:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ChatApi->create_chat_session: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **collection_id** | **str**| Id of collection | [optional] 
+ **create_chat_session_request** | [**CreateChatSessionRequest**](CreateChatSessionRequest.md)|  | [optional] 
+
+### Return type
+
+[**ChatSession**](ChatSession.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **create_delete_chat_session_job**
+> JobDetails create_delete_chat_session_job(delete_chat_sessions_job_request)
+
+Creates job to delete chat sessions.
+
+Creates job to delete chat sessions.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.delete_chat_sessions_job_request import DeleteChatSessionsJobRequest
+from h2ogpte.rest_async.models.job_details import JobDetails
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.ChatApi(api_client)
+    delete_chat_sessions_job_request = h2ogpte.rest_async.DeleteChatSessionsJobRequest() # DeleteChatSessionsJobRequest | 
+
+    try:
+        # Creates job to delete chat sessions.
+        api_response = await api_instance.create_delete_chat_session_job(delete_chat_sessions_job_request)
+        print("The response of ChatApi->create_delete_chat_session_job:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ChatApi->create_delete_chat_session_job: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **delete_chat_sessions_job_request** | [**DeleteChatSessionsJobRequest**](DeleteChatSessionsJobRequest.md)|  | 
+
+### Return type
+
+[**JobDetails**](JobDetails.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **delete_agent_server_directories**
+> delete_agent_server_directories(session_ids, dir_types=dir_types)
+
+Deletes agent server directories.
+
+Deletes agent server directories.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.ChatApi(api_client)
+    session_ids = ['session_ids_example'] # List[str] | Id of the chat session
+    dir_types = ['dir_types_example'] # List[str] | Types of agent directories to be deleted (optional)
+
+    try:
+        # Deletes agent server directories.
+        await api_instance.delete_agent_server_directories(session_ids, dir_types=dir_types)
+    except Exception as e:
+        print("Exception when calling ChatApi->delete_agent_server_directories: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **session_ids** | [**List[str]**](str.md)| Id of the chat session | 
+ **dir_types** | [**List[str]**](str.md)| Types of agent directories to be deleted | [optional] 
+
+### Return type
+
+void (empty response body)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+**409** | Conflict |  -  |
+
+
+
+# **delete_agent_server_files**
+> delete_agent_server_files(session_id)
+
+Deletes agent server files.
+
+Deletes agent server files.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.ChatApi(api_client)
+    session_id = 'session_id_example' # str | Id of the chat session
+
+    try:
+        # Deletes agent server files.
+        await api_instance.delete_agent_server_files(session_id)
+    except Exception as e:
+        print("Exception when calling ChatApi->delete_agent_server_files: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **session_id** | **str**| Id of the chat session | 
+
+### Return type
+
+void (empty response body)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+**409** | Conflict |  -  |
+
+
+
+# **delete_chat_session**
+> ChatSession delete_chat_session(session_id, timeout=timeout)
+
+Deletes collection.
+
+Deletes collection with a given unique identifier.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.chat_session import ChatSession
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.ChatApi(api_client)
+    session_id = 'session_id_example' # str | Id of the chat session
+    timeout = 300 # float | Timeout in seconds (optional) (default to 300)
+
+    try:
+        # Deletes collection.
+        api_response = await api_instance.delete_chat_session(session_id, timeout=timeout)
+        print("The response of ChatApi->delete_chat_session:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ChatApi->delete_chat_session: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **session_id** | **str**| Id of the chat session | 
+ **timeout** | **float**| Timeout in seconds | [optional] [default to 300]
+
+### Return type
+
+[**ChatSession**](ChatSession.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **delete_chat_session_collection**
+> ChatSession delete_chat_session_collection(session_id)
+
+Removes a collection reference from the chat session.
+
+Removes a collection reference from the chat session.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.chat_session import ChatSession
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.ChatApi(api_client)
+    session_id = 'session_id_example' # str | Id of the chat session
+
+    try:
+        # Removes a collection reference from the chat session.
+        api_response = await api_instance.delete_chat_session_collection(session_id)
+        print("The response of ChatApi->delete_chat_session_collection:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ChatApi->delete_chat_session_collection: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **session_id** | **str**| Id of the chat session | 
+
+### Return type
+
+[**ChatSession**](ChatSession.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **delete_chat_session_prompt_template**
+> ChatSession delete_chat_session_prompt_template(session_id)
+
+Removes a prompt template reference from the chat session.
+
+Removes a prompt template reference from the chat session.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.chat_session import ChatSession
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.ChatApi(api_client)
+    session_id = 'session_id_example' # str | Id of the chat session
+
+    try:
+        # Removes a prompt template reference from the chat session.
+        api_response = await api_instance.delete_chat_session_prompt_template(session_id)
+        print("The response of ChatApi->delete_chat_session_prompt_template:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ChatApi->delete_chat_session_prompt_template: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **session_id** | **str**| Id of the chat session | 
+
+### Return type
+
+[**ChatSession**](ChatSession.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **delete_messages**
+> delete_messages(message_ids)
+
+Deletes specific chat messages.
+
+Deletes specific chat messages.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.ChatApi(api_client)
+    message_ids = ['message_ids_example'] # List[str] | Ids of messages to be deleted
+
+    try:
+        # Deletes specific chat messages.
+        await api_instance.delete_messages(message_ids)
+    except Exception as e:
+        print("Exception when calling ChatApi->delete_messages: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **message_ids** | [**List[str]**](str.md)| Ids of messages to be deleted | 
+
+### Return type
+
+void (empty response body)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+**409** | Conflict |  -  |
+
+
+
+# **get_agent_server_directory_stats**
+> AgentServerDirectoryStats get_agent_server_directory_stats(session_id, directory_name, detail_level=detail_level)
+
+Gets stats of a agent server directory.
+
+Gets stats of a agent server directory.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.agent_server_directory_stats import AgentServerDirectoryStats
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.ChatApi(api_client)
+    session_id = 'session_id_example' # str | Id of the chat session
+    directory_name = 'directory_name_example' # str | Directory name
+    detail_level = 0 # int | the higher value, more details are returned. (optional) (default to 0)
+
+    try:
+        # Gets stats of a agent server directory.
+        api_response = await api_instance.get_agent_server_directory_stats(session_id, directory_name, detail_level=detail_level)
+        print("The response of ChatApi->get_agent_server_directory_stats:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ChatApi->get_agent_server_directory_stats: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **session_id** | **str**| Id of the chat session | 
+ **directory_name** | **str**| Directory name | 
+ **detail_level** | **int**| the higher value, more details are returned. | [optional] [default to 0]
+
+### Return type
+
+[**AgentServerDirectoryStats**](AgentServerDirectoryStats.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **get_chat_session**
+> ChatSession get_chat_session(session_id)
+
+Finds a chat session by id.
+
+Returns a single chat session by its unique identifier.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.chat_session import ChatSession
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.ChatApi(api_client)
+    session_id = 'session_id_example' # str | Id of the chat session
+
+    try:
+        # Finds a chat session by id.
+        api_response = await api_instance.get_chat_session(session_id)
+        print("The response of ChatApi->get_chat_session:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ChatApi->get_chat_session: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **session_id** | **str**| Id of the chat session | 
+
+### Return type
+
+[**ChatSession**](ChatSession.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **get_chat_session_count**
+> Count get_chat_session_count()
+
+Counts a number of chat sessions.
+
+Counts a number of chat sessions.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.count import Count
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.ChatApi(api_client)
+
+    try:
+        # Counts a number of chat sessions.
+        api_response = await api_instance.get_chat_session_count()
+        print("The response of ChatApi->get_chat_session_count:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ChatApi->get_chat_session_count: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**Count**](Count.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **get_chat_session_messages**
+> List[ChatMessage] get_chat_session_messages(session_id, offset=offset, limit=limit)
+
+Fetches chat message and metadata for messages in a chat session.
+
+Fetches chat message and metadata for messages in a chat session. Messages without a `reply_to` are from the end user, messages with a `reply_to` are from an LLM and a response to a specific user message.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.chat_message import ChatMessage
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.ChatApi(api_client)
+    session_id = 'session_id_example' # str | Id of the chat session
+    offset = 0 # int | How many chat sessions to skip before returning. (optional) (default to 0)
+    limit = 100 # int | How many chat sessions to return. (optional) (default to 100)
+
+    try:
+        # Fetches chat message and metadata for messages in a chat session.
+        api_response = await api_instance.get_chat_session_messages(session_id, offset=offset, limit=limit)
+        print("The response of ChatApi->get_chat_session_messages:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ChatApi->get_chat_session_messages: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **session_id** | **str**| Id of the chat session | 
+ **offset** | **int**| How many chat sessions to skip before returning. | [optional] [default to 0]
+ **limit** | **int**| How many chat sessions to return. | [optional] [default to 100]
+
+### Return type
+
+[**List[ChatMessage]**](ChatMessage.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **get_completion**
+> ChatCompletion get_completion(session_id, chat_completion_request)
+
+
+
+Asks question in a given chat session.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.chat_completion import ChatCompletion
+from h2ogpte.rest_async.models.chat_completion_request import ChatCompletionRequest
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.ChatApi(api_client)
+    session_id = 'session_id_example' # str | Id of a chat session
+    chat_completion_request = h2ogpte.rest_async.ChatCompletionRequest() # ChatCompletionRequest | 
+
+    try:
+        api_response = await api_instance.get_completion(session_id, chat_completion_request)
+        print("The response of ChatApi->get_completion:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ChatApi->get_completion: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **session_id** | **str**| Id of a chat session | 
+ **chat_completion_request** | [**ChatCompletionRequest**](ChatCompletionRequest.md)|  | 
+
+### Return type
+
+[**ChatCompletion**](ChatCompletion.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/jsonl
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+**500** | Internal server error |  -  |
+
+
+
+# **get_message_meta**
+> List[ChatMessageMeta] get_message_meta(message_id, info_type=info_type)
+
+Fetches chat message meta information.
+
+Fetches chat message meta information.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.chat_message_meta import ChatMessageMeta
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.ChatApi(api_client)
+    message_id = 'message_id_example' # str | Id of the chat message.
+    info_type = 'info_type_example' # str | Metadata type to fetch. (optional)
+
+    try:
+        # Fetches chat message meta information.
+        api_response = await api_instance.get_message_meta(message_id, info_type=info_type)
+        print("The response of ChatApi->get_message_meta:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ChatApi->get_message_meta: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **message_id** | **str**| Id of the chat message. | 
+ **info_type** | **str**| Metadata type to fetch. | [optional] 
+
+### Return type
+
+[**List[ChatMessageMeta]**](ChatMessageMeta.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **get_message_references**
+> List[ChatMessageReference] get_message_references(message_id, limit=limit)
+
+Fetches metadata for references of a chat message.
+
+Fetches metadata for references of a chat message. References are only available for messages sent from an LLM, an empty list will be returned for messages sent by the user.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.chat_message_reference import ChatMessageReference
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.ChatApi(api_client)
+    message_id = 'message_id_example' # str | Id of the chat message
+    limit = 56 # int | The number of references to consider based on the highest confidence scores. (optional)
+
+    try:
+        # Fetches metadata for references of a chat message.
+        api_response = await api_instance.get_message_references(message_id, limit=limit)
+        print("The response of ChatApi->get_message_references:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ChatApi->get_message_references: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **message_id** | **str**| Id of the chat message | 
+ **limit** | **int**| The number of references to consider based on the highest confidence scores. | [optional] 
+
+### Return type
+
+[**List[ChatMessageReference]**](ChatMessageReference.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **get_question_answer_feedback_count**
+> Count get_question_answer_feedback_count()
+
+Counts a number of question-answer feedbacks.
+
+Counts a number of question-answer feedbacks.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.count import Count
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.ChatApi(api_client)
+
+    try:
+        # Counts a number of question-answer feedbacks.
+        api_response = await api_instance.get_question_answer_feedback_count()
+        print("The response of ChatApi->get_question_answer_feedback_count:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ChatApi->get_question_answer_feedback_count: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**Count**](Count.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **list_agent_server_files**
+> List[AgentServerFile] list_agent_server_files(session_id)
+
+Lists agent server files.
+
+Lists agent server files.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.agent_server_file import AgentServerFile
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.ChatApi(api_client)
+    session_id = 'session_id_example' # str | Id of the chat session
+
+    try:
+        # Lists agent server files.
+        api_response = await api_instance.list_agent_server_files(session_id)
+        print("The response of ChatApi->list_agent_server_files:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ChatApi->list_agent_server_files: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **session_id** | **str**| Id of the chat session | 
+
+### Return type
+
+[**List[AgentServerFile]**](AgentServerFile.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **list_all_agent_server_directories_stats**
+> List[AgentServerDirectoryStats] list_all_agent_server_directories_stats(session_id, detail_level=detail_level)
+
+Lists stats of  agent server directories.
+
+Lists stats of agent server directories.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.agent_server_directory_stats import AgentServerDirectoryStats
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.ChatApi(api_client)
+    session_id = 'session_id_example' # str | Id of the chat session
+    detail_level = 0 # int | the higher value, more details are returned. (optional) (default to 0)
+
+    try:
+        # Lists stats of  agent server directories.
+        api_response = await api_instance.list_all_agent_server_directories_stats(session_id, detail_level=detail_level)
+        print("The response of ChatApi->list_all_agent_server_directories_stats:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ChatApi->list_all_agent_server_directories_stats: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **session_id** | **str**| Id of the chat session | 
+ **detail_level** | **int**| the higher value, more details are returned. | [optional] [default to 0]
+
+### Return type
+
+[**List[AgentServerDirectoryStats]**](AgentServerDirectoryStats.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **list_chat_sessions**
+> List[ChatSession] list_chat_sessions(offset=offset, limit=limit)
+
+List chat sessions.
+
+List chat sessions.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.chat_session import ChatSession
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.ChatApi(api_client)
+    offset = 0 # int | How many chat sessions to skip before returning. (optional) (default to 0)
+    limit = 100 # int | How many chat sessions to return. (optional) (default to 100)
+
+    try:
+        # List chat sessions.
+        api_response = await api_instance.list_chat_sessions(offset=offset, limit=limit)
+        print("The response of ChatApi->list_chat_sessions:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ChatApi->list_chat_sessions: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **offset** | **int**| How many chat sessions to skip before returning. | [optional] [default to 0]
+ **limit** | **int**| How many chat sessions to return. | [optional] [default to 100]
+
+### Return type
+
+[**List[ChatSession]**](ChatSession.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **list_question_answer_feedbacks**
+> List[QAFeedback] list_question_answer_feedbacks(offset=offset, limit=limit)
+
+Lists user's questions and answers that have a feedback.
+
+Lists user's questions and answers that have a feedback.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.qa_feedback import QAFeedback
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.ChatApi(api_client)
+    offset = 0 # int | How many feedbacks to skip before returning. (optional) (default to 0)
+    limit = 100 # int | How many feedbacks to return. (optional) (default to 100)
+
+    try:
+        # Lists user's questions and answers that have a feedback.
+        api_response = await api_instance.list_question_answer_feedbacks(offset=offset, limit=limit)
+        print("The response of ChatApi->list_question_answer_feedbacks:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ChatApi->list_question_answer_feedbacks: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **offset** | **int**| How many feedbacks to skip before returning. | [optional] [default to 0]
+ **limit** | **int**| How many feedbacks to return. | [optional] [default to 100]
+
+### Return type
+
+[**List[QAFeedback]**](QAFeedback.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **list_questions_for_chat_session**
+> List[SuggestedQuestion] list_questions_for_chat_session(session_id, limit=limit)
+
+List suggested questions for a given chat session.
+
+List suggested questions for a given chat session.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.suggested_question import SuggestedQuestion
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.ChatApi(api_client)
+    session_id = 'session_id_example' # str | Id of a chat session
+    limit = 100 # int | How many questions to return. (optional) (default to 100)
+
+    try:
+        # List suggested questions for a given chat session.
+        api_response = await api_instance.list_questions_for_chat_session(session_id, limit=limit)
+        print("The response of ChatApi->list_questions_for_chat_session:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ChatApi->list_questions_for_chat_session: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **session_id** | **str**| Id of a chat session | 
+ **limit** | **int**| How many questions to return. | [optional] [default to 100]
+
+### Return type
+
+[**List[SuggestedQuestion]**](SuggestedQuestion.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **set_message_votes**
+> set_message_votes(message_id, message_vote_update_request)
+
+Changes the vote value of a chat message.
+
+Set the exact value of a vote for a chat message. Any message type can be updated, but only LLM response votes will be visible in the UI. The expectation is 0 - unvoted, -1 - dislike, 1 - like. Values outside of this will not be viewable in the UI.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.message_vote_update_request import MessageVoteUpdateRequest
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.ChatApi(api_client)
+    message_id = 'message_id_example' # str | Id of the chat message.
+    message_vote_update_request = h2ogpte.rest_async.MessageVoteUpdateRequest() # MessageVoteUpdateRequest | 
+
+    try:
+        # Changes the vote value of a chat message.
+        await api_instance.set_message_votes(message_id, message_vote_update_request)
+    except Exception as e:
+        print("Exception when calling ChatApi->set_message_votes: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **message_id** | **str**| Id of the chat message. | 
+ **message_vote_update_request** | [**MessageVoteUpdateRequest**](MessageVoteUpdateRequest.md)|  | 
+
+### Return type
+
+void (empty response body)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+**409** | Conflict |  -  |
+
+
+
+# **update_chat_session**
+> ChatSession update_chat_session(session_id, chat_session_update_request)
+
+Updates the name of a chat session.
+
+Updates the name of a chat session.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.chat_session import ChatSession
+from h2ogpte.rest_async.models.chat_session_update_request import ChatSessionUpdateRequest
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.ChatApi(api_client)
+    session_id = 'session_id_example' # str | Id of the chat session
+    chat_session_update_request = h2ogpte.rest_async.ChatSessionUpdateRequest() # ChatSessionUpdateRequest | 
+
+    try:
+        # Updates the name of a chat session.
+        api_response = await api_instance.update_chat_session(session_id, chat_session_update_request)
+        print("The response of ChatApi->update_chat_session:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ChatApi->update_chat_session: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **session_id** | **str**| Id of the chat session | 
+ **chat_session_update_request** | [**ChatSessionUpdateRequest**](ChatSessionUpdateRequest.md)|  | 
+
+### Return type
+
+[**ChatSession**](ChatSession.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **update_chat_session_collection**
+> ChatSession update_chat_session_collection(session_id, collection_change_request)
+
+Updates a collection reference of a chat session.
+
+Updates a collection reference of a chat session.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.chat_session import ChatSession
+from h2ogpte.rest_async.models.collection_change_request import CollectionChangeRequest
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.ChatApi(api_client)
+    session_id = 'session_id_example' # str | Id of the chat session
+    collection_change_request = h2ogpte.rest_async.CollectionChangeRequest() # CollectionChangeRequest | 
+
+    try:
+        # Updates a collection reference of a chat session.
+        api_response = await api_instance.update_chat_session_collection(session_id, collection_change_request)
+        print("The response of ChatApi->update_chat_session_collection:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ChatApi->update_chat_session_collection: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **session_id** | **str**| Id of the chat session | 
+ **collection_change_request** | [**CollectionChangeRequest**](CollectionChangeRequest.md)|  | 
+
+### Return type
+
+[**ChatSession**](ChatSession.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **update_chat_session_prompt_template**
+> ChatSession update_chat_session_prompt_template(session_id, prompt_template_change_request)
+
+Updates a prompt template reference of a chat session.
+
+Updates a prompt template reference of a chat session.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.chat_session import ChatSession
+from h2ogpte.rest_async.models.prompt_template_change_request import PromptTemplateChangeRequest
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.ChatApi(api_client)
+    session_id = 'session_id_example' # str | Id of the chat session
+    prompt_template_change_request = h2ogpte.rest_async.PromptTemplateChangeRequest() # PromptTemplateChangeRequest | 
+
+    try:
+        # Updates a prompt template reference of a chat session.
+        api_response = await api_instance.update_chat_session_prompt_template(session_id, prompt_template_change_request)
+        print("The response of ChatApi->update_chat_session_prompt_template:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ChatApi->update_chat_session_prompt_template: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **session_id** | **str**| Id of the chat session | 
+ **prompt_template_change_request** | [**PromptTemplateChangeRequest**](PromptTemplateChangeRequest.md)|  | 
+
+### Return type
+
+[**ChatSession**](ChatSession.md)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+
+# **update_question_answer_feedback**
+> update_question_answer_feedback(answer_id, update_qa_feedback_request)
+
+Update feedback for a specific answer to a question.
+
+Update feedback for a specific answer to a question.
+
+### Example
+
+* Bearer Authentication (bearerAuth):
+
+```python
+import h2ogpte.rest_async
+from h2ogpte.rest_async.models.update_qa_feedback_request import UpdateQAFeedbackRequest
+from h2ogpte.rest_async.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://h2ogpte.genai.h2o.ai/api/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = h2ogpte.rest_async.Configuration(
+    host = "https://h2ogpte.genai.h2o.ai/api/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: bearerAuth
+configuration = h2ogpte.rest_async.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with h2ogpte.rest_async.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = h2ogpte.rest_async.ChatApi(api_client)
+    answer_id = 'answer_id_example' # str | Unique identifier of and answer connected with a feedback.
+    update_qa_feedback_request = h2ogpte.rest_async.UpdateQAFeedbackRequest() # UpdateQAFeedbackRequest | 
+
+    try:
+        # Update feedback for a specific answer to a question.
+        await api_instance.update_question_answer_feedback(answer_id, update_qa_feedback_request)
+    except Exception as e:
+        print("Exception when calling ChatApi->update_question_answer_feedback: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **answer_id** | **str**| Unique identifier of and answer connected with a feedback. | 
+ **update_qa_feedback_request** | [**UpdateQAFeedbackRequest**](UpdateQAFeedbackRequest.md)|  | 
+
+### Return type
+
+void (empty response body)
+
+
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful operation |  -  |
+**401** | Unauthorized - Invalid or missing API key |  -  |
+
+
+

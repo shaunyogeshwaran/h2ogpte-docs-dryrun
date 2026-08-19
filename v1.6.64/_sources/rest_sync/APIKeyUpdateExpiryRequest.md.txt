@@ -1,0 +1,29 @@
+# APIKeyUpdateExpiryRequest
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**expires_in** | **str** | Interval of when the API key should expire. Do not include if you would like to remove the expiry of a key. | [optional] 
+
+## Example
+
+```python
+from h2ogpte.rest_sync.models.api_key_update_expiry_request import APIKeyUpdateExpiryRequest
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of APIKeyUpdateExpiryRequest from a JSON string
+api_key_update_expiry_request_instance = APIKeyUpdateExpiryRequest.from_json(json)
+# print the JSON string representation of the object
+print(APIKeyUpdateExpiryRequest.to_json())
+
+# convert the object into a dict
+api_key_update_expiry_request_dict = api_key_update_expiry_request_instance.to_dict()
+# create an instance of APIKeyUpdateExpiryRequest from a dict
+api_key_update_expiry_request_from_dict = APIKeyUpdateExpiryRequest.from_dict(api_key_update_expiry_request_dict)
+```
+
+
+

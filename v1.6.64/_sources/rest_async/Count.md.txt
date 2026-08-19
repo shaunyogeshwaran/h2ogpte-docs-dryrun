@@ -1,0 +1,29 @@
+# Count
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**count** | **int** |  | 
+
+## Example
+
+```python
+from h2ogpte.rest_async.models.count import Count
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of Count from a JSON string
+count_instance = Count.from_json(json)
+# print the JSON string representation of the object
+print(Count.to_json())
+
+# convert the object into a dict
+count_dict = count_instance.to_dict()
+# create an instance of Count from a dict
+count_from_dict = Count.from_dict(count_dict)
+```
+
+
+
