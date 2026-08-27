@@ -131,7 +131,3 @@ div.document div.output-cell:before {
   opacity: 0.6;
   padding: 1px 10px 1px 5px;
 }
-.version-switcher {
-  padding: 0.5em 1em;
-  font-size: 90%;
-}
