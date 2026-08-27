@@ -14,6 +14,7 @@
   );
   const sidebarSearch = document.querySelector(".wy-side-nav-search");
   if (!asset || !sidebarSearch) return;
+  if (document.getElementById("version-switcher-select")) return;
   const assetUrl = new URL(
     asset.getAttribute("href") || asset.getAttribute("src"),
     window.location.href
