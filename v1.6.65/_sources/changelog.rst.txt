@@ -1,6 +1,0 @@
-Changelog
-=========
-
-To see the latest release notes, please visit:
-
-- `Enterprise h2oGPTe | ChangeLog <https://docs.h2o.ai/enterprise-h2ogpte/changelog>`__
